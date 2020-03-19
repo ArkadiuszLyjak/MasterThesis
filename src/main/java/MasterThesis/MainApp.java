@@ -68,7 +68,6 @@ public class MainApp {
         ElectricalNetwork elNet = ElectricalNetwork.getInstance();
         elNet.initList();
 
-        //String nodeFileName = paramsService.getNodeFileFullPath();
 
         netFileRead(paramsService.getNodeFileFullPath(),
                     s ->  elNet.nodeList.add(NodeFactory.prepareFromString(s)));
