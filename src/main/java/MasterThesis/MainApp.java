@@ -21,62 +21,46 @@ package MasterThesis;
 
 * */
 
+import MasterThesis.arc.ArcFactory;
 import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
 import MasterThesis.bfs.ElectricalNetwork;
+import MasterThesis.bfs.FileDataReader;
+import MasterThesis.line_type.LineTypeFactory;
 import MasterThesis.node.NodeFactory;
 import MasterThesis.transformer_type.TransformerTypeFactory;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
 public class MainApp {
 
-    public static void netFileRead(String sFileName, Consumer<String> consumer) throws FileNotFoundException {
-
-        File file = new File(sFileName);
-        Scanner scan = new Scanner(file);
-
-        int lines = 0;
-        while (scan.hasNextLine()) {
-            String line = scan.nextLine();
-            if (line.substring(0,2).compareTo("//") != 0) {
-                if (lines == 0 ) {
-                    System.out.println("Linia nagłówkowa lines="+lines+" "+line);
-                }
-                else {
-                    System.out.println(lines+">>>"+line);
-                    consumer.accept(line);
-                }
-                lines++;
-            }
-        }
-        System.out.println("Ilość wierszy w pliku: " + lines);
-        scan.close();
-
-    }
-
-
     public static void main(String[] args) throws FileNotFoundException {
-        System.out.println("Zaczynamy");
-        System.out.println("--------------");
 
-        AppParameters params = AppParameters.getInstance();
         AppParametersService paramsService =  AppParametersService.getInstance();
         ElectricalNetwork elNet = ElectricalNetwork.getInstance();
         elNet.initList();
 
 
-        netFileRead(paramsService.getNodeFileFullPath(),
+        FileDataReader.netFileRead(paramsService.getNodeFileFullPath(),
                     s ->  elNet.nodeList.add(NodeFactory.prepareFromString(s)));
 
-        netFileRead(paramsService.getTransformerTypeFullFileName(),
+        FileDataReader.netFileRead(paramsService.getTransformerTypeFullFileName(),
                     s ->  elNet.transformerTypeList.add(TransformerTypeFactory.prepareFromString(s)));
 
+        FileDataReader.netFileRead(paramsService.getLineTypeFullFileName(),
+                s ->  elNet.lineTypeList.add(LineTypeFactory.prepareFromString(s)));
 
-        elNet.nodeList.forEach(nodeEntity -> System.out.println(nodeEntity.getActivePower()) );
+        FileDataReader.netFileRead(paramsService.getArcFullFileName(),
+                s ->  elNet.arcEntityList.add(ArcFactory.prepareFromString(s)));
+        //-------------------
+        System.out.println("ILOSC WEZLOW : "+elNet.nodeList.size());
+        System.out.println("ILOSC Lukow : "+elNet.arcEntityList.size());
+        System.out.println("ILOSC Typow Trafo : "+elNet.transformerTypeList.size());
+        System.out.println("ILOSC tyow lini : "+elNet.lineTypeList.size());
+
+
 
     }
 }
