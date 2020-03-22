@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3debccc7-69d2-4b1b-99e3-0b705f28f625" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/base/units/UnitService.java" afterDir="false" />
+    <list default="true" id="3debccc7-69d2-4b1b-99e3-0b705f28f625" name="Default Changelist" comment="Kilka zmian">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/FileDataReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/FileDataReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/ElectricalNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/ElectricalNetwork.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/line_type/LineType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/line_type/LineType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/line_type/LineTypeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/line_type/LineTypeFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,10 +59,10 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/MasterThesis/node" />
-    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.notifications" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RecentsManager">
@@ -277,22 +281,22 @@
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
     <state width="461" height="466" key="DebuggerActiveHint/59.0.1861.1080@59.0.1861.1080" timestamp="1584605229581" />
-    <state width="1819" height="232" key="GridCell.Tab.0.bottom" timestamp="1584644276994">
+    <state width="1819" height="232" key="GridCell.Tab.0.bottom" timestamp="1584882782037">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
-    <state width="1819" height="232" key="GridCell.Tab.0.bottom/59.0.1861.1080@59.0.1861.1080" timestamp="1584644276994" />
-    <state width="1819" height="232" key="GridCell.Tab.0.center" timestamp="1584644276993">
+    <state width="1819" height="232" key="GridCell.Tab.0.bottom/59.0.1861.1080@59.0.1861.1080" timestamp="1584882782037" />
+    <state width="1819" height="232" key="GridCell.Tab.0.center" timestamp="1584882782035">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
-    <state width="1819" height="232" key="GridCell.Tab.0.center/59.0.1861.1080@59.0.1861.1080" timestamp="1584644276993" />
-    <state width="1819" height="232" key="GridCell.Tab.0.left" timestamp="1584644276992">
+    <state width="1819" height="232" key="GridCell.Tab.0.center/59.0.1861.1080@59.0.1861.1080" timestamp="1584882782035" />
+    <state width="1819" height="232" key="GridCell.Tab.0.left" timestamp="1584882782033">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
-    <state width="1819" height="232" key="GridCell.Tab.0.left/59.0.1861.1080@59.0.1861.1080" timestamp="1584644276992" />
-    <state width="1819" height="232" key="GridCell.Tab.0.right" timestamp="1584644276993">
+    <state width="1819" height="232" key="GridCell.Tab.0.left/59.0.1861.1080@59.0.1861.1080" timestamp="1584882782033" />
+    <state width="1819" height="232" key="GridCell.Tab.0.right" timestamp="1584882782036">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
-    <state width="1819" height="232" key="GridCell.Tab.0.right/59.0.1861.1080@59.0.1861.1080" timestamp="1584644276993" />
+    <state width="1819" height="232" key="GridCell.Tab.0.right/59.0.1861.1080@59.0.1861.1080" timestamp="1584882782036" />
     <state width="1819" height="356" key="GridCell.Tab.1.bottom" timestamp="1584613699559">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
@@ -309,10 +313,10 @@
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
     <state width="1819" height="356" key="GridCell.Tab.1.right/59.0.1861.1080@59.0.1861.1080" timestamp="1584613699559" />
-    <state x="472" y="119" width="1030" height="847" key="SettingsEditor" timestamp="1584554527293">
+    <state x="472" y="119" width="1030" height="847" key="SettingsEditor" timestamp="1584647805537">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
-    <state x="472" y="119" width="1030" height="847" key="SettingsEditor/59.0.1861.1080@59.0.1861.1080" timestamp="1584554527293" />
+    <state x="472" y="119" width="1030" height="847" key="SettingsEditor/59.0.1861.1080@59.0.1861.1080" timestamp="1584647805537" />
     <state x="650" y="247" key="run.anything.popup" timestamp="1584553767393">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>

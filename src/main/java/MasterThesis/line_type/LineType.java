@@ -5,9 +5,6 @@ package MasterThesis.line_type;
 
 import MasterThesis.base.entity.BaseEntity;
 import lombok.Data;
-//  1|1|3xYHAKXS1x70|15|70|0.364|0|0.08|0|0.25|0.25|175|0|0|0
-//  2|1|5xYKY1x400|0.4|400|0.153|0|0.110|0|0.210|0.37|353|0|0|0
-
 @Data
 public class LineType extends BaseEntity {
 //    id //  – numer pozycji katalogowej

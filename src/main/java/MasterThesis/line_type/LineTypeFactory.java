@@ -17,6 +17,9 @@ import MasterThesis.base.parameters.AppParametersService;
 //12  LONGTERM_SUMMER_LOAD_CAPACITY
 //13  LONGTERM_WINTER_LOAD_CAPACITY
 //14  SHORTCIRCUIT_1S_LOAD_CAPACITY
+//  1|1|3xYHAKXS1x70|15|70|0.364|0|0.08|0|0.25|0.25|175|0|0|0
+//  2|1|5xYKY1x400|0.4|400|0.153|0|0.110|0|0.210|0.37|353|0|0|0
+
 
 public class LineTypeFactory {
 
