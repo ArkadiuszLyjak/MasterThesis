@@ -5,7 +5,11 @@ package MasterThesis.line_type;
 
 import MasterThesis.base.entity.BaseEntity;
 import lombok.Data;
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class LineType extends BaseEntity {
 //    id //  – numer pozycji katalogowej
     LineKind kind;  //  –kabel=1, przewód linii napowietrznej = 2

@@ -17,81 +17,72 @@ package MasterThesis;
 
 * */
 
-import MasterThesis.arc.ArcEntity;
-import MasterThesis.arc.ArcFactory;
+import MasterThesis.arc_file_tools.FileDataService;
 import MasterThesis.base.parameters.AppParametersService;
-import MasterThesis.bfs.ElectricalNetwork;
-import MasterThesis.bfs.FileDataReader;
-import MasterThesis.line_type.LineType;
-import MasterThesis.line_type.LineTypeFactory;
-import MasterThesis.node.NodeEntity;
-import MasterThesis.node.NodeFactory;
-import MasterThesis.transformer_type.TransformerTypeEntity;
-import MasterThesis.transformer_type.TransformerTypeFactory;
-
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import MasterThesis.bfs.BfsAlgorithm;
+import MasterThesis.el_net.ElectricalNetwork;
+import MasterThesis.el_net.ElectricalNetworkService;
+import MasterThesis.el_net.NodeArcVO;
 
 public class MainApp {
 
-    public static void main(String[] args) throws FileNotFoundException {
+
+
+    public static void main(String[] args) {
         //TODO odczyt parametrow wywołania args
         AppParametersService paramsService =  AppParametersService.getInstance();
         ElectricalNetwork elNet = ElectricalNetwork.getInstance();
+        ElectricalNetworkService elNetService = ElectricalNetworkService.getInstance();
+        BfsAlgorithm bfsAlgorithm = BfsAlgorithm.getInstance();
+        FileDataService fileDataService = FileDataService.getInstance();
+     //   NetStatistics netStatistics =  NetStatistics.getInstace();
 
 
-        FileDataReader.netFileRead(paramsService.getNodeFileFullPath(),
-                s -> { NodeEntity node = NodeFactory.prepareFromString(s);
-                       elNet.nodeMap.put(node.getId(),node);
-                });
+        //Read data files
+        fileDataService.readLineTypeFiles();
+        fileDataService.readNodeFiles();
+        fileDataService.readTransformerTypeFiles();
+        fileDataService.readArcFiles();
 
+        //Generate neighbors map
+        elNetService.nodeArcListBuild();
 
+        //Generate visit order
+        bfsAlgorithm.generateLevelsOrder();
 
-        FileDataReader.netFileRead(paramsService.getLineTypeFullFileName(),
-                s ->  { LineType lineType =  LineTypeFactory.prepareFromString(s);
-                         elNet.lineTypeMap.put(lineType.getId(), lineType);
-                      }
-        );
-
-        FileDataReader.netFileRead(paramsService.getTransformerTypeFullFileName(),
-                s -> {
-                    TransformerTypeEntity transformerTypeEntity = TransformerTypeFactory.prepareFromString(s);
-                    elNet.transformerTypeMap.put(transformerTypeEntity.getId(), transformerTypeEntity);
-                }
-        );
-
-        FileDataReader.netFileRead(paramsService.getArcFullFileName(),
-                s -> { ArcEntity arc = ArcFactory.prepareFromString(s);
-                    elNet.arcMap.put(arc.getId(),arc);
-                }
-        );
         //-------------------
+
         System.out.println("---");
-        System.out.println("ILOSC WEZLOW mapa: "+elNet.nodeMap.size());
-        System.out.println("ILOSC Lukow : "+elNet.arcMap.size());
-        System.out.println("ILOSC Typow Trafo : "+elNet.transformerTypeMap.size());
-        System.out.println("ILOSC tyow lini : "+elNet.lineTypeMap.size());
+        System.out.println("ILOSC typow Trafo : "+elNet.transformerTypeMap.size());
+        System.out.println("ILOSC typow lini : "+elNet.lineTypeMap.size());
+        System.out.println("ILOSC WEZLOW : "+elNet.nodeMap.size());
+        System.out.println("ILOSC LUKOW : "+elNet.arcMap.size());
         System.out.println("---");
         //-------------------
 
 
-
-        // Mapa WEZlowW Lista lukow
-        Map<Long,List<Long>> arcBfsMap = new HashMap<>();
-
-        elNet.arcMap.forEach((aLong, arcEntity) ->  {
-            if (!arcBfsMap.containsKey(arcEntity.getStartNodeId())) {
-                arcBfsMap.put(arcEntity.getStartNodeId(), new ArrayList<>());
+        //--------------------
+        // Tylko Ci co maja sasiadow
+        elNet.nodeArcList_Map.forEach((nodeId, arcIdList) -> {
+             System.out.print(" ["+nodeId+ "] => {");
+             arcIdList.forEach(arcId -> {
+                  System.out.print(elNet.arcMap.get(arcId).getEndNodeId()+",");
+             });
+             System.out.println("} ");
             }
-            arcBfsMap.get(arcEntity.getStartNodeId()).add(arcEntity.getId());
-        });
+          );
+
+        for (Long i=0L ;i  <= bfsAlgorithm.getNetLevel(); i++){
+            bfsAlgorithm.arcLevelsMap.get(i).forEach(nodeArcVO ->
+
+                    System.out.println("LEVEL "+ nodeArcVO.netLevel+"  > "+ nodeArcVO.nodeId + "->"+
+                                    nodeArcVO.neighborNodeId)
+                            //        elNet.arcMap.get(nodeArcVO.arcId).getEndNodeId())
+            );
 
 
-        arcBfsMap.get(100L).forEach(aLong -> System.out.println("xSTART ARC : "+aLong));
-        arcBfsMap.get(3L).forEach(aLong -> System.out.println("xSTART ARC : "+aLong));
+        }
+
 
     }
 }

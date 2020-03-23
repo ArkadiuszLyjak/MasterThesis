@@ -1,4 +1,4 @@
-package MasterThesis.bfs;
+package MasterThesis.arc_file_tools;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.util.function.Consumer;
 
 public class FileDataReader {
-
-
-
     public static void netFileRead(String sFileName, Consumer<String> consumer) throws FileNotFoundException {
         try (BufferedReader br = new BufferedReader(new FileReader(sFileName))) {
             int lines = 0;
@@ -28,6 +25,4 @@ public class FileDataReader {
             e.printStackTrace();
         }
     }
-
-
 }
