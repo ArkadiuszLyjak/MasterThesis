@@ -25,12 +25,14 @@ import MasterThesis.bfs.BfsAlgorithm;
 import MasterThesis.el_net.ElectricalNetwork;
 import MasterThesis.el_net.ElectricalNetworkService;
 import MasterThesis.line_type.LineType;
+import MasterThesis.transformer_type.TransformerTypeEntity;
 
 import java.text.DecimalFormat;
 
 public class MainApp {
 
-    private static DecimalFormat df = new DecimalFormat("0.00");
+    private static DecimalFormat dfLine = new DecimalFormat("0.0000");
+    private static DecimalFormat dfTrafo = new DecimalFormat("0.00000000");
 
 
     public static void main(String[] args) {
@@ -77,55 +79,85 @@ public class MainApp {
 
             for (ArcEntity arc : elNet.arcList) {
                 if (arc.getType() == ArcType.LINE) {
-                    Double lineReactance = 0.0;
+                    //-------
+                    Double reactance = 0.0;
+                    Double resistance = 0.0;
+                    Double impedance = 0.0;
                     LineType lineType = elNet.lineTypeMap.get(arc.getPosition());
-                    lineReactance = arc.getArcLength() *  lineType.getCohesiveUnitResistance();
-                 System.out.println(arc.getId() + " " +
-                               arc.getArcLength()+ " " +
-                         df.format(lineReactance)  );
+
+                    reactance  = arc.getArcLength() * lineType.getCohesiveUnitReactance();
+                    resistance = arc.getArcLength() * lineType.getCohesiveUnitResistance();
+                    impedance  = Math.sqrt( Math.pow(resistance, 2.0) + Math.pow(resistance, 2.0));
+
+                 System.out.println(arc.getId() + " | " +
+                         "L: "+     arc.getArcLength()+ " | " +
+                         "X: "+dfLine.format(reactance) +" | "+
+                         "R: "+dfLine.format(resistance) +" | "+
+                         "Z: "+dfLine.format(impedance)
+
+                 );
 
                 }
             }
 
-//        elNet.arcMap.forEach((aLong, arcEntity) ->
-//                {     ElectricalNetwork eelNet = ElectricalNetwork.getInstance();
-//                    if (arcEntity.getType() == ArcType.LINE ) {
-//                        Double lineReactance = 0.0;
-//                        LineType lineType =  eelNet.lineTypeMap.get(arcEntity.getPosition());
-//                        System.out.println(" size LT="+lineType.getCohesiveUnitReactance() );
-//
-//                        // lineReactance = arcEntity.getArcLength() * lineType.getCohesiveUnitReactance();
-//                        //System.out.println(lineType.getCohesiveUnitReactance());
-//                        System.out.println(arcEntity.getId() + " "+arcEntity.getArcLength()+" "+ lineReactance +" "+arcEntity.getPosition()+ ">>" +eelNet.);
-//
-//                    }
-//                }
-//        );
+
+            System.out.println("--------------------");
+            System.out.println("------- TRAFO -------------");
 
 
-//        //--------------------
-//        // Tylko Ci co maja sasiadow
-//        elNet.nodeArcList_Map.forEach((nodeId, arcIdList) -> {
-//
-//                    System.out.print(" [" + nodeId + "] => {");
-//                    arcIdList.forEach(arcId -> {
-//                        System.out.print(elNet.arcMap.get(arcId).getEndNodeId() + ",");
-//                    });
-//                    System.out.println("} ");
-//                }
-//
-//        );
-//
-//        for (Long i = 0L; i <= bfsAlgorithm.getNetLevel(); i++) {
-//            bfsAlgorithm.arcLevelsMap.get(i).forEach(nodeArcVO ->
-//
-//                            System.out.println("LEVEL " + nodeArcVO.netLevel + "  > " + nodeArcVO.nodeId + "->" +
-//                                    nodeArcVO.neighborNodeId)
-//                    //        elNet.arcMap.get(nodeArcVO.arcId).getEndNodeId())
-//            );
-//
-//
-//        }
+            for (ArcEntity arc : elNet.arcList) {
+                if (arc.getType() == ArcType.TRANSFORMER) {
+                    //-------
+                    Double reactance  = 0.0;
+                    Double resistance = 0.0;
+                    Double impedance = 0.0;
+
+                    TransformerTypeEntity  transformerType = elNet.transformerTypeMap.get(arc.getPosition());
+
+
+                    resistance = (transformerType.getActiveIdleLoss() * Math.pow(transformerType.getNominalUpperVoltage(),2.0) )
+                                      / Math.pow(transformerType.getNominalPower(),2.0);
+
+                    reactance = (transformerType.getShortingVoltage() / 100)
+                            *   (Math.pow(transformerType.getNominalUpperVoltage(),2.0)/transformerType.getNominalPower() );
+
+                    impedance = (transformerType.getShortingVoltage() / 100)
+                            *   (Math.pow(transformerType.getNominalUpperVoltage(),2.0)/transformerType.getNominalPower() );
+
+                    System.out.println(arc.getId() + " | " +
+                            "X: "+dfTrafo.format(reactance) +" | "+
+                            "R: "+dfTrafo.format(resistance) +" | "+
+                            "Z: "+dfTrafo.format(impedance));
+
+                }
+            }
+
+
+
+
+        //--------------------
+        // Tylko Ci co maja sasiadow
+        elNet.nodeArcList_Map.forEach((nodeId, arcIdList) -> {
+
+                    System.out.print(" [" + nodeId + "] => {");
+                    arcIdList.forEach(arcId -> {
+                        System.out.print(elNet.arcMap.get(arcId).getEndNodeId() + ",");
+                    });
+                    System.out.println("} ");
+                }
+
+        );
+
+        for (Long i = 0L; i <= bfsAlgorithm.getNetLevel(); i++) {
+            bfsAlgorithm.arcLevelsMap.get(i).forEach(nodeArcVO ->
+
+                            System.out.println("LEVEL " + nodeArcVO.netLevel + "  > " + nodeArcVO.nodeId + "->" +
+                                    nodeArcVO.neighborNodeId)
+                    //        elNet.arcMap.get(nodeArcVO.arcId).getEndNodeId())
+            );
+
+
+        }
         } catch (Exception e) {
             System.out.println("**********************************************************");
             System.out.println("*   jakiś błędzik");

@@ -17,7 +17,7 @@ public class AppParameters {
     String dataArcResultsFileName  = "MO_DATA_ARC_RESULTS.txt";
     String dataNodeResultsFileName = "MO_DATA_NODE_RESULTS.txt";
     String delimiter               = "|";
-    String sourceDataFilesPath     = "./filesData/" ;
+    String sourceDataFilesPath     = "C:\\repo\\dataFiles\\" ;
     //*******************************
     //SNGLENTON
     private static AppParameters appParameters;
