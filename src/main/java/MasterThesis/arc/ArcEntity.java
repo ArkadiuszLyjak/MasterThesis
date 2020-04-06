@@ -3,8 +3,11 @@ package MasterThesis.arc;
 
 import MasterThesis.base.entity.BaseEntity;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class ArcEntity  extends BaseEntity {
 
     Long startNodeId;   //Pocz
@@ -15,6 +18,23 @@ public class ArcEntity  extends BaseEntity {
     Integer lines;   //Tory
     Integer state;   //Stan
     Integer changes;   //Zmiana
+    //-----------------------------------
+    // Dane wyliczane
+    Double reactance ;
+    Double resistance;
+    Double impedance;
+    //----
+    Double reactancePU ;
+    Double resistancePU;
+    Double impedancePU;
+
+    // Trafo Values
+    Double powerPU;
+    Double voltageHighPU;
+    Double voltageLowPU;
+    Double currentPU;
+
+
 
     public ArcEntity(Long id) {
         super(id);

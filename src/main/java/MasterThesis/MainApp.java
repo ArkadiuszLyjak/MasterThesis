@@ -22,6 +22,7 @@ import MasterThesis.arc.ArcType;
 import MasterThesis.arc_file_tools.FileDataService;
 import MasterThesis.base.parameters.AppParametersService;
 import MasterThesis.bfs.BfsAlgorithm;
+import MasterThesis.data_calc.BaseValues;
 import MasterThesis.el_net.ElectricalNetwork;
 import MasterThesis.el_net.ElectricalNetworkService;
 import MasterThesis.line_type.LineType;
@@ -79,85 +80,137 @@ public class MainApp {
 
             for (ArcEntity arc : elNet.arcList) {
                 if (arc.getType() == ArcType.LINE) {
-                    //-------
-                    Double reactance = 0.0;
-                    Double resistance = 0.0;
-                    Double impedance = 0.0;
                     LineType lineType = elNet.lineTypeMap.get(arc.getPosition());
 
-                    reactance  = arc.getArcLength() * lineType.getCohesiveUnitReactance();
-                    resistance = arc.getArcLength() * lineType.getCohesiveUnitResistance();
-                    impedance  = Math.sqrt( Math.pow(resistance, 2.0) + Math.pow(resistance, 2.0));
+                    Double reactance ;
+                    Double resistance;
+                    Double impedance ;
+                    Double impedancePU;
+                    Double resistancePU;
+                    Double reactancePU;
 
-                 System.out.println(arc.getId() + " | " +
-                         "L: "+     arc.getArcLength()+ " | " +
-                         "X: "+dfLine.format(reactance) +" | "+
-                         "R: "+dfLine.format(resistance) +" | "+
-                         "Z: "+dfLine.format(impedance)
+                    //----------
+                    reactance    = arc.getArcLength() * lineType.getCohesiveUnitReactance();
+                    resistance   = arc.getArcLength() * lineType.getCohesiveUnitResistance();
+                    impedance    = Math.sqrt(Math.pow(resistance, 2.0) + Math.pow(reactance, 2.0));
+                    impedancePU  = impedance  / BaseValues.impedance_base;
+                    resistancePU = resistance / BaseValues.impedance_base;
+                    reactancePU  = reactance  / BaseValues.impedance_base;
 
-                 );
+
+                    /// ustawienie encji
+                    arc.setReactance(reactance);
+                    arc.setResistance(resistance);
+                    arc.setImpedance(impedance);
+
+                    arc.setImpedancePU(impedancePU);
+                    arc.setResistance(resistancePU);
+                    arc.setReactancePU(reactancePU);
+
+
+                    System.out.println(arc.getId() + " | " +
+                            "L: " + arc.getArcLength() + " | " +
+                            "X: " + dfLine.format(arc.getReactance()) + " | " +
+                            "R: " + dfLine.format(arc.getResistance()) + " | " +
+                            "Z: " + dfLine.format(arc.getImpedance())
+
+                    );
 
                 }
             }
 
 
-            System.out.println("--------------------");
+            System.out.println("..");
             System.out.println("------- TRAFO -------------");
 
 
             for (ArcEntity arc : elNet.arcList) {
                 if (arc.getType() == ArcType.TRANSFORMER) {
                     //-------
-                    Double reactance  = 0.0;
-                    Double resistance = 0.0;
-                    Double impedance = 0.0;
+                    TransformerTypeEntity transformerType = elNet.transformerTypeMap.get(arc.getPosition());
+                    Double reactance;
+                    Double resistance;
+                    Double impedance ;
+                    Double impedancePU;
+                    Double resistancePU;
+                    Double reactancePU;
 
-                    TransformerTypeEntity  transformerType = elNet.transformerTypeMap.get(arc.getPosition());
+                    Double powerPU;
+                    Double voltageHighPU ;
+                    Double voltageLowPU;
+                    Double currentPU;
 
 
-                    resistance = (transformerType.getActiveIdleLoss() * Math.pow(transformerType.getNominalUpperVoltage(),2.0) )
-                                      / Math.pow(transformerType.getNominalPower(),2.0);
+                    resistance =  (transformerType.getActiveIdleLoss() * Math.pow(transformerType.getNominalUpperVoltage(), 2.0))
+                                 / Math.pow(transformerType.getNominalPower(), 2.0);
 
-                    reactance = (transformerType.getShortingVoltage() / 100)
-                            *   (Math.pow(transformerType.getNominalUpperVoltage(),2.0)/transformerType.getNominalPower() );
+                    reactance =  (transformerType.getShortingVoltage() / 100)
+                               * (Math.pow(transformerType.getNominalUpperVoltage(), 2.0) / transformerType.getNominalPower());
 
-                    impedance = (transformerType.getShortingVoltage() / 100)
-                            *   (Math.pow(transformerType.getNominalUpperVoltage(),2.0)/transformerType.getNominalPower() );
+                    impedance =   (transformerType.getShortingVoltage() / 100)
+                                * (Math.pow(transformerType.getNominalUpperVoltage(), 2.0) / transformerType.getNominalPower());
+                    //wartosci wzgledne per Unit
+                    impedancePU  = impedance /BaseValues.impedance_base;
+                    resistancePU = resistance /BaseValues.impedance_base;
+                    reactancePU  = reactance /BaseValues.impedance_base;
+
+                     powerPU       = transformerType.getNominalPower() / BaseValues.power_base;
+                     voltageHighPU = transformerType.getNominalUpperVoltage() / BaseValues.voltage_base;
+                     voltageLowPU  = transformerType.getNominalLowerVoltage() / BaseValues.voltage_base;
+
+                    //-------------
+                    //ustawienie encji
+                    arc.setReactance(reactance);
+                    arc.setResistance(resistance);
+                    arc.setImpedance(impedance);
+
+                    arc.setImpedancePU(impedancePU);
+                    arc.setResistancePU(resistancePU);
+                    arc.setReactancePU(reactancePU);
+
+                    arc.setPowerPU(powerPU);
+                    arc.setVoltageHighPU(voltageHighPU);
+                    arc.setVoltageLowPU(voltageLowPU);
+
+//                    System.out.println(arc.getId() + " | " +
+//                            "R: " + arc.getResistancePU() + " | " +
+//                            "X: " + arc.getReactancePU() + " | " +
+//                            "Z: " + arc.getImpedancePU());
+
 
                     System.out.println(arc.getId() + " | " +
-                            "X: "+dfTrafo.format(reactance) +" | "+
-                            "R: "+dfTrafo.format(resistance) +" | "+
-                            "Z: "+dfTrafo.format(impedance));
+                            "R: " + dfTrafo.format(arc.getResistancePU()) + " | " +
+                            "X: " + dfTrafo.format(arc.getReactancePU()) + " | " +
+                            "Z: " + dfTrafo.format(arc.getImpedancePU()));
 
                 }
             }
 
 
+            //--------------------
+            // Tylko Ci co maja sasiadow
+            elNet.nodeArcList_Map.forEach((nodeId, arcIdList) -> {
 
+                        System.out.print(" [" + nodeId + "] => {");
+                        arcIdList.forEach(arcId -> {
+                            System.out.print(elNet.arcMap.get(arcId).getEndNodeId() + ",");
+                        });
+                        System.out.println("} ");
+                    }
 
-        //--------------------
-        // Tylko Ci co maja sasiadow
-        elNet.nodeArcList_Map.forEach((nodeId, arcIdList) -> {
-
-                    System.out.print(" [" + nodeId + "] => {");
-                    arcIdList.forEach(arcId -> {
-                        System.out.print(elNet.arcMap.get(arcId).getEndNodeId() + ",");
-                    });
-                    System.out.println("} ");
-                }
-
-        );
-
-        for (Long i = 0L; i <= bfsAlgorithm.getNetLevel(); i++) {
-            bfsAlgorithm.arcLevelsMap.get(i).forEach(nodeArcVO ->
-
-                            System.out.println("LEVEL " + nodeArcVO.netLevel + "  > " + nodeArcVO.nodeId + "->" +
-                                    nodeArcVO.neighborNodeId)
-                    //        elNet.arcMap.get(nodeArcVO.arcId).getEndNodeId())
             );
+            //-----------------------
+            // Kolejnosc odwiedzin
+            for (Long i = 0L; i <= bfsAlgorithm.getNetLevel(); i++) {
+                bfsAlgorithm.arcLevelsMap.get(i).forEach(nodeArcVO ->
+
+                                System.out.println("LEVEL " + nodeArcVO.netLevel + "  > " + nodeArcVO.nodeId + "->" +
+                                        nodeArcVO.neighborNodeId)
+                        //        elNet.arcMap.get(nodeArcVO.arcId).getEndNodeId())
+                );
 
 
-        }
+            }
         } catch (Exception e) {
             System.out.println("**********************************************************");
             System.out.println("*   jakiś błędzik");
