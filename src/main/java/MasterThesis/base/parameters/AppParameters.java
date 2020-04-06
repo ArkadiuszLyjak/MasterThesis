@@ -1,9 +1,11 @@
 package MasterThesis.base.parameters;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-//Snglenton
-@Data
+@Getter
+@Setter
 public class AppParameters {
     /***************************************************
     *  Default values
@@ -15,7 +17,7 @@ public class AppParameters {
     String dataArcResultsFileName  = "MO_DATA_ARC_RESULTS.txt";
     String dataNodeResultsFileName = "MO_DATA_NODE_RESULTS.txt";
     String delimiter               = "|";
-    String sourceDataFilesPath     = "/home/robert/priv/arek_lyjak/filesWork/" ; //TODO do zmiany na jakis lokalny katalog
+    String sourceDataFilesPath     = "./filesData/" ;
     //*******************************
     //SNGLENTON
     private static AppParameters appParameters;
@@ -41,5 +43,42 @@ public class AppParameters {
                 "sourceDataFilesPath='" + sourceDataFilesPath + '\'' +"\n"+
                 '}';
     }
+
+    public  String getNodeFileFullPath(){
+        return  sourceDataFilesPath+
+                nodeFileName ;
+    }
+
+    public String getArcFullFileName(){
+        return  sourceDataFilesPath+
+                arcFileName;
+
+    }
+    public String getLineTypeFullFileName(){
+        return  sourceDataFilesPath+
+                lineTypeFileName;
+
+    }
+    public String getNodeFullFileName(){
+        return  sourceDataFilesPath+
+                nodeFileName;
+
+    }
+    public String getTransformerTypeFullFileName(){
+        return  sourceDataFilesPath+
+                transformerTypeFileName;
+
+    }
+    public String getDataArcResultsFullFileName(){
+        return  sourceDataFilesPath+
+                dataArcResultsFileName;
+
+    }
+    public String getDataNodeResultsFullFileName(){
+        return  sourceDataFilesPath+
+                dataNodeResultsFileName;
+
+    }
+
 
 }

@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3debccc7-69d2-4b1b-99e3-0b705f28f625" name="Default Changelist" comment="Kilka zmian">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/BfsAlgorithm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/NodeArcVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/tools/NetStatistics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/ElectricalNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/FileDataReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/line_type/LineType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/line_type/LineType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/base/parameters/AppParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/base/parameters/AppParameters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/base/parameters/AppParametersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/base/parameters/AppParametersService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +76,7 @@
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MasterThesis.MainApp" />
       <module name="MasterThesis.main" />
-      <option name="PROGRAM_PARAMETERS" value="--stat nodes" />
+      <option name="PROGRAM_PARAMETERS" value="-d $PROJECT_DIR$/../filesWork/" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="MasterThesis.*" />
@@ -251,10 +249,10 @@
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
     <state x="665" y="203" width="644" height="679" key="#RunMasterThesis/59.0.1861.1080@59.0.1861.1080" timestamp="1584554317537" />
-    <state x="447" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584567739802">
+    <state x="447" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585252890223">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
-    <state x="447" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog/59.0.1861.1080@59.0.1861.1080" timestamp="1584567739802" />
+    <state x="447" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog/59.0.1861.1080@59.0.1861.1080" timestamp="1585252890223" />
     <state x="770" y="250" width="430" height="586" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1584554139679">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
@@ -283,38 +281,38 @@
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
     <state width="478" height="466" key="DebuggerActiveHint/59.0.1861.1080@59.0.1861.1080" timestamp="1584984377585" />
-    <state width="1819" height="201" key="GridCell.Tab.0.bottom" timestamp="1584986401868">
+    <state width="1819" height="274" key="GridCell.Tab.0.bottom" timestamp="1585260161288">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
-    <state width="1819" height="201" key="GridCell.Tab.0.bottom/59.0.1861.1080@59.0.1861.1080" timestamp="1584986401868" />
-    <state width="1819" height="201" key="GridCell.Tab.0.center" timestamp="1584986401866">
+    <state width="1819" height="274" key="GridCell.Tab.0.bottom/59.0.1861.1080@59.0.1861.1080" timestamp="1585260161288" />
+    <state width="1819" height="274" key="GridCell.Tab.0.center" timestamp="1585260161288">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
-    <state width="1819" height="201" key="GridCell.Tab.0.center/59.0.1861.1080@59.0.1861.1080" timestamp="1584986401866" />
-    <state width="1819" height="201" key="GridCell.Tab.0.left" timestamp="1584986401864">
+    <state width="1819" height="274" key="GridCell.Tab.0.center/59.0.1861.1080@59.0.1861.1080" timestamp="1585260161288" />
+    <state width="1819" height="274" key="GridCell.Tab.0.left" timestamp="1585260161287">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
-    <state width="1819" height="201" key="GridCell.Tab.0.left/59.0.1861.1080@59.0.1861.1080" timestamp="1584986401864" />
-    <state width="1819" height="201" key="GridCell.Tab.0.right" timestamp="1584986401867">
+    <state width="1819" height="274" key="GridCell.Tab.0.left/59.0.1861.1080@59.0.1861.1080" timestamp="1585260161287" />
+    <state width="1819" height="274" key="GridCell.Tab.0.right" timestamp="1585260161288">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
-    <state width="1819" height="201" key="GridCell.Tab.0.right/59.0.1861.1080@59.0.1861.1080" timestamp="1584986401867" />
-    <state width="1082" height="355" key="GridCell.Tab.1.bottom" timestamp="1584984385658">
+    <state width="1819" height="274" key="GridCell.Tab.0.right/59.0.1861.1080@59.0.1861.1080" timestamp="1585260161288" />
+    <state width="1082" height="355" key="GridCell.Tab.1.bottom" timestamp="1584994095951">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
-    <state width="1082" height="355" key="GridCell.Tab.1.bottom/59.0.1861.1080@59.0.1861.1080" timestamp="1584984385658" />
-    <state width="1082" height="355" key="GridCell.Tab.1.center" timestamp="1584984385658">
+    <state width="1082" height="355" key="GridCell.Tab.1.bottom/59.0.1861.1080@59.0.1861.1080" timestamp="1584994095951" />
+    <state width="1082" height="355" key="GridCell.Tab.1.center" timestamp="1584994095950">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
-    <state width="1082" height="355" key="GridCell.Tab.1.center/59.0.1861.1080@59.0.1861.1080" timestamp="1584984385658" />
-    <state width="1082" height="355" key="GridCell.Tab.1.left" timestamp="1584984385658">
+    <state width="1082" height="355" key="GridCell.Tab.1.center/59.0.1861.1080@59.0.1861.1080" timestamp="1584994095950" />
+    <state width="1082" height="355" key="GridCell.Tab.1.left" timestamp="1584994095950">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
-    <state width="1082" height="355" key="GridCell.Tab.1.left/59.0.1861.1080@59.0.1861.1080" timestamp="1584984385658" />
-    <state width="1082" height="355" key="GridCell.Tab.1.right" timestamp="1584984385658">
+    <state width="1082" height="355" key="GridCell.Tab.1.left/59.0.1861.1080@59.0.1861.1080" timestamp="1584994095950" />
+    <state width="1082" height="355" key="GridCell.Tab.1.right" timestamp="1584994095950">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>
-    <state width="1082" height="355" key="GridCell.Tab.1.right/59.0.1861.1080@59.0.1861.1080" timestamp="1584984385658" />
+    <state width="1082" height="355" key="GridCell.Tab.1.right/59.0.1861.1080@59.0.1861.1080" timestamp="1584994095950" />
     <state x="472" y="119" width="1030" height="847" key="SettingsEditor" timestamp="1584647805537">
       <screen x="59" y="0" width="1861" height="1080" />
     </state>

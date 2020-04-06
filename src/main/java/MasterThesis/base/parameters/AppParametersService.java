@@ -19,42 +19,12 @@ public class AppParametersService {
         return regex;
     }
 
-    public  String getNodeFileFullPath(){
-        return  params.getSourceDataFilesPath()+
-                params.getNodeFileName() ;
+    public void setParametersFromArgs(String[] args) {
 
+        if (args.length > 0 ) {
+        //for (int i=0;  )
+          //  System.out.println(args[0]);
+            params.setSourceDataFilesPath(args[1]);
+        }
     }
-
-    public String getArcFullFileName(){
-        return  params.getSourceDataFilesPath()+
-                params.getArcFileName();
-
-    }
-    public String getLineTypeFullFileName(){
-        return  params.getSourceDataFilesPath()+
-                params.getLineTypeFileName();
-
-    }
-    public String getNodeFullFileName(){
-        return  params.getSourceDataFilesPath()+
-                params.getNodeFileName();
-
-    }
-    public String getTransformerTypeFullFileName(){
-        return  params.getSourceDataFilesPath()+
-                params.getTransformerTypeFileName();
-
-    }
-    public String getDataArcResultsFullFileName(){
-        return  params.getSourceDataFilesPath()+
-                params.getDataArcResultsFileName();
-
-    }
-    public String getDataNodeResultsFullFileName(){
-        return  params.getSourceDataFilesPath()+
-                params.getDataNodeResultsFileName();
-
-    }
-
-
 }

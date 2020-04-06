@@ -10,7 +10,7 @@ public class ArcEntity  extends BaseEntity {
     Long startNodeId;   //Pocz
     Long endNodeId;   //Konc
     ArcType type;   //Typ
-    Integer position;  //Pozycja
+    Long position;  //Pozycja
     Double arcLength;   //Dlugosc
     Integer lines;   //Tory
     Integer state;   //Stan
