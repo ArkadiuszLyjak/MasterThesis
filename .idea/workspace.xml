@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3debccc7-69d2-4b1b-99e3-0b705f28f625" name="Default Changelist" comment="Kilka zmian">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/base/parameters/AppParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/base/parameters/AppParameters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/base/parameters/AppParametersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/base/parameters/AppParametersService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" afterDir="false" />
-    </list>
+    <list default="true" id="2ac8084a-c7f9-4083-8da9-2e89e5941634" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,26 +12,9 @@
       <ProjectState />
     </projectState>
   </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <task path="$PROJECT_DIR$">
-          <activation />
-        </task>
-        <projects_view>
-          <tree_state>
-            <expand />
-            <select />
-          </tree_state>
-        </projects_view>
-      </state>
-    </system>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
-        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -48,8 +22,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1ZJFy7EEYgB3QrIADbDnBVBd4nu" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1aB6SbZUiDZ9TbH14Fj2NU1UGJv" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -57,26 +30,12 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/MasterThesis/node" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.notifications" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/MasterThesis/node" />
-      <recent name="$PROJECT_DIR$/src/main/java/MasterThesis/base" />
-      <recent name="$PROJECT_DIR$/src/main/java/MasterThesis/arc" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.MainApp">
+  <component name="RunManager">
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MasterThesis.MainApp" />
       <module name="MasterThesis.main" />
-      <option name="PROGRAM_PARAMETERS" value="-d $PROJECT_DIR$/../filesWork/" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="MasterThesis.*" />
@@ -87,244 +46,65 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainFactoryFromStrTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MasterThesis.MainFactoryFromStrTest" />
-      <module name="MasterThesis.test" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="MasterThesis.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AppTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;MasterThesis.AppTest&quot; --stacktrace" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":cleanTest" />
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="FactoryFromStrTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;MasterThesis.FactoryFromStrTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":cleanTest" />
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="MasterThesis [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.MainApp" />
-      <item itemvalue="Application.MainFactoryFromStrTest" />
-      <item itemvalue="Gradle.AppTest" />
-      <item itemvalue="Gradle.MasterThesis [build]" />
-      <item itemvalue="Gradle.FactoryFromStrTest" />
-    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainApp" />
-        <item itemvalue="Application.MainFactoryFromStrTest" />
-        <item itemvalue="Gradle.FactoryFromStrTest" />
-        <item itemvalue="Gradle.AppTest" />
-        <item itemvalue="Gradle.MasterThesis [build]" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3debccc7-69d2-4b1b-99e3-0b705f28f625" name="Default Changelist" comment="" />
-      <created>1584549541847</created>
+      <changelist id="2ac8084a-c7f9-4083-8da9-2e89e5941634" name="Default Changelist" comment="" />
+      <created>1586196640742</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1584549541847</updated>
+      <updated>1586196640742</updated>
     </task>
-    <task id="LOCAL-00001" summary="Kilka zmian">
-      <created>1584558360620</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1584558360620</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Kilka zmian" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kilka zmian" />
-  </component>
   <component name="WindowStateProjectService">
-    <state x="584" y="203" width="806" height="679" key="#Inspections" timestamp="1584552657169">
-      <screen x="59" y="0" width="1861" height="1080" />
+    <state x="682" y="436" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1586203151850">
+      <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state x="584" y="203" width="806" height="679" key="#Inspections/59.0.1861.1080@59.0.1861.1080" timestamp="1584552657169" />
-    <state x="584" y="203" width="806" height="679" key="#Project_Structure" timestamp="1584553239573">
-      <screen x="59" y="0" width="1861" height="1080" />
+    <state x="682" y="436" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/62.0.1799.1010@62.0.1799.1010" timestamp="1586203151850" />
+    <state width="445" height="466" key="DebuggerActiveHint" timestamp="1586198822545">
+      <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state x="584" y="203" width="806" height="679" key="#Project_Structure/59.0.1861.1080@59.0.1861.1080" timestamp="1584553239573" />
-    <state x="665" y="203" width="644" height="679" key="#RunMasterThesis" timestamp="1584554317537">
-      <screen x="59" y="0" width="1861" height="1080" />
+    <state width="445" height="466" key="DebuggerActiveHint/62.0.1799.1010@62.0.1799.1010" timestamp="1586198822545" />
+    <state width="512" height="874" key="GridCell.Tab.0.bottom" timestamp="1587327007050">
+      <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state x="665" y="203" width="644" height="679" key="#RunMasterThesis/59.0.1861.1080@59.0.1861.1080" timestamp="1584554317537" />
-    <state x="447" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585252890223">
-      <screen x="59" y="0" width="1861" height="1080" />
+    <state width="512" height="874" key="GridCell.Tab.0.bottom/62.0.1799.1010@62.0.1799.1010" timestamp="1587327007050" />
+    <state width="512" height="874" key="GridCell.Tab.0.center" timestamp="1587327007050">
+      <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state x="447" y="199" key="#com.intellij.execution.impl.EditConfigurationsDialog/59.0.1861.1080@59.0.1861.1080" timestamp="1585252890223" />
-    <state x="770" y="250" width="430" height="586" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1584554139679">
-      <screen x="59" y="0" width="1861" height="1080" />
+    <state width="512" height="874" key="GridCell.Tab.0.center/62.0.1799.1010@62.0.1799.1010" timestamp="1587327007050" />
+    <state width="512" height="874" key="GridCell.Tab.0.left" timestamp="1587327007050">
+      <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state x="770" y="250" width="430" height="586" key="#com.intellij.ide.macro.MacrosDialog/59.0.1861.1080@59.0.1861.1080" timestamp="1584554139679" />
-    <state x="797" y="254" width="517" height="577" key="#com.intellij.ide.util.MemberChooser" timestamp="1584567247259">
-      <screen x="59" y="0" width="1861" height="1080" />
+    <state width="512" height="874" key="GridCell.Tab.0.left/62.0.1799.1010@62.0.1799.1010" timestamp="1587327007050" />
+    <state width="512" height="874" key="GridCell.Tab.0.right" timestamp="1587327007050">
+      <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state x="797" y="254" width="517" height="577" key="#com.intellij.ide.util.MemberChooser/59.0.1861.1080@59.0.1861.1080" timestamp="1584567247259" />
-    <state x="721" y="328" width="531" height="428" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1584553971403">
-      <screen x="59" y="0" width="1861" height="1080" />
+    <state width="512" height="874" key="GridCell.Tab.0.right/62.0.1799.1010@62.0.1799.1010" timestamp="1587327007050" />
+    <state width="1757" height="332" key="GridCell.Tab.1.bottom" timestamp="1586205733155">
+      <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state x="721" y="328" width="531" height="428" key="#com.intellij.ide.util.TreeClassChooserDialog/59.0.1861.1080@59.0.1861.1080" timestamp="1584553971403" />
-    <state x="740" y="377" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog" timestamp="1584628744740">
-      <screen x="59" y="0" width="1861" height="1080" />
+    <state width="1757" height="332" key="GridCell.Tab.1.bottom/62.0.1799.1010@62.0.1799.1010" timestamp="1586205733155" />
+    <state width="1757" height="332" key="GridCell.Tab.1.center" timestamp="1586205733155">
+      <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state x="740" y="377" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog/59.0.1861.1080@59.0.1861.1080" timestamp="1584628744740" />
-    <state x="622" y="89" width="726" height="908" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584552506791">
-      <screen x="59" y="0" width="1861" height="1080" />
+    <state width="1757" height="332" key="GridCell.Tab.1.center/62.0.1799.1010@62.0.1799.1010" timestamp="1586205733155" />
+    <state width="1757" height="332" key="GridCell.Tab.1.left" timestamp="1586205733155">
+      <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state x="622" y="89" width="726" height="908" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/59.0.1861.1080@59.0.1861.1080" timestamp="1584552506791" />
-    <state x="607" y="139" width="761" height="807" key="CommitChangelistDialog2" timestamp="1584644291408">
-      <screen x="59" y="0" width="1861" height="1080" />
+    <state width="1757" height="332" key="GridCell.Tab.1.left/62.0.1799.1010@62.0.1799.1010" timestamp="1586205733155" />
+    <state width="1757" height="332" key="GridCell.Tab.1.right" timestamp="1586205733155">
+      <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state x="607" y="139" width="761" height="807" key="CommitChangelistDialog2/59.0.1861.1080@59.0.1861.1080" timestamp="1584644291408" />
-    <state width="478" height="466" key="DebuggerActiveHint" timestamp="1584984377585">
-      <screen x="59" y="0" width="1861" height="1080" />
-    </state>
-    <state width="478" height="466" key="DebuggerActiveHint/59.0.1861.1080@59.0.1861.1080" timestamp="1584984377585" />
-    <state width="1819" height="274" key="GridCell.Tab.0.bottom" timestamp="1585260161288">
-      <screen x="59" y="0" width="1861" height="1080" />
-    </state>
-    <state width="1819" height="274" key="GridCell.Tab.0.bottom/59.0.1861.1080@59.0.1861.1080" timestamp="1585260161288" />
-    <state width="1819" height="274" key="GridCell.Tab.0.center" timestamp="1585260161288">
-      <screen x="59" y="0" width="1861" height="1080" />
-    </state>
-    <state width="1819" height="274" key="GridCell.Tab.0.center/59.0.1861.1080@59.0.1861.1080" timestamp="1585260161288" />
-    <state width="1819" height="274" key="GridCell.Tab.0.left" timestamp="1585260161287">
-      <screen x="59" y="0" width="1861" height="1080" />
-    </state>
-    <state width="1819" height="274" key="GridCell.Tab.0.left/59.0.1861.1080@59.0.1861.1080" timestamp="1585260161287" />
-    <state width="1819" height="274" key="GridCell.Tab.0.right" timestamp="1585260161288">
-      <screen x="59" y="0" width="1861" height="1080" />
-    </state>
-    <state width="1819" height="274" key="GridCell.Tab.0.right/59.0.1861.1080@59.0.1861.1080" timestamp="1585260161288" />
-    <state width="1082" height="355" key="GridCell.Tab.1.bottom" timestamp="1584994095951">
-      <screen x="59" y="0" width="1861" height="1080" />
-    </state>
-    <state width="1082" height="355" key="GridCell.Tab.1.bottom/59.0.1861.1080@59.0.1861.1080" timestamp="1584994095951" />
-    <state width="1082" height="355" key="GridCell.Tab.1.center" timestamp="1584994095950">
-      <screen x="59" y="0" width="1861" height="1080" />
-    </state>
-    <state width="1082" height="355" key="GridCell.Tab.1.center/59.0.1861.1080@59.0.1861.1080" timestamp="1584994095950" />
-    <state width="1082" height="355" key="GridCell.Tab.1.left" timestamp="1584994095950">
-      <screen x="59" y="0" width="1861" height="1080" />
-    </state>
-    <state width="1082" height="355" key="GridCell.Tab.1.left/59.0.1861.1080@59.0.1861.1080" timestamp="1584994095950" />
-    <state width="1082" height="355" key="GridCell.Tab.1.right" timestamp="1584994095950">
-      <screen x="59" y="0" width="1861" height="1080" />
-    </state>
-    <state width="1082" height="355" key="GridCell.Tab.1.right/59.0.1861.1080@59.0.1861.1080" timestamp="1584994095950" />
-    <state x="472" y="119" width="1030" height="847" key="SettingsEditor" timestamp="1584647805537">
-      <screen x="59" y="0" width="1861" height="1080" />
-    </state>
-    <state x="472" y="119" width="1030" height="847" key="SettingsEditor/59.0.1861.1080@59.0.1861.1080" timestamp="1584647805537" />
-    <state x="650" y="247" key="run.anything.popup" timestamp="1584553767393">
-      <screen x="59" y="0" width="1861" height="1080" />
-    </state>
-    <state x="650" y="247" key="run.anything.popup/59.0.1861.1080@59.0.1861.1080" timestamp="1584553767393" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MasterThesis$MainApp.ic" NAME="MainApp Coverage Results" MODIFIED="1584984382418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>MasterThesis.*</FILTER>
-    </SUITE>
+    <state width="1757" height="332" key="GridCell.Tab.1.right/62.0.1799.1010@62.0.1799.1010" timestamp="1586205733155" />
   </component>
 </project>

@@ -31,9 +31,10 @@ public class FileDataService {
     public void readNodeFiles() {
         try {
             FileDataReader.netFileRead(params.getNodeFileFullPath(),
-                    s -> {
-                        NodeEntity node = NodeFactory.prepareFromString(s);
+                    fileLine -> {
+                        NodeEntity node = NodeFactory.prepareFromString(fileLine);
                         elNet.nodeMap.put(node.getId(), node);
+                        elNet.nodeList.add(node);
                     });
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -44,8 +45,8 @@ public class FileDataService {
     public  void readLineTypeFiles() {
         try {
             FileDataReader.netFileRead(params.getLineTypeFullFileName(),
-                    s -> {
-                        LineType lineType = LineTypeFactory.prepareFromString(s);
+                    fileLine -> {
+                        LineType lineType = LineTypeFactory.prepareFromString(fileLine);
                         elNet.lineTypeMap.put(lineType.getId(), lineType);
                     }
             );
@@ -57,8 +58,8 @@ public class FileDataService {
     public  void readTransformerTypeFiles() {
         try {
                 FileDataReader.netFileRead(params.getTransformerTypeFullFileName(),
-                s -> {
-                    TransformerTypeEntity transformerTypeEntity = TransformerTypeFactory.prepareFromString(s);
+                 fileLine -> {
+                    TransformerTypeEntity transformerTypeEntity = TransformerTypeFactory.prepareFromString(fileLine);
                     elNet.transformerTypeMap.put(transformerTypeEntity.getId(), transformerTypeEntity);
                 }
         );
@@ -71,8 +72,8 @@ public class FileDataService {
         try {
 
             FileDataReader.netFileRead(params.getArcFullFileName(),
-                    s -> {
-                        ArcEntity arc = ArcFactory.prepareFromString(s);
+                    fileLine -> {
+                        ArcEntity arc = ArcFactory.prepareFromString(fileLine);
                         elNet.arcMap.put(arc.getId(), arc);
                         elNet.arcList.add(arc);
                     }

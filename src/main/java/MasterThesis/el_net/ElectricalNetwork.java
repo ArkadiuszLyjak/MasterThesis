@@ -13,12 +13,14 @@ import java.util.Map;
 
 public class ElectricalNetwork {
 
-    public Map<Long ,NodeEntity>            nodeMap;
     public Map<Long, LineType>              lineTypeMap ;
     public Map<Long, TransformerTypeEntity> transformerTypeMap;
 
-    public Map<Long,ArcEntity>              arcMap;
-    public List<ArcEntity>                  arcList;
+    public Map<Long ,NodeEntity>    nodeMap;
+    public List<NodeEntity>         nodeList;
+
+    public Map<Long,ArcEntity>      arcMap;
+    public List<ArcEntity>          arcList;
 
     //Mapa wezlow -> lista lukow
     public Map<Long, List<Long>> nodeArcList_Map = new HashMap<>();
@@ -42,6 +44,7 @@ public class ElectricalNetwork {
         transformerTypeMap = new HashMap<>();
         arcMap             = new HashMap<>();
         arcList            = new ArrayList<>();
+        nodeList           = new ArrayList<>();
     }
 
     public void clean(){
@@ -50,6 +53,7 @@ public class ElectricalNetwork {
         transformerTypeMap.clear();
         arcMap.clear();
         arcList.clear();
+        nodeList.clear();
 
     }
 

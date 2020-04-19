@@ -2,7 +2,6 @@ package MasterThesis.arc;
 
 
 import MasterThesis.base.entity.BaseEntity;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

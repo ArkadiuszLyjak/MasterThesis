@@ -2,8 +2,11 @@ package MasterThesis.node;
 
 import MasterThesis.base.entity.BaseEntity;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class NodeEntity extends BaseEntity {
 
     NodeType type ;             // Typ
@@ -12,6 +15,8 @@ public class NodeEntity extends BaseEntity {
     Integer  activePowerDev;    // Odchylenie moc czynnej
     Integer  reactivePowerDev;  // Odchylenie mocy biernej
     Double   voltage;           // Napiecie
+    Double   voltagePU;           // Napiecie
+
 
     public NodeEntity(Long id) {
         super(id);
