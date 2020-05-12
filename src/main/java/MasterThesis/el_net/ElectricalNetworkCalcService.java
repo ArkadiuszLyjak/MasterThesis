@@ -41,7 +41,7 @@ public class ElectricalNetworkCalcService {
                 arc.setImpedance(impedance);
 
                 arc.setImpedancePU(impedancePU);
-                arc.setResistance(resistancePU);
+                arc.setResistancePU(resistancePU);
                 arc.setReactancePU(reactancePU);
 
             }
@@ -95,6 +95,41 @@ public class ElectricalNetworkCalcService {
                 nodeEntity.getVoltage() / BaseValues.voltage_base
                 )
         );
+    }
+
+    public void calcNodeCurrentPU_Iter0(){
+        elNet.nodeArcList_Map.forEach((nodeId, arcIdList) -> {
+                    try {
+
+                        if (nodeId != 0) {
+                            Double currentPUSum = 0.0;
+                            for (Long arcId : arcIdList) {
+                                Double resPU;
+                                Double volPU;
+                                Long endNodeId = elNet.arcMap.get(arcId).getEndNodeId();
+
+                                volPU = elNet.nodeMap.get(endNodeId).getVoltagePU();
+
+                                if (elNet.arcMap.get(arcId).getType() == ArcType.LINE) {
+                                    resPU = elNet.arcMap.get(arcId).getResistancePU();
+                                } else {
+
+                                    resPU = elNet.arcMap.get(arcId).getVoltageHighPU();
+                                }
+
+                                currentPUSum += volPU * (1 / resPU);
+                            }
+                            elNet.nodeMap.get(nodeId).setCurrentPU(currentPUSum);
+                            System.out.println("[" + nodeId + "] = " + elNet.nodeMap.get(nodeId).getCurrentPU());
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println("!!!! BLAD DLA nodeId="+nodeId);
+                        //TODO poprawa obslugi bledow
+                    }
+                }
+        );
+
     }
 
 

@@ -38,14 +38,14 @@ public class MainApp {
 
     public static void main(String[] args) {
         try {
-            AppParametersService paramsService = AppParametersService.getInstance();
-            ElectricalNetwork elNet = ElectricalNetwork.getInstance();
-            ElectricalNetworkService elNetService = ElectricalNetworkService.getInstance();
-            BfsAlgorithm bfsAlgorithm = BfsAlgorithm.getInstance();
-            FileDataService fileDataService = FileDataService.getInstance();
+            AppParametersService         paramsService = AppParametersService.getInstance();
+            ElectricalNetwork            elNet = ElectricalNetwork.getInstance();
+            ElectricalNetworkService     elNetService = ElectricalNetworkService.getInstance();
+            BfsAlgorithm                 bfsAlgorithm = BfsAlgorithm.getInstance();
+            FileDataService              fileDataService = FileDataService.getInstance();
             ElectricalNetworkCalcService elNetCalcService = ElectricalNetworkCalcService.getInstance();
             ElectricalNetworkOutPrinter  elNetPrinter = ElectricalNetworkOutPrinter.getInstance();
-            BfsAlgorithmOutPrinter bfsAlgPrinter = BfsAlgorithmOutPrinter.getInstance();
+            BfsAlgorithmOutPrinter       bfsAlgPrinter = BfsAlgorithmOutPrinter.getInstance();
             //NetStatistics netStatistics =  NetStatistics.getInstace();
 
             //--------------------------------------------------------------
@@ -58,7 +58,7 @@ public class MainApp {
 
             fileDataService.readNodeFiles();
             fileDataService.readArcFiles();
-            //--------------------------------------------------
+            //-------------------
             //Generate neighbors map
             elNetService.nodeArcListBuild();
 
@@ -66,6 +66,7 @@ public class MainApp {
             bfsAlgorithm.generateLevelsOrder();
 
             //-------------------
+            //Print
             elNetPrinter.printNetQuantity();
 
             //-------------------
@@ -80,15 +81,27 @@ public class MainApp {
             elNetPrinter.printTrafoImmitance();
             //---------------------
 
-            // CalcNodeVoltagePu
+            // Calculation Per Unit for Nodes
             elNetCalcService.calcNodeVoltagePu();
+
+
 
             elNetPrinter.printNodeVoltagePu();
 
             elNetPrinter.printNodeNeighbors();
+            //--------------------------------
+            ///->>>>
+            System.out.println("------------------ NODE CurrentPU ----------------");
+            elNetCalcService.calcNodeCurrentPU_Iter0();
+            //TODO printer for calcNodeCurrentPU_Iter0
+
+
+            //
+
 
 
             bfsAlgPrinter.printNodeVisitedOrder();
+
         } catch (Exception e) {
             System.out.println("**********************************************************");
             System.out.println("*   jakiś błędzik");

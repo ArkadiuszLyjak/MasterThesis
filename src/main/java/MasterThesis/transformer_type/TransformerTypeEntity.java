@@ -8,8 +8,10 @@ package MasterThesis.transformer_type;
 
 import MasterThesis.base.entity.BaseEntity;
 import lombok.Data;
-
-@Data
+import lombok.Getter;
+import lombok.Setter;
+@Getter
+@Setter
 public class TransformerTypeEntity extends BaseEntity {
    //    id  //id– numer pozycji katalogowej
     String type;  //type – nazwa typu

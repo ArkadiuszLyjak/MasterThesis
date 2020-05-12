@@ -65,7 +65,10 @@ public class ElectricalNetworkOutPrinter {
                 System.out.println(arc.getId() + " | " +
                         "R: " + dfTrafo.format(arc.getResistancePU()) + " | " +
                         "X: " + dfTrafo.format(arc.getReactancePU()) + " | " +
-                        "Z: " + dfTrafo.format(arc.getImpedancePU()));
+                        "Z: " + dfTrafo.format(arc.getImpedancePU()) + " | " +
+                        "H: " + dfTrafo.format(arc.getVoltageHighPU()) + " | " +
+                        "L: " + dfTrafo.format(arc.getVoltageLowPU())
+                );
 
             }
         }

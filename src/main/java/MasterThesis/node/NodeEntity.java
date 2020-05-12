@@ -15,7 +15,10 @@ public class NodeEntity extends BaseEntity {
     Integer  activePowerDev;    // Odchylenie moc czynnej
     Integer  reactivePowerDev;  // Odchylenie mocy biernej
     Double   voltage;           // Napiecie
+    //----------
+    // Calculated values
     Double   voltagePU;           // Napiecie
+    Double   currentPU;          //Prad w węźle
 
 
     public NodeEntity(Long id) {

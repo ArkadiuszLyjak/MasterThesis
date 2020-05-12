@@ -22,7 +22,8 @@ public class ArcEntity  extends BaseEntity {
     Double reactance ;
     Double resistance;
     Double impedance;
-    //----
+
+    // Line Values
     Double reactancePU ;
     Double resistancePU;
     Double impedancePU;
@@ -31,9 +32,8 @@ public class ArcEntity  extends BaseEntity {
     Double powerPU;
     Double voltageHighPU;
     Double voltageLowPU;
-    Double currentPU;
 
-
+  //  Double currentPU;
 
     public ArcEntity(Long id) {
         super(id);

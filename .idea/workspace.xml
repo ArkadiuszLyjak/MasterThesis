@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2ac8084a-c7f9-4083-8da9-2e89e5941634" name="Default Changelist" comment="" />
+    <list default="true" id="2ac8084a-c7f9-4083-8da9-2e89e5941634" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkOutPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkOutPrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/transformer_type/TransformerTypeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/transformer_type/TransformerTypeEntity.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +20,9 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="MasterThesis" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -20,6 +31,7 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PATH_TO_GIT" value="C:\Git\bin\git.exe" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1aB6SbZUiDZ9TbH14Fj2NU1UGJv" />
@@ -30,6 +42,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RunManager">
@@ -66,45 +82,65 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="421" y="164" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588358837005">
+      <screen x="62" y="0" width="1799" height="1010" />
+    </state>
+    <state x="421" y="164" key="#com.intellij.execution.impl.EditConfigurationsDialog/62.0.1799.1010@62.0.1799.1010" timestamp="1588358837005" />
     <state x="682" y="436" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1586203151850">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
     <state x="682" y="436" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/62.0.1799.1010@62.0.1799.1010" timestamp="1586203151850" />
-    <state width="445" height="466" key="DebuggerActiveHint" timestamp="1586198822545">
+    <state width="445" height="466" key="DebuggerActiveHint" timestamp="1589315916271">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="445" height="466" key="DebuggerActiveHint/62.0.1799.1010@62.0.1799.1010" timestamp="1586198822545" />
-    <state width="512" height="874" key="GridCell.Tab.0.bottom" timestamp="1587327007050">
+    <state width="445" height="466" key="DebuggerActiveHint/62.0.1799.1010@62.0.1799.1010" timestamp="1589315916271" />
+    <state x="701" y="207" key="FileChooserDialogImpl" timestamp="1588360214356">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="512" height="874" key="GridCell.Tab.0.bottom/62.0.1799.1010@62.0.1799.1010" timestamp="1587327007050" />
-    <state width="512" height="874" key="GridCell.Tab.0.center" timestamp="1587327007050">
+    <state x="701" y="207" key="FileChooserDialogImpl/62.0.1799.1010@62.0.1799.1010" timestamp="1588360214356" />
+    <state width="485" height="753" key="GridCell.Tab.0.bottom" timestamp="1589319129339">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="512" height="874" key="GridCell.Tab.0.center/62.0.1799.1010@62.0.1799.1010" timestamp="1587327007050" />
-    <state width="512" height="874" key="GridCell.Tab.0.left" timestamp="1587327007050">
+    <state width="485" height="753" key="GridCell.Tab.0.bottom/62.0.1799.1010@62.0.1799.1010" timestamp="1589319129339" />
+    <state width="485" height="753" key="GridCell.Tab.0.center" timestamp="1589319129339">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="512" height="874" key="GridCell.Tab.0.left/62.0.1799.1010@62.0.1799.1010" timestamp="1587327007050" />
-    <state width="512" height="874" key="GridCell.Tab.0.right" timestamp="1587327007050">
+    <state width="485" height="753" key="GridCell.Tab.0.center/62.0.1799.1010@62.0.1799.1010" timestamp="1589319129339" />
+    <state width="485" height="753" key="GridCell.Tab.0.left" timestamp="1589319129338">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="512" height="874" key="GridCell.Tab.0.right/62.0.1799.1010@62.0.1799.1010" timestamp="1587327007050" />
-    <state width="1757" height="332" key="GridCell.Tab.1.bottom" timestamp="1586205733155">
+    <state width="485" height="753" key="GridCell.Tab.0.left/62.0.1799.1010@62.0.1799.1010" timestamp="1589319129338" />
+    <state width="485" height="753" key="GridCell.Tab.0.right" timestamp="1589319129339">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="1757" height="332" key="GridCell.Tab.1.bottom/62.0.1799.1010@62.0.1799.1010" timestamp="1586205733155" />
-    <state width="1757" height="332" key="GridCell.Tab.1.center" timestamp="1586205733155">
+    <state width="485" height="753" key="GridCell.Tab.0.right/62.0.1799.1010@62.0.1799.1010" timestamp="1589319129339" />
+    <state width="1757" height="232" key="GridCell.Tab.1.bottom" timestamp="1589318549989">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="1757" height="332" key="GridCell.Tab.1.center/62.0.1799.1010@62.0.1799.1010" timestamp="1586205733155" />
-    <state width="1757" height="332" key="GridCell.Tab.1.left" timestamp="1586205733155">
+    <state width="1757" height="232" key="GridCell.Tab.1.bottom/62.0.1799.1010@62.0.1799.1010" timestamp="1589318549989" />
+    <state width="1757" height="232" key="GridCell.Tab.1.center" timestamp="1589318549989">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="1757" height="332" key="GridCell.Tab.1.left/62.0.1799.1010@62.0.1799.1010" timestamp="1586205733155" />
-    <state width="1757" height="332" key="GridCell.Tab.1.right" timestamp="1586205733155">
+    <state width="1757" height="232" key="GridCell.Tab.1.center/62.0.1799.1010@62.0.1799.1010" timestamp="1589318549989" />
+    <state width="1757" height="232" key="GridCell.Tab.1.left" timestamp="1589318549989">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="1757" height="332" key="GridCell.Tab.1.right/62.0.1799.1010@62.0.1799.1010" timestamp="1586205733155" />
+    <state width="1757" height="232" key="GridCell.Tab.1.left/62.0.1799.1010@62.0.1799.1010" timestamp="1589318549989" />
+    <state width="1757" height="232" key="GridCell.Tab.1.right" timestamp="1589318549989">
+      <screen x="62" y="0" width="1799" height="1010" />
+    </state>
+    <state width="1757" height="232" key="GridCell.Tab.1.right/62.0.1799.1010@62.0.1799.1010" timestamp="1589318549989" />
+    <state x="445" y="84" key="SettingsEditor" timestamp="1589311018161">
+      <screen x="62" y="0" width="1799" height="1010" />
+    </state>
+    <state x="445" y="84" key="SettingsEditor/62.0.1799.1010@62.0.1799.1010" timestamp="1589311018161" />
+    <state x="671" y="118" width="581" height="774" key="find.popup" timestamp="1589314612675">
+      <screen x="62" y="0" width="1799" height="1010" />
+    </state>
+    <state x="671" y="118" width="581" height="774" key="find.popup/62.0.1799.1010@62.0.1799.1010" timestamp="1589314612675" />
+    <state x="624" y="219" width="672" height="678" key="search.everywhere.popup" timestamp="1589316511659">
+      <screen x="62" y="0" width="1799" height="1010" />
+    </state>
+    <state x="624" y="219" width="672" height="678" key="search.everywhere.popup/62.0.1799.1010@62.0.1799.1010" timestamp="1589316511659" />
   </component>
 </project>
