@@ -17,9 +17,12 @@ public class NodeEntity extends BaseEntity {
     Double   voltage;           // Napiecie
     //----------
     // Calculated values
-    Double   voltagePU;           // Napiecie
-    Double   currentPU;          //Prad w węźle
-
+    Double   voltagePU;          // Napiecie znamionowe
+    Double   currentPU;          // Prad w wezle
+    //--
+    Double   voltagePU_Real;          // Napiecie
+    Double   currentPU_Real;          // Prad w wezle
+    Double   powerPU_Real;
 
     public NodeEntity(Long id) {
         super(id);

@@ -10,6 +10,8 @@ import MasterThesis.node.NodeEntity;
 import MasterThesis.node.NodeFactory;
 import MasterThesis.transformer_type.TransformerTypeEntity;
 import MasterThesis.transformer_type.TransformerTypeFactory;
+import com.sun.org.apache.bcel.internal.generic.ARETURN;
+import com.sun.org.apache.bcel.internal.generic.DRETURN;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -39,5 +41,14 @@ public class ElectricalNetworkService {
             }
             elNet.nodeArcList_Map.get(arcEntity.getStartNodeId()).add(arcEntity.getId());
         });
+    }
+
+    public boolean isDistributeNode(NodeEntity node) {
+        for (Long nodeId : elNet.getDistributeNodeIdList()){
+            if (nodeId == node.getId()){
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -29,9 +29,11 @@ import MasterThesis.el_net.ElectricalNetworkCalcService;
 import MasterThesis.el_net.ElectricalNetworkOutPrinter;
 import MasterThesis.el_net.ElectricalNetworkService;
 import MasterThesis.line_type.LineType;
+import MasterThesis.node.NodeEntity;
 import MasterThesis.transformer_type.TransformerTypeEntity;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class MainApp {
 
@@ -94,13 +96,67 @@ public class MainApp {
             System.out.println("------------------ NODE CurrentPU ----------------");
             elNetCalcService.calcNodeCurrentPU_Iter0();
             //TODO printer for calcNodeCurrentPU_Iter0
-
-
-            //
+        //    elNet.nodeArcList_Map.forEach((nodeId, arcIdList) -> {
+         //       System.out.println("[" + nodeId + "] = " + elNet.nodeMap.get(nodeId).getCurrentPU()); //TODO do usuniecia
+         //   }
+          //  );
 
 
 
             bfsAlgPrinter.printNodeVisitedOrder();
+
+            //----------------------------------------
+            System.out.println("------------------ NODE POWER TRANSMIT ----------------");
+            int k = 0;
+            int a = 0;
+            int i = 1;
+            int m = 2; // ilosc wezlow zasilowych
+            int n = elNet.nodeList.size() ;
+
+            Double   currentIter = 0.0;
+            Double   deltaCurrentIter = 0.0;
+            Double   voltageIter = 0.0;
+            Double   deltaVoltageIter = 0.0;
+
+
+            System.out.println(">>  ilosc wezlow =" + n);
+            //ZACZYNAMY.
+            do {
+                k++;
+                a=0;
+                for (NodeEntity node : elNet.nodeList) {
+                    currentIter = 0.0;
+                    deltaCurrentIter = 0.0;
+                    voltageIter = 0.0;
+                    deltaVoltageIter = 0.0;
+                    //---------------------
+                    if (elNetService.isDistributeNode(node)){
+                     //6A
+                      deltaVoltageIter = node.getVoltagePU();
+
+                     //7A
+                     //8A
+                    }
+                    else {
+                        //6B
+                        deltaCurrentIter = node.getCurrentPU() -
+                                                (node.getVoltagePU() )
+                                                /Math.sqrt(3);
+                        //7B
+                        //8B
+                    }
+
+
+
+
+                    System.out.println("[" + node.getId() + "] = "
+                            + node.getCurrentPU_Real() + " <"
+                            + node.getVoltagePU_Real() + " <"
+                    );
+                }
+
+            } while (a > 0) ;
+
 
         } catch (Exception e) {
             System.out.println("**********************************************************");

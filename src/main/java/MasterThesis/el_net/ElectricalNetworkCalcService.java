@@ -120,7 +120,6 @@ public class ElectricalNetworkCalcService {
                                 currentPUSum += volPU * (1 / resPU);
                             }
                             elNet.nodeMap.get(nodeId).setCurrentPU(currentPUSum);
-                            System.out.println("[" + nodeId + "] = " + elNet.nodeMap.get(nodeId).getCurrentPU());
                         }
                     }
                     catch (Exception e){

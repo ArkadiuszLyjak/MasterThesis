@@ -57,4 +57,11 @@ public class ElectricalNetwork {
 
     }
 
+    public List<Long> getDistributeNodeIdList() {
+        List<Long> distributeNodeList = new ArrayList<>();
+        for (Long arcId : nodeArcList_Map.get(0) ){
+            distributeNodeList.add(arcMap.get(arcId).getEndNodeId());
+        }
+        return distributeNodeList;
+    }
 }
