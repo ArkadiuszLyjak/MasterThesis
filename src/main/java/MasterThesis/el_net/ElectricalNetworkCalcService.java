@@ -28,12 +28,12 @@ public class ElectricalNetworkCalcService {
             if (arc.getType() == ArcType.LINE) {
                 LineType lineType = elNet.lineTypeMap.get(arc.getPosition());
 
-                Double reactance = arc.getArcLength() * lineType.getCohesiveUnitReactance();
-                Double resistance = arc.getArcLength() * lineType.getCohesiveUnitResistance();
-                Double impedance = Math.sqrt(Math.pow(resistance, 2.0) + Math.pow(reactance, 2.0));
-                Double impedancePU = impedance / BaseValues.impedance_base;
+                Double reactance    = arc.getArcLength() * lineType.getCohesiveUnitReactance();
+                Double resistance   = arc.getArcLength() * lineType.getCohesiveUnitResistance();
+                Double impedance    = Math.sqrt(Math.pow(resistance, 2.0) + Math.pow(reactance, 2.0));
+                Double impedancePU  = impedance / BaseValues.impedance_base;
                 Double resistancePU = resistance / BaseValues.impedance_base;
-                Double reactancePU = reactance / BaseValues.impedance_base;
+                Double reactancePU  = reactance / BaseValues.impedance_base;
 
                 /// ustawienie encji
                 arc.setReactance(reactance);
@@ -105,18 +105,13 @@ public class ElectricalNetworkCalcService {
                             Double currentPUSum = 0.0;
                             for (Long arcId : arcIdList) {
                                 Double resPU;
-                                Double volPU;
-                                Long endNodeId = elNet.arcMap.get(arcId).getEndNodeId();
-
-                                volPU = elNet.nodeMap.get(endNodeId).getVoltagePU();
-
+                                Long   endNodeId = elNet.arcMap.get(arcId).getEndNodeId();
+                                Double volPU = elNet.nodeMap.get(endNodeId).getVoltagePU();
                                 if (elNet.arcMap.get(arcId).getType() == ArcType.LINE) {
                                     resPU = elNet.arcMap.get(arcId).getResistancePU();
                                 } else {
-
                                     resPU = elNet.arcMap.get(arcId).getVoltageHighPU();
                                 }
-
                                 currentPUSum += volPU * (1 / resPU);
                             }
                             elNet.nodeMap.get(nodeId).setCurrentPU(currentPUSum);

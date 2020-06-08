@@ -95,11 +95,7 @@ public class MainApp {
             ///->>>>
             System.out.println("------------------ NODE CurrentPU ----------------");
             elNetCalcService.calcNodeCurrentPU_Iter0();
-            //TODO printer for calcNodeCurrentPU_Iter0
-        //    elNet.nodeArcList_Map.forEach((nodeId, arcIdList) -> {
-         //       System.out.println("[" + nodeId + "] = " + elNet.nodeMap.get(nodeId).getCurrentPU()); //TODO do usuniecia
-         //   }
-          //  );
+            elNetPrinter.printNodeCurrentPU_Iter0();
 
 
 
@@ -118,9 +114,6 @@ public class MainApp {
             Double   voltageIter = 0.0;
             Double   deltaVoltageIter = 0.0;
 
-
-            System.out.println(">>  ilosc wezlow =" + n);
-            //ZACZYNAMY.
             do {
                 k++;
                 a=0;
@@ -135,6 +128,7 @@ public class MainApp {
                       deltaVoltageIter = node.getVoltagePU();
 
                      //7A
+
                      //8A
                     }
                     else {
@@ -146,6 +140,10 @@ public class MainApp {
                         //8B
                     }
 
+//                    if (BaseValues.epsilon){
+//
+//
+//                    }
 
 
 

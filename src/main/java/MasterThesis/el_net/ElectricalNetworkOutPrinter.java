@@ -98,6 +98,13 @@ public class ElectricalNetworkOutPrinter {
     }
 
 
+    public void printNodeCurrentPU_Iter0() {
+        elNet.nodeList.forEach(nodeEntity -> {
+               System.out.println("[" + nodeEntity.getId() + "] = "
+                       + nodeEntity.getCurrentPU());
+
+        });
 
 
+    }
 }

@@ -1,20 +1,9 @@
 package MasterThesis.el_net;
 
-import MasterThesis.arc.ArcEntity;
-import MasterThesis.arc.ArcFactory;
 import MasterThesis.base.parameters.AppParametersService;
-import MasterThesis.arc_file_tools.FileDataReader;
-import MasterThesis.line_type.LineType;
-import MasterThesis.line_type.LineTypeFactory;
 import MasterThesis.node.NodeEntity;
-import MasterThesis.node.NodeFactory;
-import MasterThesis.transformer_type.TransformerTypeEntity;
-import MasterThesis.transformer_type.TransformerTypeFactory;
-import com.sun.org.apache.bcel.internal.generic.ARETURN;
-import com.sun.org.apache.bcel.internal.generic.DRETURN;
-
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ElectricalNetworkService {
     AppParametersService paramsService =  AppParametersService.getInstance();
@@ -43,8 +32,16 @@ public class ElectricalNetworkService {
         });
     }
 
+
     public boolean isDistributeNode(NodeEntity node) {
-        for (Long nodeId : elNet.getDistributeNodeIdList()){
+
+        List<Long> distributeNodeList = new ArrayList<>();
+        List<Long> arcList = elNet.nodeArcList_Map.get(0L);
+        for (Long arcId : arcList ){
+            distributeNodeList.add(elNet.arcMap.get(arcId).getEndNodeId());
+        }
+
+        for (Long nodeId : distributeNodeList){
             if (nodeId == node.getId()){
                 return true;
             }

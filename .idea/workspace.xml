@@ -4,11 +4,10 @@
     <list default="true" id="2ac8084a-c7f9-4083-8da9-2e89e5941634" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/data_calc/BaseValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/data_calc/BaseValues.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkOutPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkOutPrinter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeEntity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,50 +89,54 @@
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
     <state x="682" y="436" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/62.0.1799.1010@62.0.1799.1010" timestamp="1586203151850" />
-    <state width="445" height="466" key="DebuggerActiveHint" timestamp="1589315916271">
+    <state width="475" height="466" key="DebuggerActiveHint" timestamp="1591644656309">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="445" height="466" key="DebuggerActiveHint/62.0.1799.1010@62.0.1799.1010" timestamp="1589315916271" />
+    <state width="475" height="466" key="DebuggerActiveHint/62.0.1799.1010@62.0.1799.1010" timestamp="1591644656309" />
     <state x="701" y="207" key="FileChooserDialogImpl" timestamp="1588360214356">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
     <state x="701" y="207" key="FileChooserDialogImpl/62.0.1799.1010@62.0.1799.1010" timestamp="1588360214356" />
-    <state width="437" height="866" key="GridCell.Tab.0.bottom" timestamp="1591309490186">
+    <state width="1757" height="134" key="GridCell.Tab.0.bottom" timestamp="1591649508916">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="437" height="866" key="GridCell.Tab.0.bottom/62.0.1799.1010@62.0.1799.1010" timestamp="1591309490186" />
-    <state width="437" height="866" key="GridCell.Tab.0.center" timestamp="1591309490186">
+    <state width="1757" height="134" key="GridCell.Tab.0.bottom/62.0.1799.1010@62.0.1799.1010" timestamp="1591649508916" />
+    <state width="1757" height="134" key="GridCell.Tab.0.center" timestamp="1591649508916">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="437" height="866" key="GridCell.Tab.0.center/62.0.1799.1010@62.0.1799.1010" timestamp="1591309490186" />
-    <state width="437" height="866" key="GridCell.Tab.0.left" timestamp="1591309490186">
+    <state width="1757" height="134" key="GridCell.Tab.0.center/62.0.1799.1010@62.0.1799.1010" timestamp="1591649508916" />
+    <state width="1757" height="134" key="GridCell.Tab.0.left" timestamp="1591649508915">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="437" height="866" key="GridCell.Tab.0.left/62.0.1799.1010@62.0.1799.1010" timestamp="1591309490186" />
-    <state width="437" height="866" key="GridCell.Tab.0.right" timestamp="1591309490186">
+    <state width="1757" height="134" key="GridCell.Tab.0.left/62.0.1799.1010@62.0.1799.1010" timestamp="1591649508915" />
+    <state width="1757" height="134" key="GridCell.Tab.0.right" timestamp="1591649508916">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="437" height="866" key="GridCell.Tab.0.right/62.0.1799.1010@62.0.1799.1010" timestamp="1591309490186" />
-    <state width="1757" height="93" key="GridCell.Tab.1.bottom" timestamp="1589320033711">
+    <state width="1757" height="134" key="GridCell.Tab.0.right/62.0.1799.1010@62.0.1799.1010" timestamp="1591649508916" />
+    <state width="1757" height="134" key="GridCell.Tab.1.bottom" timestamp="1591649508916">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="1757" height="93" key="GridCell.Tab.1.bottom/62.0.1799.1010@62.0.1799.1010" timestamp="1589320033711" />
-    <state width="1757" height="93" key="GridCell.Tab.1.center" timestamp="1589320033711">
+    <state width="1757" height="134" key="GridCell.Tab.1.bottom/62.0.1799.1010@62.0.1799.1010" timestamp="1591649508916" />
+    <state width="1757" height="134" key="GridCell.Tab.1.center" timestamp="1591649508916">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="1757" height="93" key="GridCell.Tab.1.center/62.0.1799.1010@62.0.1799.1010" timestamp="1589320033711" />
-    <state width="1757" height="93" key="GridCell.Tab.1.left" timestamp="1589320033711">
+    <state width="1757" height="134" key="GridCell.Tab.1.center/62.0.1799.1010@62.0.1799.1010" timestamp="1591649508916" />
+    <state width="1757" height="134" key="GridCell.Tab.1.left" timestamp="1591649508916">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="1757" height="93" key="GridCell.Tab.1.left/62.0.1799.1010@62.0.1799.1010" timestamp="1589320033711" />
-    <state width="1757" height="93" key="GridCell.Tab.1.right" timestamp="1589320033711">
+    <state width="1757" height="134" key="GridCell.Tab.1.left/62.0.1799.1010@62.0.1799.1010" timestamp="1591649508916" />
+    <state width="1757" height="134" key="GridCell.Tab.1.right" timestamp="1591649508916">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
-    <state width="1757" height="93" key="GridCell.Tab.1.right/62.0.1799.1010@62.0.1799.1010" timestamp="1589320033711" />
+    <state width="1757" height="134" key="GridCell.Tab.1.right/62.0.1799.1010@62.0.1799.1010" timestamp="1591649508916" />
     <state x="445" y="84" key="SettingsEditor" timestamp="1589311018161">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
     <state x="445" y="84" key="SettingsEditor/62.0.1799.1010@62.0.1799.1010" timestamp="1589311018161" />
+    <state x="514" y="245" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1591648251963">
+      <screen x="62" y="0" width="1799" height="1010" />
+    </state>
+    <state x="514" y="245" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/62.0.1799.1010@62.0.1799.1010" timestamp="1591648251963" />
     <state x="671" y="118" width="581" height="774" key="find.popup" timestamp="1589314612675">
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
@@ -142,5 +145,16 @@
       <screen x="62" y="0" width="1799" height="1010" />
     </state>
     <state x="624" y="219" width="672" height="678" key="search.everywhere.popup/62.0.1799.1010@62.0.1799.1010" timestamp="1591298376541" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkService.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
