@@ -7,15 +7,18 @@ import java.io.IOException;
 import java.util.function.Consumer;
 
 public class FileDataReader {
-    public static void netFileRead(String sFileName, Consumer<String> consumer) throws FileNotFoundException {
+
+    //region netFileRead
+    public static void netFileRead(String sFileName, Consumer<String> consumer)
+            throws FileNotFoundException {
+
         try (BufferedReader br = new BufferedReader(new FileReader(sFileName))) {
             int lines = 0;
             String fileLine;
             while ((fileLine = br.readLine()) != null) {
-                if (fileLine.substring(0,2).compareTo("//") != 0) {
-                    if (lines == 0 ) {
-                    }
-                    else {
+                if (fileLine.substring(0, 2).compareTo("//") != 0) {
+                    if (lines == 0) {
+                    } else {
                         consumer.accept(fileLine);
                     }
                     lines++;
@@ -25,4 +28,6 @@ public class FileDataReader {
             e.printStackTrace();
         }
     }
+    //endregion
+
 }

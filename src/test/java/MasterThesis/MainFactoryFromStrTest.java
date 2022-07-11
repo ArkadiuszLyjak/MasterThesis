@@ -3,8 +3,8 @@ package MasterThesis;
 import MasterThesis.arc.ArcEntity;
 import MasterThesis.arc.ArcFactory;
 import MasterThesis.base.parameters.AppParameters;
-import MasterThesis.line_type.LineType;
-import MasterThesis.line_type.LineTypeFactory;
+import MasterThesis.lineType.LineTypeEntity;
+import MasterThesis.lineType.LineTypeFactory;
 import MasterThesis.node.NodeDecorator;
 import MasterThesis.node.NodeEntity;
 import MasterThesis.node.NodeFactory;
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainFactoryFromStrTest {
+
     public static void main(String[] args) {
         System.out.println("Zaczynamy");
         System.out.println(args.length);
@@ -32,7 +33,7 @@ public class MainFactoryFromStrTest {
         nodeList.add(NodeFactory.prepareFromString("105|1|40|47.058|0|0|0.4"));
         nodeList.add(NodeFactory.prepareFromString("106|4|40|47.058|0|0|0.4"));
 
-        for(NodeEntity node : nodeList){
+        for (NodeEntity node : nodeList) {
             System.out.println(nodeDecorator.getLabel(node));
         }
         //----------------
@@ -41,15 +42,15 @@ public class MainFactoryFromStrTest {
 
         transformerTypeList.add(TransformerTypeFactory.prepareFromString("10|TOd|630.00|15.75|0.42|0|0|0|0|6.5|0.6|0|6|0|0"));
         transformerTypeList.add(TransformerTypeFactory.prepareFromString("20|TOd|800.00|15.75|0.42|0|0|0|0|6.5|0.6|0|6|0|0"));
-        for (TransformerTypeEntity transformerType : transformerTypeList ){
+        for (TransformerTypeEntity transformerType : transformerTypeList) {
             System.out.println(transformerType.getId());
         }
         //----------------
-        List<LineType> lineTypeList = new ArrayList<>();
+        List<LineTypeEntity> lineTypeList = new ArrayList<>();
         lineTypeList.add(LineTypeFactory.prepareFromString("2|1|5xYKY1x400|0.4|400|0.153|0|0.110|0|0.210|0.37|353|0|0|0"));
         lineTypeList.add(LineTypeFactory.prepareFromString("3|1|5xYKY1x500|0.4|500|0.153|0|0.107|0|0.225|0.40|399|0|0|0"));
-        for (LineType lineType : lineTypeList ){
-            System.out.println(lineType.getType()+ " " + lineType.getKind()
+        for (LineTypeEntity lineType : lineTypeList) {
+            System.out.println(lineType.getType() + " " + lineType.getKind()
             );
         }
         //----------------

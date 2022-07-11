@@ -16,25 +16,28 @@ package MasterThesis.node;
 //5    Integer  reactivePowerDev;  // Odchylenie mocy biernej
 //6    Double   voltage;           // Napiecie
 
-import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
 
 public class NodeFactory {
 
-    public NodeFactory(){}
+    public NodeFactory() {
+    }
 
-    public static NodeEntity prepareFromString(String nodeStr){
+    //region prepareFromString
+    public static NodeEntity prepareFromString(String nodeStr) {
 
-        String[] nodeArray =  nodeStr.split ( AppParametersService.getInstance().getRegex());
+        String[] nodeArray = nodeStr.split(
+                AppParametersService.getInstance().getRegex());
 
         NodeEntity entity = new NodeEntity(Long.decode(nodeArray[0]));
-        entity.setType( NodeType.valueOf(Integer.valueOf(nodeArray[1])));
-        entity.setActivePower(Integer.valueOf(nodeArray[2]));
+        entity.setNodeType(NodeType.valueOf(Integer.valueOf(nodeArray[1])));
+        entity.setActivePower(Double.valueOf(nodeArray[2]));
         entity.setReactivePower(Double.valueOf(nodeArray[3]));
-        entity.setActivePowerDev(Integer.valueOf(nodeArray[4]));
-        entity.setReactivePowerDev(Integer.valueOf(nodeArray[5]));
+        entity.setActivePowerDeviation(Integer.valueOf(nodeArray[4]));
+        entity.setReactivePowerDeviation(Integer.valueOf(nodeArray[5]));
         entity.setVoltage(Double.valueOf(nodeArray[6]));
         return entity;
     }
+    //endregion
 
 }

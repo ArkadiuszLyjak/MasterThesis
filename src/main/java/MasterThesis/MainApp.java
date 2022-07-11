@@ -1,169 +1,194 @@
 package MasterThesis;
+
 //TODO Encje naglowkow plikow wynikowych
-//TODO Encje artosci wyliczen do plikow wynikowych
-//Zmiana Node na ArcNode
-//Jednoliczta obsluga błędow
+//TODO Encje wartosci wyliczen do plikow wynikowych
+
+// Zmiana Node na ArcNode
+// Jednoliczta obsluga błędow
 // odczytu pliku
 // bledow w pliku
 
 /*
- poranie praramretrow
- jezeli potrzeba w zależności od paramerow to czytaj wszystkie dane z plikow
- zbuduj listy wszystkicj plikow
+ podanie parametrow
+ jezeli potrzeba w zależności od parametrow to czytaj wszystkie dane z plikow
+ zbuduj listy wszystkich plikow
  zbuduj mape sieci
- wykoneja przejści i obliczenia
+ wykonaj przejścia i obliczenia
 
  w zależności od parametrow zapisz obliczenia
 
 * */
 
-import MasterThesis.arc.ArcEntity;
-import MasterThesis.arc.ArcType;
 import MasterThesis.arc_file_tools.FileDataService;
+import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
 import MasterThesis.bfs.BfsAlgorithm;
 import MasterThesis.bfs.BfsAlgorithmOutPrinter;
-import MasterThesis.data_calc.BaseValues;
 import MasterThesis.el_net.ElectricalNetwork;
 import MasterThesis.el_net.ElectricalNetworkCalcService;
 import MasterThesis.el_net.ElectricalNetworkOutPrinter;
 import MasterThesis.el_net.ElectricalNetworkService;
-import MasterThesis.line_type.LineType;
-import MasterThesis.node.NodeEntity;
-import MasterThesis.transformer_type.TransformerTypeEntity;
-
-import java.text.DecimalFormat;
-import java.util.List;
 
 public class MainApp {
 
-
     public static void main(String[] args) {
+
         try {
-            AppParametersService         paramsService = AppParametersService.getInstance();
-            ElectricalNetwork            elNet = ElectricalNetwork.getInstance();
-            ElectricalNetworkService     elNetService = ElectricalNetworkService.getInstance();
-            BfsAlgorithm                 bfsAlgorithm = BfsAlgorithm.getInstance();
-            FileDataService              fileDataService = FileDataService.getInstance();
-            ElectricalNetworkCalcService elNetCalcService = ElectricalNetworkCalcService.getInstance();
-            ElectricalNetworkOutPrinter  elNetPrinter = ElectricalNetworkOutPrinter.getInstance();
-            BfsAlgorithmOutPrinter       bfsAlgPrinter = BfsAlgorithmOutPrinter.getInstance();
-            //NetStatistics netStatistics =  NetStatistics.getInstace();
 
-            //--------------------------------------------------------------
+            //region Instances
+            AppParametersService paramsService =
+                    AppParametersService.getInstance();
+
+            ElectricalNetwork elNet =
+                    ElectricalNetwork.getInstance();
+
+            ElectricalNetworkService el_Net_Service =
+                    ElectricalNetworkService.getInstance();
+
+            BfsAlgorithm bfsAlgorithm =
+                    BfsAlgorithm.getInstance();
+
+            FileDataService file_Data_Service =
+                    FileDataService.getInstance();
+
+            ElectricalNetworkCalcService elNetCalcService =
+                    ElectricalNetworkCalcService.getInstance();
+
+            ElectricalNetworkOutPrinter elNetPrinter =
+                    ElectricalNetworkOutPrinter.getInstance();
+
+            BfsAlgorithmOutPrinter bfsAlgPrinter =
+                    BfsAlgorithmOutPrinter.getInstance();
+            //endregion
+
+            /*//region NetStatistics
+            NetStatistics netStatistics = NetStatistics.getInstance();
+            //endregion*/
+
+            //region Print aplication parameters
+            System.out.println(AppParameters.getInstance().toString());
+            //endregion
+
+            //region setParametersFromArgs
             paramsService.setParametersFromArgs(args);
+            //endregion
 
+            //region Read data files
+            file_Data_Service.readLineTypeFile();
+            file_Data_Service.readTransformerTypeFile();
+            file_Data_Service.readNodeFile();
+            file_Data_Service.readArcFile();
+            //endregion
 
-            //Read data files
-            fileDataService.readLineTypeFiles();
-            fileDataService.readTransformerTypeFiles();
+            //region Generate neighbors map
+            el_Net_Service.nodeNeighborsFollowingListBuild(); // następnik
+            el_Net_Service.nodeNeighborsPredecessorListBuild(); // poprzednik
+            //endregion
 
-            fileDataService.readNodeFiles();
-            fileDataService.readArcFiles();
-            //-------------------
-            //Generate neighbors map
-            elNetService.nodeArcListBuild();
+            //region print neighbors map - Consequent
+            elNetPrinter.printNodeNeighborsWithDirection(
+                    ElectricalNetworkOutPrinter.DIRECTION.FOLLOWING);
+            //endregion
 
-            //Generate visit order
+            //region print neighbors map - Predecessor
+            elNetPrinter.printNodeNeighborsWithDirection(
+                    ElectricalNetworkOutPrinter.DIRECTION.PREDECESSOR);
+            //endregion
+
+            //region Generate visit order
             bfsAlgorithm.generateLevelsOrder();
+            //endregion
 
-            //-------------------
-            //Print
+            //region Print NetQuantity
             elNetPrinter.printNetQuantity();
+            //endregion
 
-            //-------------------
+            //region Calculation Immitance
             // Calculation Immitance for Line
             elNetCalcService.calcLineImmitance();
             elNetPrinter.printLineImmitance();
 
-
-            // -------------------------------
             // Calculation Immitance for Trafo
             elNetCalcService.calcTrafoImmitance();
             elNetPrinter.printTrafoImmitance();
-            //---------------------
 
             // Calculation Per Unit for Nodes
             elNetCalcService.calcNodeVoltagePu();
-
-
-
             elNetPrinter.printNodeVoltagePu();
 
-            elNetPrinter.printNodeNeighbors();
-            //--------------------------------
-            ///->>>>
-            System.out.println("------------------ NODE CurrentPU ----------------");
-            elNetCalcService.calcNodeCurrentPU_Iter0();
-            elNetPrinter.printNodeCurrentPU_Iter0();
-
-
-
+            // Calculation initial current iteration zero
+            elNetCalcService.calcNodeCurrentPUwithConsequenNodesForZEROiteration();
+            elNetCalcService.calcNodeCurrentPUwithPredecessorsNodesForZEROiteration();
+            elNetPrinter.printNodeCurrentPUIter0();
             bfsAlgPrinter.printNodeVisitedOrder();
+            //endregion
 
-            //----------------------------------------
+            //region NODE POWER TRANSMIT
+            System.out.println("\n-------------------------------------------------------");
             System.out.println("------------------ NODE POWER TRANSMIT ----------------");
+            System.out.println("-------------------------------------------------------");
             int k = 0;
             int a = 0;
             int i = 1;
             int m = 2; // ilosc wezlow zasilowych
-            int n = elNet.nodeList.size() ;
+            int n = elNet.nodeList.size();
 
-            Double   currentIter = 0.0;
-            Double   deltaCurrentIter = 0.0;
-            Double   voltageIter = 0.0;
-            Double   deltaVoltageIter = 0.0;
+            double currentIter = 0.0;
+            double deltaCurrentIter = 0.0;
+            double voltageIter = 0.0;
+            Double deltaVoltageIter = 0.0;
+            //endregion
+
+            /*//region do loop
+            StringBuilder sb = new StringBuilder();
+            Formatter formatter = new Formatter(sb);
 
             do {
+                int iterNumber = 0;
                 k++;
-                a=0;
+                // a = 0;
                 for (NodeEntity node : elNet.nodeList) {
+                    formatter.format("i:(%02d) ", iterNumber++);
                     currentIter = 0.0;
                     deltaCurrentIter = 0.0;
                     voltageIter = 0.0;
                     deltaVoltageIter = 0.0;
-                    //---------------------
-                    if (elNetService.isDistributeNode(node)){
-                     //6A
-                      deltaVoltageIter = node.getVoltagePU();
 
-                     //7A
-
-                     //8A
-                    }
-                    else {
+                    if (el_Net_Service.isDistributeNode(node)) {
+                        //6A
+                        deltaVoltageIter = node.getVoltagePU();
+                        //7A
+                        //8A
+                    } else {
                         //6B
-                        deltaCurrentIter = node.getCurrentPU() -
-                                                (node.getVoltagePU() )
-                                                /Math.sqrt(3);
+                        // jakis bład. ..
+
+//                        deltaCurrentIter = node.getCurrentPU_Real() - (node.getVoltagePU_Real()) / Math.sqrt(3.0);
                         //7B
                         //8B
                     }
 
-//                    if (BaseValues.epsilon){
-//
-//
-//                    }
+                    // if (BaseValues.epsilon < a) {}
 
+                    formatter.format("node: (%03d) ", node.getId());
+//                    formatter.format("Current: %.2e ", deltaCurrentIter);
+                    formatter.format("Current: (%3f) ", node.getCurrentPU_Real());
+                    formatter.format("Voltage: (%3f) ", node.getVoltagePU_Real());
+                    System.out.println(sb);
+                    sb.setLength(0);
 
-
-                    System.out.println("[" + node.getId() + "] = "
-                            + node.getCurrentPU_Real() + " <"
-                            + node.getVoltagePU_Real() + " <"
-                    );
                 }
 
-            } while (a > 0) ;
-
+            } while (a > 0);
+            //endregion*/
 
         } catch (Exception e) {
-            System.out.println("**********************************************************");
-            System.out.println("*   jakiś błędzik");
-            System.out.println("* >>" + e.getMessage());
-            System.out.println("* ");
-            System.out.println("**********************************************************");
             e.printStackTrace();
+            System.out.println("\n********************************************");
+            System.out.println("************ error calculation *************");
+            System.out.println("*********************************************");
         }
+
     }
 
 }

@@ -1,9 +1,6 @@
 package MasterThesis.transformer_type;
 
-import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
-import MasterThesis.node.NodeEntity;
-import MasterThesis.node.NodeType;
 
 public class TransformerTypeFactory {
 
@@ -41,7 +38,7 @@ public class TransformerTypeFactory {
         entity.setIdleCurrent(Double.valueOf(entityArray[11]));
         entity.setShortingVoltage(Double.valueOf(entityArray[12]));
         entity.setZeroResistance(Double.valueOf(entityArray[13]));
-        entity.setZeroReaktance(Double.valueOf(entityArray[14]));
+        entity.setZeroReactance(Double.valueOf(entityArray[14]));
         return entity;
     }
 }

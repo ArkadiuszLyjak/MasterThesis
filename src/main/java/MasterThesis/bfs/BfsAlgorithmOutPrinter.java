@@ -1,29 +1,42 @@
 package MasterThesis.bfs;
 
 public class BfsAlgorithmOutPrinter {
-    private static BfsAlgorithmOutPrinter  instance;
+
+    private static BfsAlgorithmOutPrinter instance;
     BfsAlgorithm bfsAlgorithm = BfsAlgorithm.getInstance();
 
-    public static BfsAlgorithmOutPrinter getInstance(){
+    //region getInstance - Singleton
+    private BfsAlgorithmOutPrinter() {
 
-        if( instance == null){
+    }
+
+    public static BfsAlgorithmOutPrinter getInstance() {
+
+        if (instance == null) {
             instance = new BfsAlgorithmOutPrinter();
         }
         return instance;
     }
+    //endregion
 
-    public void printNodeVisitedOrder(){
-        System.out.println(" ---------- Kolejnosc odwiedzin -------------");
+    //region printNodeVisitedOrder
+    public void printNodeVisitedOrder() {
+
+        System.out.println("\n-----------------------------------------");
+        System.out.println("------- Kolejnosc odwiedzin -------------");
+        System.out.println("-----------------------------------------\n");
+
         for (Long i = 0L; i <= bfsAlgorithm.getNetLevel(); i++) {
             bfsAlgorithm.arcLevelsMap.get(i).forEach(nodeArcVO ->
 
-                            System.out.println("LEVEL " + nodeArcVO.netLevel + "  > " + nodeArcVO.nodeId + "->" +
+                            System.out.println("LEVEL " + nodeArcVO.netLevel + "  > "
+                                    + nodeArcVO.nodeId + "->" +
                                     nodeArcVO.neighborNodeId)
                     //        elNet.arcMap.get(nodeArcVO.arcId).getEndNodeId())
             );
         }
 
     }
-
+    //endregion
 
 }

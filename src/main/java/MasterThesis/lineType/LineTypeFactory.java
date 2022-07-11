@@ -28,7 +28,7 @@ public class LineTypeFactory {
 
 
     /**
-     * <p>Metoda <i>{@code prepare_From_String}</i> otrzymuje jako argument string zawierający jeden
+     * <p>Metoda <i>{@code prepareFromString}</i> otrzymuje jako argument string zawierający jeden
      * rekord z pliku z informacjami o <tt>rodzaju linii el-energetycznych</tt>.</p>
      * Use {@link String#toLowerCase()} for conversion to lower case alphabets.
      *
@@ -43,7 +43,7 @@ public class LineTypeFactory {
      * @see String#hashCode() hashCode
      */
 
-    //region prepare_From_String
+    //region prepareFromString
     public static LineTypeEntity prepareFromString(String lineTypeStr) {
 
         String[] entityArray = lineTypeStr.split(AppParametersService.getInstance().getRegex());
@@ -60,37 +60,37 @@ public class LineTypeFactory {
         entity.setVoltage(Double.valueOf(entityArray[3]));
 
         //– przekrój roboczy
-        entity.setMain_Strand_Intersection(Double.valueOf(entityArray[4]));
+        entity.setMainStrandIntersection(Double.valueOf(entityArray[4]));
 
         //– rezystancja jednostkowa
-        entity.setCohesive_Unit_Resistance(Double.valueOf(entityArray[5]));
+        entity.setCohesiveUnitResistance(Double.valueOf(entityArray[5]));
 
         // – nieistotne, wpisujemy 0
-        entity.setZero_Unit_Resistance(Double.valueOf(entityArray[6]));
+        entity.setZeroUnitResistance(Double.valueOf(entityArray[6]));
 
         // – reaktancja jednostkowa
-        entity.setCohesive_Unit_Reactance(Double.valueOf(entityArray[7]));
+        entity.setCohesiveUnitReactance(Double.valueOf(entityArray[7]));
 
         // – nieistotne, wpisujemy 0
-        entity.setZero_Unit_Reactance(Double.valueOf(entityArray[8]));
+        entity.setZeroUnitReactance(Double.valueOf(entityArray[8]));
 
         //– pojemność doziemna
-        entity.setUnit_Capacitance_To_Earth(Double.valueOf(entityArray[9]));
+        entity.setUnitCapacitanceToEarth(Double.valueOf(entityArray[9]));
 
         //– pojemność robocza
-        entity.setUnit_Working_Capacitance(Double.valueOf(entityArray[10]));
+        entity.setUnitWorkingCapacitance(Double.valueOf(entityArray[10]));
 
         //dla kabli, obciążalność dopuszczalna długotrwale, [A]
-        entity.setLong_Term_Load_Capacity(Double.valueOf(entityArray[11]));
+        entity.setLongTermLoadCapacity(Double.valueOf(entityArray[11]));
 
         // dla przewodów linii napowietrznych, obciążalność dopuszczalna długotrwale, lato, [A]
-        entity.setLong_Term_Summer_Load_Capacity(Double.valueOf(entityArray[12]));
+        entity.setLongTermSummerLoadCapacity(Double.valueOf(entityArray[12]));
 
         // dla przewodów linii napowietrznych, obciążalność Dopuszczalna długotrwale, zima, [A]
-        entity.setLong_Term_Winter_Load_Capacity(Double.valueOf(entityArray[13]));
+        entity.setLongTermWinterLoadCapacity(Double.valueOf(entityArray[13]));
 
         // – nieistotne, wpisujemy 0
-        entity.setShort_Circuit_1s_Load_Capacity(Double.valueOf(entityArray[14]));
+        entity.setShortCircuit1sLoadCapacity(Double.valueOf(entityArray[14]));
 
         return entity;
     }

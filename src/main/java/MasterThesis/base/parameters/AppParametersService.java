@@ -2,29 +2,34 @@ package MasterThesis.base.parameters;
 
 
 public class AppParametersService {
-    AppParameters params = AppParameters.getInstance();
-    static AppParametersService instance;
 
-    private AppParametersService(){}
+    //region getInstance Singleton
+    private static AppParametersService instance;
+    AppParameters params = AppParameters.getInstance();
+
+    private AppParametersService() {
+    }
 
     public static AppParametersService getInstance() {
-        if (instance == null){
+        if (instance == null) {
             instance = new AppParametersService();
         }
         return instance;
     }
+    //endregion
 
-    public String getRegex(){
-        String regex = "\\" + params.getDelimiter();
-        return regex;
+    //region getRegex
+    public String getRegex() {
+        return "\\" + params.getDelimiter();
     }
+    //endregion
 
+    //region setParametersFromArgs
     public void setParametersFromArgs(String[] args) {
-
-        if (args.length > 0 ) {
-        //for (int i=0;  )
-          //  System.out.println(args[0]);
+        if (args.length > 0) {
+//            for (int i = 0; ) System.out.println(args[0]);
             params.setSourceDataFilesPath(args[1]);
         }
     }
+    //endregion
 }
