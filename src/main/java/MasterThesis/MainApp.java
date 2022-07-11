@@ -28,6 +28,9 @@ import MasterThesis.el_net.ElectricalNetwork;
 import MasterThesis.el_net.ElectricalNetworkCalcService;
 import MasterThesis.el_net.ElectricalNetworkOutPrinter;
 import MasterThesis.el_net.ElectricalNetworkService;
+import MasterThesis.node.NodeEntity;
+
+import java.util.Formatter;
 
 public class MainApp {
 
@@ -139,7 +142,7 @@ public class MainApp {
             Double deltaVoltageIter = 0.0;
             //endregion
 
-            /*//region do loop
+            //region do loop
             StringBuilder sb = new StringBuilder();
             Formatter formatter = new Formatter(sb);
 
@@ -163,7 +166,8 @@ public class MainApp {
                         //6B
                         // jakis bład. ..
 
-//                        deltaCurrentIter = node.getCurrentPU_Real() - (node.getVoltagePU_Real()) / Math.sqrt(3.0);
+                        deltaCurrentIter = node.getCurrentRealPU() - (node.getVoltageRealPU())
+                                / Math.sqrt(3.0);
                         //7B
                         //8B
                     }
@@ -171,16 +175,16 @@ public class MainApp {
                     // if (BaseValues.epsilon < a) {}
 
                     formatter.format("node: (%03d) ", node.getId());
-//                    formatter.format("Current: %.2e ", deltaCurrentIter);
-                    formatter.format("Current: (%3f) ", node.getCurrentPU_Real());
-                    formatter.format("Voltage: (%3f) ", node.getVoltagePU_Real());
+                    formatter.format("Current: %.2e ", deltaCurrentIter);
+                    formatter.format("Current: (%3f) ", node.getCurrentRealPU());
+                    formatter.format("Voltage: (%3f) ", node.getVoltageRealPU());
                     System.out.println(sb);
                     sb.setLength(0);
 
                 }
 
             } while (a > 0);
-            //endregion*/
+            //endregion
 
         } catch (Exception e) {
             e.printStackTrace();
