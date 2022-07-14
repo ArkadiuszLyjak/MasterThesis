@@ -28,9 +28,6 @@ import MasterThesis.el_net.ElectricalNetwork;
 import MasterThesis.el_net.ElectricalNetworkCalcService;
 import MasterThesis.el_net.ElectricalNetworkOutPrinter;
 import MasterThesis.el_net.ElectricalNetworkService;
-import MasterThesis.node.NodeEntity;
-
-import java.util.Formatter;
 
 public class MainApp {
 
@@ -126,7 +123,7 @@ public class MainApp {
             bfsAlgPrinter.printNodeVisitedOrder();
             //endregion
 
-            //region NODE POWER TRANSMIT
+            /*//region NODE POWER TRANSMIT
             System.out.println("\n-------------------------------------------------------");
             System.out.println("------------------ NODE POWER TRANSMIT ----------------");
             System.out.println("-------------------------------------------------------");
@@ -140,9 +137,9 @@ public class MainApp {
             double deltaCurrentIter = 0.0;
             double voltageIter = 0.0;
             Double deltaVoltageIter = 0.0;
-            //endregion
+            //endregion*/
 
-            //region do loop
+            /*//region do loop
             StringBuilder sb = new StringBuilder();
             Formatter formatter = new Formatter(sb);
 
@@ -184,7 +181,7 @@ public class MainApp {
                 }
 
             } while (a > 0);
-            //endregion
+            //endregion*/
 
         } catch (Exception e) {
             e.printStackTrace();

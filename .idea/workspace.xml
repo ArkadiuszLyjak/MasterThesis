@@ -5,37 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87091b50-afb2-4a5a-9117-312c1c37d355" name="Default Changelist" comment="back to not underscore">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/base/entity/EntityDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/base/entity/EntityDecorator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/base/entity/EntityFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/base/entity/EntityFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/base/parameters/AppParameters.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/base/parameters/AppParametersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/base/parameters/AppParametersService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/base/parameters/App_Parameters_Service.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/BfsAlgorithm.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/BfsAlgorithmOutPrinter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/data_calc/BaseValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/data_calc/BaseValues.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkOutPrinter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/Electrical_Network.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/NodeArcVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/NodeArcVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/lineType/LineTypeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/lineType/LineTypeFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/line_type/LineKind.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/line_type/LineType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/line_type/LineTypeFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeDecorator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/transformer_type/TransformerTypeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/transformer_type/TransformerTypeFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MasterThesis/MainFactoryFromStrTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MasterThesis/MainFactoryFromStrTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
