@@ -109,18 +109,18 @@ public class MainApp {
             elNetPrinter.printLineImmitance();
 
             // Calculation Immitance for Trafo
-            elNetCalcService.calcTrafoImmitance();
-            elNetPrinter.printTrafoImmitance();
+//            elNetCalcService.calcTrafoImmitance();
+//            elNetPrinter.printTrafoImmitance();
 
             // Calculation Per Unit for Nodes
-            elNetCalcService.calcNodeVoltagePu();
-            elNetPrinter.printNodeVoltagePu();
+//            elNetCalcService.calcNodeVoltagePu();
+//            elNetPrinter.printNodeVoltagePu();
 
             // Calculation initial current iteration zero
-            elNetCalcService.calcNodeCurrentPUwithConsequenNodesForZEROiteration();
-            elNetCalcService.calcNodeCurrentPUwithPredecessorsNodesForZEROiteration();
-            elNetPrinter.printNodeCurrentPUIter0();
-            bfsAlgPrinter.printNodeVisitedOrder();
+//            elNetCalcService.calcNodeCurrentPUwithConsequenNodesForZEROiteration();
+//            elNetCalcService.calcNodeCurrentPUwithPredecessorsNodesForZEROiteration();
+//            elNetPrinter.printNodeCurrentPUIter0();
+//            bfsAlgPrinter.printNodeVisitedOrder();
             //endregion
 
             /*//region NODE POWER TRANSMIT
