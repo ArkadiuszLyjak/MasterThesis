@@ -156,6 +156,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.RozneTakie" />
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Application.TestJavaEntity" />
+      <item itemvalue="Application.TestStreams" />
+      <item itemvalue="Application.MainApp" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Test" />
