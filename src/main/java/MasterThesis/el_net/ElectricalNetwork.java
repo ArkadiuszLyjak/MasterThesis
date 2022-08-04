@@ -15,12 +15,12 @@ public class ElectricalNetwork {
     //region Properties
     private static ElectricalNetwork electricalNetwork;
 
-    public Map<Long, LineTypeEntity> lineTypeMap;                     // maps from files
+    public Map<Long, LineTypeEntity> lineTypeMap;               // maps from files
     public Map<Long, TransformerTypeEntity> transformerTypeMap; // maps from files
     public Map<Long, NodeEntity> nodeMap;                       // maps from files
     public Map<Long, ArcEntity> arcMap;                         // maps from files
-    public List<NodeEntity> nodeList;                           //
-    public List<ArcEntity> arcList;                             //
+    public List<NodeEntity> nodeList;
+    public List<ArcEntity> arcList;
 
     public Map<Long, List<Long>> neighborsConsequentMap = new LinkedHashMap<>();
     public Map<Long, List<Long>> neighborsPredecessorMap = new LinkedHashMap<>();
@@ -58,7 +58,7 @@ public class ElectricalNetwork {
 
     //region clean
     public void clean() {
-        nodeMap.clear(); //
+        nodeMap.clear();
         lineTypeMap.clear(); //
         transformerTypeMap.clear(); //
         arcMap.clear(); //

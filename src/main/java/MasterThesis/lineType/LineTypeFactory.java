@@ -50,19 +50,19 @@ public class LineTypeFactory {
 
         LineTypeEntity entity = new LineTypeEntity(Long.decode(entityArray[0]));
 
-        //kabel=1, przewód linii napowietrznej = 2
+        // kabel=1, przewód linii napowietrznej = 2
         entity.setKind(LineKind.valueOf(Integer.valueOf(entityArray[1])));
 
         // nazwa typu
         entity.setType(entityArray[2]);
 
-        //  – napięcie znamionowe
+        // – napięcie znamionowe
         entity.setVoltage(Double.valueOf(entityArray[3]));
 
-        //– przekrój roboczy
+        // – przekrój roboczy
         entity.setMainStrandIntersection(Double.valueOf(entityArray[4]));
 
-        //– rezystancja jednostkowa
+        // – rezystancja jednostkowa
         entity.setCohesiveUnitResistance(Double.valueOf(entityArray[5]));
 
         // – nieistotne, wpisujemy 0
@@ -74,13 +74,13 @@ public class LineTypeFactory {
         // – nieistotne, wpisujemy 0
         entity.setZeroUnitReactance(Double.valueOf(entityArray[8]));
 
-        //– pojemność doziemna
+        // – pojemność doziemna
         entity.setUnitCapacitanceToEarth(Double.valueOf(entityArray[9]));
 
-        //– pojemność robocza
+        // – pojemność robocza
         entity.setUnitWorkingCapacitance(Double.valueOf(entityArray[10]));
 
-        //dla kabli, obciążalność dopuszczalna długotrwale, [A]
+        // dla kabli, obciążalność dopuszczalna długotrwale, [A]
         entity.setLongTermLoadCapacity(Double.valueOf(entityArray[11]));
 
         // dla przewodów linii napowietrznych, obciążalność dopuszczalna długotrwale, lato, [A]
