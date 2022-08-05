@@ -10,6 +10,7 @@ import java.util.Formatter;
 @Setter
 public class NodeEntity extends BaseEntity {
 
+    //region node arguments
     // Typ – jeden węzeł o typie 4 (bilansujacy), pozostałe – typ = 1
     NodeType nodeType;
 
@@ -28,20 +29,22 @@ public class NodeEntity extends BaseEntity {
 
     // Napiecie – napięcie znamionowe węzła sieci
     Double voltage;
+    //endregion
 
-    // Calculated values
-    Double voltagePU;               // Napiecie znamionowe
-    Double currentInitialPU;       // prąd w iteracji "0"
-    Double currentPU;               // Prad w wezle
-
-    Double voltageRealPU;          // Napiecie
-    Double currentRealPU;          // Prad w wezle
+    //region Calculated values
+    Double voltagePU;           // Napiecie znamionowe
+    Double currentInitialPU;    // prąd w iteracji "0"
+    Double currentPU;           // Prad w wezle
+    Double voltageRealPU;       // Napiecie
+    Double currentRealPU;       // Prad w wezle
     Double powerRealPU;
+    //endregion
 
     public NodeEntity(Long id) {
         super(id);
     }
 
+    //region toString
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -63,5 +66,6 @@ public class NodeEntity extends BaseEntity {
 
         return formatter.toString();
     }
+    //endregion
 }
 

@@ -12,6 +12,7 @@ import lombok.Setter;
 
 public class LineTypeEntity extends BaseEntity {
 
+    //region line arguments
     //    id //  – numer pozycji katalogowej
     //  –kabel=1, przewód linii napowietrznej = 2
     LineKind kind;
@@ -56,6 +57,7 @@ public class LineTypeEntity extends BaseEntity {
 
     // – nieistotne, wpisujemy 0
     Double shortCircuit1sLoadCapacity;
+    //endregion
 
     public LineTypeEntity(Long id) {
         super(id);

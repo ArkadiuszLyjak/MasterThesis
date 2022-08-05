@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class ArcEntity extends BaseEntity {
 
+    //region arcs arguments
     /**
      * <p>Numer wężła początkowego łuku.</p>
      * <p>Luk oznaczony jako nr węzła początkowego -- nr węzła końcowego.</p>
@@ -52,21 +53,25 @@ public class ArcEntity extends BaseEntity {
 
     // wpisujemy wartość 2
     Integer change;
+    //endregion
 
-    // Computed data
+    //region Computed data
     Double resistance;
     Double reactance;
     Double impedance;
+    //endregion
 
-    // Line Values [pu]
+    //region Line Values [pu]
     Double resistancePU;
     Double reactancePU;
     Double impedancePU;
+    //endregion
 
-    // Trafo Values [pu]
+    //region Trafo Values [pu]
     Double voltageLowPU;
     Double voltageHighPU;
     Double powerPU;
+    //endregion
 
     //  Double currentPU;
 

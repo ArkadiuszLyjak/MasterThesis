@@ -51,8 +51,7 @@ public class ElectricalNetworkOutPrinter {
 
     //region decodeText
     static String decodeText(String input, String encoding) throws IOException {
-        return
-                new BufferedReader(
+        return new BufferedReader(
                         new InputStreamReader(
                                 new ByteArrayInputStream(input.getBytes()),
                                 Charset.forName(encoding))).readLine();

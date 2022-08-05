@@ -47,7 +47,7 @@ public class ElectricalNetworkService {
             }
 
             // dodaje ID całego rekordu, gdzie znajduje się sąsiad
-            elNet.neighborsConsequentMap.get(startNode).add(id);
+            elNet.neighborsConsequentMap.get(startNode).add(id); // dodaje ID sąsiada
         });
 
     }

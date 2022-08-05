@@ -7,6 +7,8 @@ import MasterThesis.lineType.LineTypeEntity;
 import MasterThesis.node.NodeEntity;
 import MasterThesis.transformer_type.TransformerTypeEntity;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -48,7 +50,7 @@ public class ElectricalNetworkCalcService {
                 Double reactancePU = reactance / BaseValues.impedanceBase;
                 Double impedancePU = impedance / BaseValues.impedanceBase;
 
-                /// ustawienie encji
+                // ustawienie encji
                 arc.setResistance(resistance);
                 arc.setReactance(reactance);
                 arc.setImpedance(impedance);
@@ -71,7 +73,7 @@ public class ElectricalNetworkCalcService {
                 TransformerTypeEntity transformerType =
                         elNet.transformerTypeMap.get(arc.getPosition());
 
-                // straty mocy w uzwojeniu transformatora ActiveIdleLoss
+                // power losses in the transformer winding
                 Double resistance = (transformerType.getActiveIdleLoss()
                         * Math.pow(transformerType.getNominalUpperVoltage(), 2.0))
                         / Math.pow(transformerType.getNominalPower(), 2.0);
@@ -84,21 +86,24 @@ public class ElectricalNetworkCalcService {
                         * (Math.pow(transformerType.getNominalUpperVoltage(), 2.0)
                         / transformerType.getNominalPower());
 
-                //wartosci wzgledne per Unit
+                // relative values per Unit
                 Double impedancePU = impedance / BaseValues.impedanceBase;
                 Double resistancePU = resistance / BaseValues.impedanceBase;
                 Double reactancePU = reactance / BaseValues.impedanceBase;
 
-                Double powerPU = transformerType.getNominalPower()
-                        / BaseValues.powerBase;
+                Double powerPU =
+                        transformerType.getNominalPower()
+                                / BaseValues.powerBase;
 
-                Double voltageHighPU = transformerType.getNominalUpperVoltage()
-                        / BaseValues.voltageBase;
+                Double voltageHighPU =
+                        transformerType.getNominalUpperVoltage()
+                                / BaseValues.voltageBase;
 
-                Double voltageLowPU = transformerType.getNominalLowerVoltage()
-                        / BaseValues.voltageBase;
+                Double voltageLowPU =
+                        transformerType.getNominalLowerVoltage()
+                                / BaseValues.voltageBase;
 
-                //ustawienie encji
+                // setting the entity
                 arc.setReactance(reactance);
                 arc.setResistance(resistance);
                 arc.setImpedance(impedance);
@@ -134,6 +139,9 @@ public class ElectricalNetworkCalcService {
     //region oblicz prąd początkowy w węzłach mających sąsiadów "z przodu"
     public void calcNodeCurrentPUwithConsequenNodesForZEROiteration() {
 
+        DecimalFormat df = new DecimalFormat("##.E0#");
+        DecimalFormat dfv = new DecimalFormat("#0.E0");
+
         elNet.neighborsConsequentMap.forEach((node, nodeNeighborIDList) -> {
                     try {
                         if (node != 0) {
@@ -142,42 +150,38 @@ public class ElectricalNetworkCalcService {
 
                             double resistanceBetweenStartNodeAndHisNeighborPU;
                             long uniqueNeighborNumber;
-//                            long startNode;
 
                             for (Long neighborID : nodeNeighborIDList) { // ID sąsiada!
-//                                startNode = elNet.arcMap.get(neighborID).getStartNode();
-//                                double startNodeVolPU = elNet.nodeMap.get(node).getVoltagePU();
 
                                 // unikalny nr węzła-sąsiada
-                                uniqueNeighborNumber = elNet.arcMap
-                                        .get(neighborID)
-                                        .getEndNode();
+                                uniqueNeighborNumber = elNet.arcMap.get(neighborID).getEndNode();
 
-                                if (elNet.arcMap.get(neighborID).getType() == ArcType.LINE) {
-                                    resistanceBetweenStartNodeAndHisNeighborPU =
-                                            elNet.arcMap.get(neighborID).getResistancePU();
-                                } else {
-                                    // Dlaczego high a nie low?
-                                    resistanceBetweenStartNodeAndHisNeighborPU =
-                                            elNet.arcMap.get(neighborID).getVoltageHighPU();
-                                }
+                                // pobranie rezystancji łuku [pu]
+                                resistanceBetweenStartNodeAndHisNeighborPU =
+                                        elNet.arcMap.get(neighborID).getResistancePU();
 
                                 // pobierz napięcie w węźle-sąsiedzie w [PU]
                                 double neighborVolPU = elNet.nodeMap
                                         .get(uniqueNeighborNumber)
                                         .getVoltagePU();
 
-                                // pobierz rezystancję łuku łączącego węzeł z jego sąsiadem
-                                resistanceBetweenStartNodeAndHisNeighborPU = elNet.arcMap
-                                        .get(neighborID)
-                                        .getResistancePU();
-
                                 // oblicz prąd początkowy dla danego węzła, który jest sumą
                                 // wszystkich prądów wypływających z niego do węzłów-sąsiadów
                                 currentPUSum += (neighborVolPU
                                         * (1 / resistanceBetweenStartNodeAndHisNeighborPU))
                                         / Math.sqrt(3);
+
+                                //region print temporary calculations
+                                System.out.printf("%3d->", node);
+                                System.out.printf("%3d\t", uniqueNeighborNumber);
+                                System.out.printf("R:%2.2e\t", resistanceBetweenStartNodeAndHisNeighborPU);
+                                System.out.printf("V:%2.2e\t", neighborVolPU);
+                                System.out.printf("I:%2.2e\t", currentPUSum);
+                                System.out.println();
+                                //endregion
                             }
+
+                            System.out.println();
 
                             elNet.nodeMap.get(node).setCurrentInitialPU(currentPUSum);
 
@@ -207,7 +211,7 @@ public class ElectricalNetworkCalcService {
                 neighborsNodeID.add(elNet.arcMap.get(nbor).getStartNode());
             }
 
-            Double currentSum = 0.1;
+            Double currentSum = 0.0;
 
             for (Long neighborID : neighborsNodeID) {
                 currentSum += elNet.nodeMap.get(neighborID).getCurrentInitialPU();

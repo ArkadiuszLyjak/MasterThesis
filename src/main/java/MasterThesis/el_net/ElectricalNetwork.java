@@ -15,10 +15,10 @@ public class ElectricalNetwork {
     //region Properties
     private static ElectricalNetwork electricalNetwork;
 
-    public Map<Long, LineTypeEntity> lineTypeMap;               // maps from files
-    public Map<Long, TransformerTypeEntity> transformerTypeMap; // maps from files
-    public Map<Long, NodeEntity> nodeMap;                       // maps from files
     public Map<Long, ArcEntity> arcMap;                         // maps from files
+    public Map<Long, LineTypeEntity> lineTypeMap;               // maps from files
+    public Map<Long, NodeEntity> nodeMap;                       // maps from files
+    public Map<Long, TransformerTypeEntity> transformerTypeMap; // maps from files
     public List<NodeEntity> nodeList;
     public List<ArcEntity> arcList;
 

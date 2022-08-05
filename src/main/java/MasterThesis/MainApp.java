@@ -28,6 +28,9 @@ import MasterThesis.el_net.ElectricalNetwork;
 import MasterThesis.el_net.ElectricalNetworkCalcService;
 import MasterThesis.el_net.ElectricalNetworkOutPrinter;
 import MasterThesis.el_net.ElectricalNetworkService;
+import MasterThesis.node.NodeEntity;
+
+import java.util.Formatter;
 
 public class MainApp {
 
@@ -37,13 +40,13 @@ public class MainApp {
 
             //region Instances
             AppParametersService paramsService = AppParametersService.getInstance();
-//            ElectricalNetwork elNet = ElectricalNetwork.getInstance();
-//            ElectricalNetworkService el_Net_Service = ElectricalNetworkService.getInstance();
-//            BfsAlgorithm bfsAlgorithm = BfsAlgorithm.getInstance();
-//            FileDataService file_Data_Service = FileDataService.getInstance();
-//            ElectricalNetworkCalcService elNetCalcService = ElectricalNetworkCalcService.getInstance();
-//            ElectricalNetworkOutPrinter elNetPrinter = ElectricalNetworkOutPrinter.getInstance();
-//            BfsAlgorithmOutPrinter bfsAlgPrinter = BfsAlgorithmOutPrinter.getInstance();
+            ElectricalNetwork elNet = ElectricalNetwork.getInstance();
+            ElectricalNetworkService el_Net_Service = ElectricalNetworkService.getInstance();
+            BfsAlgorithm bfsAlgorithm = BfsAlgorithm.getInstance();
+            FileDataService file_Data_Service = FileDataService.getInstance();
+            ElectricalNetworkCalcService elNetCalcService = ElectricalNetworkCalcService.getInstance();
+            ElectricalNetworkOutPrinter elNetPrinter = ElectricalNetworkOutPrinter.getInstance();
+            BfsAlgorithmOutPrinter bfsAlgPrinter = BfsAlgorithmOutPrinter.getInstance();
             //endregion
 
             /*//region NetStatistics
@@ -55,18 +58,18 @@ public class MainApp {
             //endregion
 
             //region setParametersFromArgs
-//            paramsService.setParametersFromArgs(args);
+            paramsService.setParametersFromArgs(args);
             //endregion
 
             //region Read data files
-//            file_Data_Service.readLineTypeFile();
-//            file_Data_Service.readTransformerTypeFile();
-//            file_Data_Service.readNodeFile();
-//            file_Data_Service.readArcFile();
+            file_Data_Service.readLineTypeFile();
+            file_Data_Service.readTransformerTypeFile();
+            file_Data_Service.readNodeFile();
+            file_Data_Service.readArcFile();
             //endregion
 
             //region Generate neighbors map
-//            el_Net_Service.nodeNeighborsFollowingListBuild(); // następnik
+//            el_Net_Service.nodeNeighborsFollowingListBuild();   // następnik
 //            el_Net_Service.nodeNeighborsPredecessorListBuild(); // poprzednik
             //endregion
 

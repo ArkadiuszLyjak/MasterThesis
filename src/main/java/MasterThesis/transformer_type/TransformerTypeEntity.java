@@ -15,6 +15,7 @@ import lombok.Setter;
 
 public class TransformerTypeEntity extends BaseEntity {
 
+    //region transformer arguments
     // id  //id– numer pozycji katalogowej
     String type;  //type – nazwa typu
 
@@ -43,6 +44,7 @@ public class TransformerTypeEntity extends BaseEntity {
     Double connectionGroup;
     Double zeroResistance;
     Double zeroReactance;
+    //endregion
 
     public TransformerTypeEntity(Long id) {
         super(id);
