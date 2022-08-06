@@ -41,6 +41,8 @@ public class ElectricalNetworkService {
             long startNode = arcEntity.getStartNode();
             long id = arcEntity.getId();
 
+//            System.out.printf("%d->%d%n", startNode, arcEntity.getEndNode());
+
             // StartNode - węzeł początkowy (nie ID!)
             if (!elNet.neighborsConsequentMap.containsKey(startNode)) {
                 elNet.neighborsConsequentMap.put(startNode, new ArrayList<>());
@@ -48,6 +50,7 @@ public class ElectricalNetworkService {
 
             // dodaje ID całego rekordu, gdzie znajduje się sąsiad
             elNet.neighborsConsequentMap.get(startNode).add(id); // dodaje ID sąsiada
+
         });
 
     }

@@ -62,27 +62,26 @@ public class MainApp {
             //endregion
 
             //region Read data files
-            file_Data_Service.readLineTypeFile();
-            file_Data_Service.readTransformerTypeFile();
-            file_Data_Service.readNodeFile();
             file_Data_Service.readArcFile();
+            file_Data_Service.readLineTypeFile();
+            file_Data_Service.readNodeFile();
+            file_Data_Service.readTransformerTypeFile();
             //endregion
 
             //region Generate neighbors map
-//            el_Net_Service.nodeNeighborsFollowingListBuild();   // następnik
-//            el_Net_Service.nodeNeighborsPredecessorListBuild(); // poprzednik
-            //endregion
+            el_Net_Service.nodeNeighborsFollowingListBuild();   // następnik
+//            elNetPrinter.printNodeNeighborsWithDirection(
+//                    ElectricalNetworkOutPrinter
+//                            .DIRECTION.FOLLOWING);
 
-            //region print neighbors map - Consequent
-//            elNetPrinter.printNodeNeighborsWithDirection(ElectricalNetworkOutPrinter.DIRECTION.FOLLOWING);
-            //endregion
-
-            //region print neighbors map - Predecessor
-//            elNetPrinter.printNodeNeighborsWithDirection(ElectricalNetworkOutPrinter.DIRECTION.PREDECESSOR);
+            el_Net_Service.nodeNeighborsPredecessorListBuild(); // poprzednik
+//            elNetPrinter.printNodeNeighborsWithDirection(
+//                    ElectricalNetworkOutPrinter
+//                            .DIRECTION.PREDECESSOR);
             //endregion
 
             //region Generate visit order
-//            bfsAlgorithm.generateLevelsOrder();
+            bfsAlgorithm.generateLevelsOrder();
             //endregion
 
             //region Print NetQuantity
@@ -91,22 +90,26 @@ public class MainApp {
 
             //region Calculation Immitance
             // Calculation Immitance for Line
-//            elNetCalcService.calcLineImmitance();
+            elNetCalcService.calcLineImmitance();
 //            elNetPrinter.printLineImmitance();
 
             // Calculation Immitance for Trafo
-//            elNetCalcService.calcTrafoImmitance();
+            elNetCalcService.calcTrafoImmitance();
 //            elNetPrinter.printTrafoImmitance();
 
             // Calculation Per Unit for Nodes
-//            elNetCalcService.calcNodeVoltagePu();
+            elNetCalcService.calcNodeVoltagePu();
 //            elNetPrinter.printNodeVoltagePu();
 
             // Calculation initial current iteration zero
-//            elNetCalcService.calcNodeCurrentPUwithConsequenNodesForZEROiteration();
-//            elNetCalcService.calcNodeCurrentPUwithPredecessorsNodesForZEROiteration();
+            elNetCalcService.calcNodeCurrentPUwithConsequenNodesForZEROiteration();
+            elNetCalcService.calcNodeCurrentPUwithPredecessorsNodesForZEROiteration();
 //            elNetPrinter.printNodeCurrentPUIter0();
 //            bfsAlgPrinter.printNodeVisitedOrder();
+            //endregion
+
+            //region general testing
+//            el_Net_Service.nodeNeighborsFollowingListBuild();
             //endregion
 
             /*//region NODE POWER TRANSMIT

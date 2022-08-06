@@ -139,16 +139,19 @@ public class ElectricalNetworkCalcService {
     //region oblicz prąd początkowy w węzłach mających sąsiadów "z przodu"
     public void calcNodeCurrentPUwithConsequenNodesForZEROiteration() {
 
-        DecimalFormat df = new DecimalFormat("##.E0#");
-        DecimalFormat dfv = new DecimalFormat("#0.E0");
+        DecimalFormat df = new DecimalFormat("##0.000000");
+        DecimalFormat dfv = new DecimalFormat("#0.00");
 
         elNet.neighborsConsequentMap.forEach((node, nodeNeighborIDList) -> {
                     try {
                         if (node != 0) {
 
-                            double currentPUSum = 0.0;
+//                            System.out.println("\n\n" + node);
 
-                            double resistanceBetweenStartNodeAndHisNeighborPU;
+                            double currentPUSum = 0.0;
+                            double currentPUforArc = 0.0;
+
+                            double resStartNodeAndHisNeighborPU;
                             long uniqueNeighborNumber;
 
                             for (Long neighborID : nodeNeighborIDList) { // ID sąsiada!
@@ -157,7 +160,7 @@ public class ElectricalNetworkCalcService {
                                 uniqueNeighborNumber = elNet.arcMap.get(neighborID).getEndNode();
 
                                 // pobranie rezystancji łuku [pu]
-                                resistanceBetweenStartNodeAndHisNeighborPU =
+                                resStartNodeAndHisNeighborPU =
                                         elNet.arcMap.get(neighborID).getResistancePU();
 
                                 // pobierz napięcie w węźle-sąsiedzie w [PU]
@@ -167,21 +170,28 @@ public class ElectricalNetworkCalcService {
 
                                 // oblicz prąd początkowy dla danego węzła, który jest sumą
                                 // wszystkich prądów wypływających z niego do węzłów-sąsiadów
-                                currentPUSum += (neighborVolPU
-                                        * (1 / resistanceBetweenStartNodeAndHisNeighborPU))
+                                currentPUforArc = (neighborVolPU
+                                        * (1 / resStartNodeAndHisNeighborPU))
                                         / Math.sqrt(3);
 
-                                //region print temporary calculations
-                                System.out.printf("%3d->", node);
+                                currentPUSum = currentPUSum + currentPUforArc;
+
+                                /*//region print temporary calculations
+                                System.out.printf("%s->", "---");
                                 System.out.printf("%3d\t", uniqueNeighborNumber);
-                                System.out.printf("R:%2.2e\t", resistanceBetweenStartNodeAndHisNeighborPU);
-                                System.out.printf("V:%2.2e\t", neighborVolPU);
-                                System.out.printf("I:%2.2e\t", currentPUSum);
+                                System.out.printf("R:%.2e\t", resStartNodeAndHisNeighborPU);
+                                System.out.printf("V:%.2e\t", neighborVolPU);
+                                System.out.printf("I: %.2e", currentPUforArc);
                                 System.out.println();
-                                //endregion
+                                //endregion*/
                             }
 
-                            System.out.println();
+//                            System.out.printf("Prad dla iter. zerowej dla wezla %d -> I0 = %s %.2e",
+//                                    node,
+//                                    "Σ",
+//                                    currentPUSum);
+
+//                            System.out.println();
 
                             elNet.nodeMap.get(node).setCurrentInitialPU(currentPUSum);
 
@@ -199,6 +209,7 @@ public class ElectricalNetworkCalcService {
 
     //region oblicz prąd początkowy w węzłach NIE mających sąsiadów "z przodu"
     public List<Double> calcNodeCurrentPUwithPredecessorsNodesForZEROiteration() {
+
         Stream<NodeEntity> nodeEntityStream = elNet.nodeList.stream();
 
         //region Oblicza prąd początkowy dla węzłów nie mających sąsiadów z przodu
@@ -234,10 +245,11 @@ public class ElectricalNetworkCalcService {
         };
         //endregion
 
-        // current initial [PU]
+        //region current initial [PU]
         return nodeEntityStream
                 .mapToDouble(nodeEntityToDoubleFunction)
                 .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        //endregion
 
     }
     //endregion
