@@ -2,17 +2,18 @@ package MasterThesis.el_net;
 
 import MasterThesis.arc.ArcEntity;
 import MasterThesis.arc.ArcType;
+import MasterThesis.base.entity.BaseEntity;
 import MasterThesis.data_calc.BaseValues;
 import MasterThesis.lineType.LineTypeEntity;
 import MasterThesis.node.NodeEntity;
 import MasterThesis.transformer_type.TransformerTypeEntity;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Formatter;
 import java.util.List;
-import java.util.function.ToDoubleFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ElectricalNetworkCalcService {
@@ -137,27 +138,26 @@ public class ElectricalNetworkCalcService {
      */
 
     //region oblicz prąd początkowy w węzłach mających sąsiadów "z przodu"
-    public void calcNodeCurrentPUwithConsequenNodesForZEROiteration() {
+    public void calcNodeCurrentPU__FORWARD__nodesForZEROiteration() {
 
-        DecimalFormat df = new DecimalFormat("##0.000000");
-        DecimalFormat dfv = new DecimalFormat("#0.00");
-
-        elNet.neighborsConsequentMap.forEach((node, nodeNeighborIDList) -> {
+        elNet.neighbors__FORWARD__Map.forEach((node, nodeNeighborIDList) -> {
                     try {
                         if (node != 0) {
 
-//                            System.out.println("\n\n" + node);
+                            /*//region print temporary calculations "0"
+                            System.out.println("\n\n" + node);
+                            //endregion*/
 
                             double currentPUSum = 0.0;
                             double currentPUforArc = 0.0;
 
                             double resStartNodeAndHisNeighborPU;
-                            long uniqueNeighborNumber;
+                            long endNodeNeighborNumber;
 
                             for (Long neighborID : nodeNeighborIDList) { // ID sąsiada!
 
                                 // unikalny nr węzła-sąsiada
-                                uniqueNeighborNumber = elNet.arcMap.get(neighborID).getEndNode();
+                                endNodeNeighborNumber = elNet.arcMap.get(neighborID).getEndNode();
 
                                 // pobranie rezystancji łuku [pu]
                                 resStartNodeAndHisNeighborPU =
@@ -165,7 +165,7 @@ public class ElectricalNetworkCalcService {
 
                                 // pobierz napięcie w węźle-sąsiedzie w [PU]
                                 double neighborVolPU = elNet.nodeMap
-                                        .get(uniqueNeighborNumber)
+                                        .get(endNodeNeighborNumber)
                                         .getVoltagePU();
 
                                 // oblicz prąd początkowy dla danego węzła, który jest sumą
@@ -176,9 +176,9 @@ public class ElectricalNetworkCalcService {
 
                                 currentPUSum = currentPUSum + currentPUforArc;
 
-                                /*//region print temporary calculations
+                                /*//region print temporary calculations "1"
                                 System.out.printf("%s->", "---");
-                                System.out.printf("%3d\t", uniqueNeighborNumber);
+                                System.out.printf("%3d\t", endNodeNeighborNumber);
                                 System.out.printf("R:%.2e\t", resStartNodeAndHisNeighborPU);
                                 System.out.printf("V:%.2e\t", neighborVolPU);
                                 System.out.printf("I: %.2e", currentPUforArc);
@@ -186,19 +186,21 @@ public class ElectricalNetworkCalcService {
                                 //endregion*/
                             }
 
-//                            System.out.printf("Prad dla iter. zerowej dla wezla %d -> I0 = %s %.2e",
-//                                    node,
-//                                    "Σ",
-//                                    currentPUSum);
+                            /*//region print temporary calculations "2"
+                            System.out.printf("Prad dla iter. zerowej dla wezla %d -> I0 = %s %.2e",
+                                    node,
+                                    "Σ",
+                                    currentPUSum);
 
-//                            System.out.println();
+                            System.out.println();
+                            //endregion*/
 
                             elNet.nodeMap.get(node).setCurrentInitialPU(currentPUSum);
 
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
-                        System.out.println("!!!! BLAD DLA node = " + node);
+                        System.out.println("BLAD DLA node = " + node);
                         //TODO poprawa obslugi bledow
                     }
                 }
@@ -208,48 +210,41 @@ public class ElectricalNetworkCalcService {
     //endregion
 
     //region oblicz prąd początkowy w węzłach NIE mających sąsiadów "z przodu"
-    public List<Double> calcNodeCurrentPUwithPredecessorsNodesForZEROiteration() {
+    public void calcNodeCurrentPU__REVERSE__nodesForZEROiteration() {
 
+        //region filtracja węzłów, które nia mają policzonego prądu "0"
         Stream<NodeEntity> nodeEntityStream = elNet.nodeList.stream();
 
-        //region Oblicza prąd początkowy dla węzłów nie mających sąsiadów z przodu
-        ToDoubleFunction<NodeEntity> initialCurrentPredecessor = value -> {
+        Stream<NodeEntity> nodeZeroCurrent = nodeEntityStream.filter(nodeEntity ->
+                nodeEntity.getCurrentInitialPU() == null);
 
-            List<Long> neighborsIDlist = elNet.neighborsPredecessorMap.get(value.getId());
-            List<Long> neighborsNodeID = new LinkedList<>();
-
-            for (Long nbor : neighborsIDlist) {
-                neighborsNodeID.add(elNet.arcMap.get(nbor).getStartNode());
-            }
-
-            Double currentSum = 0.0;
-
-            for (Long neighborID : neighborsNodeID) {
-                currentSum += elNet.nodeMap.get(neighborID).getCurrentInitialPU();
-            }
-
-            return currentSum;
-
-        };
+        Stream<Long> nodesZero = nodeZeroCurrent.map(BaseEntity::getId);
+        List<Long> listNodesZeroCurrent = nodesZero.collect(Collectors.toList());
         //endregion
 
-        //region ToDoubleFunction
-        ToDoubleFunction<NodeEntity> nodeEntityToDoubleFunction = nodeEntity -> {
+        try {
+            elNet.neighbors__REVERSE__Map.forEach((node, nodeNeighborIDList) -> {
+                if (listNodesZeroCurrent.contains(node)) {
 
-            if (nodeEntity.getCurrentInitialPU() == null) {
-                nodeEntity.setCurrentInitialPU(initialCurrentPredecessor
-                        .applyAsDouble(nodeEntity));
-            }
+                    //region obliczenie pradu "0" na podst. sąsiadów "wstecz"
+                    // rezystancja łuku między węzłem a jego sąsiadem
+                    // napięcie w węźle startowym
+                    //endregion
 
-            return nodeEntity.getCurrentInitialPU();
-        };
-        //endregion
+                    //region wyświetlenie obliczonych prądów
+                    Formatter fmt = new Formatter();
+                    System.out.println(fmt.format("%d\tI0: (%.4e)",
+                            node,
+                            elNet.nodeMap.get(node).getCurrentInitialPU()));
+                    //endregion
+                }
 
-        //region current initial [PU]
-        return nodeEntityStream
-                .mapToDouble(nodeEntityToDoubleFunction)
-                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-        //endregion
+            });
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
     //endregion

@@ -20,7 +20,6 @@ package MasterThesis;
 * */
 
 import MasterThesis.arc_file_tools.FileDataService;
-import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
 import MasterThesis.bfs.BfsAlgorithm;
 import MasterThesis.bfs.BfsAlgorithmOutPrinter;
@@ -28,9 +27,6 @@ import MasterThesis.el_net.ElectricalNetwork;
 import MasterThesis.el_net.ElectricalNetworkCalcService;
 import MasterThesis.el_net.ElectricalNetworkOutPrinter;
 import MasterThesis.el_net.ElectricalNetworkService;
-import MasterThesis.node.NodeEntity;
-
-import java.util.Formatter;
 
 public class MainApp {
 
@@ -71,13 +67,11 @@ public class MainApp {
             //region Generate neighbors map
             el_Net_Service.nodeNeighborsFollowingListBuild();   // następnik
 //            elNetPrinter.printNodeNeighborsWithDirection(
-//                    ElectricalNetworkOutPrinter
-//                            .DIRECTION.FOLLOWING);
+//                    ElectricalNetworkOutPrinter.DIRECTION.FORWARD);
 
-            el_Net_Service.nodeNeighborsPredecessorListBuild(); // poprzednik
-//            elNetPrinter.printNodeNeighborsWithDirection(
-//                    ElectricalNetworkOutPrinter
-//                            .DIRECTION.PREDECESSOR);
+            el_Net_Service.nodeNeighbors__REVERSE__ListBuild(); // poprzednik
+            elNetPrinter.printNodeNeighborsWithDirection(
+                    ElectricalNetworkOutPrinter.DIRECTION.REVERSE);
             //endregion
 
             //region Generate visit order
@@ -102,8 +96,8 @@ public class MainApp {
 //            elNetPrinter.printNodeVoltagePu();
 
             // Calculation initial current iteration zero
-            elNetCalcService.calcNodeCurrentPUwithConsequenNodesForZEROiteration();
-            elNetCalcService.calcNodeCurrentPUwithPredecessorsNodesForZEROiteration();
+            elNetCalcService.calcNodeCurrentPU__FORWARD__nodesForZEROiteration();
+            elNetCalcService.calcNodeCurrentPU__REVERSE__nodesForZEROiteration();
 //            elNetPrinter.printNodeCurrentPUIter0();
 //            bfsAlgPrinter.printNodeVisitedOrder();
             //endregion

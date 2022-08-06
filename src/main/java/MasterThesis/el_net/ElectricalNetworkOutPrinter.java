@@ -313,8 +313,8 @@ public class ElectricalNetworkOutPrinter {
 
         switch (direction) {
             //region FORWARD
-            case FOLLOWING:
-                elNet.neighborsConsequentMap.forEach((node, neighborsIdList) -> {
+            case FORWARD:
+                elNet.neighbors__FORWARD__Map.forEach((node, neighborsIdList) -> {
                             System.out.printf("node:[%3d] --> ", node);
                             System.out.print("neighbors: [");
                             neighborsIdList.forEach(neighborId -> {
@@ -328,8 +328,8 @@ public class ElectricalNetworkOutPrinter {
             //endregion
 
             //region REVERSE
-            case PREDECESSOR:
-                elNet.neighborsPredecessorMap.forEach((nodeEnd, neighborsStartIdList) -> {
+            case REVERSE:
+                elNet.neighbors__REVERSE__Map.forEach((nodeEnd, neighborsStartIdList) -> {
                     System.out.printf("node: [%3d] --> neighbors: ", nodeEnd);
 
                     LongFunction<Long> IDtoNodeStartLongFunction = ID ->
@@ -373,7 +373,7 @@ public class ElectricalNetworkOutPrinter {
 
     //region DIRECTION
     public enum DIRECTION {
-        FOLLOWING("nastepnik"), PREDECESSOR("poprzednik");
+        FORWARD("nastepnik"), REVERSE("poprzednik");
 
         private final String direction;
 

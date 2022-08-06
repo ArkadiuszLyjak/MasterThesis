@@ -22,8 +22,8 @@ public class ElectricalNetwork {
     public List<NodeEntity> nodeList;
     public List<ArcEntity> arcList;
 
-    public Map<Long, List<Long>> neighborsConsequentMap = new LinkedHashMap<>();
-    public Map<Long, List<Long>> neighborsPredecessorMap = new LinkedHashMap<>();
+    public Map<Long, List<Long>> neighbors__FORWARD__Map = new LinkedHashMap<>();
+    public Map<Long, List<Long>> neighbors__REVERSE__Map = new LinkedHashMap<>();
     //endregion
 
     /**

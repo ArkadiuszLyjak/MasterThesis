@@ -66,6 +66,8 @@
     <setting file="file://$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/MasterThesis/base/parameters/AppParameters.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/MasterThesis/base/parameters/AppParametersService.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkOutPrinter.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkService.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/MasterThesis/tools/PrintUtility.java" root0="FORCE_HIGHLIGHTING" />
@@ -276,7 +278,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java</url>
-          <line>203</line>
+          <line>205</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>

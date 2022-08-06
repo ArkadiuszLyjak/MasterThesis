@@ -44,12 +44,12 @@ public class ElectricalNetworkService {
 //            System.out.printf("%d->%d%n", startNode, arcEntity.getEndNode());
 
             // StartNode - węzeł początkowy (nie ID!)
-            if (!elNet.neighborsConsequentMap.containsKey(startNode)) {
-                elNet.neighborsConsequentMap.put(startNode, new ArrayList<>());
+            if (!elNet.neighbors__FORWARD__Map.containsKey(startNode)) {
+                elNet.neighbors__FORWARD__Map.put(startNode, new ArrayList<>());
             }
 
             // dodaje ID całego rekordu, gdzie znajduje się sąsiad
-            elNet.neighborsConsequentMap.get(startNode).add(id); // dodaje ID sąsiada
+            elNet.neighbors__FORWARD__Map.get(startNode).add(id); // dodaje ID sąsiada
 
         });
 
@@ -57,19 +57,19 @@ public class ElectricalNetworkService {
     //endregion
 
     //region Generate reverse neighbors map
-    public void nodeNeighborsPredecessorListBuild() {
+    public void nodeNeighbors__REVERSE__ListBuild() {
         elNet.arcMap.forEach((aLong, arcEntity) -> {
 
             long endNode = arcEntity.getEndNode(); // start z końcowego węzła
             long id = arcEntity.getId();
 
             // StartNode - węzeł początkowy (nie ID!)
-            if (!elNet.neighborsPredecessorMap.containsKey(endNode)) {
-                elNet.neighborsPredecessorMap.put(endNode, new ArrayList<>());
+            if (!elNet.neighbors__REVERSE__Map.containsKey(endNode)) {
+                elNet.neighbors__REVERSE__Map.put(endNode, new ArrayList<>());
             }
 
             // dodaje ID całego rekordu, gdzie znajduje się sąsiad
-            elNet.neighborsPredecessorMap.get(endNode).add(id);
+            elNet.neighbors__REVERSE__Map.get(endNode).add(id);
         });
 
     }
@@ -79,7 +79,7 @@ public class ElectricalNetworkService {
     public boolean isDistributeNode(NodeEntity node) {
 
         List<Long> distributeNodeList = new ArrayList<>();
-        List<Long> arcList = elNet.neighborsConsequentMap.get(0L);
+        List<Long> arcList = elNet.neighbors__FORWARD__Map.get(0L);
 
         for (Long arcId : arcList) {
             distributeNodeList.add(elNet.arcMap.get(arcId).getEndNode());
