@@ -17,28 +17,7 @@ import java.util.function.LongFunction;
 public class ElectricalNetworkOutPrinter {
 
     //region DecimalFormat
-    private static final DecimalFormat DECIMAL_FORMAT_LINE_EXP =
-            new DecimalFormat("0.0#E0#");
-
-    private static final DecimalFormat DECIMAL_FORMAT_CURRENT_PU_EXP =
-            new DecimalFormat("0.00##E0");
-
-    private static final DecimalFormat DECIMAL_FORMAT_TRAFO_EXP =
-            new DecimalFormat("0.00##E0");
-    private static final DecimalFormat DECIMAL_FORMAT_TRAFO =
-            new DecimalFormat("0.000000");
-
-    private static final DecimalFormat DECIMAL_FORMAT_TRAFO_VOLTAGE_EXP =
-            new DecimalFormat("0.00E0");
-
-    private static final DecimalFormat DECIMAL_FORMAT_TRAFO_VOLTAGE =
-            new DecimalFormat("0.000000");
-
-    private static final DecimalFormat DECIMAL_FORMAT_NODE_VOLTAGE_PU_EXP =
-            new DecimalFormat("0.00E0");
-
-    private static final DecimalFormat DECIMAL_FORMAT_NODE_VOLTAGE_PU =
-            new DecimalFormat("0.000000");
+    private static final DecimalFormat DECIMAL_FORMAT_EXP = new DecimalFormat("0.00E0");
     //endregion
 
     //region getInstance - Singleton
@@ -162,15 +141,24 @@ public class ElectricalNetworkOutPrinter {
         System.out.println("\n-------------------------------------");
         System.out.println("------- Line  Immitance -------------");
         System.out.println("-------------------------------------\n");
+
         for (ArcEntity arc : elNet.arcList) {
             if (arc.getType() == ArcType.LINE) {
-                System.out.printf("%-3d->%3d\tL:%-8.2f\tX:%-8.2f\tR:%-8.2f\tZ:%-8.2f %n",
-                        arc.getStartNode(),
-                        arc.getEndNode(),
-                        arc.getArcLength(),
-                        arc.getReactance(),
-                        arc.getResistance(),
-                        arc.getImpedance());
+                System.out.printf("%4d-->%-4d ", arc.getStartNode(), arc.getEndNode());
+                System.out.print("L:" + DECIMAL_FORMAT_EXP.format(arc.getArcLength()) + "[m]");
+                System.out.print(" R:" + DECIMAL_FORMAT_EXP.format(arc.getResistancePU()));
+                System.out.print(" X:" + DECIMAL_FORMAT_EXP.format(arc.getReactancePU()));
+                System.out.print(" Z:" + DECIMAL_FORMAT_EXP.format(arc.getImpedancePU()));
+                System.out.println(" [pu]");
+
+//                System.out.printf("%-4d->%4d\tL:%.2e\tX:%.2e\tR:%.2e\tZ:%.2e %n",
+////                System.out.printf("%-4d->%4d\tL:%-8.2f\tX:%-8.2f\tR:%-8.2f\tZ:%-8.2f %n",
+//                        arc.getStartNode(),
+//                        arc.getEndNode(),
+//                        arc.getArcLength(),
+//                        arc.getResistance(),
+//                        arc.getReactance(),
+//                        arc.getImpedance());
 
             }
         }
@@ -202,29 +190,13 @@ public class ElectricalNetworkOutPrinter {
 
         for (ArcEntity arc : elNet.arcList) {
             if (arc.getType() == ArcType.TRANSFORMER) {
-
-                StringBuilder stringBuilder = new StringBuilder();
-                Formatter formatter = new Formatter(stringBuilder);
-
-                formatter.format("--------- Trafo ID: (" + arc.getId() + ") ---------\n");
-
-                formatter.format("%-30s %s%n", "(R) Resistance [pu]:",
-                        DECIMAL_FORMAT_TRAFO.format(arc.getResistancePU()));
-
-                formatter.format("%-30s %s%n", "(X) Reactance [pu]:",
-                        DECIMAL_FORMAT_TRAFO.format(arc.getReactancePU()));
-
-                formatter.format("%-30s %s%n", "(Z) Impedance [pu]:",
-                        DECIMAL_FORMAT_TRAFO.format(arc.getImpedancePU()));
-
-                formatter.format("%-30s %s%n", "(H) UPPER_VOLTAGE [pu]:",
-                        DECIMAL_FORMAT_TRAFO_VOLTAGE.format(arc.getVoltageHighPU()));
-
-                formatter.format("%-30s %s%n", "(L) LOWER_VOLTAGE [pu]:",
-                        DECIMAL_FORMAT_TRAFO_VOLTAGE.format(arc.getVoltageLowPU()));
-
-                System.out.println(stringBuilder);
-
+                System.out.printf("%s %d %s", "--------- Trafo ID: (", arc.getId(), ") ---------\n");
+                System.out.printf("%-25s %4.2e %s%n", "(R) Resistance:", arc.getResistancePU(), " [pu]");
+                System.out.printf("%-25s %4.2e %s%n", "(X) Reactance:", arc.getReactancePU(), " [pu]");
+                System.out.printf("%-25s %4.2e %s%n", "(Z) Impedance:", arc.getImpedancePU(), " [pu]");
+                System.out.printf("%-25s %4.2e %s%n", "(H) UPPER_VOLTAGE:", arc.getVoltageHighPU(), " [pu]");
+                System.out.printf("%-25s %4.2e %s%n", "(L) LOWER_VOLTAGE:", arc.getVoltageLowPU(), " [pu]");
+                System.out.println();
             }
         }
 
@@ -269,9 +241,10 @@ public class ElectricalNetworkOutPrinter {
         System.out.println("-------------------------------------\n");
 
         elNet.nodeList.forEach(nodeEntity ->
-                System.out.printf("Node: %3d --> V[pu]: %s%n",
+                System.out.printf("Node: %3d --> Vol: %s %s %n",
                         nodeEntity.getId(),
-                        DECIMAL_FORMAT_NODE_VOLTAGE_PU_EXP.format(nodeEntity.getVoltagePU())));
+                        DECIMAL_FORMAT_EXP.format(nodeEntity.getVoltagePU()),
+                        " [pu]"));
     }
     //endregion
 
@@ -365,7 +338,7 @@ public class ElectricalNetworkOutPrinter {
         elNet.nodeList.forEach(nodeEntity -> {
             System.out.printf("%3d: %s%n",
                     nodeEntity.getId(),
-                    DECIMAL_FORMAT_CURRENT_PU_EXP.format(nodeEntity.getCurrentInitialPU()));
+                    DECIMAL_FORMAT_EXP.format(nodeEntity.getCurrentInitialPU()));
         });
 
     }

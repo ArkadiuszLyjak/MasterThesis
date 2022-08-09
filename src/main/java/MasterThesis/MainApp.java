@@ -20,6 +20,7 @@ package MasterThesis;
 * */
 
 import MasterThesis.arc_file_tools.FileDataService;
+import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
 import MasterThesis.bfs.BfsAlgorithm;
 import MasterThesis.bfs.BfsAlgorithmOutPrinter;
@@ -50,7 +51,7 @@ public class MainApp {
             //endregion*/
 
             //region Print aplication parameters
-//            System.out.println(AppParameters.getInstance().toString());
+            System.out.println(AppParameters.getInstance().toString());
             //endregion
 
             //region setParametersFromArgs
@@ -64,36 +65,35 @@ public class MainApp {
             file_Data_Service.readTransformerTypeFile();
             //endregion
 
+            //region Print NetQuantity
+            elNetPrinter.printNetQuantity();
+            //endregion
+
             //region Generate neighbors map
             el_Net_Service.nodeNeighborsFollowingListBuild();   // następnik
-//            elNetPrinter.printNodeNeighborsWithDirection(
-//                    ElectricalNetworkOutPrinter.DIRECTION.FORWARD);
+//            elNetPrinter.printNodeNeighborsWithDirection(ElectricalNetworkOutPrinter.DIRECTION.FORWARD);
 
             el_Net_Service.nodeNeighbors__REVERSE__ListBuild(); // poprzednik
-            elNetPrinter.printNodeNeighborsWithDirection(
-                    ElectricalNetworkOutPrinter.DIRECTION.REVERSE);
+//            elNetPrinter.printNodeNeighborsWithDirection(ElectricalNetworkOutPrinter.DIRECTION.REVERSE);
             //endregion
 
             //region Generate visit order
             bfsAlgorithm.generateLevelsOrder();
             //endregion
 
-            //region Print NetQuantity
-//            elNetPrinter.printNetQuantity();
-            //endregion
 
             //region Calculation Immitance
             // Calculation Immitance for Line
             elNetCalcService.calcLineImmitance();
-//            elNetPrinter.printLineImmitance();
+            elNetPrinter.printLineImmitance();
 
             // Calculation Immitance for Trafo
             elNetCalcService.calcTrafoImmitance();
-//            elNetPrinter.printTrafoImmitance();
+            elNetPrinter.printTrafoImmitance();
 
             // Calculation Per Unit for Nodes
             elNetCalcService.calcNodeVoltagePu();
-//            elNetPrinter.printNodeVoltagePu();
+            elNetPrinter.printNodeVoltagePu();
 
             // Calculation initial current iteration zero
             elNetCalcService.calcNodeCurrentPU__FORWARD__nodesForZEROiteration();
