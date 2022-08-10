@@ -301,6 +301,20 @@ public class ElectricalNetworkOutPrinter {
             //region REVERSE
             case REVERSE:
                 elNet.neighbors_REVERSE_Map.forEach((nodeEnd, neighborsStartIdList) -> {
+                    LongFunction<Long> IDtoNodeStartLongFunction = ID -> elNet.arcMap.get(ID).getStartNode();
+
+                    System.out.print("reverse neighbors: ");
+                    for (Long startNodeID : neighborsStartIdList) {
+                        System.out.printf("%d ", IDtoNodeStartLongFunction.apply(startNodeID));
+                    }
+                    System.out.println("--> " + nodeEnd);
+                });
+                break;
+            //endregion
+
+            /*//region REVERSE
+            case REVERSE:
+                elNet.neighbors_REVERSE_Map.forEach((nodeEnd, neighborsStartIdList) -> {
                     System.out.printf("node: [%3d] --> neighbors: ", nodeEnd);
 
                     LongFunction<Long> IDtoNodeStartLongFunction = ID ->
@@ -313,7 +327,7 @@ public class ElectricalNetworkOutPrinter {
                     System.out.println("]");
                 });
                 break;
-            //endregion
+            //endregion*/
         }
     }
     //endregion
@@ -329,9 +343,9 @@ public class ElectricalNetworkOutPrinter {
     //region printNodeCurrentPUIter0
     public void printNodeCurrentPUIter0() {
 
-        System.out.println("\n-------------------------------------");
-        System.out.println("------- NODE CurrentPU --------------");
-        System.out.println("-------------------------------------\n");
+        System.out.println("\n----------------------------------------");
+        System.out.println("------- NODE CurrentPU Io --------------");
+        System.out.println("----------------------------------------\n");
 
         elNet.nodeList.forEach(nodeEntity -> {
             System.out.printf("%3d: %s%n",

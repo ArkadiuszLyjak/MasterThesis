@@ -20,6 +20,7 @@ package MasterThesis;
 * */
 
 import MasterThesis.arc_file_tools.FileDataService;
+import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
 import MasterThesis.bfs.BfsAlgorithm;
 import MasterThesis.bfs.BfsAlgorithmOutPrinter;
@@ -27,6 +28,9 @@ import MasterThesis.el_net.ElectricalNetwork;
 import MasterThesis.el_net.ElectricalNetworkCalcService;
 import MasterThesis.el_net.ElectricalNetworkOutPrinter;
 import MasterThesis.el_net.ElectricalNetworkService;
+import MasterThesis.node.NodeEntity;
+
+import java.util.Formatter;
 
 public class MainApp {
 
@@ -70,38 +74,42 @@ public class MainApp {
 
             //region Generate neighbors map
             el_Net_Service.nodeNeighborsFollowingListBuild();   // następnik
-//            elNetPrinter.printNodeNeighborsWithDirection(ElectricalNetworkOutPrinter.DIRECTION.FORWARD);
+//            elNetPrinter.printNodeNeighborsWithDirection(
+//                    ElectricalNetworkOutPrinter.DIRECTION.FORWARD);
 
             el_Net_Service.nodeNeighbors__REVERSE__ListBuild(); // poprzednik
-//            elNetPrinter.printNodeNeighborsWithDirection(ElectricalNetworkOutPrinter.DIRECTION.REVERSE);
+//            elNetPrinter.printNodeNeighborsWithDirection(
+//                    ElectricalNetworkOutPrinter.DIRECTION.REVERSE);
             //endregion
 
             //region Generate visit order
-            bfsAlgorithm.generateLevelsOrder();
+//            bfsAlgorithm.generateLevelsOrder();
             //endregion
 
             //region Calculation Immitance
             // Calculation Immitance for Line
-            elNetCalcService.calcLineImmitance();
+//            elNetCalcService.calcLineImmitance();
 //            elNetPrinter.printLineImmitance();
 
             // Calculation Immitance for Trafo
-            elNetCalcService.calcTrafoImmitance();
+//            elNetCalcService.calcTrafoImmitance();
 //            elNetPrinter.printTrafoImmitance();
 
             // Calculation Per Unit for Nodes
-            elNetCalcService.calcNodeVoltagePu();
+//            elNetCalcService.calcNodeVoltagePu();
 
             // Calculation initial current iteration zero
-            elNetCalcService.calcNodeCurrentPU_FORWARD_nodesForZEROiteration();
-            elNetCalcService.calcNodeCurrentPU_REVERSE_nodesForZEROiteration();
-            elNetPrinter.printNodeCurrentPUIter0();
-//            bfsAlgPrinter.printNodeVisitedOrder();
-//            elNetPrinter.printNodeInfo();
+//            elNetCalcService.calcNodeCurrentPU_FORWARD_nodesForZEROiteration();
+//            elNetCalcService.calcNodeCurrentPU_REVERSE_nodesForZEROiteration();
+//            elNetPrinter.printNodeCurrentPUIter0();
             //endregion
 
-            //region general testing
-//            el_Net_Service.nodeNeighborsFollowingListBuild();
+            //region kolejność odwiedzin wg algo BFS
+//            bfsAlgPrinter.printNodeVisitedOrder();
+            //endregion
+
+            //region Nodes informations
+//            elNetPrinter.printNodeInfo();
             //endregion
 
             /*//region NODE POWER TRANSMIT
@@ -129,7 +137,7 @@ public class MainApp {
                 k++;
                 // a = 0;
                 for (NodeEntity node : elNet.nodeList) {
-                    formatter.format("i:(%02d) ", iterNumber++);
+                    formatter.format("iter: %d\n", iterNumber++);
                     currentIter = 0.0;
                     deltaCurrentIter = 0.0;
                     voltageIter = 0.0;
@@ -144,18 +152,18 @@ public class MainApp {
                         //6B
                         // jakis bład. ..
 
-                        deltaCurrentIter = node.getCurrentRealPU() - (node.getVoltageRealPU())
-                                / Math.sqrt(3.0);
+//                        deltaCurrentIter = node.getCurrentRealPU() - (node.getVoltageRealPU())
+//                                /Math.sqrt(3.0);
                         //7B
                         //8B
                     }
 
                     // if (BaseValues.epsilon < a) {}
 
-                    formatter.format("node: (%03d) ", node.getId());
-                    formatter.format("Current: %.2e ", deltaCurrentIter);
-                    formatter.format("Current: (%3f) ", node.getCurrentRealPU());
-                    formatter.format("Voltage: (%3f) ", node.getVoltageRealPU());
+                    formatter.format("Node: %03d\n", node.getId());
+                    formatter.format("I1: %12.4e\n", deltaCurrentIter);
+                    formatter.format("I2: %6.4e\n", node.getCurrentRealPU());
+                    formatter.format("V:  %6.4e\n", node.getVoltageRealPU());
                     System.out.println(sb);
                     sb.setLength(0);
 

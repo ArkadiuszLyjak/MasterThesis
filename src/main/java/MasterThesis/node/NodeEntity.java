@@ -51,18 +51,18 @@ public class NodeEntity extends BaseEntity {
         Formatter formatter = new Formatter(sb);
 
         formatter.format("%-21s %d%n", "id:", this.getId());
-//        formatter.format("%-21s %s%n", "node type:", NodeType.valueOf(nodeType.id));
-//        formatter.format("%-21s %.2f [kW]%n", "active power:", activePower);
-//        formatter.format("%-21s %.2f [kVar]%n", "reactive power:", reactivePower);
-//        formatter.format("%-21s %.2f [kV]%n", "voltage:", voltage);
+        formatter.format("%-21s %s%n", "node type:", NodeType.valueOf(nodeType.id));
+        formatter.format("%-21s %.2f [kW]%n", "active power:", activePower);
+        formatter.format("%-21s %.2f [kVar]%n", "reactive power:", reactivePower);
+        formatter.format("%-21s %.2f [kV]%n", "voltage:", voltage);
 
         // jednostki [pu]
-        formatter.format("%-21s %.6f [PU]%n", "voltage:", voltagePU);
-        formatter.format("%-21s %f [PU]%n", "current iter '0':", currentInitialPU);
-//        formatter.format("%-21s %f [PU]%n", "current:", currentPU);
-//        formatter.format("%-21s %f [PU]%n", "voltage real:", voltageRealPU);
-//        formatter.format("%-21s %f [PU]%n", "current real:", currentRealPU);
-//        formatter.format("%-21s %f [PU]%n", "power real:", powerRealPU);
+        formatter.format("%-21s %.2e [PU]%n", "voltage:", voltagePU);
+        formatter.format("%-21s %.2e [PU]%n", "current iter '0':", currentInitialPU);
+        formatter.format("%-21s %.4e [PU]%n", "current:", currentPU);
+        formatter.format("%-21s %.4e [PU]%n", "voltage real:", voltageRealPU);
+        formatter.format("%-21s %.4e [PU]%n", "current real:", currentRealPU);
+        formatter.format("%-21s %.4e [PU]%n", "power real:", powerRealPU);
 
         return formatter.toString();
     }
