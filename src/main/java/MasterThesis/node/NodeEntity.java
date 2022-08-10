@@ -27,7 +27,7 @@ public class NodeEntity extends BaseEntity {
     // Odchylenie mocy biernej = 0
     Integer reactivePowerDeviation;
 
-    // Napiecie – napięcie znamionowe węzła sieci
+    // Napiecie – napięcie znamionowe węzła sieci [kV]
     Double voltage;
     //endregion
 
@@ -50,19 +50,19 @@ public class NodeEntity extends BaseEntity {
         StringBuilder sb = new StringBuilder();
         Formatter formatter = new Formatter(sb);
 
-        formatter.format(">--------------------------\n");
         formatter.format("%-21s %d%n", "id:", this.getId());
-        formatter.format("%-21s %s%n", "node type:", NodeType.valueOf(nodeType.id));
-        formatter.format("%-21s %.2f%n", "active power:", activePower);
-        formatter.format("%-21s %.2f%n", "reactive power:", reactivePower);
-        formatter.format("%-21s %.2f%n", "voltage:", voltage);
-        formatter.format("%-21s %.6f%n", "voltage [PU]:", voltagePU);
-        formatter.format("%-21s %f%n", "current initial [PU]:", currentInitialPU);
-        formatter.format("%-21s %f%n", "current [PU]:", currentPU);
-        formatter.format("%-21s %f%n", "voltage real [PU]:", voltageRealPU);
-        formatter.format("%-21s %f%n", "current real [PU]:", currentRealPU);
-        formatter.format("%-21s %f%n", "power real [PU]:", powerRealPU);
-        formatter.format("--------------------------<\n");
+//        formatter.format("%-21s %s%n", "node type:", NodeType.valueOf(nodeType.id));
+//        formatter.format("%-21s %.2f [kW]%n", "active power:", activePower);
+//        formatter.format("%-21s %.2f [kVar]%n", "reactive power:", reactivePower);
+//        formatter.format("%-21s %.2f [kV]%n", "voltage:", voltage);
+
+        // jednostki [pu]
+        formatter.format("%-21s %.6f [PU]%n", "voltage:", voltagePU);
+        formatter.format("%-21s %f [PU]%n", "current iter '0':", currentInitialPU);
+//        formatter.format("%-21s %f [PU]%n", "current:", currentPU);
+//        formatter.format("%-21s %f [PU]%n", "voltage real:", voltageRealPU);
+//        formatter.format("%-21s %f [PU]%n", "current real:", currentRealPU);
+//        formatter.format("%-21s %f [PU]%n", "power real:", powerRealPU);
 
         return formatter.toString();
     }

@@ -234,17 +234,15 @@ public class ElectricalNetworkOutPrinter {
     //endregion
 
     //region printNodeVoltagePu
-    public void printNodeVoltagePu() {
+    public void printNodeInfo() {
 
         System.out.println("\n-------------------------------------");
-        System.out.println("------- Node VoltagePu --------------");
+        System.out.println("------- Node Information --------------");
         System.out.println("-------------------------------------\n");
 
-        elNet.nodeList.forEach(nodeEntity ->
-                System.out.printf("Node: %3d --> Vol: %s %s %n",
-                        nodeEntity.getId(),
-                        DECIMAL_FORMAT_EXP.format(nodeEntity.getVoltagePU()),
-                        " [pu]"));
+        elNet.nodeList.forEach(nodeEntity -> {
+            System.out.println(nodeEntity.toString());
+        });
     }
     //endregion
 
@@ -287,7 +285,7 @@ public class ElectricalNetworkOutPrinter {
         switch (direction) {
             //region FORWARD
             case FORWARD:
-                elNet.neighbors__FORWARD__Map.forEach((node, neighborsIdList) -> {
+                elNet.neighbors_FORWARD_Map.forEach((node, neighborsIdList) -> {
                             System.out.printf("node:[%3d] --> ", node);
                             System.out.print("neighbors: [");
                             neighborsIdList.forEach(neighborId -> {
@@ -302,7 +300,7 @@ public class ElectricalNetworkOutPrinter {
 
             //region REVERSE
             case REVERSE:
-                elNet.neighbors__REVERSE__Map.forEach((nodeEnd, neighborsStartIdList) -> {
+                elNet.neighbors_REVERSE_Map.forEach((nodeEnd, neighborsStartIdList) -> {
                     System.out.printf("node: [%3d] --> neighbors: ", nodeEnd);
 
                     LongFunction<Long> IDtoNodeStartLongFunction = ID ->

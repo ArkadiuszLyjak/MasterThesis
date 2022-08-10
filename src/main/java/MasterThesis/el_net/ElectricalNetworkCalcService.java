@@ -8,11 +8,8 @@ import MasterThesis.lineType.LineTypeEntity;
 import MasterThesis.node.NodeEntity;
 import MasterThesis.transformer_type.TransformerTypeEntity;
 
-import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -138,13 +135,13 @@ public class ElectricalNetworkCalcService {
      */
 
     //region oblicz prąd początkowy w węzłach mających sąsiadów "z przodu"
-    public void calcNodeCurrentPU__FORWARD__nodesForZEROiteration() {
+    public void calcNodeCurrentPU_FORWARD_nodesForZEROiteration() {
 
-        elNet.neighbors__FORWARD__Map.forEach((node, nodeNeighborIDList) -> {
+        elNet.neighbors_FORWARD_Map.forEach((node, nodeNeighborIDList) -> {
                     try {
                         if (node != 0) {
 
-                            /*//region print temporary calculations "0"
+                            /*//region print temporary calculations "1/3"
                             System.out.println("\n\n" + node);
                             //endregion*/
 
@@ -176,7 +173,7 @@ public class ElectricalNetworkCalcService {
 
                                 currentPUSum = currentPUSum + currentPUforArc;
 
-                                /*//region print temporary calculations "1"
+                                /*//region print temporary calculations "2/3"
                                 System.out.printf("%s->", "---");
                                 System.out.printf("%3d\t", endNodeNeighborNumber);
                                 System.out.printf("R:%.2e\t", resStartNodeAndHisNeighborPU);
@@ -186,7 +183,7 @@ public class ElectricalNetworkCalcService {
                                 //endregion*/
                             }
 
-                            /*//region print temporary calculations "2"
+                            /*//region print temporary calculations "3/3"
                             System.out.printf("Prad dla iter. zerowej dla wezla %d -> I0 = %s %.2e",
                                     node,
                                     "Σ",
@@ -210,7 +207,7 @@ public class ElectricalNetworkCalcService {
     //endregion
 
     //region oblicz prąd początkowy w węzłach NIE mających sąsiadów "z przodu"
-    public void calcNodeCurrentPU__REVERSE__nodesForZEROiteration() {
+    public void calcNodeCurrentPU_REVERSE_nodesForZEROiteration() {
 
         //region filtracja węzłów, które nia mają policzonego prądu "0"
         Stream<NodeEntity> nodeEntityStream = elNet.nodeList.stream();
@@ -218,36 +215,37 @@ public class ElectricalNetworkCalcService {
         Stream<NodeEntity> nodeZeroCurrent = nodeEntityStream.filter(nodeEntity ->
                 nodeEntity.getCurrentInitialPU() == null);
 
+        // Strumien zawierający ID węzła bez obl. prądu iteracji "0"
         Stream<Long> nodesZero = nodeZeroCurrent.map(BaseEntity::getId);
+
+        // Utw. kolekcje ze strumienia z ID bez obl. prądu j.w
         List<Long> listNodesZeroCurrent = nodesZero.collect(Collectors.toList());
         //endregion
 
         try {
-            elNet.neighbors__REVERSE__Map.forEach((node, nodeNeighborIDList) -> {
+            elNet.neighbors_REVERSE_Map.forEach((node, nodeNeighborIDList) -> {
+
                 if (listNodesZeroCurrent.contains(node)) {
 
-                    //region obliczenie pradu "0" na podst. sąsiadów "wstecz"
-                    // rezystancja łuku między węzłem a jego sąsiadem
-                    // napięcie w węźle startowym
-                    //endregion
+                    double currentNode = 0;
 
-                    //region wyświetlenie obliczonych prądów
-                    Formatter fmt = new Formatter();
-                    System.out.println(fmt.format("%d\tI0: (%.4e)",
-                            node,
-                            elNet.nodeMap.get(node).getCurrentInitialPU()));
+                    for (Long IDs : nodeNeighborIDList) {
+                        double conductanceArcPU = 1 / elNet.arcMap.get(IDs).getResistancePU();
+                        double voltagePU = elNet.nodeMap.get(elNet.arcMap.get(IDs).getStartNode()).getVoltagePU();
+                        double currentNodeTemporary = (conductanceArcPU * voltagePU) / Math.sqrt(3.0);
+                        currentNode += currentNodeTemporary;
+                        elNet.nodeMap.get(node).setCurrentInitialPU(currentNode);
+                    }
                     //endregion
                 }
-
             });
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
 
     }
-    //endregion
+//endregion
 
 }
 

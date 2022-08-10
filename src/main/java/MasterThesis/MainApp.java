@@ -20,7 +20,6 @@ package MasterThesis;
 * */
 
 import MasterThesis.arc_file_tools.FileDataService;
-import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
 import MasterThesis.bfs.BfsAlgorithm;
 import MasterThesis.bfs.BfsAlgorithmOutPrinter;
@@ -51,7 +50,7 @@ public class MainApp {
             //endregion*/
 
             //region Print aplication parameters
-            System.out.println(AppParameters.getInstance().toString());
+//            System.out.println(AppParameters.getInstance().toString());
             //endregion
 
             //region setParametersFromArgs
@@ -66,7 +65,7 @@ public class MainApp {
             //endregion
 
             //region Print NetQuantity
-            elNetPrinter.printNetQuantity();
+//            elNetPrinter.printNetQuantity();
             //endregion
 
             //region Generate neighbors map
@@ -81,25 +80,24 @@ public class MainApp {
             bfsAlgorithm.generateLevelsOrder();
             //endregion
 
-
             //region Calculation Immitance
             // Calculation Immitance for Line
             elNetCalcService.calcLineImmitance();
-            elNetPrinter.printLineImmitance();
+//            elNetPrinter.printLineImmitance();
 
             // Calculation Immitance for Trafo
             elNetCalcService.calcTrafoImmitance();
-            elNetPrinter.printTrafoImmitance();
+//            elNetPrinter.printTrafoImmitance();
 
             // Calculation Per Unit for Nodes
             elNetCalcService.calcNodeVoltagePu();
-            elNetPrinter.printNodeVoltagePu();
 
             // Calculation initial current iteration zero
-            elNetCalcService.calcNodeCurrentPU__FORWARD__nodesForZEROiteration();
-            elNetCalcService.calcNodeCurrentPU__REVERSE__nodesForZEROiteration();
-//            elNetPrinter.printNodeCurrentPUIter0();
+            elNetCalcService.calcNodeCurrentPU_FORWARD_nodesForZEROiteration();
+            elNetCalcService.calcNodeCurrentPU_REVERSE_nodesForZEROiteration();
+            elNetPrinter.printNodeCurrentPUIter0();
 //            bfsAlgPrinter.printNodeVisitedOrder();
+//            elNetPrinter.printNodeInfo();
             //endregion
 
             //region general testing

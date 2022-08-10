@@ -44,12 +44,12 @@ public class ElectricalNetworkService {
 //            System.out.printf("%d->%d%n", startNode, arcEntity.getEndNode());
 
             // StartNode - węzeł początkowy (nie ID!)
-            if (!elNet.neighbors__FORWARD__Map.containsKey(startNode)) {
-                elNet.neighbors__FORWARD__Map.put(startNode, new ArrayList<>());
+            if (!elNet.neighbors_FORWARD_Map.containsKey(startNode)) {
+                elNet.neighbors_FORWARD_Map.put(startNode, new ArrayList<>());
             }
 
             // dodaje ID całego rekordu, gdzie znajduje się sąsiad
-            elNet.neighbors__FORWARD__Map.get(startNode).add(id); // dodaje ID sąsiada
+            elNet.neighbors_FORWARD_Map.get(startNode).add(id); // dodaje ID sąsiada
 
         });
 
@@ -64,12 +64,12 @@ public class ElectricalNetworkService {
             long id = arcEntity.getId();
 
             // StartNode - węzeł początkowy (nie ID!)
-            if (!elNet.neighbors__REVERSE__Map.containsKey(endNode)) {
-                elNet.neighbors__REVERSE__Map.put(endNode, new ArrayList<>());
+            if (!elNet.neighbors_REVERSE_Map.containsKey(endNode)) {
+                elNet.neighbors_REVERSE_Map.put(endNode, new ArrayList<>());
             }
 
             // dodaje ID całego rekordu, gdzie znajduje się sąsiad
-            elNet.neighbors__REVERSE__Map.get(endNode).add(id);
+            elNet.neighbors_REVERSE_Map.get(endNode).add(id);
         });
 
     }
@@ -79,7 +79,7 @@ public class ElectricalNetworkService {
     public boolean isDistributeNode(NodeEntity node) {
 
         List<Long> distributeNodeList = new ArrayList<>();
-        List<Long> arcList = elNet.neighbors__FORWARD__Map.get(0L);
+        List<Long> arcList = elNet.neighbors_FORWARD_Map.get(0L);
 
         for (Long arcId : arcList) {
             distributeNodeList.add(elNet.arcMap.get(arcId).getEndNode());
