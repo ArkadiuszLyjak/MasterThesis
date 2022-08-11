@@ -3,6 +3,7 @@ package MasterThesis.el_net;
 
 import MasterThesis.arc.ArcEntity;
 import MasterThesis.arc.ArcType;
+import MasterThesis.lineType.LineTypeEntity;
 import MasterThesis.tools.PrintUtility;
 
 import java.io.BufferedReader;
@@ -151,32 +152,9 @@ public class ElectricalNetworkOutPrinter {
                 System.out.print(" Z:" + DECIMAL_FORMAT_EXP.format(arc.getImpedancePU()));
                 System.out.println(" [pu]");
 
-//                System.out.printf("%-4d->%4d\tL:%.2e\tX:%.2e\tR:%.2e\tZ:%.2e %n",
-////                System.out.printf("%-4d->%4d\tL:%-8.2f\tX:%-8.2f\tR:%-8.2f\tZ:%-8.2f %n",
-//                        arc.getStartNode(),
-//                        arc.getEndNode(),
-//                        arc.getArcLength(),
-//                        arc.getResistance(),
-//                        arc.getReactance(),
-//                        arc.getImpedance());
 
             }
         }
-
-/*
-        for (ArcEntity arc : elNet.arcList) {
-            if (arc.getType() == ArcType.LINE) {
-                System.out.println(arc.getId() + " | " +
-                        "L: " + arc.getArcLength() + " | " +
-                        "X: " + DECIMAL_FORMAT_LINE.format(arc.getReactance()) + " | " +
-                        "R: " + DECIMAL_FORMAT_LINE.format(arc.getResistance()) + " | " +
-                        "Z: " + DECIMAL_FORMAT_LINE.format(arc.getImpedance())
-
-                );
-
-            }
-        }
-*/
 
     }
     //endregion
@@ -199,36 +177,6 @@ public class ElectricalNetworkOutPrinter {
                 System.out.println();
             }
         }
-
-/*
-        for (ArcEntity arc : elNet.arcList) {
-            if (arc.getType() == ArcType.TRANSFORMER) {
-
-                StringBuilder stringBuilder = new StringBuilder();
-                Formatter formatter = new Formatter(stringBuilder);
-
-                formatter.format("--------- Trafo ID: (" + arc.getId() + ") ---------\n");
-
-                formatter.format("%-30s %s%n", "(R) Resistance [pu]:",
-                        DECIMAL_FORMAT_TRAFO.format(arc.getResistancePU()));
-
-                formatter.format("%-30s %s%n", "(X) Reactance [pu]:",
-                        DECIMAL_FORMAT_TRAFO.format(arc.getReactancePU()));
-
-                formatter.format("%-30s %s%n", "(Z) Impedance [pu]:",
-                        DECIMAL_FORMAT_TRAFO.format(arc.getImpedancePU()));
-
-                formatter.format("%-30s %s%n", "(H) UPPER_VOLTAGE [pu]:",
-                        DECIMAL_FORMAT_TRAFO_VOLTAGE.format(arc.getVoltageHighPU()));
-
-                formatter.format("%-30s %s%n", "(L) LOWER_VOLTAGE [pu]:",
-                        DECIMAL_FORMAT_TRAFO_VOLTAGE.format(arc.getVoltageLowPU()));
-
-                System.out.println(stringBuilder);
-
-            }
-        }
-*/
 
     }
     //endregion
@@ -256,7 +204,7 @@ public class ElectricalNetworkOutPrinter {
      * <a href="http://www.supermanisthegreatest.com">Superman!</a> </p>
      *
      * @see ElectricalNetwork#arcMap
-     * @see ElectricalNetworkService#nodeNeighborsFollowingListBuild()
+     * @see ElectricalNetworkService#nodeNeighbors_FOLLOWING_listBuild()
      */
 
     //region printNodeNeighborsWithDirection
@@ -312,22 +260,6 @@ public class ElectricalNetworkOutPrinter {
                 break;
             //endregion
 
-            /*//region REVERSE
-            case REVERSE:
-                elNet.neighbors_REVERSE_Map.forEach((nodeEnd, neighborsStartIdList) -> {
-                    System.out.printf("node: [%3d] --> neighbors: ", nodeEnd);
-
-                    LongFunction<Long> IDtoNodeStartLongFunction = ID ->
-                            elNet.arcMap.get(ID).getStartNode();
-
-                    System.out.print("[");
-                    for (Long startNodeID : neighborsStartIdList) {
-                        System.out.printf("%d ", IDtoNodeStartLongFunction.apply(startNodeID));
-                    }
-                    System.out.println("]");
-                });
-                break;
-            //endregion*/
         }
     }
     //endregion
@@ -371,4 +303,48 @@ public class ElectricalNetworkOutPrinter {
         }
     }
     //endregion
+
+    public void printLineType() {
+        System.out.println("\n----------------------------------------");
+        System.out.println("------------- Line Type ----------------");
+        System.out.println("----------------------------------------\n");
+
+        StringBuilder sb = new StringBuilder();
+        Formatter fmt = new Formatter(sb);
+
+        elNet.arcMap.forEach((IDs, arcEntity) -> {
+
+            // IDs - id z mapy łuków
+            // arcEntity - encja znajdująca się pod id = IDs
+            // pobranie pozycji (tylko) linii w odpowiednim katalogu
+            LongFunction<Long> IDtoPosition = ID -> elNet.arcMap.get(ID).getPosition();
+            Long pos = IDtoPosition.apply(IDs);
+
+            // pobranie encji linii na podst. jej pozycji w katalogu
+            LineTypeEntity lineTypeEntity = elNet.lineTypeMap.get(pos);
+
+            if (arcEntity.getType() == ArcType.LINE) {
+                fmt.format("%-31s %d\n", "ID arc: ", IDs);
+                fmt.format("%-31s %d\n", "position ID: ", lineTypeEntity.getId());
+                fmt.format("%-31s %s\n", "Kind: ", lineTypeEntity.getKind());
+                fmt.format("%-31s %s\n", "Type: ", lineTypeEntity.getType());
+                fmt.format("%-31s %.2f [kV]\n", "Voltage: ", lineTypeEntity.getVoltage());
+                fmt.format("%-31s %.2f\n", "MAIN_STRAND_INTERSECTION: ", lineTypeEntity.getMainStrandIntersection());
+                fmt.format("%-31s %.2f\n", "COHESIVE_UNIT_RESISTANCE: ", lineTypeEntity.getCohesiveUnitResistance());
+                fmt.format("%-31s %.2f\n", "ZERO_UNIT_RESISTANCE: ", lineTypeEntity.getZeroUnitResistance());
+                fmt.format("%-31s %.2f\n", "COHESIVE_UNIT_REACTANCE: ", lineTypeEntity.getCohesiveUnitReactance());
+                fmt.format("%-31s %.2f\n", "ZERO_UNIT_REACTANCE: ", lineTypeEntity.getZeroUnitReactance());
+                fmt.format("%-31s %.2f\n", "UNIT_CAPACITANCE_TO_EARTH: ", lineTypeEntity.getUnitCapacitanceToEarth());
+                fmt.format("%-31s %.2f\n", "UNIT_WORKING_CAPACITANCE: ", lineTypeEntity.getUnitWorkingCapacitance());
+                fmt.format("%-31s %.2f\n", "LONGTERM_LOAD_CAPACITY: ", lineTypeEntity.getLongTermLoadCapacity());
+                fmt.format("%-31s %.2f\n", "LONGTERM_SUMMER_LOAD_CAPACITY: ", lineTypeEntity.getLongTermSummerLoadCapacity());
+                fmt.format("%-31s %.2f\n", "LONGTERM_WINTER_LOAD_CAPACITY: ", lineTypeEntity.getLongTermWinterLoadCapacity());
+                fmt.format("%-31s %.2f\n", "SHORTCIRCUIT_1S_LOAD_CAPACITY: ", lineTypeEntity.getShortCircuit1sLoadCapacity());
+                fmt.format("\n\n");
+            }
+        });
+
+        System.out.println(fmt.toString());
+
+    }
 }

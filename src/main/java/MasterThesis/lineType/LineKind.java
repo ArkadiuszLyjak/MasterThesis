@@ -2,7 +2,8 @@ package MasterThesis.lineType;
 
 public enum LineKind {
 
-    // wire=1, electrical overhead wire = 2
+    // wire = 1,
+    // electrical overhead wire = 2
 
     CABLE(1),
     OVERHEAD_WIRE(2);

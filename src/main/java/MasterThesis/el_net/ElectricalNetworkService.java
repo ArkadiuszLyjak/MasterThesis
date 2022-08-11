@@ -34,7 +34,7 @@ public class ElectricalNetworkService {
      */
 
     //region Generate forward neighbors map
-    public void nodeNeighborsFollowingListBuild() {
+    public void nodeNeighbors_FOLLOWING_listBuild() {
 
         elNet.arcMap.forEach((aLong, arcEntity) -> {
 
@@ -57,7 +57,7 @@ public class ElectricalNetworkService {
     //endregion
 
     //region Generate reverse neighbors map
-    public void nodeNeighbors__REVERSE__ListBuild() {
+    public void nodeNeighbors_REVERSE_ListBuild() {
         elNet.arcMap.forEach((aLong, arcEntity) -> {
 
             long endNode = arcEntity.getEndNode(); // start z końcowego węzła

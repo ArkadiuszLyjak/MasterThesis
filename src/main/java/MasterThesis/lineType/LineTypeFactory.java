@@ -26,7 +26,6 @@ import java.util.function.Consumer;
 
 public class LineTypeFactory {
 
-
     /**
      * <p>Metoda <i>{@code prepareFromString}</i> otrzymuje jako argument string zawierający jeden
      * rekord z pliku z informacjami o <tt>rodzaju linii el-energetycznych</tt>.</p>

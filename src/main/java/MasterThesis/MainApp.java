@@ -20,7 +20,6 @@ package MasterThesis;
 * */
 
 import MasterThesis.arc_file_tools.FileDataService;
-import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
 import MasterThesis.bfs.BfsAlgorithm;
 import MasterThesis.bfs.BfsAlgorithmOutPrinter;
@@ -73,34 +72,34 @@ public class MainApp {
             //endregion
 
             //region Generate neighbors map
-            el_Net_Service.nodeNeighborsFollowingListBuild();   // następnik
+            el_Net_Service.nodeNeighbors_FOLLOWING_listBuild();   // następnik
 //            elNetPrinter.printNodeNeighborsWithDirection(
 //                    ElectricalNetworkOutPrinter.DIRECTION.FORWARD);
 
-            el_Net_Service.nodeNeighbors__REVERSE__ListBuild(); // poprzednik
+            el_Net_Service.nodeNeighbors_REVERSE_ListBuild(); // poprzednik
 //            elNetPrinter.printNodeNeighborsWithDirection(
 //                    ElectricalNetworkOutPrinter.DIRECTION.REVERSE);
             //endregion
 
             //region Generate visit order
-//            bfsAlgorithm.generateLevelsOrder();
+            bfsAlgorithm.generateLevelsOrder();
             //endregion
 
             //region Calculation Immitance
             // Calculation Immitance for Line
-//            elNetCalcService.calcLineImmitance();
+            elNetCalcService.calcLineImmitance();
 //            elNetPrinter.printLineImmitance();
 
             // Calculation Immitance for Trafo
-//            elNetCalcService.calcTrafoImmitance();
+            elNetCalcService.calcTrafoImmitance();
 //            elNetPrinter.printTrafoImmitance();
 
             // Calculation Per Unit for Nodes
-//            elNetCalcService.calcNodeVoltagePu();
+            elNetCalcService.calcNodeVoltagePu();
 
             // Calculation initial current iteration zero
-//            elNetCalcService.calcNodeCurrentPU_FORWARD_nodesForZEROiteration();
-//            elNetCalcService.calcNodeCurrentPU_REVERSE_nodesForZEROiteration();
+            elNetCalcService.calcNodeCurrentPU_FORWARD_nodesForZEROiteration();
+            elNetCalcService.calcNodeCurrentPU_REVERSE_nodesForZEROiteration();
 //            elNetPrinter.printNodeCurrentPUIter0();
             //endregion
 
@@ -112,23 +111,28 @@ public class MainApp {
 //            elNetPrinter.printNodeInfo();
             //endregion
 
-            /*//region NODE POWER TRANSMIT
+            //region Arcs informations
+//            elNetPrinter.printLineType();
+            //endregion
+
+            //region NODE POWER TRANSMIT
             System.out.println("\n-------------------------------------------------------");
             System.out.println("------------------ NODE POWER TRANSMIT ----------------");
             System.out.println("-------------------------------------------------------");
-            int k = 0;
-            int a = 0;
-            int i = 1;
-            int m = 2; // ilosc wezlow zasilowych
-            int n = elNet.nodeList.size();
+
+            int k = 0; // iteracja zerowa / zero iteration
+            int a = 0; // wskaźnik błędu / error indicator
+            int i = 1; // liczba węzłów / number of nodes ???
+            int m = 2; // ilosc wezlow zasilowych / number of power nodes
+            int n = elNet.nodeList.size(); // number of nodes
 
             double currentIter = 0.0;
             double deltaCurrentIter = 0.0;
             double voltageIter = 0.0;
             Double deltaVoltageIter = 0.0;
-            //endregion*/
+            //endregion
 
-            /*//region do loop
+            //region do loop
             StringBuilder sb = new StringBuilder();
             Formatter formatter = new Formatter(sb);
 
@@ -152,8 +156,7 @@ public class MainApp {
                         //6B
                         // jakis bład. ..
 
-//                        deltaCurrentIter = node.getCurrentRealPU() - (node.getVoltageRealPU())
-//                                /Math.sqrt(3.0);
+                        deltaCurrentIter = node.getCurrentRealPU() - (node.getVoltageRealPU()) / Math.sqrt(3.0);
                         //7B
                         //8B
                     }
@@ -169,8 +172,8 @@ public class MainApp {
 
                 }
 
-            } while (a > 0);
-            //endregion*/
+            } while (a > 0.0001);
+            //endregion
 
         } catch (Exception e) {
             e.printStackTrace();
