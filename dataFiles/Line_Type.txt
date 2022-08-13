@@ -1,0 +1,21 @@
+//Plik LINE_TYPE – katalog kabli i przewodów
+//ID – numer pozycji katalogowej
+//KIND_ID –kabel=1, przewód linii napowietrznej = 2
+//TYPE – nazwa typu
+//VOLTAGE – napięcie znamionowe
+//MAIN_STRAND_INTERSECTION – przekrój roboczy
+//COHESIVE_UNIT_RESISTANCE – rezystancja jednostkowa---
+//ZERO_UNIT_RESISTANCE – nieistotne, wpisujemy 0
+//COHESIVE_UNIT_REACTANCE – reaktancja jednostkowa
+//ZERO_UNIT_REACTANCE – nieistotne, wpisujemy 0
+//UNIT_CAPACITANCE_TO_EARTH – pojemność doziemna
+//UNIT_WORKING_CAPACITANCE – pojemność robocza
+// dla kabli, obciążalność dopuszczalna długotrwale, [A]
+//LONGTERM_SUMMER_LOAD_CAPACITY dla przewodów linii napowietrznych, obciążalność dopuszczalna długotrwale, lato, [A]
+//LONGTERM_WINTER_LOAD_CAPACITY dla przewodów linii napowietrznych, obciążalność Dopuszczalna długotrwale, zima, [A]
+//SHORTCIRCUIT_1S_LOAD_CAPACITY – nieistotne, wpisujemy 0
+ID|KIND_ID|TYPE|VOLTAGE|MAIN_STRAND_INTERSECTION|COHESIVE_UNIT_RESISTANCE|ZERO_UNIT_RESISTANCE|COHESIVE_UNIT_REACTANCE|ZERO_UNIT_REACTANCE|UNIT_CAPACITANCE_TO_EARTH|UNIT_WORKING_CAPACITANCE|LONGTERM_LOAD_CAPACITY|LONGTERM_SUMMER_LOAD_CAPACITY|LONGTERM_WINTER_LOAD_CAPACITY|SHORTCIRCUIT_1S_LOAD_CAPACITY
+1|1|3xYHAKXS1x70|15|70|0.364|0|0.08|0|0.25|0.25|175|0|0|0
+2|1|5xYKY1x400|0.4|400|0.153|0|0.110|0|0.210|0.37|353|0|0|0
+3|1|5xYKY1x500|0.4|500|0.153|0|0.107|0|0.225|0.40|399|0|0|0
+8|2|3xAFL-6|15|70|0.191|0|0.08|0|0.31|0.31|0|345|390|0

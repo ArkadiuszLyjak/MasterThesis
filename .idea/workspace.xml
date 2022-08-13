@@ -187,7 +187,6 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0c89a208-fdea-48b8-8e8e-feb687354030" name="Changes" comment="" />
       <created>1602790449081</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -199,6 +198,8 @@
       <workItem from="1659975526858" duration="44467000" />
       <workItem from="1660161736627" duration="12796000" />
       <workItem from="1660231474413" duration="6342000" />
+      <workItem from="1660249466434" duration="876000" />
+      <workItem from="1660300797632" duration="20360000" />
     </task>
     <task id="LOCAL-00001" summary="__">
       <created>1657106998806</created>
@@ -275,17 +276,6 @@
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java</url>
-          <line>202</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MasterThesis$MainApp.ic" NAME="MainApp Coverage Results" MODIFIED="1584984382418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

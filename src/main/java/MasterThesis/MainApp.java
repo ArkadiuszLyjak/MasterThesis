@@ -20,6 +20,7 @@ package MasterThesis;
 * */
 
 import MasterThesis.arc_file_tools.FileDataService;
+import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
 import MasterThesis.bfs.BfsAlgorithm;
 import MasterThesis.bfs.BfsAlgorithmOutPrinter;
@@ -52,11 +53,11 @@ public class MainApp {
             NetStatistics netStatistics = NetStatistics.getInstance();
             //endregion*/
 
-            //region Print aplication parameters
+            //region Print application parameters
 //            System.out.println(AppParameters.getInstance().toString());
             //endregion
 
-            //region setParametersFromArgs
+            //region set parameters from args
             paramsService.setParametersFromArgs(args);
             //endregion
 
@@ -71,51 +72,55 @@ public class MainApp {
 //            elNetPrinter.printNetQuantity();
             //endregion
 
-            //region Generate neighbors map
+            //region generate front and back neighbors maps
             el_Net_Service.nodeNeighbors_FOLLOWING_listBuild();   // następnik
-//            elNetPrinter.printNodeNeighborsWithDirection(
-//                    ElectricalNetworkOutPrinter.DIRECTION.FORWARD);
+//            elNetPrinter.printNodeNeighborsWithDirection(ElectricalNetworkOutPrinter
+//                    .DIRECTION.FORWARD);
 
             el_Net_Service.nodeNeighbors_REVERSE_ListBuild(); // poprzednik
-//            elNetPrinter.printNodeNeighborsWithDirection(
-//                    ElectricalNetworkOutPrinter.DIRECTION.REVERSE);
+//            elNetPrinter.printNodeNeighborsWithDirection(ElectricalNetworkOutPrinter
+//                    .DIRECTION.REVERSE);
             //endregion
 
             //region Generate visit order
             bfsAlgorithm.generateLevelsOrder();
             //endregion
 
-            //region Calculation Immitance
-            // Calculation Immitance for Line
+            //region calculations for power grid elements
+            //region Calculation Immitance for Line
             elNetCalcService.calcLineImmitance();
 //            elNetPrinter.printLineImmitance();
+            //endregion
 
-            // Calculation Immitance for Trafo
+            //region Calculation Immitance for Trafo
             elNetCalcService.calcTrafoImmitance();
 //            elNetPrinter.printTrafoImmitance();
+            //endregion
 
-            // Calculation Per Unit for Nodes
+            //region Calculation Per Unit for Nodes
             elNetCalcService.calcNodeVoltagePu();
+            //endregion
 
-            // Calculation initial current iteration zero
+            //region Calculation initial current iteration zero and printing
             elNetCalcService.calcNodeCurrentPU_FORWARD_nodesForZEROiteration();
             elNetCalcService.calcNodeCurrentPU_REVERSE_nodesForZEROiteration();
 //            elNetPrinter.printNodeCurrentPUIter0();
             //endregion
+            //endregion
 
-            //region kolejność odwiedzin wg algo BFS
+            //region order of visits according to algo BFS
 //            bfsAlgPrinter.printNodeVisitedOrder();
             //endregion
 
-            //region Nodes informations
+            //region Nodes informations printer
 //            elNetPrinter.printNodeInfo();
             //endregion
 
-            //region Arcs informations
+            /*//region Arcs informations
 //            elNetPrinter.printLineType();
-            //endregion
+            //endregion*/
 
-            //region NODE POWER TRANSMIT
+            /*//region NODE POWER TRANSMIT
             System.out.println("\n-------------------------------------------------------");
             System.out.println("------------------ NODE POWER TRANSMIT ----------------");
             System.out.println("-------------------------------------------------------");
@@ -130,9 +135,11 @@ public class MainApp {
             double deltaCurrentIter = 0.0;
             double voltageIter = 0.0;
             Double deltaVoltageIter = 0.0;
-            //endregion
+            double eps = 0.1;
 
-            //region do loop
+            //endregion*/
+
+            /*//region do loop
             StringBuilder sb = new StringBuilder();
             Formatter formatter = new Formatter(sb);
 
@@ -152,6 +159,7 @@ public class MainApp {
                         deltaVoltageIter = node.getVoltagePU();
                         //7A
                         //8A
+                        a = 1;
                     } else {
                         //6B
                         // jakis bład. ..
@@ -159,6 +167,7 @@ public class MainApp {
                         deltaCurrentIter = node.getCurrentRealPU() - (node.getVoltageRealPU()) / Math.sqrt(3.0);
                         //7B
                         //8B
+                        a = 0;
                     }
 
                     // if (BaseValues.epsilon < a) {}
@@ -172,8 +181,8 @@ public class MainApp {
 
                 }
 
-            } while (a > 0.0001);
-            //endregion
+            } while (a == 0);
+            //endregion*/
 
         } catch (Exception e) {
             e.printStackTrace();
