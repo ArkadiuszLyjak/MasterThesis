@@ -92,13 +92,13 @@ public class BfsAlgorithm {
     private void generateLevelsOrder(Long beginNode, Long netLevel) {
         List<NodeArcVO> nodeArcVOList = new ArrayList<>();
 
-        if (elNet.neighbors_FORWARD_Map.containsKey(beginNode)) {
+        if (elNet.neighborsFORWARDmap.containsKey(beginNode)) {
 
             if (maxNetLevel < netLevel) {
                 maxNetLevel = netLevel;
             }
 
-            for (Long arcId : elNet.neighbors_FORWARD_Map.get(beginNode)) {
+            for (Long arcId : elNet.neighborsFORWARDmap.get(beginNode)) {
                 NodeArcVO nodeArcVO = new NodeArcVO();
                 nodeArcVO.netLevel = netLevel;
                 nodeArcVO.nodeId = beginNode;

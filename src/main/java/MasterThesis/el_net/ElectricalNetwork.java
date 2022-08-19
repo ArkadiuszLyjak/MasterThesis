@@ -5,25 +5,22 @@ import MasterThesis.lineType.LineTypeEntity;
 import MasterThesis.node.NodeEntity;
 import MasterThesis.transformer_type.TransformerTypeEntity;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ElectricalNetwork {
 
     //region Properties
     private static ElectricalNetwork electricalNetwork;
-
     public Map<Long, ArcEntity> arcMap;                         // maps from files
     public Map<Long, LineTypeEntity> lineTypeMap;               // maps from files
     public Map<Long, NodeEntity> nodeMap;                       // maps from files
     public Map<Long, TransformerTypeEntity> transformerTypeMap; // maps from files
     public List<NodeEntity> nodeList;
     public List<ArcEntity> arcList;
-
-    public Map<Long, List<Long>> neighbors_FORWARD_Map = new LinkedHashMap<>();
-    public Map<Long, List<Long>> neighbors_REVERSE_Map = new LinkedHashMap<>();
+    public Map<Long, List<Long>> neighborsFORWARDmap = new LinkedHashMap<>();
+    public Map<Long, List<Long>> neighborsREVERSEMap = new LinkedHashMap<>();
+    public Map<Long, ArrayList<Long>> nodesNBRfwdREVmap = new LinkedHashMap<>();
+    public List<Long> nodesWithNoNeighborsInFront = new LinkedList<>();
     //endregion
 
     /**

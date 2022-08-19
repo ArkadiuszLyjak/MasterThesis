@@ -5,6 +5,8 @@ import MasterThesis.base.entity.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Formatter;
+
 @Getter
 @Setter
 public class ArcEntity extends BaseEntity {
@@ -77,6 +79,25 @@ public class ArcEntity extends BaseEntity {
 
     public ArcEntity(Long id) {
         super(id);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Formatter fmt = new Formatter(sb);
+
+        fmt.format("[%3d] ", super.id); // ID
+        fmt.format("[%3d > ", startNode); // ID
+        fmt.format("%3d] ", endNode); // ID
+        fmt.format("%-11s ", type); // ID
+        fmt.format("%-2d ", position); // ID
+        fmt.format("%7.2f ", arcLength); // ID
+        fmt.format("%d ", tracks); // ID
+        fmt.format("%d ", condition); // ID
+        fmt.format("%d ", change); // ID
+
+
+        return sb.toString();
     }
 
 }

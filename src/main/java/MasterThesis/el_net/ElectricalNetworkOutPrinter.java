@@ -4,6 +4,7 @@ package MasterThesis.el_net;
 import MasterThesis.arc.ArcEntity;
 import MasterThesis.arc.ArcType;
 import MasterThesis.lineType.LineTypeEntity;
+import MasterThesis.node.NodeType;
 import MasterThesis.tools.PrintUtility;
 
 import java.io.BufferedReader;
@@ -24,7 +25,7 @@ public class ElectricalNetworkOutPrinter {
     //region getInstance - Singleton
     private static ElectricalNetworkOutPrinter instance;
 
-    ElectricalNetwork elNet = ElectricalNetwork.getInstance();
+    ElectricalNetwork electricalNetwork = ElectricalNetwork.getInstance();
 
     private ElectricalNetworkOutPrinter() {
     }
@@ -86,7 +87,7 @@ public class ElectricalNetworkOutPrinter {
                             }
                             return length;
                         }, trafoString),
-                elNet.transformerTypeMap.size());
+                electricalNetwork.transformerTypeMap.size());
         //endregion
 
         //region lineTypeString
@@ -100,7 +101,7 @@ public class ElectricalNetworkOutPrinter {
                             }
                             return length;
                         }, lineTypeString),
-                elNet.lineTypeMap.size());
+                electricalNetwork.lineTypeMap.size());
         //endregion
 
         //region nodeString
@@ -114,7 +115,7 @@ public class ElectricalNetworkOutPrinter {
                             }
                             return length;
                         }, nodeString),
-                elNet.nodeMap.size());
+                electricalNetwork.nodeMap.size());
         //endregion
 
         //region arcString
@@ -128,7 +129,7 @@ public class ElectricalNetworkOutPrinter {
                             }
                             return length;
                         }, arcString),
-                elNet.arcMap.size());
+                electricalNetwork.arcMap.size());
         //endregion
 
         System.out.println(builder);
@@ -143,7 +144,7 @@ public class ElectricalNetworkOutPrinter {
         System.out.println("------- Line  Immitance -------------");
         System.out.println("-------------------------------------\n");
 
-        for (ArcEntity arc : elNet.arcList) {
+        for (ArcEntity arc : electricalNetwork.arcList) {
             if (arc.getType() == ArcType.LINE) {
                 System.out.printf("%4d-->%-4d ", arc.getStartNode(), arc.getEndNode());
                 System.out.print("L:" + DECIMAL_FORMAT_EXP.format(arc.getArcLength()) + "[m]");
@@ -166,7 +167,7 @@ public class ElectricalNetworkOutPrinter {
         System.out.println("------- Trafo Immitance -------------");
         System.out.println("-------------------------------------\n");
 
-        for (ArcEntity arc : elNet.arcList) {
+        for (ArcEntity arc : electricalNetwork.arcList) {
             if (arc.getType() == ArcType.TRANSFORMER) {
                 System.out.printf("%s %d %s", "--------- Trafo ID: (", arc.getId(), ") ---------\n");
                 System.out.printf("%-25s %4.2e %s%n", "(R) Resistance:", arc.getResistancePU(), " [pu]");
@@ -188,7 +189,7 @@ public class ElectricalNetworkOutPrinter {
         System.out.println("------- Node Information --------------");
         System.out.println("-------------------------------------\n");
 
-        elNet.nodeList.forEach(nodeEntity -> {
+        electricalNetwork.nodeList.forEach(nodeEntity -> {
             System.out.println(nodeEntity.toString());
         });
     }
@@ -204,17 +205,19 @@ public class ElectricalNetworkOutPrinter {
      * <a href="http://www.supermanisthegreatest.com">Superman!</a> </p>
      *
      * @see ElectricalNetwork#arcMap
-     * @see ElectricalNetworkService#nodeNeighbors_FOLLOWING_listBuild()
+     * @see ElectricalNetworkService#nodeNbrsFwdListBuild()
      */
 
     //region printNodeNeighborsWithDirection
-    public void printNodeNeighborsWithDirection(DIRECTION direction) {
+    public void printNodeNBRSdirection(DIRECTION direction) {
 
         StringBuilder sb = new StringBuilder();
         Formatter fmt = new Formatter(sb);
 
         //region filler
-        String formattedString = fmt.format("----- Sasiedzi wezlow - " + direction.getDirection() + " -----").toString();
+        String formattedString = fmt
+                .format("----- Sasiedzi wezlow - " + direction.getDirection() + " -----")
+                .toString();
 
         System.out.print(PrintUtility.createExtenderWithCharacter(
                 formattedString.length() - 1,
@@ -232,12 +235,12 @@ public class ElectricalNetworkOutPrinter {
 
         switch (direction) {
             //region FORWARD
-            case FORWARD:
-                elNet.neighbors_FORWARD_Map.forEach((node, neighborsIdList) -> {
+            case FWD:
+                electricalNetwork.neighborsFORWARDmap.forEach((node, neighborsIdList) -> {
                             System.out.printf("node:[%3d] --> ", node);
                             System.out.print("neighbors: [");
                             neighborsIdList.forEach(neighborId -> {
-                                System.out.printf("%d ", elNet.arcMap.get(neighborId).getEndNode());
+                                System.out.printf("%d ", electricalNetwork.arcMap.get(neighborId).getEndNode());
                             });
                             System.out.println("]");
                         }
@@ -248,14 +251,15 @@ public class ElectricalNetworkOutPrinter {
 
             //region REVERSE
             case REVERSE:
-                elNet.neighbors_REVERSE_Map.forEach((nodeEnd, neighborsStartIdList) -> {
-                    LongFunction<Long> IDtoNodeStartLongFunction = ID -> elNet.arcMap.get(ID).getStartNode();
+                electricalNetwork.neighborsREVERSEMap.forEach((nodeEnd, neighborsStartIdList) -> {
+                    LongFunction<Long> IDtoNodeStartLongFunction = ID ->
+                            electricalNetwork.arcMap.get(ID).getStartNode();
 
                     System.out.print("reverse neighbors: ");
                     for (Long startNodeID : neighborsStartIdList) {
                         System.out.printf("%d ", IDtoNodeStartLongFunction.apply(startNodeID));
                     }
-                    System.out.println("--> " + nodeEnd);
+                    System.out.println("<-- " + nodeEnd);
                 });
                 break;
             //endregion
@@ -272,14 +276,14 @@ public class ElectricalNetworkOutPrinter {
      * <tt><i><b>wypływająych</b></i></tt> z węzła.</p>
      */
 
-    //region printNodeCurrentPUIter0
-    public void printNodeCurrentPUIter0() {
+    //region print Node Current PU Iter 0
+    public void printNodeCurrPUIterZero() {
 
         System.out.println("\n----------------------------------------");
         System.out.println("------- NODE CurrentPU Io --------------");
         System.out.println("----------------------------------------\n");
 
-        elNet.nodeList.forEach(nodeEntity -> {
+        electricalNetwork.nodeList.forEach(nodeEntity -> {
             System.out.printf("%3d: %s%n",
                     nodeEntity.getId(),
                     DECIMAL_FORMAT_EXP.format(nodeEntity.getCurrentInitialPU()));
@@ -290,7 +294,7 @@ public class ElectricalNetworkOutPrinter {
 
     //region DIRECTION
     public enum DIRECTION {
-        FORWARD("nastepnik"), REVERSE("poprzednik");
+        FWD("nastepnik"), REVERSE("poprzednik");
 
         private final String direction;
 
@@ -304,6 +308,20 @@ public class ElectricalNetworkOutPrinter {
     }
     //endregion
 
+    //region printSelfConductance
+    public void printSelfConductance() {
+        System.out.println("\nKonduktancja własna węzłów [pu]: ");
+        electricalNetwork.nodeMap.forEach((uniqueNodeNum, nodeEntity) -> {
+            System.out.println(String.format("%3d ", uniqueNodeNum)
+                            + String.format("%.2e", nodeEntity.getSelfConductance()));
+        });
+
+        System.out.println();
+
+    }
+    //endregion
+
+    //region print LineType
     public void printLineType() {
         System.out.println("\n----------------------------------------");
         System.out.println("------------- Line Type ----------------");
@@ -312,16 +330,16 @@ public class ElectricalNetworkOutPrinter {
         StringBuilder sb = new StringBuilder();
         Formatter fmt = new Formatter(sb);
 
-        elNet.arcMap.forEach((IDs, arcEntity) -> {
+        electricalNetwork.arcMap.forEach((IDs, arcEntity) -> {
 
             // IDs - id z mapy łuków
             // arcEntity - encja znajdująca się pod id = IDs
             // pobranie pozycji (tylko) linii w odpowiednim katalogu
-            LongFunction<Long> IDtoPosition = ID -> elNet.arcMap.get(ID).getPosition();
+            LongFunction<Long> IDtoPosition = ID -> electricalNetwork.arcMap.get(ID).getPosition();
             Long pos = IDtoPosition.apply(IDs);
 
             // pobranie encji linii na podst. jej pozycji w katalogu
-            LineTypeEntity lineTypeEntity = elNet.lineTypeMap.get(pos);
+            LineTypeEntity lineTypeEntity = electricalNetwork.lineTypeMap.get(pos);
 
             if (arcEntity.getType() == ArcType.LINE) {
                 fmt.format("%-31s %d\n", "ID arc: ", IDs);
@@ -346,5 +364,47 @@ public class ElectricalNetworkOutPrinter {
 
         System.out.println(fmt.toString());
 
+    }
+    //endregion
+
+    //region print distributed nodes
+    public void printDistributedNodes(NodeType nodeType) {
+        System.out.println("\nDistributed nodes: ");
+        electricalNetwork.nodeMap.forEach((aLong, nodeEntity) -> {
+            if (nodeEntity.getNodeType() == nodeType) {
+                System.out.print(aLong + " ");
+            }
+        });
+
+        System.out.println();
+    }
+    //endregion
+
+    //region print nodes with no neighbors in front
+    public void printNDSwithNoNBRSinFront() {
+        System.out.println("\nNodes with no neighbors: ");
+        electricalNetwork.nodesWithNoNeighborsInFront.forEach(aLong -> System.out.print(aLong + " "));
+        System.out.println();
+    }
+    //endregion
+
+    public void printNodesNbrsFwdRevMap() {
+        System.out.println("Mapa sąsiadów węzłów FWD i REV:");
+        if (!electricalNetwork.nodesNBRfwdREVmap.isEmpty()) {
+            electricalNetwork.nodesNBRfwdREVmap.forEach((uniqueNodeNumber, neighborsIDsList) -> {
+                /*//region zamiana ID węzła na unikalny nr węzła
+                ArrayList<Long> nodeUniqueNumber = new ArrayList<>();
+                for (Long nodeID : neighborsIDsList) {
+                    nodeUniqueNumber.add(electricalNetwork.arcMap.get(nodeID).getStartNode());
+                }
+                System.out.println(uniqueNodeNumber + ":" + nodeUniqueNumber);
+                //endregion*/
+
+                // drukuje unikalny nr węzła oraz tablicę ID sąsiadów w przód i tył
+                System.out.println(uniqueNodeNumber + ": ID's " + neighborsIDsList);
+            });
+        } else {
+            System.out.println("Mapa: nodesNBRfwdREVmap jest pusta");
+        }
     }
 }

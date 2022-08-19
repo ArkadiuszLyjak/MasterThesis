@@ -50,10 +50,9 @@ public class FileDataService {
     public void readLineTypeFile() {
         try {
             FileDataReader.netFileRead(params.getLineTypeFullFileName(), fileLine -> {
-                        LineTypeEntity lineType = LineTypeFactory.prepareFromString(fileLine);
-                        elNet.lineTypeMap.put(lineType.getId(), lineType);
-                    }
-            );
+                LineTypeEntity lineType = LineTypeFactory.prepareFromString(fileLine);
+                elNet.lineTypeMap.put(lineType.getId(), lineType);
+            });
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -65,14 +64,10 @@ public class FileDataService {
     public void readTransformerTypeFile() {
         try {
             FileDataReader.netFileRead(params.getTransformerTypeFullFileName(), fileLine -> {
-                        TransformerTypeEntity transformerTypeEntity =
-                                TransformerTypeFactory.prepareFromString(fileLine);
+                TransformerTypeEntity transformerTypeEntity = TransformerTypeFactory.prepareFromString(fileLine);
 
-                        elNet.transformerTypeMap.put(
-                                transformerTypeEntity.getId(),
-                                transformerTypeEntity);
-                    }
-            );
+                elNet.transformerTypeMap.put(transformerTypeEntity.getId(), transformerTypeEntity);
+            });
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -84,11 +79,23 @@ public class FileDataService {
     public void readArcFile() {
         try {
             FileDataReader.netFileRead(params.getArcFullFileName(), fileLine -> {
-                        ArcEntity arc = ArcFactory.prepareFromString(fileLine);
-                        elNet.arcMap.put(arc.getId(), arc);
-                        elNet.arcList.add(arc);
-                    }
-            );
+                ArcEntity arc = ArcFactory.prepareFromString(fileLine);
+
+                //region adds all records regardless of state
+                elNet.arcMap.put(arc.getId(), arc);
+                elNet.arcList.add(arc);
+                //endregion
+
+                /*//region Adds only the records that are turned on and prints to the screen
+                if (arc.getCondition() == 1) {
+                    elNet.arcMap.put(arc.getId(), arc);
+                    elNet.arcList.add(arc);
+                    System.out.println(arc);
+                } else {
+                    System.out.printf("[%3d] %3d > %3d %s%n", arc.getId(), arc.getStartNode(), arc.getEndNode(), "-------- not connected --------");
+                }
+                //endregion*/
+            });
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

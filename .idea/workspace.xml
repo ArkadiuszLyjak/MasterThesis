@@ -5,7 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87091b50-afb2-4a5a-9117-312c1c37d355" name="Default Changelist" comment="back to not underscore">
+      <change afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/tools/MapSearch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/BfsAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/BfsAlgorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkOutPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkOutPrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/lineType/LineKind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/lineType/LineKind.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +112,11 @@
     ]
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="MasterThesis.el_net.ElectricalNetworkService" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.MainApp">
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MasterThesis.MainApp" />
@@ -187,6 +206,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="86cbf58d-66df-4190-9c95-5f60890c7660" name="Changes" comment="" />
       <created>1602790449081</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -199,7 +219,14 @@
       <workItem from="1660161736627" duration="12796000" />
       <workItem from="1660231474413" duration="6342000" />
       <workItem from="1660249466434" duration="876000" />
-      <workItem from="1660300797632" duration="20360000" />
+      <workItem from="1660300797632" duration="82364000" />
+      <workItem from="1660655514073" duration="9194000" />
+      <workItem from="1660718843551" duration="31162000" />
+      <workItem from="1660768056017" duration="599000" />
+      <workItem from="1660805383800" duration="2469000" />
+      <workItem from="1660853013644" duration="82000" />
+      <workItem from="1660853236207" duration="3928000" />
+      <workItem from="1660899171915" duration="23752000" />
     </task>
     <task id="LOCAL-00001" summary="__">
       <created>1657106998806</created>
@@ -262,6 +289,31 @@
         <entry key="MAIN">
           <value>
             <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="algo-alpha" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>

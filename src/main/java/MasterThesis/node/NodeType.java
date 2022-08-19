@@ -18,7 +18,7 @@ public enum NodeType {
     //region valueOf
     public static NodeType valueOf(Integer _id) {
         if (Objects.equals(_id, COMPENSATORY_NODE.id)) return COMPENSATORY_NODE;
-        //TODO Rzucić wyjątek jeżlei inny niż 4 i 1
+        //TODO Rzucić wyjątek jeżeli inny niż 4 i 1
         return OTHER_NODE;
     }
     //endregion
