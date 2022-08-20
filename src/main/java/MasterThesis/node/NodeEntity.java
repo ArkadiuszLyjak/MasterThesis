@@ -39,9 +39,9 @@ public class NodeEntity extends BaseEntity {
     Double selfConductance;     // self conductance of the node
 
     // backward computed values from relative values
-//    Double voltageRealPU;       // Napiecie
-//    Double currentRealPU;       // Prad w wezle
-//    Double powerRealPU;
+    Double voltageRealPU;       // Napiecie
+    Double currentRealPU;       // Prad w wezle
+    Double powerRealPU;
 
     //endregion
 
@@ -55,19 +55,19 @@ public class NodeEntity extends BaseEntity {
         StringBuilder sb = new StringBuilder();
         Formatter formatter = new Formatter(sb);
 
-        formatter.format("%-21s %d%n", "id:", this.getId());
-        formatter.format("%-21s %s%n", "node type:", NodeType.valueOf(nodeType.id));
-        formatter.format("%-21s %.2f [kW]%n", "active power:", activePower);
-        formatter.format("%-21s %.2f [kVar]%n", "reactive power:", reactivePower);
-        formatter.format("%-21s %.2f [kV]%n", "voltage:", nominalVoltage);
+        formatter.format("%-23s %d%n", "id:", this.getId());
+        formatter.format("%-23s %s%n", "node type:", NodeType.valueOf(nodeType.id));
+        formatter.format("%-23s %.2f [kW]%n", "active power:", activePower);
+        formatter.format("%-23s %.2f [kVar]%n", "reactive power:", reactivePower);
+        formatter.format("%-23s %.2f [kV]%n", "voltage:", nominalVoltage);
 
         // jednostki [pu]
-        formatter.format("%-21s %.2e [PU]%n", "voltage:", voltagePU);
-        formatter.format("%-21s %.2e [PU]%n", "current iter '0':", currentInitialPU);
-        formatter.format("%-21s %.4e [PU]%n", "current:", currentPU);
-//        formatter.format("%-21s %.4e [PU]%n", "voltage real:", voltageRealPU);
-//        formatter.format("%-21s %.4e [PU]%n", "current real:", currentRealPU);
-//        formatter.format("%-21s %.4e [PU]%n", "power real:", powerRealPU);
+        formatter.format("%-23s %.2e%n", "voltage [PU]:", voltagePU);
+        formatter.format("%-23s %.2e%n", "current iter '0' [PU]:", currentInitialPU);
+        formatter.format("%-23s %.2e%n", "current [PU]:", currentPU);
+        formatter.format("%-23s %.4e%n", "voltage real [PU]:", voltageRealPU);
+        formatter.format("%-23s %.4e%n", "current real [PU]:", currentRealPU);
+        formatter.format("%-23s %.4e%n", "power real: [PU]", powerRealPU);
 
         return formatter.toString();
     }

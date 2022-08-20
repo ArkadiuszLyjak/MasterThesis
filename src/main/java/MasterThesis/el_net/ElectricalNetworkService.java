@@ -42,12 +42,12 @@ public class ElectricalNetworkService {
             long startNode = arcEntity.getStartNode();
 
             // StartNode - węzeł początkowy (nie ID!)
-            if (!electricalNetwork.neighborsFORWARDmap.containsKey(startNode)) {
-                electricalNetwork.neighborsFORWARDmap.put(startNode, new ArrayList<>());
+            if (!electricalNetwork.nbrsFWDmap.containsKey(startNode)) {
+                electricalNetwork.nbrsFWDmap.put(startNode, new ArrayList<>());
             }
 
             // dodaje ID całego rekordu, gdzie znajduje się sąsiad
-            electricalNetwork.neighborsFORWARDmap.get(startNode).add(aLong); // dodaje ID sąsiada
+            electricalNetwork.nbrsFWDmap.get(startNode).add(aLong); // dodaje ID sąsiada
 
         });
 
@@ -76,7 +76,7 @@ public class ElectricalNetworkService {
     public boolean isDistributeNode(NodeEntity node) {
 
         List<Long> distributeNodeList = new ArrayList<>();
-        List<Long> arcList = electricalNetwork.neighborsFORWARDmap.get(0L);
+        List<Long> arcList = electricalNetwork.nbrsFWDmap.get(0L);
 
         for (Long arcId : arcList) {
             distributeNodeList.add(electricalNetwork.arcMap.get(arcId).getEndNode());
@@ -115,14 +115,12 @@ public class ElectricalNetworkService {
 //                System.out.println("Mapa zawiera: " + endNode);
             }
 
-//            System.out.print(electricalNetwork.nodesNBRfwdREVmap.get(startNode) + " | ");
-//            System.out.println(electricalNetwork.nodesNBRfwdREVmap.get(endNode));
         });
         //endregion
 
         //region print neighbors forward map
         // along - unikalny nr węzła // longs - ID sąsiadów
-        electricalNetwork.neighborsFORWARDmap.forEach((uniqueStartNode, forwardNeighborIDsList) ->
+        electricalNetwork.nbrsFWDmap.forEach((uniqueStartNode, forwardNeighborIDsList) ->
 
         {
             if (electricalNetwork.nodesNBRfwdREVmap.containsKey(uniqueStartNode)) {
@@ -170,7 +168,7 @@ public class ElectricalNetworkService {
     //endregion
 
     //region generate list of nodes with no neighbors in front of them
-    public void createNoNBRSnodesList() {
+    public void createNoNeighborsNodesList() {
         // list of all available nodes
         List<Long> listOfAllNodesAvailable = electricalNetwork.nodeList
                 .stream()
@@ -179,13 +177,13 @@ public class ElectricalNetworkService {
 
         // set of neighbors forward map
         Set<Map.Entry<Long, List<Long>>> setOfNeighborsForwardMap =
-                electricalNetwork.neighborsFORWARDmap.entrySet();
+                electricalNetwork.nbrsFWDmap.entrySet();
 
         // set only keys
-        Set<Long> ids = electricalNetwork.neighborsFORWARDmap.keySet();
+        Set<Long> ids = electricalNetwork.nbrsFWDmap.keySet();
 
         // values from forward neighbors map
-        Collection<List<Long>> values = electricalNetwork.neighborsFORWARDmap.values();
+        Collection<List<Long>> values = electricalNetwork.nbrsFWDmap.values();
 
         // build list of nodes with no neighbors in front
         listOfAllNodesAvailable.forEach(aLong -> {

@@ -117,9 +117,9 @@ public class ElectricalNetworkCalcService {
      */
 
     //region oblicz prąd początkowy w węzłach mających sąsiadów "z przodu"
-    public void calcNodeCurrPUFWDnodesForZeroIter() {
+    public void calcNodeCurrentPU_FWD_nodesForZeroIter() {
 
-        elNet.neighborsFORWARDmap.forEach((node, nodeNeighborIDList) -> {
+        elNet.nbrsFWDmap.forEach((node, nodeNeighborIDList) -> {
             try {
                 if (node != 0) {
 
@@ -170,6 +170,7 @@ public class ElectricalNetworkCalcService {
                             //endregion*/
 
                     elNet.nodeMap.get(node).setCurrentInitialPU(currentPUSum);
+                    elNet.nodeMap.get(node).setCurrentPU(currentPUSum);
 
                 }
             } catch (Exception e) {
@@ -183,7 +184,7 @@ public class ElectricalNetworkCalcService {
     //endregion
 
     //region oblicz prąd początkowy w węzłach NIE mających sąsiadów "z przodu"
-    public void calcNodeCurrentPUrevNodesForZeroIter() {
+    public void calcNodeCurrentPU_REV_nodesForZeroIter() {
 
         //region filtracja węzłów, które nia mają policzonego prądu "0"
         Stream<NodeEntity> nodeEntityStream = elNet.nodeList.stream();
@@ -215,6 +216,7 @@ public class ElectricalNetworkCalcService {
                         double currentNodeTemporary = (conductanceArcPU * voltagePU) / Math.sqrt(3.0);
                         currentNode += currentNodeTemporary;
                         elNet.nodeMap.get(node).setCurrentInitialPU(currentNode);
+                        elNet.nodeMap.get(node).setCurrentPU(currentNode);
                     }
                     //endregion
                 }

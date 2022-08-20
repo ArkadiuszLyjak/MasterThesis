@@ -5,21 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87091b50-afb2-4a5a-9117-312c1c37d355" name="Default Changelist" comment="back to not underscore">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/tools/MapSearch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/BfsAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/BfsAlgorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkOutPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkOutPrinter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/lineType/LineKind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/lineType/LineKind.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeDecorator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +26,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -206,7 +201,6 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="86cbf58d-66df-4190-9c95-5f60890c7660" name="Changes" comment="" />
       <created>1602790449081</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -226,7 +220,10 @@
       <workItem from="1660805383800" duration="2469000" />
       <workItem from="1660853013644" duration="82000" />
       <workItem from="1660853236207" duration="3928000" />
-      <workItem from="1660899171915" duration="23752000" />
+      <workItem from="1660899171915" duration="27379000" />
+      <workItem from="1660936832097" duration="105000" />
+      <workItem from="1660937877284" duration="22429000" />
+      <workItem from="1661003340017" duration="8697000" />
     </task>
     <task id="LOCAL-00001" summary="__">
       <created>1657106998806</created>

@@ -6,7 +6,6 @@ import MasterThesis.arc.ArcType;
 import MasterThesis.lineType.LineTypeEntity;
 import MasterThesis.node.NodeType;
 import MasterThesis.tools.PrintUtility;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -209,7 +208,7 @@ public class ElectricalNetworkOutPrinter {
      */
 
     //region printNodeNeighborsWithDirection
-    public void printNodeNBRSdirection(DIRECTION direction) {
+    public void printNodeNeighborsDirection(DIRECTION direction) {
 
         StringBuilder sb = new StringBuilder();
         Formatter fmt = new Formatter(sb);
@@ -236,7 +235,7 @@ public class ElectricalNetworkOutPrinter {
         switch (direction) {
             //region FORWARD
             case FWD:
-                electricalNetwork.neighborsFORWARDmap.forEach((node, neighborsIdList) -> {
+                electricalNetwork.nbrsFWDmap.forEach((node, neighborsIdList) -> {
                             System.out.printf("node:[%3d] --> ", node);
                             System.out.print("neighbors: [");
                             neighborsIdList.forEach(neighborId -> {
@@ -250,7 +249,7 @@ public class ElectricalNetworkOutPrinter {
             //endregion
 
             //region REVERSE
-            case REVERSE:
+            case REV:
                 electricalNetwork.neighborsREVERSEMap.forEach((nodeEnd, neighborsStartIdList) -> {
                     LongFunction<Long> IDtoNodeStartLongFunction = ID ->
                             electricalNetwork.arcMap.get(ID).getStartNode();
@@ -277,7 +276,7 @@ public class ElectricalNetworkOutPrinter {
      */
 
     //region print Node Current PU Iter 0
-    public void printNodeCurrPUIterZero() {
+    public void printNodeCurrentPUIterZero() {
 
         System.out.println("\n----------------------------------------");
         System.out.println("------- NODE CurrentPU Io --------------");
@@ -294,7 +293,7 @@ public class ElectricalNetworkOutPrinter {
 
     //region DIRECTION
     public enum DIRECTION {
-        FWD("nastepnik"), REVERSE("poprzednik");
+        FWD("nastepnik"), REV("poprzednik");
 
         private final String direction;
 
@@ -381,15 +380,15 @@ public class ElectricalNetworkOutPrinter {
     //endregion
 
     //region print nodes with no neighbors in front
-    public void printNDSwithNoNBRSinFront() {
-        System.out.println("\nNodes with no neighbors: ");
+    public void printNodesWithNoNeighborsInFront() {
+        System.out.println("\nnodes that have no neighbors in front: ");
         electricalNetwork.nodesWithNoNeighborsInFront.forEach(aLong -> System.out.print(aLong + " "));
         System.out.println();
     }
     //endregion
 
-    public void printNodesNbrsFwdRevMap() {
-        System.out.println("Mapa sąsiadów węzłów FWD i REV:");
+    public void printNodesNeighborsFwdRevMap() {
+        System.out.println("map of the neighbors of the nodes in front and behind:");
         if (!electricalNetwork.nodesNBRfwdREVmap.isEmpty()) {
             electricalNetwork.nodesNBRfwdREVmap.forEach((uniqueNodeNumber, neighborsIDsList) -> {
                 /*//region zamiana ID węzła na unikalny nr węzła
@@ -401,7 +400,8 @@ public class ElectricalNetworkOutPrinter {
                 //endregion*/
 
                 // drukuje unikalny nr węzła oraz tablicę ID sąsiadów w przód i tył
-                System.out.println(uniqueNodeNumber + ": ID's " + neighborsIDsList);
+                System.out.printf("%3d <-> ", uniqueNodeNumber);
+                System.out.println(neighborsIDsList);
             });
         } else {
             System.out.println("Mapa: nodesNBRfwdREVmap jest pusta");
