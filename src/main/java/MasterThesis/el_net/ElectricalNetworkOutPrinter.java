@@ -204,7 +204,7 @@ public class ElectricalNetworkOutPrinter {
      * <a href="http://www.supermanisthegreatest.com">Superman!</a> </p>
      *
      * @see ElectricalNetwork#arcMap
-     * @see ElectricalNetworkService#nodeNbrsFwdListBuild()
+     * @see ElectricalNetworkService#nodeNeighborsForwardListBuild()
      */
 
     //region printNodeNeighborsWithDirection
@@ -235,7 +235,7 @@ public class ElectricalNetworkOutPrinter {
         switch (direction) {
             //region FORWARD
             case FWD:
-                electricalNetwork.nbrsFWDmap.forEach((node, neighborsIdList) -> {
+                electricalNetwork.neighborsForwardMap.forEach((node, neighborsIdList) -> {
                             System.out.printf("node:[%3d] --> ", node);
                             System.out.print("neighbors: [");
                             neighborsIdList.forEach(neighborId -> {
@@ -250,7 +250,7 @@ public class ElectricalNetworkOutPrinter {
 
             //region REVERSE
             case REV:
-                electricalNetwork.neighborsREVERSEMap.forEach((nodeEnd, neighborsStartIdList) -> {
+                electricalNetwork.neighborsReverseMap.forEach((nodeEnd, neighborsStartIdList) -> {
                     LongFunction<Long> IDtoNodeStartLongFunction = ID ->
                             electricalNetwork.arcMap.get(ID).getStartNode();
 
@@ -312,7 +312,7 @@ public class ElectricalNetworkOutPrinter {
         System.out.println("\nKonduktancja własna węzłów [pu]: ");
         electricalNetwork.nodeMap.forEach((uniqueNodeNum, nodeEntity) -> {
             System.out.println(String.format("%3d ", uniqueNodeNum)
-                            + String.format("%.2e", nodeEntity.getSelfConductance()));
+                            + String.format("%.2e", nodeEntity.getSelfConductancePU()));
         });
 
         System.out.println();
@@ -389,8 +389,8 @@ public class ElectricalNetworkOutPrinter {
 
     public void printNodesNeighborsFwdRevMap() {
         System.out.println("map of the neighbors of the nodes in front and behind:");
-        if (!electricalNetwork.nodesNBRfwdREVmap.isEmpty()) {
-            electricalNetwork.nodesNBRfwdREVmap.forEach((uniqueNodeNumber, neighborsIDsList) -> {
+        if (!electricalNetwork.nodesNeighborsForwardReverseMap.isEmpty()) {
+            electricalNetwork.nodesNeighborsForwardReverseMap.forEach((uniqueNodeNumber, neighborsIDsList) -> {
                 /*//region zamiana ID węzła na unikalny nr węzła
                 ArrayList<Long> nodeUniqueNumber = new ArrayList<>();
                 for (Long nodeID : neighborsIDsList) {

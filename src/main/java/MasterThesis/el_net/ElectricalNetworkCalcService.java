@@ -119,7 +119,7 @@ public class ElectricalNetworkCalcService {
     //region oblicz prąd początkowy w węzłach mających sąsiadów "z przodu"
     public void calcNodeCurrentPU_FWD_nodesForZeroIter() {
 
-        elNet.nbrsFWDmap.forEach((node, nodeNeighborIDList) -> {
+        elNet.neighborsForwardMap.forEach((node, nodeNeighborIDList) -> {
             try {
                 if (node != 0) {
 
@@ -200,7 +200,7 @@ public class ElectricalNetworkCalcService {
         //endregion
 
         try {
-            elNet.neighborsREVERSEMap.forEach((node, nodeNeighborIDList) -> {
+            elNet.neighborsReverseMap.forEach((node, nodeNeighborIDList) -> {
 
                 if (listNodesZeroCurrent.contains(node)) {
 

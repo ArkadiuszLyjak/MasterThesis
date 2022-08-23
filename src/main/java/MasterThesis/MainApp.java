@@ -20,22 +20,18 @@ package MasterThesis;
 * */
 
 import MasterThesis.arc_file_tools.FileDataService;
-import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
 import MasterThesis.bfs.BfsAlgorithm;
 import MasterThesis.bfs.BfsAlgorithmOutPrinter;
 import MasterThesis.el_net.*;
-import MasterThesis.node.NodeEntity;
-import MasterThesis.node.NodeType;
 import MasterThesis.tools.NetStatistics;
 
 import java.nio.charset.Charset;
-import java.util.Formatter;
-import java.util.List;
 
 public class MainApp {
 
     public static void main(String[] args) {
+
         Charset defaultCharset = Charset.defaultCharset();
         System.out.println("default Charset:" + defaultCharset);
 
@@ -77,10 +73,10 @@ public class MainApp {
             //endregion
 
             //region generate front and back neighbors maps
-            elNetService.nodeNbrsFwdListBuild();   // następnik
-//            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.FWD);
+            elNetService.nodeNeighborsForwardListBuild();   // następnik
+            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.FWD);
 
-            elNetService.nodeNbrsRevListBuild();     // poprzednik
+            elNetService.nodeNeighborsReverseListBuild();     // poprzednik
 //            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.REV);
             //endregion
 
@@ -114,10 +110,6 @@ public class MainApp {
 //            bfsAlgOutPrinter.printNodeVisitedOrder();
             //endregion
 
-            //region Nodes informations printer
-//            elNetOutPrinter.printNodeInfo();
-            //endregion
-
             //region arcs informations
 //            elNetOutPrinter.printLineType();
             //endregion
@@ -141,7 +133,15 @@ public class MainApp {
             int nodesQuantity = elNet.nodeList.size(); // number of nodes at all
             int powerNodesQuantity = 2; // ilosc wezlow zasilowych / number of power nodes
             int iterateMax = 0; // the number of iterations is undefined and depends on the error rate
-            directMethodAlgorithm.calculateDirectMethod(nodesQuantity, powerNodesQuantity, iterateMax);
+//            directMethodAlgorithm.calculateDirectMethod(nodesQuantity, powerNodesQuantity, iterateMax);
+            //endregion
+
+            //region  active power flow calculation
+//            directMethodAlgorithm.activePowerFlow();
+            //endregion
+
+            //region Nodes informations printer
+//            elNetOutPrinter.printNodeInfo();
             //endregion
 
         } catch (Exception e) {

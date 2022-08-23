@@ -35,19 +35,32 @@ public class ElectricalNetworkService {
      */
 
     //region Generate forward neighbors map
-    public void nodeNbrsFwdListBuild() {
+    public void nodeNeighborsForwardListBuild() {
 
-        electricalNetwork.arcMap.forEach((aLong, arcEntity) -> {
+        electricalNetwork.arcMap.forEach((arcID, arcEntity) -> {
 
-            long startNode = arcEntity.getStartNode();
+            if (electricalNetwork.arcMap.get(arcID).getCondition() == 1) {
+                long startNode = arcEntity.getStartNode();
 
-            // StartNode - węzeł początkowy (nie ID!)
-            if (!electricalNetwork.nbrsFWDmap.containsKey(startNode)) {
-                electricalNetwork.nbrsFWDmap.put(startNode, new ArrayList<>());
+                // StartNode - węzeł początkowy (nie ID!)
+                if (!electricalNetwork.neighborsForwardMap.containsKey(startNode)) {
+                    electricalNetwork.neighborsForwardMap.put(startNode, new ArrayList<>());
+                }
+
+                // dodaje ID całego rekordu, gdzie znajduje się sąsiad
+                electricalNetwork.neighborsForwardMap.get(startNode).add(arcID); // dodaje ID sąsiada
             }
 
-            // dodaje ID całego rekordu, gdzie znajduje się sąsiad
-            electricalNetwork.nbrsFWDmap.get(startNode).add(aLong); // dodaje ID sąsiada
+               /* long startNode = arcEntity.getStartNode();
+
+                // StartNode - węzeł początkowy (nie ID!)
+                if (!electricalNetwork.neighborsForwardMap.containsKey(startNode)) {
+                    electricalNetwork.neighborsForwardMap.put(startNode, new ArrayList<>());
+                }
+
+                // dodaje ID całego rekordu, gdzie znajduje się sąsiad
+                electricalNetwork.neighborsForwardMap.get(startNode).add(arcID); // dodaje ID sąsiada*/
+
 
         });
 
@@ -55,20 +68,35 @@ public class ElectricalNetworkService {
     //endregion
 
     //region Generate reverse neighbors map
-    public void nodeNbrsRevListBuild() {
-        electricalNetwork.arcMap.forEach((aLong, arcEntity) -> {
+    public void nodeNeighborsReverseListBuild() {
+        electricalNetwork.arcMap.forEach((arcID, arcEntity) -> {
 
+            /*//region Description 1
             long endNode = arcEntity.getEndNode(); // start z końcowego węzła
 
             // StartNode - węzeł początkowy (nie ID!)
-            if (!electricalNetwork.neighborsREVERSEMap.containsKey(endNode)) {
-                electricalNetwork.neighborsREVERSEMap.put(endNode, new ArrayList<>());
+            if (!electricalNetwork.neighborsReverseMap.containsKey(endNode)) {
+                electricalNetwork.neighborsReverseMap.put(endNode, new ArrayList<>());
             }
 
             // dodaje ID całego rekordu, gdzie znajduje się sąsiad
-            electricalNetwork.neighborsREVERSEMap.get(endNode).add(aLong);
-        });
+            electricalNetwork.neighborsReverseMap.get(endNode).add(arcID);
+            //endregion*/
 
+            //region Description 2
+            if (electricalNetwork.arcMap.get(arcID).getCondition() == 1) {
+                long endNode = arcEntity.getEndNode(); // start z końcowego węzła
+
+                // StartNode - węzeł początkowy (nie ID!)
+                if (!electricalNetwork.neighborsReverseMap.containsKey(endNode)) {
+                    electricalNetwork.neighborsReverseMap.put(endNode, new ArrayList<>());
+                }
+
+                // dodaje ID całego rekordu, gdzie znajduje się sąsiad
+                electricalNetwork.neighborsReverseMap.get(endNode).add(arcID);
+            }
+            //endregion
+        });
     }
     //endregion
 
@@ -76,7 +104,7 @@ public class ElectricalNetworkService {
     public boolean isDistributeNode(NodeEntity node) {
 
         List<Long> distributeNodeList = new ArrayList<>();
-        List<Long> arcList = electricalNetwork.nbrsFWDmap.get(0L);
+        List<Long> arcList = electricalNetwork.neighborsForwardMap.get(0L);
 
         for (Long arcId : arcList) {
             distributeNodeList.add(electricalNetwork.arcMap.get(arcId).getEndNode());
@@ -100,17 +128,17 @@ public class ElectricalNetworkService {
 
             long startNode = arcEntity.getStartNode();
             long endNode = arcEntity.getEndNode();
-            boolean containsStartKey = electricalNetwork.nodesNBRfwdREVmap.containsKey(startNode);
-            boolean containsEndKey = electricalNetwork.nodesNBRfwdREVmap.containsKey(endNode);
+            boolean containsStartKey = electricalNetwork.nodesNeighborsForwardReverseMap.containsKey(startNode);
+            boolean containsEndKey = electricalNetwork.nodesNeighborsForwardReverseMap.containsKey(endNode);
 
             if (!containsStartKey) {
-                electricalNetwork.nodesNBRfwdREVmap.put(startNode, new ArrayList<>());
+                electricalNetwork.nodesNeighborsForwardReverseMap.put(startNode, new ArrayList<>());
             } else {
 //                System.out.println("Mapa zawiera: " + startNode);
             }
 
             if (!containsEndKey) {
-                electricalNetwork.nodesNBRfwdREVmap.put(endNode, new ArrayList<>());
+                electricalNetwork.nodesNeighborsForwardReverseMap.put(endNode, new ArrayList<>());
             } else {
 //                System.out.println("Mapa zawiera: " + endNode);
             }
@@ -120,11 +148,11 @@ public class ElectricalNetworkService {
 
         //region print neighbors forward map
         // along - unikalny nr węzła // longs - ID sąsiadów
-        electricalNetwork.nbrsFWDmap.forEach((uniqueStartNode, forwardNeighborIDsList) ->
+        electricalNetwork.neighborsForwardMap.forEach((uniqueStartNode, forwardNeighborIDsList) ->
 
         {
-            if (electricalNetwork.nodesNBRfwdREVmap.containsKey(uniqueStartNode)) {
-                electricalNetwork.nodesNBRfwdREVmap.get(uniqueStartNode).addAll(forwardNeighborIDsList);
+            if (electricalNetwork.nodesNeighborsForwardReverseMap.containsKey(uniqueStartNode)) {
+                electricalNetwork.nodesNeighborsForwardReverseMap.get(uniqueStartNode).addAll(forwardNeighborIDsList);
             } else {
 //                System.out.println("Mapa nie zawiera klucza: " + uniqueStartNode);
             }
@@ -133,11 +161,11 @@ public class ElectricalNetworkService {
 
         //region print neighbors reverse map
         // along - unikalny nr węzła // longs - ID sąsiadów
-        electricalNetwork.neighborsREVERSEMap.forEach((uniqueEndNode, reverseNeighborsIDlist) ->
+        electricalNetwork.neighborsReverseMap.forEach((uniqueEndNode, reverseNeighborsIDlist) ->
 
         {
-            if (electricalNetwork.nodesNBRfwdREVmap.containsKey(uniqueEndNode)) {
-                electricalNetwork.nodesNBRfwdREVmap.get(uniqueEndNode).addAll(reverseNeighborsIDlist);
+            if (electricalNetwork.nodesNeighborsForwardReverseMap.containsKey(uniqueEndNode)) {
+                electricalNetwork.nodesNeighborsForwardReverseMap.get(uniqueEndNode).addAll(reverseNeighborsIDlist);
             }
         });
         //endregion
@@ -148,9 +176,9 @@ public class ElectricalNetworkService {
         {
             double selfConductance = 0;
 
-            if (electricalNetwork.nodesNBRfwdREVmap.containsKey(uniqueNodeNum)) {
+            if (electricalNetwork.nodesNeighborsForwardReverseMap.containsKey(uniqueNodeNum)) {
                 try {
-                    for (Long IDnbr : electricalNetwork.nodesNBRfwdREVmap.get(uniqueNodeNum)) {
+                    for (Long IDnbr : electricalNetwork.nodesNeighborsForwardReverseMap.get(uniqueNodeNum)) {
                         double calcSelfConductance = 1 / electricalNetwork.arcMap.get(IDnbr).getResistancePU();
                         if (!(calcSelfConductance == Double.POSITIVE_INFINITY)) {
                             selfConductance = selfConductance + calcSelfConductance;
@@ -159,7 +187,7 @@ public class ElectricalNetworkService {
                 } catch (Exception e) {
                     System.out.println("Dzielenie przez zero!");
                 }
-                nodeEntity.setSelfConductance(selfConductance);
+                nodeEntity.setSelfConductancePU(selfConductance);
             }
 
         });
@@ -177,13 +205,13 @@ public class ElectricalNetworkService {
 
         // set of neighbors forward map
         Set<Map.Entry<Long, List<Long>>> setOfNeighborsForwardMap =
-                electricalNetwork.nbrsFWDmap.entrySet();
+                electricalNetwork.neighborsForwardMap.entrySet();
 
         // set only keys
-        Set<Long> ids = electricalNetwork.nbrsFWDmap.keySet();
+        Set<Long> ids = electricalNetwork.neighborsForwardMap.keySet();
 
         // values from forward neighbors map
-        Collection<List<Long>> values = electricalNetwork.nbrsFWDmap.values();
+        Collection<List<Long>> values = electricalNetwork.neighborsForwardMap.values();
 
         // build list of nodes with no neighbors in front
         listOfAllNodesAvailable.forEach(aLong -> {

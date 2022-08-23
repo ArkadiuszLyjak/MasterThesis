@@ -73,6 +73,7 @@ public class ArcEntity extends BaseEntity {
     Double voltageLowPU;
     Double voltageHighPU;
     Double powerPU;
+    double activePowerFlowPU;     // active power flow
     //endregion
 
     //  Double currentPU;
@@ -81,23 +82,25 @@ public class ArcEntity extends BaseEntity {
         super(id);
     }
 
+    //region toString
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         Formatter fmt = new Formatter(sb);
 
-        fmt.format("[%3d] ", super.id); // ID
-        fmt.format("[%3d > ", startNode); // ID
-        fmt.format("%3d] ", endNode); // ID
-        fmt.format("%-11s ", type); // ID
-        fmt.format("%-2d ", position); // ID
-        fmt.format("%7.2f ", arcLength); // ID
-        fmt.format("%d ", tracks); // ID
-        fmt.format("%d ", condition); // ID
-        fmt.format("%d ", change); // ID
-
+        fmt.format("[%3d] ", super.id);         // ID
+        fmt.format("[%3d > ", startNode);       // ID
+        fmt.format("%3d] ", endNode);           // ID
+        fmt.format("%-11s ", type);             // ID
+        fmt.format("%-2d ", position);          // ID
+        fmt.format("%7.2f ", arcLength);        // ID
+        fmt.format("%d ", tracks);              // ID
+        fmt.format("%d ", condition);           // ID
+        fmt.format("%d ", change);              // ID
+        fmt.format("%.4f ", activePowerFlowPU); // active power flow [PU]
 
         return sb.toString();
     }
+    //endregion
 
 }

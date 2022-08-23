@@ -4,10 +4,10 @@ package MasterThesis.data_calc;
 public class BaseValues {
 
     //    public static Double power_base = 100_000_000.0; // 100 MVA
-    public static Double powerBase = 1_000_000.0; // 1 MVA
-    public static Double voltageBase = 420.0; // V
+    public static Double powerBase = 1_000_000.0;       // 1 MVA
+    public static Double voltageBase = 420.0;           // V
     public static Double currentBase = powerBase / ((Math.sqrt(3.0)) * voltageBase);
     public static Double impedanceBase = Math.pow(voltageBase, 2.0) / powerBase;
-    public static Double epsilon = 0.01;
+    public static Double epsilon = 0.0000000000001;
 
 }

@@ -17,9 +17,9 @@ public class ElectricalNetwork {
     public Map<Long, TransformerTypeEntity> transformerTypeMap; // maps from files
     public List<NodeEntity> nodeList;
     public List<ArcEntity> arcList;
-    public Map<Long, List<Long>> nbrsFWDmap = new LinkedHashMap<>();
-    public Map<Long, List<Long>> neighborsREVERSEMap = new LinkedHashMap<>();
-    public Map<Long, ArrayList<Long>> nodesNBRfwdREVmap = new LinkedHashMap<>();
+    public Map<Long, List<Long>> neighborsForwardMap = new LinkedHashMap<>();
+    public Map<Long, List<Long>> neighborsReverseMap = new LinkedHashMap<>();
+    public Map<Long, ArrayList<Long>> nodesNeighborsForwardReverseMap = new LinkedHashMap<>();
     public List<Long> nodesWithNoNeighborsInFront = new LinkedList<>();
     //endregion
 
