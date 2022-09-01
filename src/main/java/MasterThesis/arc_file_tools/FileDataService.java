@@ -92,7 +92,11 @@ public class FileDataService {
                     elNet.arcList.add(arc);
                     System.out.println(arc);
                 } else {
-                    System.out.printf("[%3d] %3d > %3d %s%n", arc.getId(), arc.getStartNode(), arc.getEndNode(), "-------- not connected --------");
+                    System.out.printf("[%3d] %3d > %3d %s%n",
+                            arc.getId(),
+                            arc.getStartNode(),
+                            arc.getEndNode(),
+                            "-------- not connected --------");
                 }
                 //endregion*/
             });

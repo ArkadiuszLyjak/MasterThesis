@@ -10,6 +10,8 @@ import MasterThesis.base.entity.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Formatter;
+
 @Getter
 @Setter
 
@@ -48,6 +50,32 @@ public class TransformerTypeEntity extends BaseEntity {
 
     public TransformerTypeEntity(Long id) {
         super(id);
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+        Formatter fmt = new Formatter(sb);
+
+        fmt.format("%-31s %d\n", "ID: ", super.id);
+        fmt.format("%-31s %s\n", "Type: ", type);
+        fmt.format("%-31s %.2f [VA]\n", "nominal power: ", nominalPower);
+        fmt.format("%-31s %.2f\n", "nominal Upper Voltage: ", nominalUpperVoltage);
+        fmt.format("%-31s %.2f\n", "nominal Lower Voltage: ", nominalLowerVoltage);
+        fmt.format("%-31s %.2f\n", "voltage Increase Range: ", voltageIncreaseRange);
+        fmt.format("%-31s %.2f\n", "voltage Decrease Range: ", voltageDecreaseRange);
+        fmt.format("%-31s %.2f\n", "no Of Adjustment Range: ", noOfAdjustmentRange);
+        fmt.format("%-31s %.2f\n", "connection Group: ", connectionGroup);
+        fmt.format("%-31s %.2f\n", "load Power Loss: ", loadPowerLoss);
+        fmt.format("%-31s %.2f\n", "active Idle Loss: ", activeIdleLoss);
+        fmt.format("%-31s %.2f\n", "idle Current: ", idleCurrent);
+        fmt.format("%-31s %.2f\n", "shorting Voltage: ", shortingVoltage);
+        fmt.format("%-31s %.2f\n", "zero Resistance: ", zeroResistance);
+        fmt.format("%-31s %.2f\n", "zero Reactance", zeroReactance);
+        fmt.format("\n\n");
+
+        return fmt.toString();
     }
 
 }

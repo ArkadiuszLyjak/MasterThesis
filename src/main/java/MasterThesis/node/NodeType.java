@@ -22,4 +22,8 @@ public enum NodeType {
         return OTHER_NODE;
     }
     //endregion
+
+    public Integer getId() {
+        return id;
+    }
 }

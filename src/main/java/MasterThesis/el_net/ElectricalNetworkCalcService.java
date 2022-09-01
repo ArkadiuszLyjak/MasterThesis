@@ -8,6 +8,7 @@ import MasterThesis.lineType.LineTypeEntity;
 import MasterThesis.node.NodeEntity;
 import MasterThesis.transformer_type.TransformerTypeEntity;
 
+import java.io.PrintWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -31,21 +32,30 @@ public class ElectricalNetworkCalcService {
 
     //region calcLineImmitance
     public void calcLineImmitance() {
-        for (ArcEntity arc : elNet.arcList) {
 
+        StringBuilder stringBuilder = new StringBuilder();
+        Formatter formatter = new Formatter(stringBuilder);
+
+        for (ArcEntity arc : elNet.arcList) {
             if (arc.getType() == ArcType.LINE) {
 
+//                if (!(Double.compare(arc.getArcLength(), 0.0) == 0)) {
                 LineTypeEntity lineType = elNet.lineTypeMap.get(arc.getPosition());
 
-                Double resistance = arc.getArcLength() * lineType.getCohesiveUnitResistance();
-                Double reactance = arc.getArcLength() * lineType.getCohesiveUnitReactance();
+                // Parametry immitancji linii liczone dla km stąd dzielenie przez 1000
+                // CohesiveUnitResistance dla 7000m 0.191
+                Double resistance = (arc.getArcLength() / 1000) * lineType.getCohesiveUnitResistance();   // [km]
+//                System.out.print(arc.getArcLength() + " ");
+//                System.out.print(lineType.getCohesiveUnitResistance() + " ");
+                Double reactance = (arc.getArcLength() / 1000) * lineType.getCohesiveUnitReactance();     // [km]
+//                System.out.println(lineType.getCohesiveUnitReactance());
                 Double impedance = Math.sqrt(Math.pow(resistance, 2.0) + Math.pow(reactance, 2.0));
 
                 Double resistancePU = resistance / BaseValues.impedanceBase;
                 Double reactancePU = reactance / BaseValues.impedanceBase;
                 Double impedancePU = impedance / BaseValues.impedanceBase;
 
-                // ustawienie encji
+                //region ustawienie encji
                 arc.setResistance(resistance);
                 arc.setReactance(reactance);
                 arc.setImpedance(impedance);
@@ -53,6 +63,22 @@ public class ElectricalNetworkCalcService {
                 arc.setResistancePU(resistancePU);
                 arc.setReactancePU(reactancePU);
                 arc.setImpedancePU(impedancePU);
+                //endregion
+
+                //region temporary print
+                formatter.format("%3d->%3d ", arc.getStartNode(), arc.getEndNode());
+//                formatter.format("%-8s ", arc.getType());
+                formatter.format("L:%.4f[km] ", arc.getArcLength() / 1000);
+//                formatter.format("%-8s ", lineType.getKind().toString());
+                formatter.format("R:%-7.4f[Ω] ", reactance);
+                formatter.format("X:%-7.4f \u2126", reactance);
+                formatter.format("Z:%-7.4f ", impedance);
+//                System.out.println(stringBuilder);
+                stringBuilder.setLength(0);
+
+                //endregion
+
+//                }
 
             }
         }
@@ -67,25 +93,57 @@ public class ElectricalNetworkCalcService {
 
                 TransformerTypeEntity transformerType = elNet.transformerTypeMap.get(arc.getPosition());
 
-                // power losses in the transformer winding
-                Double resistance = (transformerType.getActiveIdleLoss() * Math.pow(transformerType.getNominalUpperVoltage(), 2.0)) / Math.pow(transformerType.getNominalPower(), 2.0);
+                /*//region power losses in the transformer winding
+                Double resistance = ((transformerType.getActiveIdleLoss() / 1000)       // [MW]
+                        * Math.pow(transformerType.getNominalUpperVoltage(), 2.0))      // [kV]
+                        / Math.pow((transformerType.getNominalPower() / 1000), 2.0);    // [MVA]
 
-                Double reactance = (transformerType.getShortingVoltage() / 100) * (Math.pow(transformerType.getNominalUpperVoltage(), 2.0) / transformerType.getNominalPower());
+                Double reactance = (transformerType.getShortingVoltage() / 100)
+                        * (Math.pow(transformerType.getNominalUpperVoltage(), 2.0)
+                        / transformerType.getNominalPower());
 
-                Double impedance = (transformerType.getShortingVoltage() / 100) * (Math.pow(transformerType.getNominalUpperVoltage(), 2.0) / transformerType.getNominalPower());
+                Double impedance = (transformerType.getShortingVoltage() / 100)
+                        * (Math.pow(transformerType.getNominalUpperVoltage(), 2.0)
+                        / transformerType.getNominalPower());
 
-                // relative values per Unit
+                //endregion*/
+
+                double resistance = 0;
+                double reactance = 0;
+                double impedance = 0;
+
+                //region power losses in the transformer winding
+                if ((transformerType.getNominalPower() / 1000) < 2.5) {
+
+                    resistance = ((transformerType.getActiveIdleLoss() / 1000)              // [MW]     OK
+                            * Math.pow(transformerType.getNominalUpperVoltage(), 2.0))      // [kV]     OK
+                            / Math.pow((transformerType.getNominalPower() / 1000), 2.0);    // [MVA]    OK
+
+                    impedance = (transformerType.getShortingVoltage()                       // [%]      OK
+                            * (Math.pow(transformerType.getNominalUpperVoltage(), 2.0)))    // [kV]     OK
+                            / ((transformerType.getNominalPower() / 1000) * 100);           // [MVA]    OK
+
+                    // TODO Obliczyc reaktancje na podst. wzoru ze str. 9
+                    reactance = Math.sqrt(Math.pow(impedance, 2) - Math.pow(resistance, 2));
+
+
+                } else { // a moze else-if?
+                    System.out.println("Transformator o mocy wyższej niż 2.5 MWA");
+                }
+
+                //endregion
+
+                //region relative values per Unit
                 Double impedancePU = impedance / BaseValues.impedanceBase;
                 Double resistancePU = resistance / BaseValues.impedanceBase;
                 Double reactancePU = reactance / BaseValues.impedanceBase;
 
                 Double powerPU = transformerType.getNominalPower() / BaseValues.powerBase;
-
                 Double voltageHighPU = transformerType.getNominalUpperVoltage() / BaseValues.voltageBase;
-
                 Double voltageLowPU = transformerType.getNominalLowerVoltage() / BaseValues.voltageBase;
+                //endregion
 
-                // setting the entity
+                //region setting the entity
                 arc.setReactance(reactance);
                 arc.setResistance(resistance);
                 arc.setImpedance(impedance);
@@ -97,6 +155,7 @@ public class ElectricalNetworkCalcService {
                 arc.setPowerPU(powerPU);
                 arc.setVoltageHighPU(voltageHighPU);
                 arc.setVoltageLowPU(voltageLowPU);
+                //endregion
             }
 
         }
@@ -105,7 +164,8 @@ public class ElectricalNetworkCalcService {
 
     //region calcNodeVoltagePu
     public void calcNodeVoltagePu() {
-        elNet.nodeMap.forEach((aLong, nodeEntity) -> nodeEntity.setVoltagePU(nodeEntity.getNominalVoltage() / BaseValues.voltageBase));
+        elNet.nodeMap.forEach((aLong, nodeEntity) -> nodeEntity
+                .setVoltagePU(nodeEntity.getNominalVoltage() / BaseValues.voltageBase));
     }
     //endregion
 
@@ -117,7 +177,7 @@ public class ElectricalNetworkCalcService {
      */
 
     //region oblicz prąd początkowy w węzłach mających sąsiadów "z przodu"
-    public void calcNodeCurrentPU_FWD_nodesForZeroIter() {
+    public void calcNodeCurrentPUforwardNodesForZeroIter() {
 
         elNet.neighborsForwardMap.forEach((node, nodeNeighborIDList) -> {
             try {
@@ -184,7 +244,7 @@ public class ElectricalNetworkCalcService {
     //endregion
 
     //region oblicz prąd początkowy w węzłach NIE mających sąsiadów "z przodu"
-    public void calcNodeCurrentPU_REV_nodesForZeroIter() {
+    public void calcNodeCurrentPUreverseNodesForZeroIter() {
 
         //region filtracja węzłów, które nia mają policzonego prądu "0"
         Stream<NodeEntity> nodeEntityStream = elNet.nodeList.stream();

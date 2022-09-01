@@ -2,6 +2,7 @@ package MasterThesis.arc;
 
 
 import MasterThesis.base.entity.BaseEntity;
+import MasterThesis.base.parameters.AppParameters;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,8 @@ import java.util.Formatter;
 @Getter
 @Setter
 public class ArcEntity extends BaseEntity {
+
+    AppParameters appParameters = AppParameters.getInstance();
 
     //region arcs arguments
     /**
@@ -73,14 +76,15 @@ public class ArcEntity extends BaseEntity {
     Double voltageLowPU;
     Double voltageHighPU;
     Double powerPU;
-    double activePowerFlowPU;     // active power flow
     //endregion
 
-    //  Double currentPU;
+    Double activePowerFlowPU;     // active power flow
 
+    //region ArcEntity Constructor
     public ArcEntity(Long id) {
         super(id);
     }
+    //endregion
 
     //region toString
     @Override
@@ -88,19 +92,21 @@ public class ArcEntity extends BaseEntity {
         StringBuilder sb = new StringBuilder();
         Formatter fmt = new Formatter(sb);
 
-        fmt.format("[%3d] ", super.id);         // ID
-        fmt.format("[%3d > ", startNode);       // ID
-        fmt.format("%3d] ", endNode);           // ID
-        fmt.format("%-11s ", type);             // ID
-        fmt.format("%-2d ", position);          // ID
-        fmt.format("%7.2f ", arcLength);        // ID
-        fmt.format("%d ", tracks);              // ID
-        fmt.format("%d ", condition);           // ID
-        fmt.format("%d ", change);              // ID
-        fmt.format("%.4f ", activePowerFlowPU); // active power flow [PU]
+        String del = appParameters.getDelimiter();
+
+        fmt.format("%d%s", super.id, del);              // ID
+        fmt.format("%d%s", startNode, del);             // ID
+        fmt.format("%d%s", endNode, del);               // ID
+        fmt.format("%s%s", type, del);                  // ID
+        fmt.format("%d%s", position, del);              // ID
+        fmt.format("%.2f%s", arcLength, del);           // ID
+        fmt.format("%d%s", tracks, del);                // ID
+        fmt.format("%d%s", condition, del);             // ID
+        fmt.format("%d%s", change, del);                // ID
 
         return sb.toString();
     }
     //endregion
+
 
 }

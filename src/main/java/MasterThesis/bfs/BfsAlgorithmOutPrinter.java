@@ -29,10 +29,9 @@ public class BfsAlgorithmOutPrinter {
         for (Long i = 0L; i <= bfsAlgorithm.getNetLevel(); i++) {
             bfsAlgorithm.arcLevelsMap.get(i).forEach(nodeArcVO ->
 
-                            System.out.println("LEVEL " + nodeArcVO.netLevel + "  > "
-                                    + nodeArcVO.nodeId + "->" +
-                                    nodeArcVO.neighborNodeId)
-                    //        elNet.arcMap.get(nodeArcVO.arcId).getEndNodeId())
+                            System.out.println("LEVEL " + nodeArcVO.netLevel + " > "
+                                    + nodeArcVO.nodeId + "->" + nodeArcVO.neighborNodeId)
+//                    elNet.arcMap.get(nodeArcVO.arcId).getEndNodeId())
             );
         }
 

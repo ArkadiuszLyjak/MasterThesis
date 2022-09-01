@@ -48,10 +48,10 @@ public class DirectMethodAlgorithm {
 
 //                        System.out.printf("%(.4f\n", u_i - u_j);
 
-                        System.out.printf("%3d-->%3d power_flow: %(.2e\n",
-                                node,
-                                elNet.arcMap.get(nodeID).getEndNode(),
-                                elNet.arcMap.get(nodeID).getActivePowerFlowPU());
+//                        System.out.printf("%3d-->%3d flow: %(.2e\n",
+//                                node,
+//                                elNet.arcMap.get(nodeID).getEndNode(),
+//                                elNet.arcMap.get(nodeID).getActivePowerFlowPU());
                     }
 
                 }
@@ -99,8 +99,8 @@ public class DirectMethodAlgorithm {
 
                         //region obliczenie zmiany prądu dla obecnego węzła dla iteracji 'k'
                         currentPU = node.getCurrentPU();
-                        double v_i = node.getVoltagePU();                   // napięcie w wężle liczonym
-                        double g_ii = node.getSelfConductancePU();            // konduktancja własna węzła
+                        double v_i = node.getVoltagePU();                       // napięcie w wężle liczonym
+                        double g_ii = node.getSelfConductancePU();              // konduktancja własna węzła
 
                         // napięcia w węzłach-sąsiadach dla iter. poprzedniej
                         // konduktancja między liczonym węzłem a jego sąsiadem
@@ -128,12 +128,12 @@ public class DirectMethodAlgorithm {
                             }
                         }
 
-                        formatter.format("∑ %.2e ", item_sum);
+                        formatter.format("∑ %(.2e ", item_sum);
 
                         double item_sqrt = Math.sqrt(3.00);
 
                         deltaCurrentThisIterPresentNode = item_Ii - ((item_Ui_Gii - item_sum) / item_sqrt);  //
-                        formatter.format("ΔI:%+.2e ", deltaCurrentThisIterPresentNode);
+                        formatter.format("ΔI:%-(10.2e ", deltaCurrentThisIterPresentNode);
                         //endregion
 
                         //region obliczenie zmiany napięcia dla obecnego węzła i obecnej iteracji 'k'
@@ -148,7 +148,7 @@ public class DirectMethodAlgorithm {
                         // zmiana napięcia wyliczona powyżej - deltaVoltageThisIterPresentNode
                         double voltageThisIterPresentNode = v_i + deltaVoltageThisIterPresentNode;
                         elNet.nodeMap.get(nodeNumber).setVoltagePU(voltageThisIterPresentNode);
-                        formatter.format("V:%.2e ", voltageThisIterPresentNode);
+                        formatter.format("V:%(8.2e ", voltageThisIterPresentNode);
                         //endregion
 
                         //region error settings

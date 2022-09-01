@@ -1,6 +1,7 @@
 package MasterThesis.node;
 
 import MasterThesis.base.entity.BaseEntity;
+import MasterThesis.base.parameters.AppParameters;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,37 +42,35 @@ public class NodeEntity extends BaseEntity {
     Double voltageReal;       // voltage
     Double currentReal;       // node current
     Double powerReal;         // active power flow in nominated units
-
     //endregion
 
+    //region Node Entity
     public NodeEntity(Long id) {
         super(id);
     }
+    //endregion
 
     //region toString
     @Override
     public String toString() {
+
         StringBuilder sb = new StringBuilder();
         Formatter formatter = new Formatter(sb);
 
-        formatter.format("%-23s %d%n", "id:", this.getId());
-//        formatter.format("%-23s %s%n", "node type:", NodeType.valueOf(nodeType.id));
-//        formatter.format("%-23s %.2f [kW]%n", "active power:", activePower);
-//        formatter.format("%-23s %.2f [kVar]%n", "reactive power:", reactivePower);
-//        formatter.format("%-23s %.2f [kV]%n", "voltage:", nominalVoltage);
+        String del = AppParameters.getInstance().getDelimiter();
 
-        // jednostki [pu]
-        formatter.format("%-23s %.2e%n", "voltage [PU]:", voltagePU);
-        formatter.format("%-23s %.2e%n", "current iter '0' [PU]:", currentInitialPU);
-        formatter.format("%-23s %.2e%n", "current [PU]:", currentPU);
-
-        // jednostki rzeczywiste
-//        formatter.format("%-23s %.4e%n", "voltage real:", voltageReal);
-//        formatter.format("%-23s %.4e%n", "current real:", currentReal);
-//        formatter.format("%-23s %.4e%n", "power real:", powerReal);
+        formatter.format("%d%s", this.getId(), del);
+        formatter.format("%d%s", nodeType.getId(), del);
+        formatter.format("%.0f%s", activePower, del);
+        formatter.format("%.2f%s", reactivePower, del);
+        formatter.format("%d%s", activePowerDeviation, del);
+        formatter.format("%d%s", reactivePowerDeviation, del);
+        formatter.format("%.1f", nominalVoltage);
 
         return formatter.toString();
     }
     //endregion
+
+
 }
 

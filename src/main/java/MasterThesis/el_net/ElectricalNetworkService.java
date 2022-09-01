@@ -23,7 +23,6 @@ public class ElectricalNetworkService {
         }
         return instance;
     }
-
     //endregion
 
     /**
@@ -39,7 +38,7 @@ public class ElectricalNetworkService {
 
         electricalNetwork.arcMap.forEach((arcID, arcEntity) -> {
 
-            if (electricalNetwork.arcMap.get(arcID).getCondition() == 1) {
+            if (arcEntity.getCondition() == 1) {
                 long startNode = arcEntity.getStartNode();
 
                 // StartNode - węzeł początkowy (nie ID!)
@@ -60,7 +59,6 @@ public class ElectricalNetworkService {
 
                 // dodaje ID całego rekordu, gdzie znajduje się sąsiad
                 electricalNetwork.neighborsForwardMap.get(startNode).add(arcID); // dodaje ID sąsiada*/
-
 
         });
 
@@ -85,20 +83,24 @@ public class ElectricalNetworkService {
 
             //region Description 2
             if (electricalNetwork.arcMap.get(arcID).getCondition() == 1) {
-                long endNode = arcEntity.getEndNode(); // start z końcowego węzła
+    long endNode = arcEntity.getEndNode(); // start z końcowego węzła
 
-                // StartNode - węzeł początkowy (nie ID!)
-                if (!electricalNetwork.neighborsReverseMap.containsKey(endNode)) {
-                    electricalNetwork.neighborsReverseMap.put(endNode, new ArrayList<>());
-                }
+    // StartNode - węzeł początkowy (nie ID!)
+                if(!electricalNetwork.neighborsReverseMap.containsKey(endNode))
 
-                // dodaje ID całego rekordu, gdzie znajduje się sąsiad
-                electricalNetwork.neighborsReverseMap.get(endNode).add(arcID);
-            }
-            //endregion
-        });
+    {
+        electricalNetwork.neighborsReverseMap.put(endNode, new ArrayList<>());
     }
-    //endregion
+
+    // dodaje ID całego rekordu, gdzie znajduje się sąsiad
+                electricalNetwork.neighborsReverseMap.get(endNode).
+
+    add(arcID);
+}
+//endregion
+        });
+                }
+//endregion
 
     //region isDistributeNode
     public boolean isDistributeNode(NodeEntity node) {

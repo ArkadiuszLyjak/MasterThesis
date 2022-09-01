@@ -6,16 +6,24 @@
   <component name="ChangeListManager">
     <list default="true" id="87091b50-afb2-4a5a-9117-312c1c37d355" name="Default Changelist" comment="back to not underscore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataFiles/Transformer_Type.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dataFiles/Transformer_Type.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc/ArcFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/BfsAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/BfsAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/data_calc/BaseValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/data_calc/BaseValues.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/BfsAlgorithmOutPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/bfs/BfsAlgorithmOutPrinter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/DirectMethodAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/DirectMethodAlgorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetwork.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkOutPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkOutPrinter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/lineType/LineKind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/lineType/LineKind.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/lineType/LineTypeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/lineType/LineTypeEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/node/NodeType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/transformer_type/TransformerTypeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/transformer_type/TransformerTypeEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/transformer_type/TransformerTypeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/transformer_type/TransformerTypeFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,13 +103,15 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;LombokPluginIS_LOMBOK_JPS_FIX_ENABLED&quot;: &quot;true&quot;,
+    &quot;LombokPluginIS_LOMBOK_VERSION_CHECK_Enabled&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
@@ -191,11 +201,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainApp" />
         <item itemvalue="Application.TestingJava" />
         <item itemvalue="Application.Test" />
-        <item itemvalue="Application.RozneTakie" />
         <item itemvalue="Application.TestStreams" />
+        <item itemvalue="Application.RozneTakie" />
+        <item itemvalue="Application.MainApp" />
       </list>
     </recent_temporary>
   </component>
@@ -230,6 +240,11 @@
       <workItem from="1661003340017" duration="8697000" />
       <workItem from="1661145496738" duration="25435000" />
       <workItem from="1661268310236" duration="7764000" />
+      <workItem from="1661793756161" duration="18985000" />
+      <workItem from="1661855876973" duration="11388000" />
+      <workItem from="1661879095708" duration="3018000" />
+      <workItem from="1661883086090" duration="37880000" />
+      <workItem from="1662037863009" duration="4104000" />
     </task>
     <task id="LOCAL-00001" summary="__">
       <created>1657106998806</created>
@@ -291,7 +306,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="algo-alpha" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

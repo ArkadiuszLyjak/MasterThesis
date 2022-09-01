@@ -3,9 +3,14 @@ package MasterThesis.el_net;
 
 import MasterThesis.arc.ArcEntity;
 import MasterThesis.arc.ArcType;
+import MasterThesis.base.entity.BaseEntity;
+import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.lineType.LineTypeEntity;
+import MasterThesis.node.NodeEntity;
 import MasterThesis.node.NodeType;
 import MasterThesis.tools.PrintUtility;
+import MasterThesis.transformer_type.TransformerTypeEntity;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -13,18 +18,23 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.util.Formatter;
+import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.LongFunction;
 
 public class ElectricalNetworkOutPrinter {
 
-    //region DecimalFormat
+    AppParameters appParameters = AppParameters.getInstance();
+
+    //region Decimal Format
     private static final DecimalFormat DECIMAL_FORMAT_EXP = new DecimalFormat("0.00E0");
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.0000");
     //endregion
 
     //region getInstance - Singleton
     private static ElectricalNetworkOutPrinter instance;
 
-    ElectricalNetwork electricalNetwork = ElectricalNetwork.getInstance();
+    ElectricalNetwork elNet = ElectricalNetwork.getInstance();
 
     private ElectricalNetworkOutPrinter() {
     }
@@ -37,7 +47,7 @@ public class ElectricalNetworkOutPrinter {
     }
     //endregion
 
-    //region decodeText
+    //region decode Text
     static String decodeText(String input, String encoding) throws IOException {
         return new BufferedReader(
                 new InputStreamReader(
@@ -46,7 +56,7 @@ public class ElectricalNetworkOutPrinter {
     }
     //endregion
 
-    //region printNetQuantity
+    //region print NetQuantity
     public void printNetQuantity() throws IOException {
 
         String longestHeaderString = "-------- Ilosc elementow sieci ---------"; // 39
@@ -86,7 +96,7 @@ public class ElectricalNetworkOutPrinter {
                             }
                             return length;
                         }, trafoString),
-                electricalNetwork.transformerTypeMap.size());
+                elNet.transformerTypeMap.size());
         //endregion
 
         //region lineTypeString
@@ -100,7 +110,7 @@ public class ElectricalNetworkOutPrinter {
                             }
                             return length;
                         }, lineTypeString),
-                electricalNetwork.lineTypeMap.size());
+                elNet.lineTypeMap.size());
         //endregion
 
         //region nodeString
@@ -114,7 +124,7 @@ public class ElectricalNetworkOutPrinter {
                             }
                             return length;
                         }, nodeString),
-                electricalNetwork.nodeMap.size());
+                elNet.nodeMap.size());
         //endregion
 
         //region arcString
@@ -128,7 +138,7 @@ public class ElectricalNetworkOutPrinter {
                             }
                             return length;
                         }, arcString),
-                electricalNetwork.arcMap.size());
+                elNet.arcMap.size());
         //endregion
 
         System.out.println(builder);
@@ -136,37 +146,63 @@ public class ElectricalNetworkOutPrinter {
     }
     //endregion
 
-    //region printLineImmitance
+    //region print LineImmitance
     public void printLineImmitance() {
 
         System.out.println("\n-------------------------------------");
         System.out.println("------- Line  Immitance -------------");
         System.out.println("-------------------------------------\n");
 
-        for (ArcEntity arc : electricalNetwork.arcList) {
+        for (ArcEntity arc : elNet.arcList) {
             if (arc.getType() == ArcType.LINE) {
+//                if (!(Double.compare(arc.getArcLength(), 0.0) == 0)) {
                 System.out.printf("%4d-->%-4d ", arc.getStartNode(), arc.getEndNode());
                 System.out.print("L:" + DECIMAL_FORMAT_EXP.format(arc.getArcLength()) + "[m]");
                 System.out.print(" R:" + DECIMAL_FORMAT_EXP.format(arc.getResistancePU()));
                 System.out.print(" X:" + DECIMAL_FORMAT_EXP.format(arc.getReactancePU()));
                 System.out.print(" Z:" + DECIMAL_FORMAT_EXP.format(arc.getImpedancePU()));
                 System.out.println(" [pu]");
+//                }
 
+            }
+        }
 
+    }
+
+    //endregion
+
+    //region print trafo immitance w [Ω]
+    public void printTrafoImmitance(boolean ohm) {
+
+        System.out.println("\n-------------------------------------");
+        System.out.println("------- Trafo Immitance -------------");
+        System.out.println("-------------------------------------\n");
+
+        StringBuilder sb = new StringBuilder();
+        Formatter fmt = new Formatter(sb);
+
+        for (ArcEntity arc : elNet.arcList) {
+            if (arc.getType() == ArcType.TRANSFORMER) {
+                fmt.format("ID:%3d ", arc.getId());
+                fmt.format("R:%.4f[Ω] ", arc.getResistance());
+                fmt.format("X:%.4f[Ω] ", arc.getReactance());
+                fmt.format("Z:%.4f[Ω] ", arc.getImpedance());
+                System.out.println(fmt);
+                sb.setLength(0);
             }
         }
 
     }
     //endregion
 
-    //region printTrafoImmitance
+    //region print Trafo Immitance w [PU]
     public void printTrafoImmitance() {
 
         System.out.println("\n-------------------------------------");
         System.out.println("------- Trafo Immitance -------------");
         System.out.println("-------------------------------------\n");
 
-        for (ArcEntity arc : electricalNetwork.arcList) {
+        for (ArcEntity arc : elNet.arcList) {
             if (arc.getType() == ArcType.TRANSFORMER) {
                 System.out.printf("%s %d %s", "--------- Trafo ID: (", arc.getId(), ") ---------\n");
                 System.out.printf("%-25s %4.2e %s%n", "(R) Resistance:", arc.getResistancePU(), " [pu]");
@@ -181,14 +217,14 @@ public class ElectricalNetworkOutPrinter {
     }
     //endregion
 
-    //region printNodeVoltagePu
+    //region print Node Voltage [PU]
     public void printNodeInfo() {
 
         System.out.println("\n-------------------------------------");
         System.out.println("------- Node Information --------------");
         System.out.println("-------------------------------------\n");
 
-        electricalNetwork.nodeList.forEach(nodeEntity -> {
+        elNet.nodeList.forEach(nodeEntity -> {
             System.out.println(nodeEntity.toString());
         });
     }
@@ -207,7 +243,7 @@ public class ElectricalNetworkOutPrinter {
      * @see ElectricalNetworkService#nodeNeighborsForwardListBuild()
      */
 
-    //region printNodeNeighborsWithDirection
+    //region print Node Neighbors With Direction
     public void printNodeNeighborsDirection(DIRECTION direction) {
 
         StringBuilder sb = new StringBuilder();
@@ -235,11 +271,11 @@ public class ElectricalNetworkOutPrinter {
         switch (direction) {
             //region FORWARD
             case FWD:
-                electricalNetwork.neighborsForwardMap.forEach((node, neighborsIdList) -> {
+                elNet.neighborsForwardMap.forEach((node, neighborsIdList) -> {
                             System.out.printf("node:[%3d] --> ", node);
                             System.out.print("neighbors: [");
                             neighborsIdList.forEach(neighborId -> {
-                                System.out.printf("%d ", electricalNetwork.arcMap.get(neighborId).getEndNode());
+                                System.out.printf("%d ", elNet.arcMap.get(neighborId).getEndNode());
                             });
                             System.out.println("]");
                         }
@@ -250,9 +286,9 @@ public class ElectricalNetworkOutPrinter {
 
             //region REVERSE
             case REV:
-                electricalNetwork.neighborsReverseMap.forEach((nodeEnd, neighborsStartIdList) -> {
+                elNet.neighborsReverseMap.forEach((nodeEnd, neighborsStartIdList) -> {
                     LongFunction<Long> IDtoNodeStartLongFunction = ID ->
-                            electricalNetwork.arcMap.get(ID).getStartNode();
+                            elNet.arcMap.get(ID).getStartNode();
 
                     System.out.print("reverse neighbors: ");
                     for (Long startNodeID : neighborsStartIdList) {
@@ -282,10 +318,10 @@ public class ElectricalNetworkOutPrinter {
         System.out.println("------- NODE CurrentPU Io --------------");
         System.out.println("----------------------------------------\n");
 
-        electricalNetwork.nodeList.forEach(nodeEntity -> {
-            System.out.printf("%3d: %s%n",
+        elNet.nodeList.forEach(nodeEntity -> {
+            System.out.printf("%3d: %s [PU]%n",
                     nodeEntity.getId(),
-                    DECIMAL_FORMAT_EXP.format(nodeEntity.getCurrentInitialPU()));
+                    DECIMAL_FORMAT.format(nodeEntity.getCurrentInitialPU()));
         });
 
     }
@@ -307,12 +343,12 @@ public class ElectricalNetworkOutPrinter {
     }
     //endregion
 
-    //region printSelfConductance
+    //region print Self Conductance
     public void printSelfConductance() {
         System.out.println("\nKonduktancja własna węzłów [pu]: ");
-        electricalNetwork.nodeMap.forEach((uniqueNodeNum, nodeEntity) -> {
+        elNet.nodeMap.forEach((uniqueNodeNum, nodeEntity) -> {
             System.out.println(String.format("%3d ", uniqueNodeNum)
-                            + String.format("%.2e", nodeEntity.getSelfConductancePU()));
+                    + String.format("%(.2f", nodeEntity.getSelfConductancePU()));
         });
 
         System.out.println();
@@ -329,34 +365,66 @@ public class ElectricalNetworkOutPrinter {
         StringBuilder sb = new StringBuilder();
         Formatter fmt = new Formatter(sb);
 
-        electricalNetwork.arcMap.forEach((IDs, arcEntity) -> {
+        elNet.arcMap.forEach((IDs, arcEntity) -> {
 
             // IDs - id z mapy łuków
             // arcEntity - encja znajdująca się pod id = IDs
             // pobranie pozycji (tylko) linii w odpowiednim katalogu
-            LongFunction<Long> IDtoPosition = ID -> electricalNetwork.arcMap.get(ID).getPosition();
+            LongFunction<Long> IDtoPosition = ID -> elNet.arcMap.get(ID).getPosition();
             Long pos = IDtoPosition.apply(IDs);
 
             // pobranie encji linii na podst. jej pozycji w katalogu
-            LineTypeEntity lineTypeEntity = electricalNetwork.lineTypeMap.get(pos);
+            LineTypeEntity lineTypeEntity = elNet.lineTypeMap.get(pos);
 
             if (arcEntity.getType() == ArcType.LINE) {
-                fmt.format("%-31s %d\n", "ID arc: ", IDs);
-                fmt.format("%-31s %d\n", "position ID: ", lineTypeEntity.getId());
-                fmt.format("%-31s %s\n", "Kind: ", lineTypeEntity.getKind());
-                fmt.format("%-31s %s\n", "Type: ", lineTypeEntity.getType());
-                fmt.format("%-31s %.2f [kV]\n", "Voltage: ", lineTypeEntity.getVoltage());
-                fmt.format("%-31s %.2f\n", "MAIN_STRAND_INTERSECTION: ", lineTypeEntity.getMainStrandIntersection());
-                fmt.format("%-31s %.2f\n", "COHESIVE_UNIT_RESISTANCE: ", lineTypeEntity.getCohesiveUnitResistance());
-                fmt.format("%-31s %.2f\n", "ZERO_UNIT_RESISTANCE: ", lineTypeEntity.getZeroUnitResistance());
-                fmt.format("%-31s %.2f\n", "COHESIVE_UNIT_REACTANCE: ", lineTypeEntity.getCohesiveUnitReactance());
-                fmt.format("%-31s %.2f\n", "ZERO_UNIT_REACTANCE: ", lineTypeEntity.getZeroUnitReactance());
-                fmt.format("%-31s %.2f\n", "UNIT_CAPACITANCE_TO_EARTH: ", lineTypeEntity.getUnitCapacitanceToEarth());
-                fmt.format("%-31s %.2f\n", "UNIT_WORKING_CAPACITANCE: ", lineTypeEntity.getUnitWorkingCapacitance());
-                fmt.format("%-31s %.2f\n", "LONGTERM_LOAD_CAPACITY: ", lineTypeEntity.getLongTermLoadCapacity());
-                fmt.format("%-31s %.2f\n", "LONGTERM_SUMMER_LOAD_CAPACITY: ", lineTypeEntity.getLongTermSummerLoadCapacity());
-                fmt.format("%-31s %.2f\n", "LONGTERM_WINTER_LOAD_CAPACITY: ", lineTypeEntity.getLongTermWinterLoadCapacity());
-                fmt.format("%-31s %.2f\n", "SHORTCIRCUIT_1S_LOAD_CAPACITY: ", lineTypeEntity.getShortCircuit1sLoadCapacity());
+                fmt.format("%-31s %d\n", "ID arc: ",
+                        IDs);
+
+                fmt.format("%-31s %d\n", "position ID: ",
+                        lineTypeEntity.getId());
+
+                fmt.format("%-31s %s\n", "Kind: ",
+                        lineTypeEntity.getKind());
+
+                fmt.format("%-31s %s\n", "Type: ",
+                        lineTypeEntity.getType());
+
+                fmt.format("%-31s %.2f [kV]\n", "Voltage: ",
+                        lineTypeEntity.getVoltage());
+
+                fmt.format("%-31s %.2f\n", "MAIN_STRAND_INTERSECTION: ",
+                        lineTypeEntity.getMainStrandIntersection());
+
+                fmt.format("%-31s %.2f\n", "COHESIVE_UNIT_RESISTANCE: ",
+                        lineTypeEntity.getCohesiveUnitResistance());
+
+                fmt.format("%-31s %.2f\n", "ZERO_UNIT_RESISTANCE: ",
+                        lineTypeEntity.getZeroUnitResistance());
+
+                fmt.format("%-31s %.2f\n", "COHESIVE_UNIT_REACTANCE: ",
+                        lineTypeEntity.getCohesiveUnitReactance());
+
+                fmt.format("%-31s %.2f\n", "ZERO_UNIT_REACTANCE: ",
+                        lineTypeEntity.getZeroUnitReactance());
+
+                fmt.format("%-31s %.2f\n", "UNIT_CAPACITANCE_TO_EARTH: ",
+                        lineTypeEntity.getUnitCapacitanceToEarth());
+
+                fmt.format("%-31s %.2f\n", "UNIT_WORKING_CAPACITANCE: ",
+                        lineTypeEntity.getUnitWorkingCapacitance());
+
+                fmt.format("%-31s %.2f\n", "LONGTERM_LOAD_CAPACITY: ",
+                        lineTypeEntity.getLongTermLoadCapacity());
+
+                fmt.format("%-31s %.2f\n", "LONGTERM_SUMMER_LOAD_CAPACITY: ",
+                        lineTypeEntity.getLongTermSummerLoadCapacity());
+
+                fmt.format("%-31s %.2f\n", "LONGTERM_WINTER_LOAD_CAPACITY: ",
+                        lineTypeEntity.getLongTermWinterLoadCapacity());
+
+                fmt.format("%-31s %.2f\n", "SHORTCIRCUIT_1S_LOAD_CAPACITY: ",
+                        lineTypeEntity.getShortCircuit1sLoadCapacity());
+
                 fmt.format("\n\n");
             }
         });
@@ -366,10 +434,35 @@ public class ElectricalNetworkOutPrinter {
     }
     //endregion
 
+    //region print node values
+    public void printNodeValues(Map<Long, NodeEntity> nodeEntityMap) {
+
+        StringBuilder sb = new StringBuilder();
+        Formatter formatter = new Formatter(sb);
+
+        nodeEntityMap.forEach((aLong, nodeEntity) -> {
+            formatter.format("%-23s %d%n", "id:", nodeEntity.getId());
+            formatter.format("%-23s %s%n", "node type:", nodeEntity.getNodeType());
+            formatter.format("%-23s %.2f [kW]%n", "active power:", nodeEntity.getActivePower());
+            formatter.format("%-23s %.2f [kVar]%n", "reactive power:", nodeEntity.getReactivePower());
+            formatter.format("%-23s %.2f [kV]%n", "voltage:", nodeEntity.getNominalVoltage());
+            formatter.format("%-23s %.4e%n", "voltage [PU]:", nodeEntity.getVoltagePU());
+            formatter.format("%-23s %.4e%n", "current iter '0' [PU]:", nodeEntity.getCurrentInitialPU());
+            formatter.format("%-23s %.4e%n", "current [PU]:", nodeEntity.getCurrentPU());
+            formatter.format("%-23s %.4e%n", "voltage real:", nodeEntity.getVoltageReal());
+            formatter.format("%-23s %.4e%n", "current real:", nodeEntity.getCurrentReal());
+            formatter.format("%-23s %.4e%n", "power real:", nodeEntity.getPowerReal());
+
+            System.out.println(formatter);
+            sb.setLength(0);
+        });
+    }
+    //endregion
+
     //region print distributed nodes
     public void printDistributedNodes(NodeType nodeType) {
         System.out.println("\nDistributed nodes: ");
-        electricalNetwork.nodeMap.forEach((aLong, nodeEntity) -> {
+        elNet.nodeMap.forEach((aLong, nodeEntity) -> {
             if (nodeEntity.getNodeType() == nodeType) {
                 System.out.print(aLong + " ");
             }
@@ -382,15 +475,17 @@ public class ElectricalNetworkOutPrinter {
     //region print nodes with no neighbors in front
     public void printNodesWithNoNeighborsInFront() {
         System.out.println("\nnodes that have no neighbors in front: ");
-        electricalNetwork.nodesWithNoNeighborsInFront.forEach(aLong -> System.out.print(aLong + " "));
+        elNet.nodesWithNoNeighborsInFront.forEach(aLong -> System.out.print(aLong + " "));
         System.out.println();
     }
     //endregion
 
-    public void printNodesNeighborsFwdRevMap() {
+    //region print nodes neighbors forward and reverse map
+    public void printNodesNeighborsForwardReverseMap() {
         System.out.println("map of the neighbors of the nodes in front and behind:");
-        if (!electricalNetwork.nodesNeighborsForwardReverseMap.isEmpty()) {
-            electricalNetwork.nodesNeighborsForwardReverseMap.forEach((uniqueNodeNumber, neighborsIDsList) -> {
+        if (!elNet.nodesNeighborsForwardReverseMap.isEmpty()) {
+            elNet.nodesNeighborsForwardReverseMap.forEach((uniqueNodeNumber, neighborsIDsList) -> {
+
                 /*//region zamiana ID węzła na unikalny nr węzła
                 ArrayList<Long> nodeUniqueNumber = new ArrayList<>();
                 for (Long nodeID : neighborsIDsList) {
@@ -407,4 +502,54 @@ public class ElectricalNetworkOutPrinter {
             System.out.println("Mapa: nodesNBRfwdREVmap jest pusta");
         }
     }
+    //endregion
+
+    //region print "files data stored in maps" using toString method
+    public void arcEntityPrinter(Map<Long, ArcEntity> map) {
+        map.forEach(biConsumer);
+    }
+
+    public void lineTypeEntityPrinter(Map<Long, LineTypeEntity> map) {
+        map.forEach(biConsumer);
+    }
+
+    public void nodeEntityPrinter(Map<Long, NodeEntity> map) {
+        map.forEach(biConsumer);
+    }
+
+    public void transformerTypeEntityPrinter(Map<Long, TransformerTypeEntity> map) {
+        map.forEach(biConsumer);
+    }
+
+    static BiConsumer<Long, BaseEntity> biConsumer = (ID, baseEntity) -> {
+        System.out.println(baseEntity.toString());
+    };
+
+    BiConsumer<Long, LineTypeEntity> lineTypeBiConsumer = (ID, lineTypeEntity) -> {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        Formatter formatter = new Formatter(stringBuilder);
+
+        String del = appParameters.getDelimiter();
+
+        formatter.format("%d%s", lineTypeEntity.getId(), del);
+        formatter.format("%d%s", lineTypeEntity.getKind().getId(), del);
+        formatter.format("%s%s", lineTypeEntity.getType(), del);
+        formatter.format("%.1f%s", lineTypeEntity.getVoltage(), del);
+        formatter.format("%.0f%s", lineTypeEntity.getMainStrandIntersection(), del);
+        formatter.format("%.3f%s", lineTypeEntity.getCohesiveUnitResistance(), del);
+        formatter.format("%.0f%s", lineTypeEntity.getZeroUnitResistance(), del);
+        formatter.format("%.3f%s", lineTypeEntity.getCohesiveUnitReactance(), del);
+        formatter.format("%.1f%s", lineTypeEntity.getZeroUnitReactance(), del);
+        formatter.format("%.3f%s", lineTypeEntity.getUnitCapacitanceToEarth(), del);
+        formatter.format("%.2f%s", lineTypeEntity.getUnitWorkingCapacitance(), del);
+        formatter.format("%.2f%s", lineTypeEntity.getLongTermSummerLoadCapacity(), del);
+        formatter.format("%.2f%s", lineTypeEntity.getLongTermWinterLoadCapacity(), del);
+        formatter.format("%.0f%s", lineTypeEntity.getShortCircuit1sLoadCapacity(), del);
+
+        System.out.println(formatter);
+    };
+    //endregion
+
+    //endregion
 }
