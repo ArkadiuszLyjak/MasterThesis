@@ -20,6 +20,7 @@ package MasterThesis;
 * */
 
 import MasterThesis.arc_file_tools.FileDataService;
+import MasterThesis.arc_file_tools.FileDataWriter;
 import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
 //import MasterThesis.bfs.BfsAlgorithm;
@@ -152,9 +153,19 @@ public class MainApp {
             //endregion
 
             //region  active power flow calculation
-//            directMethodAlgorithm.activePowerFlow();
+            directMethodAlgorithm.activePowerFlow();
             //endregion
 
+            //region print calculated nodes values
+//            elNetOutPrinter.printNodeValues(elNet.nodeMap, ElectricalNetworkOutPrinter.LEVELPRINT.HORIZONTAL);
+//            elNetOutPrinter.printNodeValues(elNet.nodeMap, ElectricalNetworkOutPrinter.LEVELPRINT.VERTICAL);
+            //endregion
+
+
+            //region print results to files
+            fileDataService.writeNodeResults();
+            fileDataService.writeArcResults();
+            //endregion
 
         } catch (Exception e) {
             e.printStackTrace();

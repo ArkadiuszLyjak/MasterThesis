@@ -130,7 +130,6 @@ public class ElectricalNetworkCalcService {
                 } else { // a moze else-if?
                     System.out.println("Transformator o mocy wyższej niż 2.5 MWA");
                 }
-
                 //endregion
 
                 //region relative values per Unit

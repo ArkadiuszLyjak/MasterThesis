@@ -22,6 +22,8 @@ public class AppParameters {
     String dataNodeResultsFileName = "MO_DATA_NODE_RESULTS.txt";
     String delimiter = "|";
     String sourceDataFilesPath = "C:\\repo\\MasterThesis\\dataFiles\\";
+    String arcResultsOutputFile = sourceDataFilesPath + "ARC_RESULTS.txt";
+    String nodeResultsOutputFile = sourceDataFilesPath + "NODE_RESULTS.txt";
     //endregion
 
     //region SINGLENTON getInstance

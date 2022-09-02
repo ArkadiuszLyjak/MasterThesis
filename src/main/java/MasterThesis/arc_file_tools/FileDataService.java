@@ -12,6 +12,7 @@ import MasterThesis.transformer_type.TransformerTypeEntity;
 import MasterThesis.transformer_type.TransformerTypeFactory;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class FileDataService {
 
@@ -28,6 +29,39 @@ public class FileDataService {
             instance = new FileDataService();
         }
         return instance;
+    }
+    //endregion
+
+    //region write Arc Results
+    public void writeArcResults() throws IOException {
+        String delim = params.getDelimiter();
+        FileDataWriter.fileDataWrite(params.getArcResultsOutputFile(), printWriter -> {
+            printWriter.write("ID|TYPE|TRANSMIT POWER\n");
+            elNet.arcMap.forEach((ID, arcEntity) -> {
+                printWriter.print(ID);
+                printWriter.print(delim);
+                printWriter.write(arcEntity.getType().toString());
+                printWriter.print(delim);
+                printWriter.printf("%-(2.4f%s", arcEntity.getPowerFlowReal(), delim);
+                printWriter.printf("%-(2.4f%s", arcEntity.getActivePowerFlowPU(), delim);
+                printWriter.println();
+            });
+        });
+    }
+    //endregion
+
+    //region write Node Results
+    public void writeNodeResults() throws IOException {
+        String delim = params.getDelimiter();
+
+        FileDataWriter.fileDataWrite(params.getNodeResultsOutputFile(), printWriter -> {
+            printWriter.write("Node|Voltage\n");
+            elNet.nodeMap.forEach((ID, nodeEntity) -> {
+                printWriter.printf("%4d%s", ID, delim);
+                printWriter.printf("%-(6.6f ", nodeEntity.getVoltageReal());
+                printWriter.print("\n");
+            });
+        });
     }
     //endregion
 

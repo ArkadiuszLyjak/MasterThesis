@@ -83,23 +83,21 @@ public class ElectricalNetworkService {
 
             //region Description 2
             if (electricalNetwork.arcMap.get(arcID).getCondition() == 1) {
-    long endNode = arcEntity.getEndNode(); // start z końcowego węzła
+                long endNode = arcEntity.getEndNode(); // start z końcowego węzła
 
-    // StartNode - węzeł początkowy (nie ID!)
-                if(!electricalNetwork.neighborsReverseMap.containsKey(endNode))
+                // StartNode - węzeł początkowy (nie ID!)
+                if (!electricalNetwork.neighborsReverseMap.containsKey(endNode)) {
+                    electricalNetwork.neighborsReverseMap.put(endNode, new ArrayList<>());
+                }
 
-    {
-        electricalNetwork.neighborsReverseMap.put(endNode, new ArrayList<>());
-    }
-
-    // dodaje ID całego rekordu, gdzie znajduje się sąsiad
+                // dodaje ID całego rekordu, gdzie znajduje się sąsiad
                 electricalNetwork.neighborsReverseMap.get(endNode).
 
-    add(arcID);
-}
+                        add(arcID);
+            }
 //endregion
         });
-                }
+    }
 //endregion
 
     //region isDistributeNode

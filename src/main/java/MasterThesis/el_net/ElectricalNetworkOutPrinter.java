@@ -10,6 +10,7 @@ import MasterThesis.node.NodeEntity;
 import MasterThesis.node.NodeType;
 import MasterThesis.tools.PrintUtility;
 import MasterThesis.transformer_type.TransformerTypeEntity;
+import org.omg.PortableInterceptor.ACTIVE;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -19,10 +20,33 @@ import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.util.Formatter;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.LongFunction;
 
 public class ElectricalNetworkOutPrinter {
+
+    //region LEVELPRINT
+    public enum LEVELPRINT {
+        HORIZONTAL(1),
+        VERTICAL(2);
+
+        final int id;
+
+        LEVELPRINT(int id) {
+            this.id = id;
+        }
+
+        public static LEVELPRINT valueOF(int id) {
+            if (Objects.equals(id, HORIZONTAL.id)) return HORIZONTAL;
+            return VERTICAL;
+        }
+
+        public int getId() {
+            return id;
+        }
+    }
+    //endregion
 
     AppParameters appParameters = AppParameters.getInstance();
 
@@ -435,27 +459,45 @@ public class ElectricalNetworkOutPrinter {
     //endregion
 
     //region print node values
-    public void printNodeValues(Map<Long, NodeEntity> nodeEntityMap) {
+    public void printNodeValues(Map<Long, NodeEntity> nodeEntityMap, LEVELPRINT levelprint) {
 
         StringBuilder sb = new StringBuilder();
         Formatter formatter = new Formatter(sb);
 
-        nodeEntityMap.forEach((aLong, nodeEntity) -> {
-            formatter.format("%-23s %d%n", "id:", nodeEntity.getId());
-            formatter.format("%-23s %s%n", "node type:", nodeEntity.getNodeType());
-            formatter.format("%-23s %.2f [kW]%n", "active power:", nodeEntity.getActivePower());
-            formatter.format("%-23s %.2f [kVar]%n", "reactive power:", nodeEntity.getReactivePower());
-            formatter.format("%-23s %.2f [kV]%n", "voltage:", nodeEntity.getNominalVoltage());
-            formatter.format("%-23s %.4e%n", "voltage [PU]:", nodeEntity.getVoltagePU());
-            formatter.format("%-23s %.4e%n", "current iter '0' [PU]:", nodeEntity.getCurrentInitialPU());
-            formatter.format("%-23s %.4e%n", "current [PU]:", nodeEntity.getCurrentPU());
-            formatter.format("%-23s %.4e%n", "voltage real:", nodeEntity.getVoltageReal());
-            formatter.format("%-23s %.4e%n", "current real:", nodeEntity.getCurrentReal());
-            formatter.format("%-23s %.4e%n", "power real:", nodeEntity.getPowerReal());
+        switch (levelprint) {
 
-            System.out.println(formatter);
-            sb.setLength(0);
-        });
+            case VERTICAL:
+                nodeEntityMap.forEach((aLong, nodeEntity) -> {
+                    formatter.format("%-23s %d%n", "id:", nodeEntity.getId());
+                    formatter.format("%-23s %.2f [kW]%n", "active power:", nodeEntity.getActivePower());
+                    formatter.format("%-23s %.2f [kVar]%n", "reactive power:", nodeEntity.getReactivePower());
+                    formatter.format("%-23s %.2f [kV]%n", "voltage:", nodeEntity.getNominalVoltage());
+                    formatter.format("%-23s %.4f%n", "voltage [PU]:", nodeEntity.getVoltagePU());
+                    formatter.format("%-23s %.4f%n", "current iter '0' [PU]:", nodeEntity.getCurrentInitialPU());
+                    formatter.format("%-23s %.4f%n", "current [PU]:", nodeEntity.getCurrentPU());
+                    formatter.format("%-23s %.4f%n", "voltage real:", nodeEntity.getVoltageReal());
+                    formatter.format("%-23s %.4f%n", "current real:", nodeEntity.getCurrentReal());
+
+                    System.out.println(formatter);
+                    sb.setLength(0);
+                });
+
+                break;
+
+            case HORIZONTAL:
+                nodeEntityMap.forEach((aLong, nodeEntity) -> {
+                    formatter.format("%s%3d  ", "id:", nodeEntity.getId());
+                    formatter.format("%s%-(10.4f ", "I:", nodeEntity.getCurrentReal());
+                    formatter.format("%s%-(10.6f ", "V:", nodeEntity.getVoltageReal());
+
+                    System.out.println(formatter);
+                    sb.setLength(0);
+                });
+
+                break;
+
+        }
+
     }
     //endregion
 
@@ -551,5 +593,20 @@ public class ElectricalNetworkOutPrinter {
     };
     //endregion
 
+
+    //region arc results print
+    public void arcResultsPrint() {
+        // ID
+        // TYPE
+        // TRANSMIT POWER
+
+    }
+    //endregion
+
+    //region node results print
+    public void nodeResultsPrint() {
+        // ID
+        // VOLTAGE
+    }
     //endregion
 }

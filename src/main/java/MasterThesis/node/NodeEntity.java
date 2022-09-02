@@ -36,15 +36,14 @@ public class NodeEntity extends BaseEntity {
     Double voltagePU;           // relative voltage value
     Double currentInitialPU;    // the relative value of the current for the null iteration
     Double currentPU;           // relative value of the current
-    Double selfConductancePU;     // self conductance of the node
+    Double selfConductancePU;   // self conductance of the node
 
     // backward computed values from relative values
     Double voltageReal;       // voltage
     Double currentReal;       // node current
-    Double powerReal;         // active power flow in nominated units
     //endregion
 
-    //region Node Entity
+    //region Node Entity Constructor
     public NodeEntity(Long id) {
         super(id);
     }
@@ -70,7 +69,6 @@ public class NodeEntity extends BaseEntity {
         return formatter.toString();
     }
     //endregion
-
 
 }
 
