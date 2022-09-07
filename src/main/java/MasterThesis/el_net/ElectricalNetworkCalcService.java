@@ -274,6 +274,7 @@ public class ElectricalNetworkCalcService {
 
                         double currentNodeTemporary = (conductanceArcPU * voltagePU) / Math.sqrt(3.0);
                         currentNode += currentNodeTemporary;
+
                         elNet.nodeMap.get(node).setCurrentInitialPU(currentNode);
                         elNet.nodeMap.get(node).setCurrentPU(currentNode);
                     }

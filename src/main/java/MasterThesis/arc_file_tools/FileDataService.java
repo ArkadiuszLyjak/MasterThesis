@@ -13,12 +13,15 @@ import MasterThesis.transformer_type.TransformerTypeFactory;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 public class FileDataService {
 
     static FileDataService instance;
     AppParameters params = AppParameters.getInstance();
     ElectricalNetwork elNet = ElectricalNetwork.getInstance();
+
+    static DecimalFormat df = new DecimalFormat("00.000000");
 
     //region getInstance
     private FileDataService() {
@@ -33,7 +36,7 @@ public class FileDataService {
     //endregion
 
     //region write Arc Results
-    public void writeArcResults() throws IOException {
+    public void writeArcResultsToFile() throws IOException {
         String delim = params.getDelimiter();
         FileDataWriter.fileDataWrite(params.getArcResultsOutputFile(), printWriter -> {
             printWriter.write("ID|TYPE|TRANSMIT POWER\n");
@@ -43,7 +46,6 @@ public class FileDataService {
                 printWriter.write(arcEntity.getType().toString());
                 printWriter.print(delim);
                 printWriter.printf("%-(2.4f%s", arcEntity.getPowerFlowReal(), delim);
-                printWriter.printf("%-(2.4f%s", arcEntity.getActivePowerFlowPU(), delim);
                 printWriter.println();
             });
         });
@@ -51,14 +53,14 @@ public class FileDataService {
     //endregion
 
     //region write Node Results
-    public void writeNodeResults() throws IOException {
+    public void writeNodeResultsToFile() throws IOException {
         String delim = params.getDelimiter();
 
         FileDataWriter.fileDataWrite(params.getNodeResultsOutputFile(), printWriter -> {
-            printWriter.write("Node|Voltage\n");
+            printWriter.write("Node ID|Voltage\n");
             elNet.nodeMap.forEach((ID, nodeEntity) -> {
-                printWriter.printf("%4d%s", ID, delim);
-                printWriter.printf("%-(6.6f ", nodeEntity.getVoltageReal());
+                printWriter.printf("%3d%s", ID, delim);
+                printWriter.printf("%-9.6f", nodeEntity.getVoltageReal());
                 printWriter.print("\n");
             });
         });

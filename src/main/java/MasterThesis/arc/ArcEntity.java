@@ -79,7 +79,6 @@ public class ArcEntity extends BaseEntity {
     //endregion
 
     Double powerFlowReal;         // active power flow in nominated units
-
     Double activePowerFlowPU;     // active power flow
 
     //region ArcEntity Constructor

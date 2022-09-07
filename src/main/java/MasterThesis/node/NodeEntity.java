@@ -39,8 +39,9 @@ public class NodeEntity extends BaseEntity {
     Double selfConductancePU;   // self conductance of the node
 
     // backward computed values from relative values
-    Double voltageReal;       // voltage
-    Double currentReal;       // node current
+    Double voltageReal;         // real value voltage
+    Double currentReal;         // real value node current
+    Double selfConductanceReal; // real value self conductance
     //endregion
 
     //region Node Entity Constructor

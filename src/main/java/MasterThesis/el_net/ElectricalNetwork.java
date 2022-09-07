@@ -1,7 +1,7 @@
 package MasterThesis.el_net;
 
 import MasterThesis.arc.ArcEntity;
-import MasterThesis.base.entity.BaseEntity;
+import MasterThesis.el_net.directMethod.InterimEntity;
 import MasterThesis.lineType.LineTypeEntity;
 import MasterThesis.node.NodeEntity;
 import MasterThesis.transformer_type.TransformerTypeEntity;
@@ -12,7 +12,7 @@ public class ElectricalNetwork {
 
     //region Properties
     private static ElectricalNetwork electricalNetwork;
-    public Map<Long, ArcEntity> arcMap;                        // maps from files
+    public Map<Long, ArcEntity> arcMap;                         // maps from files
     public Map<Long, LineTypeEntity> lineTypeMap;               // maps from files
     public Map<Long, NodeEntity> nodeMap;                       // maps from files
     public Map<Long, TransformerTypeEntity> transformerTypeMap; // maps from files
@@ -22,6 +22,13 @@ public class ElectricalNetwork {
     public Map<Long, List<Long>> neighborsReverseMap = new LinkedHashMap<>();
     public Map<Long, ArrayList<Long>> nodesNeighborsForwardReverseMap = new LinkedHashMap<>();
     public List<Long> nodesWithNoNeighborsInFront = new LinkedList<>();
+
+    // mapa przechowująca obliczenia pośrednie dla każdej iteracji w głównym algorytmie stałoprądowym
+    // <long iteracja , mapa<long węzeł, interimEntity>>
+    public Map<Long, Map<Long, InterimEntity>> mapIterate = new LinkedHashMap<>();
+
+    // <Long węzeł, interimEntity>
+    public Map<Long, InterimEntity> interimNodeMap = new LinkedHashMap<>();
     //endregion
 
     /**

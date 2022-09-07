@@ -38,17 +38,17 @@ public class ElectricalNetworkService {
 
         electricalNetwork.arcMap.forEach((arcID, arcEntity) -> {
 
-            if (arcEntity.getCondition() == 1) {
-                long startNode = arcEntity.getStartNode();
+//            if (arcEntity.getCondition() == 1) {
+            long startNode = arcEntity.getStartNode();
 
-                // StartNode - węzeł początkowy (nie ID!)
-                if (!electricalNetwork.neighborsForwardMap.containsKey(startNode)) {
-                    electricalNetwork.neighborsForwardMap.put(startNode, new ArrayList<>());
-                }
-
-                // dodaje ID całego rekordu, gdzie znajduje się sąsiad
-                electricalNetwork.neighborsForwardMap.get(startNode).add(arcID); // dodaje ID sąsiada
+            // StartNode - węzeł początkowy (nie ID!)
+            if (!electricalNetwork.neighborsForwardMap.containsKey(startNode)) {
+                electricalNetwork.neighborsForwardMap.put(startNode, new ArrayList<>());
             }
+
+            // dodaje ID całego rekordu, gdzie znajduje się sąsiad
+            electricalNetwork.neighborsForwardMap.get(startNode).add(arcID); // dodaje ID sąsiada
+//                }
 
                /* long startNode = arcEntity.getStartNode();
 
@@ -82,19 +82,19 @@ public class ElectricalNetworkService {
             //endregion*/
 
             //region Description 2
-            if (electricalNetwork.arcMap.get(arcID).getCondition() == 1) {
-                long endNode = arcEntity.getEndNode(); // start z końcowego węzła
+//                    if (electricalNetwork.arcMap.get(arcID).getCondition() == 1) {
+            long endNode = arcEntity.getEndNode(); // start z końcowego węzła
 
-                // StartNode - węzeł początkowy (nie ID!)
-                if (!electricalNetwork.neighborsReverseMap.containsKey(endNode)) {
-                    electricalNetwork.neighborsReverseMap.put(endNode, new ArrayList<>());
-                }
-
-                // dodaje ID całego rekordu, gdzie znajduje się sąsiad
-                electricalNetwork.neighborsReverseMap.get(endNode).
-
-                        add(arcID);
+            // StartNode - węzeł początkowy (nie ID!)
+            if (!electricalNetwork.neighborsReverseMap.containsKey(endNode)) {
+                electricalNetwork.neighborsReverseMap.put(endNode, new ArrayList<>());
             }
+
+            // dodaje ID całego rekordu, gdzie znajduje się sąsiad
+            electricalNetwork.neighborsReverseMap.get(endNode).
+
+                    add(arcID);
+//            }
 //endregion
         });
     }

@@ -3,14 +3,10 @@ package MasterThesis.el_net;
 
 import MasterThesis.arc.ArcEntity;
 import MasterThesis.arc.ArcType;
-import MasterThesis.base.entity.BaseEntity;
 import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.lineType.LineTypeEntity;
-import MasterThesis.node.NodeEntity;
 import MasterThesis.node.NodeType;
 import MasterThesis.tools.PrintUtility;
-import MasterThesis.transformer_type.TransformerTypeEntity;
-import org.omg.PortableInterceptor.ACTIVE;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -19,10 +15,10 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.util.Formatter;
-import java.util.Map;
 import java.util.Objects;
-import java.util.function.BiConsumer;
 import java.util.function.LongFunction;
+
+import static MasterThesis.data_calc.BaseValues.voltageBase;
 
 public class ElectricalNetworkOutPrinter {
 
@@ -51,7 +47,7 @@ public class ElectricalNetworkOutPrinter {
     AppParameters appParameters = AppParameters.getInstance();
 
     //region Decimal Format
-    private static final DecimalFormat DECIMAL_FORMAT_EXP = new DecimalFormat("0.00E0");
+    private static final DecimalFormat DECIMAL_FORMAT_EXP = new DecimalFormat("0.0E0");
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.0000");
     //endregion
 
@@ -182,10 +178,10 @@ public class ElectricalNetworkOutPrinter {
 //                if (!(Double.compare(arc.getArcLength(), 0.0) == 0)) {
                 System.out.printf("%4d-->%-4d ", arc.getStartNode(), arc.getEndNode());
                 System.out.print("L:" + DECIMAL_FORMAT_EXP.format(arc.getArcLength()) + "[m]");
-                System.out.print(" R:" + DECIMAL_FORMAT_EXP.format(arc.getResistancePU()));
-                System.out.print(" X:" + DECIMAL_FORMAT_EXP.format(arc.getReactancePU()));
-                System.out.print(" Z:" + DECIMAL_FORMAT_EXP.format(arc.getImpedancePU()));
-                System.out.println(" [pu]");
+                System.out.printf(" R:%-8s", DECIMAL_FORMAT_EXP.format(arc.getResistancePU()));
+                System.out.printf("X:%-8s", DECIMAL_FORMAT_EXP.format(arc.getReactancePU()));
+                System.out.printf("Z:%-7s", DECIMAL_FORMAT_EXP.format(arc.getImpedancePU()));
+                System.out.println("[pu]");
 //                }
 
             }
@@ -241,18 +237,6 @@ public class ElectricalNetworkOutPrinter {
     }
     //endregion
 
-    //region print Node Voltage [PU]
-    public void printNodeInfo() {
-
-        System.out.println("\n-------------------------------------");
-        System.out.println("------- Node Information --------------");
-        System.out.println("-------------------------------------\n");
-
-        elNet.nodeList.forEach(nodeEntity -> {
-            System.out.println(nodeEntity.toString());
-        });
-    }
-    //endregion
 
     /**
      * <p>Metoda zwraca <em><i>unikalny numer węzła</i></em> oraz listę jego sąsiadów.
@@ -345,7 +329,7 @@ public class ElectricalNetworkOutPrinter {
         elNet.nodeList.forEach(nodeEntity -> {
             System.out.printf("%3d: %s [PU]%n",
                     nodeEntity.getId(),
-                    DECIMAL_FORMAT.format(nodeEntity.getCurrentInitialPU()));
+                    DECIMAL_FORMAT_EXP.format(nodeEntity.getCurrentInitialPU()));
         });
 
     }
@@ -372,7 +356,7 @@ public class ElectricalNetworkOutPrinter {
         System.out.println("\nKonduktancja własna węzłów [pu]: ");
         elNet.nodeMap.forEach((uniqueNodeNum, nodeEntity) -> {
             System.out.println(String.format("%3d ", uniqueNodeNum)
-                    + String.format("%(.2f", nodeEntity.getSelfConductancePU()));
+                    + String.format("%(.1e", nodeEntity.getSelfConductancePU()));
         });
 
         System.out.println();
@@ -459,44 +443,57 @@ public class ElectricalNetworkOutPrinter {
     //endregion
 
     //region print node values
-    public void printNodeValues(Map<Long, NodeEntity> nodeEntityMap, LEVELPRINT levelprint) {
+    public void printNodeValues(LEVELPRINT levelprint) {
 
         StringBuilder sb = new StringBuilder();
         Formatter formatter = new Formatter(sb);
 
         switch (levelprint) {
 
+            //region VERTICAL
             case VERTICAL:
-                nodeEntityMap.forEach((aLong, nodeEntity) -> {
+                elNet.nodeMap.forEach((aLong, nodeEntity) -> {
                     formatter.format("%-23s %d%n", "id:", nodeEntity.getId());
-                    formatter.format("%-23s %.2f [kW]%n", "active power:", nodeEntity.getActivePower());
-                    formatter.format("%-23s %.2f [kVar]%n", "reactive power:", nodeEntity.getReactivePower());
-                    formatter.format("%-23s %.2f [kV]%n", "voltage:", nodeEntity.getNominalVoltage());
-                    formatter.format("%-23s %.4f%n", "voltage [PU]:", nodeEntity.getVoltagePU());
-                    formatter.format("%-23s %.4f%n", "current iter '0' [PU]:", nodeEntity.getCurrentInitialPU());
-                    formatter.format("%-23s %.4f%n", "current [PU]:", nodeEntity.getCurrentPU());
-                    formatter.format("%-23s %.4f%n", "voltage real:", nodeEntity.getVoltageReal());
-                    formatter.format("%-23s %.4f%n", "current real:", nodeEntity.getCurrentReal());
+//                    formatter.format("%-23s %.2f [kW]%n", "active power:", nodeEntity.getActivePower());
+//                    formatter.format("%-23s %.2f [kVar]%n", "reactive power:", nodeEntity.getReactivePower());
+                    formatter.format("  %-23s %.2f [kV]%n", "voltage nominal:", nodeEntity.getNominalVoltage());
+                    formatter.format("  %-23s %.1e%n", "voltage [PU]:", nodeEntity.getVoltagePU());
+                    formatter.format("  %-23s %.4f%n", "voltage real:", nodeEntity.getVoltageReal());
+//                    formatter.format("%-23s %.4f%n", "current iter '0' [PU]:", nodeEntity.getCurrentInitialPU());
+//                    formatter.format("%-23s %.4f%n", "current [PU]:", nodeEntity.getCurrentPU());
+//                    formatter.format("%-23s %.4f%n", "current real:", nodeEntity.getCurrentReal());
 
                     System.out.println(formatter);
                     sb.setLength(0);
                 });
 
                 break;
+            //endregion
 
+            //region HORIZONTAL
             case HORIZONTAL:
-                nodeEntityMap.forEach((aLong, nodeEntity) -> {
-                    formatter.format("%s%3d  ", "id:", nodeEntity.getId());
-                    formatter.format("%s%-(10.4f ", "I:", nodeEntity.getCurrentReal());
-                    formatter.format("%s%-(10.6f ", "V:", nodeEntity.getVoltageReal());
+                elNet.nodeMap.forEach((aLong, nodeEntity) -> {
+                    formatter.format("%3d ", nodeEntity.getId());
+                    formatter.format("%s%-(10.4f ", "Ir: ", nodeEntity.getCurrentReal());
+                    formatter.format("%s%-(10.6f ", "Vr: ", nodeEntity.getVoltageReal());
 
                     System.out.println(formatter);
                     sb.setLength(0);
                 });
 
                 break;
+            //endregion
 
         }
+
+    }
+    //endregion
+
+    //region arc results print
+    public void arcResultsPrint() {
+        // ID
+        // TYPE
+        // TRANSMIT POWER
 
     }
     //endregion
@@ -546,67 +543,69 @@ public class ElectricalNetworkOutPrinter {
     }
     //endregion
 
-    //region print "files data stored in maps" using toString method
-    public void arcEntityPrinter(Map<Long, ArcEntity> map) {
-        map.forEach(biConsumer);
+    public void printInterimCalculations() {
+
+        StringBuilder sb = new StringBuilder();
+        Formatter formatter = new Formatter(sb);
+
+        String arrowSpacer = " <<<<<<<<<<<<<<<<<<<";
+        String lineSpacer = "---------------------------";
+
+        DecimalFormat df = new DecimalFormat("0.0E0;(#,##0.0#)");
+
+        elNet.mapIterate.forEach((iterate, nodeInterimMap) -> {
+
+            formatter.format("\nk:%d - pętla do-while%s\n\n", iterate, arrowSpacer);
+
+            nodeInterimMap.forEach((node, interimEntity) -> {
+
+                formatter.format("%s\n%-18s [%d]\n%s\n",
+                        lineSpacer, "node", node, lineSpacer);
+
+                formatter.format("%-18s %s\n", "currentPU: ",
+                        df.format(interimEntity.getCurrentPU()));
+
+                formatter.format("%-18s %s\n", "Ui: ",
+                        df.format(interimEntity.getU_i()));
+
+                formatter.format("%-18s %s\n", "Gii: ",
+                        df.format(interimEntity.getG_ii()));
+
+                formatter.format("%-18s %s\n", "currentPU: ",
+                        df.format(interimEntity.getItem_Ii()));
+
+                formatter.format("%-18s %s\n", "Ui * Gii:",
+                        df.format(interimEntity.getItem_Ui_Gii()));
+
+                formatter.format("%-19s %s\n", "ΔI:",
+                        df.format(interimEntity.getDeltaCurrentThisIterPresentNode()));
+
+                formatter.format("%-19s %s\n", "ΔVi",
+                        df.format(interimEntity.getDeltaVoltageThisIterPresentNode())); // 0
+
+                formatter.format("%-18s %s\n", "V iter [PU]: ",
+                        df.format(interimEntity.getVoltageThisIterPresentNode()));
+
+                formatter.format("%-18s %s\n", "V iter real: ",
+                        df.format(interimEntity.getVoltageThisIterPresentNode() * voltageBase));
+
+                formatter.format("%-18s %d\n", "a: ",
+                        interimEntity.getA());
+
+                System.out.println(sb);
+                sb.setLength(0);
+
+                interimEntity.getNeighborCalcMap().forEach((neighbor, neighborCalcEntity) -> {
+                    System.out.printf("\t%-12s [%d]\n", "neighbor", neighbor);
+                    System.out.printf("\t%-12s %s\n", "Uj", df.format(neighborCalcEntity.getU_j()));
+                    System.out.printf("\t%-12s %s\n", "Ui - Uj", df.format(interimEntity.getU_i() - neighborCalcEntity.getU_j()));
+                    System.out.printf("\t%-12s %s\n", "Gij", df.format(neighborCalcEntity.getG_ij()));
+                    System.out.printf("\t%-14s %s\n", "∑", df.format(neighborCalcEntity.getItem_sum()));
+                    System.out.println();
+                });
+            });
+
+        });
     }
 
-    public void lineTypeEntityPrinter(Map<Long, LineTypeEntity> map) {
-        map.forEach(biConsumer);
-    }
-
-    public void nodeEntityPrinter(Map<Long, NodeEntity> map) {
-        map.forEach(biConsumer);
-    }
-
-    public void transformerTypeEntityPrinter(Map<Long, TransformerTypeEntity> map) {
-        map.forEach(biConsumer);
-    }
-
-    static BiConsumer<Long, BaseEntity> biConsumer = (ID, baseEntity) -> {
-        System.out.println(baseEntity.toString());
-    };
-
-    BiConsumer<Long, LineTypeEntity> lineTypeBiConsumer = (ID, lineTypeEntity) -> {
-
-        StringBuilder stringBuilder = new StringBuilder();
-        Formatter formatter = new Formatter(stringBuilder);
-
-        String del = appParameters.getDelimiter();
-
-        formatter.format("%d%s", lineTypeEntity.getId(), del);
-        formatter.format("%d%s", lineTypeEntity.getKind().getId(), del);
-        formatter.format("%s%s", lineTypeEntity.getType(), del);
-        formatter.format("%.1f%s", lineTypeEntity.getVoltage(), del);
-        formatter.format("%.0f%s", lineTypeEntity.getMainStrandIntersection(), del);
-        formatter.format("%.3f%s", lineTypeEntity.getCohesiveUnitResistance(), del);
-        formatter.format("%.0f%s", lineTypeEntity.getZeroUnitResistance(), del);
-        formatter.format("%.3f%s", lineTypeEntity.getCohesiveUnitReactance(), del);
-        formatter.format("%.1f%s", lineTypeEntity.getZeroUnitReactance(), del);
-        formatter.format("%.3f%s", lineTypeEntity.getUnitCapacitanceToEarth(), del);
-        formatter.format("%.2f%s", lineTypeEntity.getUnitWorkingCapacitance(), del);
-        formatter.format("%.2f%s", lineTypeEntity.getLongTermSummerLoadCapacity(), del);
-        formatter.format("%.2f%s", lineTypeEntity.getLongTermWinterLoadCapacity(), del);
-        formatter.format("%.0f%s", lineTypeEntity.getShortCircuit1sLoadCapacity(), del);
-
-        System.out.println(formatter);
-    };
-    //endregion
-
-
-    //region arc results print
-    public void arcResultsPrint() {
-        // ID
-        // TYPE
-        // TRANSMIT POWER
-
-    }
-    //endregion
-
-    //region node results print
-    public void nodeResultsPrint() {
-        // ID
-        // VOLTAGE
-    }
-    //endregion
 }

@@ -8,6 +8,6 @@ public class BaseValues {
     public static Double voltageBase = 420.0;           // V
     public static Double currentBase = powerBase / ((Math.sqrt(3.0)) * voltageBase);
     public static Double impedanceBase = Math.pow(voltageBase, 2.0) / powerBase;
-    public static Double epsilon = 0.0000000000001;
+    public static Double epsilon = 0.00000000001;
 
 }
