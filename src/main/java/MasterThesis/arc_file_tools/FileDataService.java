@@ -60,7 +60,7 @@ public class FileDataService {
             printWriter.write("Node ID|Voltage\n");
             elNet.nodeMap.forEach((ID, nodeEntity) -> {
                 printWriter.printf("%3d%s", ID, delim);
-                printWriter.printf("%-9.6f", nodeEntity.getVoltageReal());
+                printWriter.printf("%-9.4f", nodeEntity.getVoltageReal());
                 printWriter.print("\n");
             });
         });

@@ -1,5 +1,6 @@
 package MasterThesis.el_net;
 
+import MasterThesis.arc.ArcEntity;
 import MasterThesis.base.entity.BaseEntity;
 import MasterThesis.base.parameters.AppParametersService;
 import MasterThesis.node.NodeEntity;
@@ -12,7 +13,7 @@ public class ElectricalNetworkService {
     //region getInstance - Singleton
     static ElectricalNetworkService instance;
     AppParametersService appParametersService = AppParametersService.getInstance();
-    ElectricalNetwork electricalNetwork = ElectricalNetwork.getInstance();
+    ElectricalNetwork elNet = ElectricalNetwork.getInstance();
 
     private ElectricalNetworkService() {
     }
@@ -36,18 +37,18 @@ public class ElectricalNetworkService {
     //region Generate forward neighbors map
     public void nodeNeighborsForwardListBuild() {
 
-        electricalNetwork.arcMap.forEach((arcID, arcEntity) -> {
+        elNet.arcMap.forEach((arcID, arcEntity) -> {
 
 //            if (arcEntity.getCondition() == 1) {
             long startNode = arcEntity.getStartNode();
 
             // StartNode - węzeł początkowy (nie ID!)
-            if (!electricalNetwork.neighborsForwardMap.containsKey(startNode)) {
-                electricalNetwork.neighborsForwardMap.put(startNode, new ArrayList<>());
+            if (!elNet.neighborsForwardMap.containsKey(startNode)) {
+                elNet.neighborsForwardMap.put(startNode, new ArrayList<>());
             }
 
             // dodaje ID całego rekordu, gdzie znajduje się sąsiad
-            electricalNetwork.neighborsForwardMap.get(startNode).add(arcID); // dodaje ID sąsiada
+            elNet.neighborsForwardMap.get(startNode).add(arcID); // dodaje ID sąsiada
 //                }
 
                /* long startNode = arcEntity.getStartNode();
@@ -67,7 +68,7 @@ public class ElectricalNetworkService {
 
     //region Generate reverse neighbors map
     public void nodeNeighborsReverseListBuild() {
-        electricalNetwork.arcMap.forEach((arcID, arcEntity) -> {
+        elNet.arcMap.forEach((arcID, arcEntity) -> {
 
             /*//region Description 1
             long endNode = arcEntity.getEndNode(); // start z końcowego węzła
@@ -86,12 +87,12 @@ public class ElectricalNetworkService {
             long endNode = arcEntity.getEndNode(); // start z końcowego węzła
 
             // StartNode - węzeł początkowy (nie ID!)
-            if (!electricalNetwork.neighborsReverseMap.containsKey(endNode)) {
-                electricalNetwork.neighborsReverseMap.put(endNode, new ArrayList<>());
+            if (!elNet.neighborsReverseMap.containsKey(endNode)) {
+                elNet.neighborsReverseMap.put(endNode, new ArrayList<>());
             }
 
             // dodaje ID całego rekordu, gdzie znajduje się sąsiad
-            electricalNetwork.neighborsReverseMap.get(endNode).
+            elNet.neighborsReverseMap.get(endNode).
 
                     add(arcID);
 //            }
@@ -104,10 +105,10 @@ public class ElectricalNetworkService {
     public boolean isDistributeNode(NodeEntity node) {
 
         List<Long> distributeNodeList = new ArrayList<>();
-        List<Long> arcList = electricalNetwork.neighborsForwardMap.get(0L);
+        List<Long> arcList = elNet.neighborsForwardMap.get(0L);
 
         for (Long arcId : arcList) {
-            distributeNodeList.add(electricalNetwork.arcMap.get(arcId).getEndNode());
+            distributeNodeList.add(elNet.arcMap.get(arcId).getEndNode());
         }
 
         for (Long nodeId : distributeNodeList) {
@@ -124,21 +125,21 @@ public class ElectricalNetworkService {
     public void calcNodeSelfCond() {
 
         //region Tworzy mapę węzłów i ich wszystkich sąsiadów z przodu i z tyłu.
-        electricalNetwork.arcMap.forEach((arcID, arcEntity) -> {
+        elNet.arcMap.forEach((arcID, arcEntity) -> {
 
             long startNode = arcEntity.getStartNode();
             long endNode = arcEntity.getEndNode();
-            boolean containsStartKey = electricalNetwork.nodesNeighborsForwardReverseMap.containsKey(startNode);
-            boolean containsEndKey = electricalNetwork.nodesNeighborsForwardReverseMap.containsKey(endNode);
+            boolean containsStartKey = elNet.nodesNeighborsForwardReverseMap.containsKey(startNode);
+            boolean containsEndKey = elNet.nodesNeighborsForwardReverseMap.containsKey(endNode);
 
             if (!containsStartKey) {
-                electricalNetwork.nodesNeighborsForwardReverseMap.put(startNode, new ArrayList<>());
+                elNet.nodesNeighborsForwardReverseMap.put(startNode, new ArrayList<>());
             } else {
 //                System.out.println("Mapa zawiera: " + startNode);
             }
 
             if (!containsEndKey) {
-                electricalNetwork.nodesNeighborsForwardReverseMap.put(endNode, new ArrayList<>());
+                elNet.nodesNeighborsForwardReverseMap.put(endNode, new ArrayList<>());
             } else {
 //                System.out.println("Mapa zawiera: " + endNode);
             }
@@ -148,11 +149,11 @@ public class ElectricalNetworkService {
 
         //region print neighbors forward map
         // along - unikalny nr węzła // longs - ID sąsiadów
-        electricalNetwork.neighborsForwardMap.forEach((uniqueStartNode, forwardNeighborIDsList) ->
+        elNet.neighborsForwardMap.forEach((uniqueStartNode, forwardNeighborIDsList) ->
 
         {
-            if (electricalNetwork.nodesNeighborsForwardReverseMap.containsKey(uniqueStartNode)) {
-                electricalNetwork.nodesNeighborsForwardReverseMap.get(uniqueStartNode).addAll(forwardNeighborIDsList);
+            if (elNet.nodesNeighborsForwardReverseMap.containsKey(uniqueStartNode)) {
+                elNet.nodesNeighborsForwardReverseMap.get(uniqueStartNode).addAll(forwardNeighborIDsList);
             } else {
 //                System.out.println("Mapa nie zawiera klucza: " + uniqueStartNode);
             }
@@ -161,25 +162,25 @@ public class ElectricalNetworkService {
 
         //region print neighbors reverse map
         // along - unikalny nr węzła // longs - ID sąsiadów
-        electricalNetwork.neighborsReverseMap.forEach((uniqueEndNode, reverseNeighborsIDlist) ->
+        elNet.neighborsReverseMap.forEach((uniqueEndNode, reverseNeighborsIDlist) ->
 
         {
-            if (electricalNetwork.nodesNeighborsForwardReverseMap.containsKey(uniqueEndNode)) {
-                electricalNetwork.nodesNeighborsForwardReverseMap.get(uniqueEndNode).addAll(reverseNeighborsIDlist);
+            if (elNet.nodesNeighborsForwardReverseMap.containsKey(uniqueEndNode)) {
+                elNet.nodesNeighborsForwardReverseMap.get(uniqueEndNode).addAll(reverseNeighborsIDlist);
             }
         });
         //endregion
 
         //region calculate selfConductance for every node
-        electricalNetwork.nodeMap.forEach((uniqueNodeNum, nodeEntity) ->
+        elNet.nodeMap.forEach((uniqueNodeNum, nodeEntity) ->
 
         {
             double selfConductance = 0;
 
-            if (electricalNetwork.nodesNeighborsForwardReverseMap.containsKey(uniqueNodeNum)) {
+            if (elNet.nodesNeighborsForwardReverseMap.containsKey(uniqueNodeNum)) {
                 try {
-                    for (Long IDnbr : electricalNetwork.nodesNeighborsForwardReverseMap.get(uniqueNodeNum)) {
-                        double calcSelfConductance = 1 / electricalNetwork.arcMap.get(IDnbr).getResistancePU();
+                    for (Long IDnbr : elNet.nodesNeighborsForwardReverseMap.get(uniqueNodeNum)) {
+                        double calcSelfConductance = 1 / elNet.arcMap.get(IDnbr).getResistancePU();
                         if (!(calcSelfConductance == Double.POSITIVE_INFINITY)) {
                             selfConductance = selfConductance + calcSelfConductance;
                         }
@@ -196,26 +197,47 @@ public class ElectricalNetworkService {
     //endregion
 
     //region generate list of nodes with no neighbors in front of them
-    public void createNoNeighborsNodesList() {
+    public void createNoFrontNeighborsNodesList() {
         // list of all available nodes
-        List<Long> listOfAllNodesAvailable = electricalNetwork.nodeList
+        List<Long> listOfAllNodesAvailable = elNet.nodeList
                 .stream()
                 .map(BaseEntity::getId)
                 .collect(Collectors.toList());
 
         // set of neighbors forward map
         Set<Map.Entry<Long, List<Long>>> setOfNeighborsForwardMap =
-                electricalNetwork.neighborsForwardMap.entrySet();
+                elNet.neighborsForwardMap.entrySet();
 
         // set only keys
-        Set<Long> ids = electricalNetwork.neighborsForwardMap.keySet();
+        Set<Long> ids = elNet.neighborsForwardMap.keySet();
 
         // values from forward neighbors map
-        Collection<List<Long>> values = electricalNetwork.neighborsForwardMap.values();
+        Collection<List<Long>> values = elNet.neighborsForwardMap.values();
 
         // build list of nodes with no neighbors in front
         listOfAllNodesAvailable.forEach(aLong -> {
-            if (!ids.contains(aLong)) electricalNetwork.nodesWithNoNeighborsInFront.add(aLong);
+            if (!ids.contains(aLong)) elNet.nodesWithNoNeighborsInFront.add(aLong);
+        });
+
+    }
+    //endregion
+
+    //region create no back neighbors nodes list
+    public void createNoBackNeighborsNodesList() {
+
+        // list of all available nodes
+        Set<Map.Entry<Long, List<Long>>> entrySet = elNet.neighborsReverseMap.entrySet();
+
+        entrySet.forEach(longListEntry -> {
+            long key = longListEntry.getKey();
+            List<Long> value = longListEntry.getValue();
+            for (Long nodeID : value) {
+                ArcEntity arcEntity = elNet.arcMap.get(nodeID);
+                long startNode = arcEntity.getStartNode();
+                if (startNode == 0) {
+                    elNet.nodesWithNoNeighborsBackList.add(arcEntity.getEndNode());
+                }
+            }
         });
 
     }

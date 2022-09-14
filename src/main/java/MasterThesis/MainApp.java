@@ -60,12 +60,17 @@ public class MainApp {
             appParametersService.setParametersFromArgs(args);
             //endregion
 
+            // print app parameters and net quontity
+//            System.out.println(AppParameters.getInstance().toString());
+//            elNetOutPrinter.printNetQuantity(); // print net quantity
+
             //region Read data files
             fileDataService.readArcFile();
 //            elNetOutPrinter.arcEntityPrinter(elNet.arcMap);
 
             fileDataService.readLineTypeFile();
 //            elNetOutPrinter.lineTypeEntityPrinter(elNet.lineTypeMap);
+//            elNetOutPrinter.printLineType(); // print line type
 
             fileDataService.readNodeFile();
 //            elNetOutPrinter.nodeEntityPrinter(elNet.nodeMap);
@@ -80,19 +85,25 @@ public class MainApp {
 
             elNetService.nodeNeighborsReverseListBuild();     // poprzednik
 //            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.REV);
+
+            elNetOutPrinter.printNodesNeighborsForwardReverseMap(); // print nodes neighbors forward reverse map
             //endregion
 
             //region Generate visit order
             bfsAlgo.generateLevelsOrder();
+//            bfsAlgOutPrinter.printNodeVisitedOrder(); // print node visited order
             //endregion
 
             //region calculations for power grid elements
             //region Calculation Immitance for Line
             elNetCalcService.calcLineImmitance();
+//            elNetOutPrinter.printLineImmitance();
             //endregion
 
             //region Calculation Immitance for Trafo
             elNetCalcService.calcTrafoImmitance();
+//            elNetOutPrinter.printTrafoImmitance();          // print trafo immitance [PU]
+//            elNetOutPrinter.printTrafoImmitance(true); // print trafo immitance [Ω]
             //endregion
 
             //region Calculation Per Unit for Nodes
@@ -102,23 +113,31 @@ public class MainApp {
             //region Calculation initial current iteration zero and printing
             elNetCalcService.calcNodeCurrentPUforwardNodesForZeroIter();
             elNetCalcService.calcNodeCurrentPUreverseNodesForZeroIter();
+//            elNetOutPrinter.printNodeCurrentPUIterZero(); // print node current PU iter zero
             //endregion
             //endregion
 
             //region self conductance of the node
             elNetService.calcNodeSelfCond();
+//            elNetOutPrinter.printSelfConductance(); // print self conductance
             //endregion
 
             //region create nodes with no neighbors in front
-            elNetService.createNoNeighborsNodesList();
+            elNetService.createNoFrontNeighborsNodesList();
+//            elNetOutPrinter.printNodesWithNoNeighborsInFront(); // print nodes with no frontneighbors
+            //endregion
+
+            //region create and print power nodes list
+            elNetService.createNoBackNeighborsNodesList();
+//            elNetOutPrinter.printNodesWithNoNeighborsAtBack(); // print nodes with no back neighbors
             //endregion
 
             //region Main algorithm for direct current calculation method
-            int nodesQuantity = elNet.nodeList.size(); // number of nodes at all
-            int powerNodesQuantity = 2; // ilosc wezlow zasilowych / number of power nodes
-            int iterateMax = 0; // the number of iterations is undefined and depends on the error rate
-            directMethodAlgorithm.calculateDirectMethod(nodesQuantity, powerNodesQuantity);
-            elNetOutPrinter.printInterimCalculations();
+            directMethodAlgorithm.calculateDirectMethod();
+//            elNetOutPrinter.printInterimCalculations();
+//            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.HORIZONTAL);
+//            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.VERTICAL);
+//            elNetOutPrinter.printDistributedNodes(NodeType.OTHER_NODE); // print distributed nodes
 
             //region  active power flow calculation
 //            directMethodAlgorithm.activePowerFlow();
@@ -129,48 +148,6 @@ public class MainApp {
             fileDataService.writeNodeResultsToFile();
             fileDataService.writeArcResultsToFile();
             //endregion
-
-            //region Print application parameters
-            // print distributed nodes
-//            elNetOutPrinter.printDistributedNodes(NodeType.OTHER_NODE);
-
-            // print node visited order
-//            bfsAlgOutPrinter.printNodeVisitedOrder();
-
-            // print node current PU iter zero
-//            elNetOutPrinter.printNodeCurrentPUIterZero();
-
-            // print self conductance
-//            elNetOutPrinter.printSelfConductance();
-
-            // print line type
-//            elNetOutPrinter.printLineType();
-
-            // print line immitance
-//            elNetOutPrinter.printLineImmitance();
-
-            // print trafo immitance [PU]
-//            elNetOutPrinter.printTrafoImmitance();
-
-            // print trafo immitance [Ω]
-//            elNetOutPrinter.printTrafoImmitance(true);
-
-            // print nodes neighbors forward reverse map
-//            elNetOutPrinter.printNodesNeighborsForwardReverseMap();
-
-            // print nodes with no neighbors in front
-//            elNetOutPrinter.printNodesWithNoNeighborsInFront();
-
-            // print node values HORIZONTAL
-//            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.HORIZONTAL);
-
-            // print node values VERTICAL
-//            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.VERTICAL);
-
-            // print app parameters and net quontity
-//            System.out.println(AppParameters.getInstance().toString());
-//            elNetOutPrinter.printNetQuantity(); // print net quantity
-
             //endregion
 
         } catch (Exception e) {

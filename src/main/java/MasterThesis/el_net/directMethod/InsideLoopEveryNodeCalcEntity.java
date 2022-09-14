@@ -3,14 +3,13 @@ package MasterThesis.el_net.directMethod;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Getter
 @Setter
 
-public class InterimEntity {
+public class InsideLoopEveryNodeCalcEntity {
 
     long iterateMaxNumber;                     // emergency "valve"
     int a;                                     // error indicator
@@ -28,7 +27,7 @@ public class InterimEntity {
     double deltaVoltageThisIterPresentNode;    // zmiana napięcia w obl. węźle [PU]
     double voltageThisIterPresentNode;         // obl. nowe napięcie w węźle [PU]
 
-    public InterimEntity(IterateMapBuilder builder) {
+    public InsideLoopEveryNodeCalcEntity(InsideLoopEveryNodeCalcEntityBuilder builder) {
         iterateMaxNumber = builder.iterateMaxNumber;
         a = builder.a;
         deltaCurrentThisIterPresentNode = builder.deltaCurrentThisIterPresentNode;

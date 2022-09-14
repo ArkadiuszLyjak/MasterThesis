@@ -4,6 +4,7 @@ package MasterThesis.el_net;
 import MasterThesis.arc.ArcEntity;
 import MasterThesis.arc.ArcType;
 import MasterThesis.base.parameters.AppParameters;
+import MasterThesis.el_net.directMethod.InsideLoopEveryNodeCalcEntity;
 import MasterThesis.lineType.LineTypeEntity;
 import MasterThesis.node.NodeType;
 import MasterThesis.tools.PrintUtility;
@@ -14,13 +15,28 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.text.DecimalFormat;
-import java.util.Formatter;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.LongFunction;
 
 import static MasterThesis.data_calc.BaseValues.voltageBase;
 
 public class ElectricalNetworkOutPrinter {
+
+    //region DIRECTION
+    public enum DIRECTION {
+        FWD("nastepnik"), REV("poprzednik");
+
+        private final String direction;
+
+        DIRECTION(String direction) {
+            this.direction = direction;
+        }
+
+        public String getDirection() {
+            return direction;
+        }
+    }
+    //endregion
 
     //region LEVELPRINT
     public enum LEVELPRINT {
@@ -335,22 +351,6 @@ public class ElectricalNetworkOutPrinter {
     }
     //endregion
 
-    //region DIRECTION
-    public enum DIRECTION {
-        FWD("nastepnik"), REV("poprzednik");
-
-        private final String direction;
-
-        DIRECTION(String direction) {
-            this.direction = direction;
-        }
-
-        public String getDirection() {
-            return direction;
-        }
-    }
-    //endregion
-
     //region print Self Conductance
     public void printSelfConductance() {
         System.out.println("\nKonduktancja własna węzłów [pu]: ");
@@ -519,19 +519,25 @@ public class ElectricalNetworkOutPrinter {
     }
     //endregion
 
+    public void printNodesWithNoNeighborsAtBack() {
+        System.out.println("Power nodes: ");
+        elNet.nodesWithNoNeighborsBackList.forEach(System.out::println);
+    }
+
+
     //region print nodes neighbors forward and reverse map
     public void printNodesNeighborsForwardReverseMap() {
         System.out.println("map of the neighbors of the nodes in front and behind:");
         if (!elNet.nodesNeighborsForwardReverseMap.isEmpty()) {
             elNet.nodesNeighborsForwardReverseMap.forEach((uniqueNodeNumber, neighborsIDsList) -> {
 
-                /*//region zamiana ID węzła na unikalny nr węzła
+                //region zamiana ID węzła na unikalny nr węzła
                 ArrayList<Long> nodeUniqueNumber = new ArrayList<>();
                 for (Long nodeID : neighborsIDsList) {
-                    nodeUniqueNumber.add(electricalNetwork.arcMap.get(nodeID).getStartNode());
+                    nodeUniqueNumber.add(elNet.arcMap.get(nodeID).getStartNode());
                 }
                 System.out.println(uniqueNodeNumber + ":" + nodeUniqueNumber);
-                //endregion*/
+                //endregion
 
                 // drukuje unikalny nr węzła oraz tablicę ID sąsiadów w przód i tył
                 System.out.printf("%3d <-> ", uniqueNodeNumber);
@@ -543,6 +549,7 @@ public class ElectricalNetworkOutPrinter {
     }
     //endregion
 
+    //region print interim calculations
     public void printInterimCalculations() {
 
         StringBuilder sb = new StringBuilder();
@@ -551,61 +558,85 @@ public class ElectricalNetworkOutPrinter {
         String arrowSpacer = " <<<<<<<<<<<<<<<<<<<";
         String lineSpacer = "---------------------------";
 
-        DecimalFormat df = new DecimalFormat("0.0E0;(#,##0.0#)");
+        DecimalFormat df = new DecimalFormat("0.0000##;(#,0000##)");
+//        DecimalFormat df = new DecimalFormat("0.0E0;(#,##0.0#)");
 
-        elNet.mapIterate.forEach((iterate, nodeInterimMap) -> {
+        Set<Map.Entry<Long, Map<Long, InsideLoopEveryNodeCalcEntity>>> entrySet = elNet.everyIterateCalcMap.entrySet();
+        ArrayList<Long> longArrayList = new ArrayList<>(elNet.everyIterateCalcMap.keySet());
+        Collections.sort(longArrayList);
 
-            formatter.format("\nk:%d - pętla do-while%s\n\n", iterate, arrowSpacer);
+        elNet.everyIterateCalcMap.forEach((iterate, nodeInterimMap) -> {
 
-            nodeInterimMap.forEach((node, interimEntity) -> {
+            if (iterate.equals(Collections.max(longArrayList))) {
 
-                formatter.format("%s\n%-18s [%d]\n%s\n",
-                        lineSpacer, "node", node, lineSpacer);
+                formatter.format("\nk:%d - pętla do-while%s\n\n",
+                        iterate, arrowSpacer);
 
-                formatter.format("%-18s %s\n", "currentPU: ",
-                        df.format(interimEntity.getCurrentPU()));
+                nodeInterimMap.forEach((node, InsideLoopEveryNodeCalcEntity) -> {
 
-                formatter.format("%-18s %s\n", "Ui: ",
-                        df.format(interimEntity.getU_i()));
+                    formatter.format("%s\n%-18s [%d]\n%s\n",
+                            lineSpacer, "node", node, lineSpacer);
 
-                formatter.format("%-18s %s\n", "Gii: ",
-                        df.format(interimEntity.getG_ii()));
+                    formatter.format("%-18s %s\n", "currentPU: ",
+                            df.format(InsideLoopEveryNodeCalcEntity.getCurrentPU()));
 
-                formatter.format("%-18s %s\n", "currentPU: ",
-                        df.format(interimEntity.getItem_Ii()));
+                    formatter.format("%-18s %s\n", "Ui: ",
+                            df.format(InsideLoopEveryNodeCalcEntity.getU_i()));
 
-                formatter.format("%-18s %s\n", "Ui * Gii:",
-                        df.format(interimEntity.getItem_Ui_Gii()));
+                    formatter.format("%-18s %s\n", "Gii: ",
+                            df.format(InsideLoopEveryNodeCalcEntity.getG_ii()));
 
-                formatter.format("%-19s %s\n", "ΔI:",
-                        df.format(interimEntity.getDeltaCurrentThisIterPresentNode()));
+                    formatter.format("%-18s %s\n", "currentPU: ",
+                            df.format(InsideLoopEveryNodeCalcEntity.getItem_Ii()));
 
-                formatter.format("%-19s %s\n", "ΔVi",
-                        df.format(interimEntity.getDeltaVoltageThisIterPresentNode())); // 0
+                    formatter.format("%-18s %s\n", "Ui * Gii:",
+                            df.format(InsideLoopEveryNodeCalcEntity.getItem_Ui_Gii()));
 
-                formatter.format("%-18s %s\n", "V iter [PU]: ",
-                        df.format(interimEntity.getVoltageThisIterPresentNode()));
+                    formatter.format("%-19s %s\n", "ΔI:", df.format(InsideLoopEveryNodeCalcEntity.getDeltaCurrentThisIterPresentNode()));
 
-                formatter.format("%-18s %s\n", "V iter real: ",
-                        df.format(interimEntity.getVoltageThisIterPresentNode() * voltageBase));
+                    formatter.format("%-19s %s\n", "ΔVi",
+                            df.format(InsideLoopEveryNodeCalcEntity.getDeltaVoltageThisIterPresentNode()));
 
-                formatter.format("%-18s %d\n", "a: ",
-                        interimEntity.getA());
+                    formatter.format("%-18s %s\n", "V iter [PU]: ",
+                            df.format(InsideLoopEveryNodeCalcEntity.getVoltageThisIterPresentNode()));
 
-                System.out.println(sb);
-                sb.setLength(0);
+                    formatter.format("%-18s %.4f\n", "V iter real: ",
+                            (InsideLoopEveryNodeCalcEntity.getVoltageThisIterPresentNode() * voltageBase));
 
-                interimEntity.getNeighborCalcMap().forEach((neighbor, neighborCalcEntity) -> {
-                    System.out.printf("\t%-12s [%d]\n", "neighbor", neighbor);
-                    System.out.printf("\t%-12s %s\n", "Uj", df.format(neighborCalcEntity.getU_j()));
-                    System.out.printf("\t%-12s %s\n", "Ui - Uj", df.format(interimEntity.getU_i() - neighborCalcEntity.getU_j()));
-                    System.out.printf("\t%-12s %s\n", "Gij", df.format(neighborCalcEntity.getG_ij()));
-                    System.out.printf("\t%-14s %s\n", "∑", df.format(neighborCalcEntity.getItem_sum()));
-                    System.out.println();
+//                    formatter.format("%-18s %s\n",
+//                            "V iter real: ", df.format(InsideLoopEveryNodeCalcEntity.getVoltageThisIterPresentNode()
+//                                    * voltageBase));
+
+                    formatter.format("%-18s %d\n", "a: ",
+                            InsideLoopEveryNodeCalcEntity.getA());
+
+                    System.out.println(sb);
+                    sb.setLength(0);
+
+                    InsideLoopEveryNodeCalcEntity.getNeighborCalcMap().forEach((neighbor, neighborCalcEntity) -> {
+
+                        System.out.printf("\t%-12s [%d]\n",
+                                "neighbor", neighbor);
+
+                        System.out.printf("\t%-12s %s\n",
+                                "Uj", df.format(neighborCalcEntity.getU_j()));
+
+                        System.out.printf("\t%-12s %s\n",
+                                "Ui - Uj", df.format(InsideLoopEveryNodeCalcEntity.getU_i() - neighborCalcEntity.getU_j()));
+
+                        System.out.printf("\t%-12s %s\n",
+                                "Gij", df.format(neighborCalcEntity.getG_ij()));
+
+                        System.out.printf("\t%-14s %s\n",
+                                "∑", df.format(neighborCalcEntity.getItem_sum()));
+
+                        System.out.println();
+                    });
                 });
-            });
+            }
 
         });
     }
+    //endregion
 
 }
