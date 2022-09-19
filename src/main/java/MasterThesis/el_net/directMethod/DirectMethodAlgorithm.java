@@ -5,6 +5,7 @@ import MasterThesis.el_net.ElectricalNetwork;
 import MasterThesis.node.NodeEntity;
 import MasterThesis.node.NodeType;
 
+import java.io.IOException;
 import java.util.Formatter;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -36,13 +37,11 @@ public class DirectMethodAlgorithm {
 
         long iterateMax = 0;
 
-        //region NODE POWER TRANSMIT
         System.out.println("\n-------------------------------------------------------");
         System.out.println("------------------ NODE POWER TRANSMIT ----------------");
         System.out.println("-------------------------------------------------------");
 
         int a; // error indicator
-        //endregion
 
         //region do loop
         do {
@@ -52,10 +51,11 @@ public class DirectMethodAlgorithm {
             if (iterateMax == 10) break; // safety "valve"
             iterateMax++;
 
-            System.out.println("iterate: " + " " + iterateMax);
+            System.out.printf("\n\n----------- iterate: %d -----------\n\n\n", iterateMax);
 
             //region iteracje dla każdego węzła
             for (NodeEntity node : elNet.nodeList) {
+                System.out.println();
 
                 //region data for every node
                 long nodeNumber = node.getId();
@@ -75,29 +75,42 @@ public class DirectMethodAlgorithm {
                 //endregion
 
                 double u_i = node.getVoltagePU();               // napięcie w wężle liczonym
-                double g_ii = node.getSelfConductancePU();          // konduktancja własna węzła
-                double item_Ii = currentThisIterPresentNode;
+                double g_ii = node.getSelfConductancePU();      // konduktancja własna węzła
                 double item_Ui_Gii = u_i * g_ii;
+                double item_Ii = currentThisIterPresentNode;
                 double item_sum = 0;
 
                 List<Long> neighborsIDsList = elNet.neighborsForwardMap.get(nodeNumber);
 
-                //region obliczenie sumy po sąsiadach
+                System.out.println("--------------- START -------------------");
+                //region obliczenie sumy "Uj * Gij" po sąsiadach
                 if (neighborsIDsList != null && !neighborsIDsList.isEmpty()) {
+
                     for (Long neighborFWDid : neighborsIDsList) {
 
                         try {
 
                             long nodeUniqueNeighborFWD = elNet.arcMap.get(neighborFWDid).getEndNode();
+                            System.out.printf("\t%3d - neighbor\n", nodeUniqueNeighborFWD);
+
                             double u_j = elNet.nodeMap.get(nodeUniqueNeighborFWD).getVoltagePU();
+                            System.out.printf("\t%-10s %(.2e\n", "Uj", u_j);
+
                             double g_ij = 1 / elNet.arcMap.get(neighborFWDid).getResistancePU();
+                            System.out.printf("\t%-10s %(.2e\n", "Gij", g_ij);
+
                             item_sum += u_j * g_ij;
+                            System.out.printf("\t%-10s %(.2e\n", "Uj*Gij", u_j * g_ij);
 
                         } catch (NullPointerException e) {
                             System.out.println("pusta lista!");
                             e.printStackTrace();
                         }
+
                     }
+
+                    System.out.printf("\t%-10s %(.2e\n", "item_sum", item_sum);
+
                 }
                 //endregion
 
@@ -109,51 +122,70 @@ public class DirectMethodAlgorithm {
 
                     //region powerNodes
                     if (!elNet.nodesWithNoNeighborsBackList.contains(node.getId())) {
-                        System.out.println(node.getId() + " algorytm PRAWY - 5B");
+                        System.out.printf("\n[%3d] - %s\n", node.getId(), "algorytm PRAWY - 5B");
 
                         //region obliczenie zmiany prądu dla obecnego węzła dla iteracji 'k'
                         deltaCurrentThisIterPresentNode = item_Ii - (item_Ui_Gii - item_sum) / item_sqrt;
+                        System.out.printf("%-14s %(.2e\n", "Ii", item_Ii);
+                        System.out.printf("%-14s %(.2e\n", "Ui * Gii", item_Ui_Gii);
+                        System.out.printf("%-14s %(.2e\n", "sum", item_sum);
+                        System.out.printf("%-14s %(.2e\n", "delta current", deltaCurrentThisIterPresentNode);
                         //endregion
 
                         //region obliczenie zmiany napięcia dla obecnego węzła i obecnej iteracji 'k'
                         deltaVoltageThisIterPresentNode = (deltaCurrentThisIterPresentNode * item_sqrt) / g_ii;
+                        System.out.printf("%-14s %(.2e\n", "Gii", g_ii);
+                        System.out.printf("%-14s %(.2e\n", "delta voltage", deltaVoltageThisIterPresentNode);
                         //endregion
 
                         //region napięcie w węźle dla obecnej iteracji i węzła
                         voltageThisIterPresentNode = u_i + deltaVoltageThisIterPresentNode;
+                        System.out.printf("%-14s %(.2e\n", "Ui", u_i);
+                        System.out.printf("%-14s %(.2e\n", "voltage", voltageThisIterPresentNode);
 
+                        //region setters
                         elNet.nodeMap.get(nodeNumber).setVoltagePU(voltageThisIterPresentNode);
                         node.setVoltagePU(voltageThisIterPresentNode);
                         node.setVoltageReal(voltageThisIterPresentNode * voltageBase);
                         node.setCurrentReal(item_Ii * BaseValues.currentBase);
                         //endregion
+                        //endregion
 
                         //region error settings
                         a = checkAndSetErrorIndicator(deltaCurrentThisIterPresentNode, a);
+                        System.out.printf("%-14s %d\n\n", "indicator a", a);
+
                         //endregion
 
                     } else {
 
-                        System.out.println(node.getId() + " algorytm LEWY - 5A");
+                        System.out.printf("[%3d] - %s\n", node.getId(), "algorytm LEWY - 5A");
 
                         //region obliczenie zmiany napięcia dla obecnego węzła i obecnej iteracji 'k'
-                        deltaVoltageThisIterPresentNode = node.getVoltagePU() - item_sqrt * node.getCurrentPU();
+                        deltaVoltageThisIterPresentNode = node.getVoltagePU() -
+                                ((item_sqrt * node.getCurrentPU() + item_sum) / g_ii);
+                        System.out.printf("%-14s %(.2e\n", "delta voltage", deltaVoltageThisIterPresentNode);
                         //endregion
 
                         //region obliczenie zmiany prądu dla obecnego węzła dla iteracji 'k'
-                        deltaCurrentThisIterPresentNode = item_Ii - (item_Ui_Gii) / item_sqrt;
+                        deltaCurrentThisIterPresentNode = (deltaVoltageThisIterPresentNode * g_ii) / item_sqrt;
+                        System.out.printf("%-14s %(.2e\n", "delta current", deltaCurrentThisIterPresentNode);
                         //endregion
 
-                        currentThisIterPresentNode = node.getCurrentPU();
+                        currentThisIterPresentNode = node.getCurrentPU() + deltaCurrentThisIterPresentNode;
+                        System.out.printf("%-14s %(.2e\n", "current", currentThisIterPresentNode);
                         node.setCurrentPU(currentThisIterPresentNode);
 
                         //region error settings
                         a = checkAndSetErrorIndicator(deltaCurrentThisIterPresentNode, a);
+                        System.out.printf("%-14s %d\n\n", "indicator a", a);
+
                         //endregion
                     }
                     //endregion
                 }
                 //endregion
+
             }
             //endregion
 
@@ -199,50 +231,36 @@ public class DirectMethodAlgorithm {
     public void activePowerFlow() {
         double u_n = voltageBase;
 
-        StringBuilder stringBuilder = new StringBuilder();
-        Formatter formatter = new Formatter(stringBuilder);
-
         elNet.neighborsForwardMap.forEach((node, nodeNeighborsIDs) -> {
 
             if (node > 0) {
                 double u_i = elNet.nodeMap.get(node).getVoltagePU();
 
                 for (Long nodeID : nodeNeighborsIDs) {
-//                    formatter.format("Ui:%-(4.4f  ", u_i);
+//                    System.out.printf("Ui:%-(4.4f  ", u_i);
 
                     double u_j = elNet.nodeMap.get(elNet.arcMap.get(nodeID).getEndNode()).getVoltagePU();
-
-//                    formatter.format("Uj:%-(4.4f  ", u_j); // Uj
+//                    System.out.printf("Uj:%-(4.4f  ", u_j);
 
                     double g_ij = 1 / elNet.arcMap.get(nodeID).getResistancePU();
-
-//                    formatter.format("Gij:%-(4.2f ", g_ij); // Gij
+//                    System.out.printf("Gij:%-(4.2f ", g_ij);
 
                     if (g_ij != Double.POSITIVE_INFINITY && g_ij != 0) {
                         double pwr_ij = u_n * (u_i - u_j) * g_ij;
                         elNet.arcMap.get(nodeID).setActivePowerFlowPU(pwr_ij);
 
-                        formatter.format("Ui-Uj:%-(8.4f  ", u_i - u_j);         // Ui - Uj
-                        formatter.format("%3d-->%3d %(.4f  ",                   // start-->end flow
+                        System.out.printf("Ui-Uj:%-(8.4f  ", u_i - u_j);
+                        System.out.printf("%3d-->%3d %(.4f  ",                   // start-->end flow
                                 node,
                                 elNet.arcMap.get(nodeID).getEndNode(),
                                 elNet.arcMap.get(nodeID).getActivePowerFlowPU());
 
+                        System.out.println();
+
                     }
-
-                    if (u_i - u_j < 0) {
-                        System.out.println(formatter);
-                    }
-
-//                    System.out.println(formatter);
-
-                    stringBuilder.setLength(0);
-
                 }
             }
-
         });
-
     }
-    //endregion
+//endregion
 }

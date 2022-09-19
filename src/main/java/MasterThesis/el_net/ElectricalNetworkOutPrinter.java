@@ -64,7 +64,7 @@ public class ElectricalNetworkOutPrinter {
 
     //region Decimal Format
     private static final DecimalFormat DECIMAL_FORMAT_EXP = new DecimalFormat("0.0E0");
-    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.0000");
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.0000;(0.0000)");
     //endregion
 
     //region getInstance - Singleton
@@ -311,8 +311,8 @@ public class ElectricalNetworkOutPrinter {
             //region REVERSE
             case REV:
                 elNet.neighborsReverseMap.forEach((nodeEnd, neighborsStartIdList) -> {
-                    LongFunction<Long> IDtoNodeStartLongFunction = ID ->
-                            elNet.arcMap.get(ID).getStartNode();
+                    LongFunction<Long> IDtoNodeStartLongFunction = ID -> elNet.arcMap.get(ID).getStartNode();
+
 
                     System.out.print("reverse neighbors: ");
                     for (Long startNodeID : neighborsStartIdList) {
@@ -345,7 +345,8 @@ public class ElectricalNetworkOutPrinter {
         elNet.nodeList.forEach(nodeEntity -> {
             System.out.printf("%3d: %s [PU]%n",
                     nodeEntity.getId(),
-                    DECIMAL_FORMAT_EXP.format(nodeEntity.getCurrentInitialPU()));
+//                    DECIMAL_FORMAT_EXP.format(nodeEntity.getCurrentInitialPU()));
+                    DECIMAL_FORMAT.format(nodeEntity.getCurrentInitialPU()));
         });
 
     }
@@ -356,7 +357,7 @@ public class ElectricalNetworkOutPrinter {
         System.out.println("\nKonduktancja własna węzłów [pu]: ");
         elNet.nodeMap.forEach((uniqueNodeNum, nodeEntity) -> {
             System.out.println(String.format("%3d ", uniqueNodeNum)
-                    + String.format("%(.1e", nodeEntity.getSelfConductancePU()));
+                    + String.format("%(8.4f", nodeEntity.getSelfConductancePU()));
         });
 
         System.out.println();
@@ -400,28 +401,28 @@ public class ElectricalNetworkOutPrinter {
                 fmt.format("%-31s %.2f [kV]\n", "Voltage: ",
                         lineTypeEntity.getVoltage());
 
-                fmt.format("%-31s %.2f\n", "MAIN_STRAND_INTERSECTION: ",
+                fmt.format("%-31s %.4f\n", "MAIN_STRAND_INTERSECTION: ",
                         lineTypeEntity.getMainStrandIntersection());
 
-                fmt.format("%-31s %.2f\n", "COHESIVE_UNIT_RESISTANCE: ",
+                fmt.format("%-31s %.4f\n", "COHESIVE_UNIT_RESISTANCE: ",
                         lineTypeEntity.getCohesiveUnitResistance());
 
-                fmt.format("%-31s %.2f\n", "ZERO_UNIT_RESISTANCE: ",
+                fmt.format("%-31s %.4f\n", "ZERO_UNIT_RESISTANCE: ",
                         lineTypeEntity.getZeroUnitResistance());
 
-                fmt.format("%-31s %.2f\n", "COHESIVE_UNIT_REACTANCE: ",
+                fmt.format("%-31s %.4f\n", "COHESIVE_UNIT_REACTANCE: ",
                         lineTypeEntity.getCohesiveUnitReactance());
 
-                fmt.format("%-31s %.2f\n", "ZERO_UNIT_REACTANCE: ",
+                fmt.format("%-31s %.4f\n", "ZERO_UNIT_REACTANCE: ",
                         lineTypeEntity.getZeroUnitReactance());
 
-                fmt.format("%-31s %.2f\n", "UNIT_CAPACITANCE_TO_EARTH: ",
+                fmt.format("%-31s %.4f\n", "UNIT_CAPACITANCE_TO_EARTH: ",
                         lineTypeEntity.getUnitCapacitanceToEarth());
 
-                fmt.format("%-31s %.2f\n", "UNIT_WORKING_CAPACITANCE: ",
+                fmt.format("%-31s %.4f\n", "UNIT_WORKING_CAPACITANCE: ",
                         lineTypeEntity.getUnitWorkingCapacitance());
 
-                fmt.format("%-31s %.2f\n", "LONGTERM_LOAD_CAPACITY: ",
+                fmt.format("%-31s %.4f\n", "LONGTERM_LOAD_CAPACITY: ",
                         lineTypeEntity.getLongTermLoadCapacity());
 
                 fmt.format("%-31s %.2f\n", "LONGTERM_SUMMER_LOAD_CAPACITY: ",
@@ -430,14 +431,14 @@ public class ElectricalNetworkOutPrinter {
                 fmt.format("%-31s %.2f\n", "LONGTERM_WINTER_LOAD_CAPACITY: ",
                         lineTypeEntity.getLongTermWinterLoadCapacity());
 
-                fmt.format("%-31s %.2f\n", "SHORTCIRCUIT_1S_LOAD_CAPACITY: ",
+                fmt.format("%-31s %.4f\n", "SHORTCIRCUIT_1S_LOAD_CAPACITY: ",
                         lineTypeEntity.getShortCircuit1sLoadCapacity());
 
                 fmt.format("\n\n");
             }
         });
 
-        System.out.println(fmt.toString());
+        System.out.println(fmt);
 
     }
     //endregion
@@ -456,12 +457,12 @@ public class ElectricalNetworkOutPrinter {
                     formatter.format("%-23s %d%n", "id:", nodeEntity.getId());
 //                    formatter.format("%-23s %.2f [kW]%n", "active power:", nodeEntity.getActivePower());
 //                    formatter.format("%-23s %.2f [kVar]%n", "reactive power:", nodeEntity.getReactivePower());
-                    formatter.format("  %-23s %.2f [kV]%n", "voltage nominal:", nodeEntity.getNominalVoltage());
-                    formatter.format("  %-23s %.1e%n", "voltage [PU]:", nodeEntity.getVoltagePU());
-                    formatter.format("  %-23s %.4f%n", "voltage real:", nodeEntity.getVoltageReal());
-//                    formatter.format("%-23s %.4f%n", "current iter '0' [PU]:", nodeEntity.getCurrentInitialPU());
-//                    formatter.format("%-23s %.4f%n", "current [PU]:", nodeEntity.getCurrentPU());
-//                    formatter.format("%-23s %.4f%n", "current real:", nodeEntity.getCurrentReal());
+                    formatter.format("  %-23s %(.2f [kV]%n", "voltage nominal:", nodeEntity.getNominalVoltage());
+                    formatter.format("  %-23s %(.1e%n", "voltage [PU]:", nodeEntity.getVoltagePU());
+//                    formatter.format("  %-23s %(.4f%n", "voltage real:", nodeEntity.getVoltageReal());
+                    formatter.format("%-23s %(.4f%n", "current iter '0' [PU]:", nodeEntity.getCurrentInitialPU());
+//                    formatter.format("%-23s %(.4f%n", "current [PU]:", nodeEntity.getCurrentPU());
+//                    formatter.format("%-23s %(.4f%n", "current real:", nodeEntity.getCurrentReal());
 
                     System.out.println(formatter);
                     sb.setLength(0);
@@ -480,12 +481,9 @@ public class ElectricalNetworkOutPrinter {
                     System.out.println(formatter);
                     sb.setLength(0);
                 });
-
                 break;
             //endregion
-
         }
-
     }
     //endregion
 
@@ -514,37 +512,28 @@ public class ElectricalNetworkOutPrinter {
     //region print nodes with no neighbors in front
     public void printNodesWithNoNeighborsInFront() {
         System.out.println("\nnodes that have no neighbors in front: ");
-        elNet.nodesWithNoNeighborsInFront.forEach(aLong -> System.out.print(aLong + " "));
-        System.out.println();
+        elNet.nodesWithNoNeighborsInFrontList.forEach(aLong ->
+                System.out.println(aLong + " "));
     }
     //endregion
 
+    //region print nodes with no neighbors at back
     public void printNodesWithNoNeighborsAtBack() {
         System.out.println("Power nodes: ");
         elNet.nodesWithNoNeighborsBackList.forEach(System.out::println);
     }
-
+    //endregion
 
     //region print nodes neighbors forward and reverse map
     public void printNodesNeighborsForwardReverseMap() {
         System.out.println("map of the neighbors of the nodes in front and behind:");
         if (!elNet.nodesNeighborsForwardReverseMap.isEmpty()) {
             elNet.nodesNeighborsForwardReverseMap.forEach((uniqueNodeNumber, neighborsIDsList) -> {
-
-                //region zamiana ID węzła na unikalny nr węzła
-                ArrayList<Long> nodeUniqueNumber = new ArrayList<>();
-                for (Long nodeID : neighborsIDsList) {
-                    nodeUniqueNumber.add(elNet.arcMap.get(nodeID).getStartNode());
-                }
-                System.out.println(uniqueNodeNumber + ":" + nodeUniqueNumber);
-                //endregion
-
-                // drukuje unikalny nr węzła oraz tablicę ID sąsiadów w przód i tył
-                System.out.printf("%3d <-> ", uniqueNodeNumber);
+                System.out.printf("%3d ", uniqueNodeNumber);
                 System.out.println(neighborsIDsList);
             });
         } else {
-            System.out.println("Mapa: nodesNBRfwdREVmap jest pusta");
+            System.out.println("Mapa: nodesNeighborsForwardReverseMap jest pusta");
         }
     }
     //endregion

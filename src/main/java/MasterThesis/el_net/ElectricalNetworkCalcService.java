@@ -39,16 +39,12 @@ public class ElectricalNetworkCalcService {
         for (ArcEntity arc : elNet.arcList) {
             if (arc.getType() == ArcType.LINE) {
 
-//                if (!(Double.compare(arc.getArcLength(), 0.0) == 0)) {
                 LineTypeEntity lineType = elNet.lineTypeMap.get(arc.getPosition());
 
                 // Parametry immitancji linii liczone dla km stąd dzielenie przez 1000
                 // CohesiveUnitResistance dla 7000m 0.191
                 Double resistance = (arc.getArcLength() / 1000) * lineType.getCohesiveUnitResistance();   // [km]
-//                System.out.print(arc.getArcLength() + " ");
-//                System.out.print(lineType.getCohesiveUnitResistance() + " ");
                 Double reactance = (arc.getArcLength() / 1000) * lineType.getCohesiveUnitReactance();     // [km]
-//                System.out.println(lineType.getCohesiveUnitReactance());
                 Double impedance = Math.sqrt(Math.pow(resistance, 2.0) + Math.pow(reactance, 2.0));
 
                 Double resistancePU = resistance / BaseValues.impedanceBase;
@@ -66,19 +62,21 @@ public class ElectricalNetworkCalcService {
                 //endregion
 
                 //region temporary print
+//                formatter.format("B:%-7.4f ", BaseValues.impedanceBase); // [Ω]
                 formatter.format("%3d->%3d ", arc.getStartNode(), arc.getEndNode());
 //                formatter.format("%-8s ", arc.getType());
                 formatter.format("L:%.4f[km] ", arc.getArcLength() / 1000);
-//                formatter.format("%-8s ", lineType.getKind().toString());
-                formatter.format("R:%-7.4f[Ω] ", reactance);
-                formatter.format("X:%-7.4f \u2126", reactance);
-                formatter.format("Z:%-7.4f ", impedance);
+                formatter.format("%-8s ", lineType.getKind().toString());
+                formatter.format("R:%-7.4f[Ω] ", resistance); // [Ω]
+                formatter.format("R:%-7.4f[pu]", resistancePU); //
+//                formatter.format("X:%-7.4f ", reactance);
+//                formatter.format("X:%-7.4f ", reactancePU);
+//                formatter.format("Z:%-7.4f ", impedance);
+//                formatter.format("Z:%-7.4f ", impedancePU);
 //                System.out.println(stringBuilder);
                 stringBuilder.setLength(0);
 
                 //endregion
-
-//                }
 
             }
         }
@@ -163,8 +161,11 @@ public class ElectricalNetworkCalcService {
 
     //region calcNodeVoltagePu
     public void calcNodeVoltagePu() {
-        elNet.nodeMap.forEach((aLong, nodeEntity) -> nodeEntity
-                .setVoltagePU(nodeEntity.getNominalVoltage() / BaseValues.voltageBase));
+        elNet.nodeMap.forEach((node, nodeEntity) -> {
+                    nodeEntity.setVoltagePU(nodeEntity.getNominalVoltage() / BaseValues.voltageBase);
+//                    System.out.printf("%3d %(.2e\n", node, nodeEntity.getNominalVoltage() / BaseValues.voltageBase);
+                }
+        );
     }
     //endregion
 
@@ -219,7 +220,7 @@ public class ElectricalNetworkCalcService {
                                 //endregion*/
                     }
 
-                            /*//region print temporary calculations "3/3"
+                                /*//region print temporary calculations "3/3"
                             System.out.printf("Prad dla iter. zerowej dla wezla %d -> I0 = %s %.2e",
                                     node,
                                     "Σ",

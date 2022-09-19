@@ -16,13 +16,16 @@ public class ElectricalNetwork {
     public Map<Long, LineTypeEntity> lineTypeMap;               // maps from files
     public Map<Long, NodeEntity> nodeMap;                       // maps from files
     public Map<Long, TransformerTypeEntity> transformerTypeMap; // maps from files
+
     public List<NodeEntity> nodeList;
     public List<ArcEntity> arcList;
+
     public Map<Long, List<Long>> neighborsForwardMap = new LinkedHashMap<>();
     public Map<Long, List<Long>> neighborsReverseMap = new LinkedHashMap<>();
     public Map<Long, ArrayList<Long>> nodesNeighborsForwardReverseMap = new LinkedHashMap<>();
+
     public List<Long> nodesWithNoNeighborsBackList = new LinkedList<>();
-    public List<Long> nodesWithNoNeighborsInFront = new LinkedList<>();
+    public List<Long> nodesWithNoNeighborsInFrontList = new LinkedList<>();
 
     // Mapa<nr_iteracji, Mapa<nr_węzła, obl_węzłowe>>
     public Map<Long, Map<Long, InsideLoopEveryNodeCalcEntity>> everyIterateCalcMap = new LinkedHashMap<>();

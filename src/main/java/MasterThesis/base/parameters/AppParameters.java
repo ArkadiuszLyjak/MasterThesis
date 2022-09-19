@@ -18,8 +18,10 @@ public class AppParameters {
     String lineTypeFileName = "Line_Type.txt";
     String nodeFileName = "Node.txt";
     String transformerTypeFileName = "Transformer_Type.txt";
-    String dataArcResultsFileName = "MO_DATA_ARC_RESULTS.txt";
-    String dataNodeResultsFileName = "MO_DATA_NODE_RESULTS.txt";
+    String dataArcResultsFileName = "ARC_RESULTS.txt";
+    //    String dataArcResultsFileName = "MO_DATA_ARC_RESULTS.txt";
+    String dataNodeResultsFileName = "NODE_RESULTS.txt";
+    //    String dataNodeResultsFileName = "MO_DATA_NODE_RESULTS.txt";
     String delimiter = "|";
     String sourceDataFilesPath = "C:\\repo\\MasterThesis\\dataFiles\\";
     String arcResultsOutputFile = sourceDataFilesPath + "ARC_RESULTS.txt";

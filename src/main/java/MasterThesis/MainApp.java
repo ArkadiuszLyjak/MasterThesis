@@ -20,6 +20,7 @@ package MasterThesis;
 * */
 
 import MasterThesis.arc_file_tools.FileDataService;
+import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
 //import MasterThesis.bfs.BfsAlgorithm;
 //import MasterThesis.bfs.BfsAlgorithmOutPrinter;
@@ -27,6 +28,7 @@ import MasterThesis.bfs.BfsAlgorithm;
 import MasterThesis.bfs.BfsAlgorithmOutPrinter;
 import MasterThesis.el_net.*;
 import MasterThesis.el_net.directMethod.DirectMethodAlgorithm;
+import MasterThesis.node.NodeType;
 import MasterThesis.tools.NetStatistics;
 
 import java.nio.charset.Charset;
@@ -60,23 +62,18 @@ public class MainApp {
             appParametersService.setParametersFromArgs(args);
             //endregion
 
-            // print app parameters and net quontity
-//            System.out.println(AppParameters.getInstance().toString());
-//            elNetOutPrinter.printNetQuantity(); // print net quantity
-
             //region Read data files
             fileDataService.readArcFile();
-//            elNetOutPrinter.arcEntityPrinter(elNet.arcMap);
-
             fileDataService.readLineTypeFile();
-//            elNetOutPrinter.lineTypeEntityPrinter(elNet.lineTypeMap);
-//            elNetOutPrinter.printLineType(); // print line type
-
             fileDataService.readNodeFile();
-//            elNetOutPrinter.nodeEntityPrinter(elNet.nodeMap);
-
             fileDataService.readTransformerTypeFile();
-//            elNetOutPrinter.transformerTypeEntityPrinter(elNet.transformerTypeMap);
+
+//            elNetOutPrinter.printLineType(); // print line type
+            //endregion
+
+            //region print app parameters and net quantity
+//            System.out.println(AppParameters.getInstance().toString());
+//            elNetOutPrinter.printNetQuantity(); // print net quantity
             //endregion
 
             //region generate front and back neighbors maps
@@ -86,7 +83,8 @@ public class MainApp {
             elNetService.nodeNeighborsReverseListBuild();     // poprzednik
 //            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.REV);
 
-            elNetOutPrinter.printNodesNeighborsForwardReverseMap(); // print nodes neighbors forward reverse map
+            elNetService.nodeNeighborsForwardReverseListBuild();
+//            elNetOutPrinter.printNodesNeighborsForwardReverseMap(); // print nodes neighbors forward reverse map
             //endregion
 
             //region Generate visit order
@@ -123,21 +121,17 @@ public class MainApp {
             //endregion
 
             //region create nodes with no neighbors in front
-            elNetService.createNoFrontNeighborsNodesList();
+//            elNetService.createNoFrontNeighborsNodesList();
 //            elNetOutPrinter.printNodesWithNoNeighborsInFront(); // print nodes with no frontneighbors
             //endregion
 
             //region create and print power nodes list
-            elNetService.createNoBackNeighborsNodesList();
+//            elNetService.createNoBackNeighborsNodesList();
 //            elNetOutPrinter.printNodesWithNoNeighborsAtBack(); // print nodes with no back neighbors
             //endregion
 
             //region Main algorithm for direct current calculation method
-            directMethodAlgorithm.calculateDirectMethod();
-//            elNetOutPrinter.printInterimCalculations();
-//            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.HORIZONTAL);
-//            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.VERTICAL);
-//            elNetOutPrinter.printDistributedNodes(NodeType.OTHER_NODE); // print distributed nodes
+//            directMethodAlgorithm.calculateDirectMethod();
 
             //region  active power flow calculation
 //            directMethodAlgorithm.activePowerFlow();
@@ -145,16 +139,20 @@ public class MainApp {
             //endregion
 
             //region print results to files
-            fileDataService.writeNodeResultsToFile();
-            fileDataService.writeArcResultsToFile();
+//            fileDataService.writeNodeResultsToFile();
+//            fileDataService.writeArcResultsToFile();
             //endregion
+
+//            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.HORIZONTAL);
+//            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.VERTICAL);
+//            elNetOutPrinter.printDistributedNodes(NodeType.OTHER_NODE); // print distributed nodes
             //endregion
 
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("\n********************************************");
             System.out.println("************ error calculation *************");
-            System.out.println("*********************************************");
+            System.out.println("********************************************");
         }
 
     }
