@@ -68,7 +68,7 @@ public class MainApp {
             fileDataService.readNodeFile();
             fileDataService.readTransformerTypeFile();
 
-//            elNetOutPrinter.printLineType(); // print line type
+            elNetOutPrinter.printLineType(); // print line type
             //endregion
 
             //region print app parameters and net quantity
@@ -77,46 +77,46 @@ public class MainApp {
             //endregion
 
             //region generate front and back neighbors maps
-            elNetService.nodeNeighborsForwardListBuild();   // następnik
+//            elNetService.nodeNeighborsForwardListBuild();   // następnik
 //            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.FWD);
 
-            elNetService.nodeNeighborsReverseListBuild();     // poprzednik
+//            elNetService.nodeNeighborsReverseListBuild();     // poprzednik
 //            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.REV);
 
-            elNetService.nodeNeighborsForwardReverseListBuild();
+//            elNetService.nodeNeighborsForwardReverseListBuild();
 //            elNetOutPrinter.printNodesNeighborsForwardReverseMap(); // print nodes neighbors forward reverse map
             //endregion
 
             //region Generate visit order
-            bfsAlgo.generateLevelsOrder();
+//            bfsAlgo.generateLevelsOrder();
 //            bfsAlgOutPrinter.printNodeVisitedOrder(); // print node visited order
             //endregion
 
             //region calculations for power grid elements
             //region Calculation Immitance for Line
-            elNetCalcService.calcLineImmitance();
+//            elNetCalcService.calcLineImmitance();
 //            elNetOutPrinter.printLineImmitance();
             //endregion
 
             //region Calculation Immitance for Trafo
-            elNetCalcService.calcTrafoImmitance();
+//            elNetCalcService.calcTrafoImmitance();
 //            elNetOutPrinter.printTrafoImmitance();          // print trafo immitance [PU]
 //            elNetOutPrinter.printTrafoImmitance(true); // print trafo immitance [Ω]
             //endregion
 
             //region Calculation Per Unit for Nodes
-            elNetCalcService.calcNodeVoltagePu();
+//            elNetCalcService.calcNodeVoltagePu();
             //endregion
 
             //region Calculation initial current iteration zero and printing
-            elNetCalcService.calcNodeCurrentPUforwardNodesForZeroIter();
-            elNetCalcService.calcNodeCurrentPUreverseNodesForZeroIter();
+//            elNetCalcService.calcNodeCurrentPUforwardNodesForZeroIter();
+//            elNetCalcService.calcNodeCurrentPUreverseNodesForZeroIter();
 //            elNetOutPrinter.printNodeCurrentPUIterZero(); // print node current PU iter zero
             //endregion
             //endregion
 
             //region self conductance of the node
-            elNetService.calcNodeSelfCond();
+//            elNetService.calcNodeSelfCond();
 //            elNetOutPrinter.printSelfConductance(); // print self conductance
             //endregion
 
@@ -139,8 +139,8 @@ public class MainApp {
             //endregion
 
             //region print results to files
-//            fileDataService.writeNodeResultsToFile();
-//            fileDataService.writeArcResultsToFile();
+            fileDataService.writeNodeResultsToFile();
+            fileDataService.writeArcResultsToFile();
             //endregion
 
 //            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.HORIZONTAL);
