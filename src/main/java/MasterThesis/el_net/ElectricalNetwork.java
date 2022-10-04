@@ -1,7 +1,7 @@
 package MasterThesis.el_net;
 
 import MasterThesis.arc.ArcEntity;
-import MasterThesis.el_net.directMethod.InsideLoopEveryNodeCalcEntity;
+import MasterThesis.el_net.InsideCalcContener.DirectMethodInsideCalcEntity;
 import MasterThesis.lineType.LineTypeEntity;
 import MasterThesis.node.NodeEntity;
 import MasterThesis.transformer_type.TransformerTypeEntity;
@@ -28,7 +28,7 @@ public class ElectricalNetwork {
     public List<Long> nodesWithNoNeighborsInFrontList = new LinkedList<>();
 
     // Mapa<nr_iteracji, Mapa<nr_węzła, obl_węzłowe>>
-    public Map<Long, Map<Long, InsideLoopEveryNodeCalcEntity>> everyIterateCalcMap = new LinkedHashMap<>();
+    public Map<Long, Map<Long, DirectMethodInsideCalcEntity>> everyIterateCalcMap = new LinkedHashMap<>();
     //endregion
 
     /**

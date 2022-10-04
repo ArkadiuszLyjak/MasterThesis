@@ -4,7 +4,7 @@ package MasterThesis.el_net;
 import MasterThesis.arc.ArcEntity;
 import MasterThesis.arc.ArcType;
 import MasterThesis.base.parameters.AppParameters;
-import MasterThesis.el_net.directMethod.InsideLoopEveryNodeCalcEntity;
+import MasterThesis.el_net.InsideCalcContener.DirectMethodInsideCalcEntity;
 import MasterThesis.lineType.LineTypeEntity;
 import MasterThesis.node.NodeType;
 import MasterThesis.tools.PrintUtility;
@@ -64,7 +64,8 @@ public class ElectricalNetworkOutPrinter {
 
     //region Decimal Format
     private static final DecimalFormat DECIMAL_FORMAT_EXP = new DecimalFormat("0.0E0");
-    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.0000;(0.0000)");
+    private static final DecimalFormat DECIMAL_FORMAT_IMMITANCE = new DecimalFormat("0.0000;(0.0000)");
+    private static final DecimalFormat DECIMAL_FORMAT_LENGTH = new DecimalFormat("0.00;(0.00)");
     //endregion
 
     //region getInstance - Singleton
@@ -193,13 +194,12 @@ public class ElectricalNetworkOutPrinter {
             if (arc.getType() == ArcType.LINE) {
 //                if (!(Double.compare(arc.getArcLength(), 0.0) == 0)) {
                 System.out.printf("%4d-->%-4d ", arc.getStartNode(), arc.getEndNode());
-                System.out.print("L:" + DECIMAL_FORMAT_EXP.format(arc.getArcLength()) + "[m]");
-                System.out.printf(" R:%-8s", DECIMAL_FORMAT_EXP.format(arc.getResistancePU()));
-                System.out.printf("X:%-8s", DECIMAL_FORMAT_EXP.format(arc.getReactancePU()));
-                System.out.printf("Z:%-7s", DECIMAL_FORMAT_EXP.format(arc.getImpedancePU()));
+                System.out.printf("%s %-7.2f[m] ", "L:", arc.getArcLength());
+                System.out.printf("R:%-8.4f", arc.getResistancePU());
+                System.out.printf("X:%-8.4f", arc.getReactancePU());
+                System.out.printf("Z:%-8.4f", arc.getImpedancePU());
                 System.out.println("[pu]");
-//                }
-
+//            }
             }
         }
 
@@ -346,7 +346,7 @@ public class ElectricalNetworkOutPrinter {
             System.out.printf("%3d: %s [PU]%n",
                     nodeEntity.getId(),
 //                    DECIMAL_FORMAT_EXP.format(nodeEntity.getCurrentInitialPU()));
-                    DECIMAL_FORMAT.format(nodeEntity.getCurrentInitialPU()));
+                    DECIMAL_FORMAT_IMMITANCE.format(nodeEntity.getCurrentInitialPU()));
         });
 
     }
@@ -453,6 +453,7 @@ public class ElectricalNetworkOutPrinter {
 
             //region VERTICAL
             case VERTICAL:
+                System.out.println();
                 elNet.nodeMap.forEach((aLong, nodeEntity) -> {
                     formatter.format("%-23s %d%n", "id:", nodeEntity.getId());
 //                    formatter.format("%-23s %.2f [kW]%n", "active power:", nodeEntity.getActivePower());
@@ -473,6 +474,7 @@ public class ElectricalNetworkOutPrinter {
 
             //region HORIZONTAL
             case HORIZONTAL:
+                System.out.println();
                 elNet.nodeMap.forEach((aLong, nodeEntity) -> {
                     formatter.format("%3d ", nodeEntity.getId());
                     formatter.format("%s%-(10.4f ", "Ir: ", nodeEntity.getCurrentReal());
@@ -550,7 +552,7 @@ public class ElectricalNetworkOutPrinter {
         DecimalFormat df = new DecimalFormat("0.0000##;(#,0000##)");
 //        DecimalFormat df = new DecimalFormat("0.0E0;(#,##0.0#)");
 
-        Set<Map.Entry<Long, Map<Long, InsideLoopEveryNodeCalcEntity>>> entrySet = elNet.everyIterateCalcMap.entrySet();
+        Set<Map.Entry<Long, Map<Long, DirectMethodInsideCalcEntity>>> entrySet = elNet.everyIterateCalcMap.entrySet();
         ArrayList<Long> longArrayList = new ArrayList<>(elNet.everyIterateCalcMap.keySet());
         Collections.sort(longArrayList);
 
@@ -561,48 +563,48 @@ public class ElectricalNetworkOutPrinter {
                 formatter.format("\nk:%d - pętla do-while%s\n\n",
                         iterate, arrowSpacer);
 
-                nodeInterimMap.forEach((node, InsideLoopEveryNodeCalcEntity) -> {
+                nodeInterimMap.forEach((node, DirectMethodInsideCalcEntity) -> {
 
                     formatter.format("%s\n%-18s [%d]\n%s\n",
                             lineSpacer, "node", node, lineSpacer);
 
                     formatter.format("%-18s %s\n", "currentPU: ",
-                            df.format(InsideLoopEveryNodeCalcEntity.getCurrentPU()));
+                            df.format(DirectMethodInsideCalcEntity.getCurrentPU()));
 
                     formatter.format("%-18s %s\n", "Ui: ",
-                            df.format(InsideLoopEveryNodeCalcEntity.getU_i()));
+                            df.format(DirectMethodInsideCalcEntity.getU_i()));
 
                     formatter.format("%-18s %s\n", "Gii: ",
-                            df.format(InsideLoopEveryNodeCalcEntity.getG_ii()));
+                            df.format(DirectMethodInsideCalcEntity.getG_ii()));
 
                     formatter.format("%-18s %s\n", "currentPU: ",
-                            df.format(InsideLoopEveryNodeCalcEntity.getItem_Ii()));
+                            df.format(DirectMethodInsideCalcEntity.getItem_Ii()));
 
                     formatter.format("%-18s %s\n", "Ui * Gii:",
-                            df.format(InsideLoopEveryNodeCalcEntity.getItem_Ui_Gii()));
+                            df.format(DirectMethodInsideCalcEntity.getItem_Ui_Gii()));
 
-                    formatter.format("%-19s %s\n", "ΔI:", df.format(InsideLoopEveryNodeCalcEntity.getDeltaCurrentThisIterPresentNode()));
+                    formatter.format("%-19s %s\n", "ΔI:", df.format(DirectMethodInsideCalcEntity.getDeltaCurrentThisIterPresentNode()));
 
                     formatter.format("%-19s %s\n", "ΔVi",
-                            df.format(InsideLoopEveryNodeCalcEntity.getDeltaVoltageThisIterPresentNode()));
+                            df.format(DirectMethodInsideCalcEntity.getDeltaVoltageThisIterPresentNode()));
 
                     formatter.format("%-18s %s\n", "V iter [PU]: ",
-                            df.format(InsideLoopEveryNodeCalcEntity.getVoltageThisIterPresentNode()));
+                            df.format(DirectMethodInsideCalcEntity.getVoltageThisIterPresentNode()));
 
                     formatter.format("%-18s %.4f\n", "V iter real: ",
-                            (InsideLoopEveryNodeCalcEntity.getVoltageThisIterPresentNode() * voltageBase));
+                            (DirectMethodInsideCalcEntity.getVoltageThisIterPresentNode() * voltageBase));
 
 //                    formatter.format("%-18s %s\n",
 //                            "V iter real: ", df.format(InsideLoopEveryNodeCalcEntity.getVoltageThisIterPresentNode()
 //                                    * voltageBase));
 
                     formatter.format("%-18s %d\n", "a: ",
-                            InsideLoopEveryNodeCalcEntity.getA());
+                            DirectMethodInsideCalcEntity.getA());
 
                     System.out.println(sb);
                     sb.setLength(0);
 
-                    InsideLoopEveryNodeCalcEntity.getNeighborCalcMap().forEach((neighbor, neighborCalcEntity) -> {
+                    DirectMethodInsideCalcEntity.getNeighborCalcMap().forEach((neighbor, neighborCalcEntity) -> {
 
                         System.out.printf("\t%-12s [%d]\n",
                                 "neighbor", neighbor);
@@ -611,7 +613,7 @@ public class ElectricalNetworkOutPrinter {
                                 "Uj", df.format(neighborCalcEntity.getU_j()));
 
                         System.out.printf("\t%-12s %s\n",
-                                "Ui - Uj", df.format(InsideLoopEveryNodeCalcEntity.getU_i() - neighborCalcEntity.getU_j()));
+                                "Ui - Uj", df.format(DirectMethodInsideCalcEntity.getU_i() - neighborCalcEntity.getU_j()));
 
                         System.out.printf("\t%-12s %s\n",
                                 "Gij", df.format(neighborCalcEntity.getG_ij()));

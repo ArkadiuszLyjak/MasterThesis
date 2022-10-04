@@ -8,7 +8,6 @@ import MasterThesis.lineType.LineTypeEntity;
 import MasterThesis.node.NodeEntity;
 import MasterThesis.transformer_type.TransformerTypeEntity;
 
-import java.io.PrintWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,23 +32,43 @@ public class ElectricalNetworkCalcService {
     //region calcLineImmitance
     public void calcLineImmitance() {
 
-        StringBuilder stringBuilder = new StringBuilder();
-        Formatter formatter = new Formatter(stringBuilder);
+        // OBL. LINII Z PLIKU obliczenia_impedancji_linii.pdf
 
         for (ArcEntity arc : elNet.arcList) {
             if (arc.getType() == ArcType.LINE) {
 
+//                System.out.printf("%3d->%3d ", arc.getStartNode(), arc.getEndNode());
+//                System.out.printf("%s ", arc.getType());
+
                 LineTypeEntity lineType = elNet.lineTypeMap.get(arc.getPosition());
+//                System.out.printf("%s ", lineType.getKind().toString());
+//                System.out.printf("L:%.4f[km] ", arc.getArcLength() / 1000);
 
                 // Parametry immitancji linii liczone dla km stąd dzielenie przez 1000
-                // CohesiveUnitResistance dla 7000m 0.191
-                Double resistance = (arc.getArcLength() / 1000) * lineType.getCohesiveUnitResistance();   // [km]
-                Double reactance = (arc.getArcLength() / 1000) * lineType.getCohesiveUnitReactance();     // [km]
-                Double impedance = Math.sqrt(Math.pow(resistance, 2.0) + Math.pow(reactance, 2.0));
 
+                //region [Ω]
+                Double resistance = (arc.getArcLength() / 1000) * lineType.getCohesiveUnitResistance();   // [km]
+//                System.out.printf("R:%.4f[Ω] ", resistance);
+
+                Double reactance = (arc.getArcLength() / 1000) * lineType.getCohesiveUnitReactance();     // [km]
+//                System.out.printf("X:%.4f[Ω] ", reactance);
+
+                Double impedance = Math.sqrt(Math.pow(resistance, 2.0) + Math.pow(reactance, 2.0));
+//                System.out.printf("Z:%.4f[Ω] ", impedance);
+                //endregion
+
+                //region [pu]
                 Double resistancePU = resistance / BaseValues.impedanceBase;
+//                System.out.printf("R:%.4f[pu] ", resistancePU);
+
                 Double reactancePU = reactance / BaseValues.impedanceBase;
+//                System.out.printf("X:%.4f[pu] ", reactancePU);
+
                 Double impedancePU = impedance / BaseValues.impedanceBase;
+//                System.out.printf("Z:%.4f[pu] ", impedancePU);
+                //endregion
+
+//                System.out.println();
 
                 //region ustawienie encji
                 arc.setResistance(resistance);
@@ -59,23 +78,6 @@ public class ElectricalNetworkCalcService {
                 arc.setResistancePU(resistancePU);
                 arc.setReactancePU(reactancePU);
                 arc.setImpedancePU(impedancePU);
-                //endregion
-
-                //region temporary print
-//                formatter.format("B:%-7.4f ", BaseValues.impedanceBase); // [Ω]
-                formatter.format("%3d->%3d ", arc.getStartNode(), arc.getEndNode());
-//                formatter.format("%-8s ", arc.getType());
-                formatter.format("L:%.4f[km] ", arc.getArcLength() / 1000);
-                formatter.format("%-8s ", lineType.getKind().toString());
-                formatter.format("R:%-7.4f[Ω] ", resistance); // [Ω]
-                formatter.format("R:%-7.4f[pu]", resistancePU); //
-//                formatter.format("X:%-7.4f ", reactance);
-//                formatter.format("X:%-7.4f ", reactancePU);
-//                formatter.format("Z:%-7.4f ", impedance);
-//                formatter.format("Z:%-7.4f ", impedancePU);
-//                System.out.println(stringBuilder);
-                stringBuilder.setLength(0);
-
                 //endregion
 
             }
@@ -163,7 +165,7 @@ public class ElectricalNetworkCalcService {
     public void calcNodeVoltagePu() {
         elNet.nodeMap.forEach((node, nodeEntity) -> {
                     nodeEntity.setVoltagePU(nodeEntity.getNominalVoltage() / BaseValues.voltageBase);
-//                    System.out.printf("%3d %(.2e\n", node, nodeEntity.getNominalVoltage() / BaseValues.voltageBase);
+//                    System.out.printf("%3d %(.4f\n", node, nodeEntity.getNominalVoltage() / BaseValues.voltageBase);
                 }
         );
     }
@@ -176,22 +178,21 @@ public class ElectricalNetworkCalcService {
      * <p style="text-intend:20px;">ID rekordu zawierającego unikalny nr węzła końcowego - sąsiada</p>
      */
 
-    //region oblicz prąd początkowy w węzłach mających sąsiadów "z przodu"
+    /*//region oblicz prąd początkowy w węzłach mających sąsiadów "z przodu"
     public void calcNodeCurrentPUforwardNodesForZeroIter() {
 
         elNet.neighborsForwardMap.forEach((node, nodeNeighborIDList) -> {
+
             try {
                 if (node != 0) {
 
-                            /*//region print temporary calculations "1/3"
-                            System.out.println("\n\n" + node);
-                            //endregion*/
+//                    System.out.println("\n" + node);
 
                     double currentPUSum = 0.0;
                     double currentPUforArc = 0.0;
 
-                    double resStartNodeAndHisNeighborPU;
-                    long endNodeNeighborNumber;
+                    double resStartNodeAndHisNeighborPU = 0.0;
+                    long endNodeNeighborNumber = 0;
 
                     for (Long neighborID : nodeNeighborIDList) { // ID sąsiada!
 
@@ -210,27 +211,23 @@ public class ElectricalNetworkCalcService {
 
                         currentPUSum = currentPUSum + currentPUforArc;
 
-                                /*//region print temporary calculations "2/3"
-                                System.out.printf("%s->", "---");
-                                System.out.printf("%3d\t", endNodeNeighborNumber);
-                                System.out.printf("R:%.2e\t", resStartNodeAndHisNeighborPU);
-                                System.out.printf("V:%.2e\t", neighborVolPU);
-                                System.out.printf("I: %.2e", currentPUforArc);
-                                System.out.println();
-                                //endregion*/
+//                        System.out.printf("%s->", "---");
+//                        System.out.printf("%3d\t", endNodeNeighborNumber);
+//                        System.out.printf("R:%.4f\t", resStartNodeAndHisNeighborPU);
+//                        System.out.printf("V.%d:%.4f\t", endNodeNeighborNumber, neighborVolPU);
+//                        System.out.printf("I: %.4f", currentPUforArc);
+//                        System.out.println();
                     }
 
-                                /*//region print temporary calculations "3/3"
-                            System.out.printf("Prad dla iter. zerowej dla wezla %d -> I0 = %s %.2e",
-                                    node,
-                                    "Σ",
-                                    currentPUSum);
+//                    System.out.printf("Prad dla iter. zerowej dla wezla %d -> I0 = %s %.4f",
+//                    node,
+//                    "Σ",
+//                    currentPUSum);
 
-                            System.out.println();
-                            //endregion*/
+//                    System.out.println();
 
                     elNet.nodeMap.get(node).setCurrentInitialPU(currentPUSum);
-                    elNet.nodeMap.get(node).setCurrentPU(currentPUSum);
+//                    elNet.nodeMap.get(node).setCurrentPU(currentPUSum);
 
                 }
             } catch (Exception e) {
@@ -241,9 +238,9 @@ public class ElectricalNetworkCalcService {
         });
 
     }
-    //endregion
+    //endregion*/
 
-    //region oblicz prąd początkowy w węzłach NIE mających sąsiadów "z przodu"
+    /*//region oblicz prąd początkowy w węzłach NIE mających sąsiadów "z przodu"
     public void calcNodeCurrentPUreverseNodesForZeroIter() {
 
         //region filtracja węzłów, które nia mają policzonego prądu "0"
@@ -288,7 +285,74 @@ public class ElectricalNetworkCalcService {
 
 
     }
-//endregion
+//endregion*/
+
+    //region oblicz prąd początkowy w węzłach mających sąsiadów "z przodu"
+    public void calcNodeCurrentPUAllNodes() {
+
+        elNet.nodesNeighborsForwardReverseMap.forEach((node, nodeNeighborIDList) -> {
+
+            try {
+                if (node != 0) {
+
+//                   System.out.println("NODE >" + node+"<");
+
+                    double currentPUSum = 0.0;
+                    double currentPUforArc = 0.0;
+
+                    double resStartNodeAndHisNeighborPU = 0.0;
+                    long endNodeNeighborNumber = 0;
+                    long nodeNeighborNumber = 0;
+                    for (Long neighborID : nodeNeighborIDList) { // ID sąsiada!
+
+                        // unikalny nr węzła-sąsiada
+                        if (node.compareTo(elNet.arcMap.get(neighborID).getEndNode()) != 0) {
+                            nodeNeighborNumber = elNet.arcMap.get(neighborID).getEndNode();
+                        } else {
+                            nodeNeighborNumber = elNet.arcMap.get(neighborID).getStartNode();
+                        }
+
+                        // pobranie rezystancji łuku [pu]
+                        resStartNodeAndHisNeighborPU = elNet.arcMap.get(neighborID).getResistancePU();
+
+                        // pobierz napięcie w węźle-sąsiedzie w [PU]
+                        if (elNet.nodeMap.containsKey(nodeNeighborNumber)) {
+                            double neighborVolPU = elNet.nodeMap.get(nodeNeighborNumber).getVoltagePU();
+                            // oblicz prąd początkowy dla danego węzła, który jest sumą
+                            // wszystkich prądów wypływających z niego do węzłów-sąsiadów
+                            currentPUforArc = (neighborVolPU * (1 / resStartNodeAndHisNeighborPU)) / Math.sqrt(3);
+
+                            currentPUSum = currentPUSum + currentPUforArc;
+                        }
+//                        System.out.printf("%s->", "---");
+//                        System.out.printf("%3d\t", endNodeNeighborNumber);
+//                        System.out.printf("R:%(.4f\t", resStartNodeAndHisNeighborPU);
+//                        System.out.printf("V.%d:%(.4f\t", endNodeNeighborNumber, neighborVolPU);
+//                        System.out.printf("I: %(.4f", currentPUforArc);
+//                        System.out.println();
+                    }
+
+//                    System.out.printf("Prad dla iter. zerowej dla wezla %d -> I0 = %s %(.4f",
+//                            node,
+//                            "Σ",
+//                            currentPUSum);
+
+//                    System.out.println();
+
+                    elNet.nodeMap.get(node).setCurrentInitialPU(currentPUSum);
+//                    elNet.nodeMap.get(node).setCurrentPU(currentPUSum);
+
+                }
+            } catch (Exception e) {
+                //e.printStackTrace();
+                //e.printStackTrace();
+                System.out.println("BLAD DLA node = " + node + " " + e);
+                //TODO poprawa obslugi bledow
+            }
+        });
+
+    }
+    //endregion
 
 }
 

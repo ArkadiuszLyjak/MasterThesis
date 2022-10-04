@@ -20,15 +20,13 @@ package MasterThesis;
 * */
 
 import MasterThesis.arc_file_tools.FileDataService;
-import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
 //import MasterThesis.bfs.BfsAlgorithm;
 //import MasterThesis.bfs.BfsAlgorithmOutPrinter;
 import MasterThesis.bfs.BfsAlgorithm;
 import MasterThesis.bfs.BfsAlgorithmOutPrinter;
 import MasterThesis.el_net.*;
-import MasterThesis.el_net.directMethod.DirectMethodAlgorithm;
-import MasterThesis.node.NodeType;
+import MasterThesis.el_net.DirectMethodAlgorithm;
 import MasterThesis.tools.NetStatistics;
 
 import java.nio.charset.Charset;
@@ -55,7 +53,7 @@ public class MainApp {
             //endregion
 
             //region NetStatistics
-            NetStatistics netStatistics = NetStatistics.getInstance();
+//            NetStatistics netStatistics = NetStatistics.getInstance();
             //endregion
 
             //region set parameters from args
@@ -68,7 +66,7 @@ public class MainApp {
             fileDataService.readNodeFile();
             fileDataService.readTransformerTypeFile();
 
-            elNetOutPrinter.printLineType(); // print line type
+//            elNetOutPrinter.printLineType(); // print line type
             //endregion
 
             //region print app parameters and net quantity
@@ -77,64 +75,63 @@ public class MainApp {
             //endregion
 
             //region generate front and back neighbors maps
-//            elNetService.nodeNeighborsForwardListBuild();   // następnik
+            elNetService.nodeNeighborsForwardListBuild();   // następnik
 //            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.FWD);
 
-//            elNetService.nodeNeighborsReverseListBuild();     // poprzednik
+            elNetService.nodeNeighborsReverseListBuild();     // poprzednik
 //            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.REV);
 
-//            elNetService.nodeNeighborsForwardReverseListBuild();
+            elNetService.nodeNeighborsForwardReverseListBuild();
 //            elNetOutPrinter.printNodesNeighborsForwardReverseMap(); // print nodes neighbors forward reverse map
             //endregion
 
             //region Generate visit order
-//            bfsAlgo.generateLevelsOrder();
+            bfsAlgo.generateLevelsOrder();
 //            bfsAlgOutPrinter.printNodeVisitedOrder(); // print node visited order
             //endregion
 
             //region calculations for power grid elements
             //region Calculation Immitance for Line
-//            elNetCalcService.calcLineImmitance();
+            elNetCalcService.calcLineImmitance();
 //            elNetOutPrinter.printLineImmitance();
             //endregion
 
             //region Calculation Immitance for Trafo
-//            elNetCalcService.calcTrafoImmitance();
+            elNetCalcService.calcTrafoImmitance();
 //            elNetOutPrinter.printTrafoImmitance();          // print trafo immitance [PU]
 //            elNetOutPrinter.printTrafoImmitance(true); // print trafo immitance [Ω]
             //endregion
 
             //region Calculation Per Unit for Nodes
-//            elNetCalcService.calcNodeVoltagePu();
+            elNetCalcService.calcNodeVoltagePu();
             //endregion
 
             //region Calculation initial current iteration zero and printing
-//            elNetCalcService.calcNodeCurrentPUforwardNodesForZeroIter();
-//            elNetCalcService.calcNodeCurrentPUreverseNodesForZeroIter();
+            elNetCalcService.calcNodeCurrentPUAllNodes();
 //            elNetOutPrinter.printNodeCurrentPUIterZero(); // print node current PU iter zero
             //endregion
             //endregion
 
             //region self conductance of the node
-//            elNetService.calcNodeSelfCond();
+            elNetService.calcNodeSelfCond();
 //            elNetOutPrinter.printSelfConductance(); // print self conductance
             //endregion
 
             //region create nodes with no neighbors in front
-//            elNetService.createNoFrontNeighborsNodesList();
+            elNetService.createNoFrontNeighborsNodesList();
 //            elNetOutPrinter.printNodesWithNoNeighborsInFront(); // print nodes with no frontneighbors
             //endregion
 
             //region create and print power nodes list
-//            elNetService.createNoBackNeighborsNodesList();
+            elNetService.createNoBackNeighborsNodesList();
 //            elNetOutPrinter.printNodesWithNoNeighborsAtBack(); // print nodes with no back neighbors
             //endregion
 
             //region Main algorithm for direct current calculation method
-//            directMethodAlgorithm.calculateDirectMethod();
+            directMethodAlgorithm.calculateDirectMethod();
 
             //region  active power flow calculation
-//            directMethodAlgorithm.activePowerFlow();
+            directMethodAlgorithm.activePowerFlow();
             //endregion
             //endregion
 

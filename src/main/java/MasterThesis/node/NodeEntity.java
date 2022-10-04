@@ -35,7 +35,7 @@ public class NodeEntity extends BaseEntity {
     //region quantities calculated in relative units [pu]
     Double voltagePU;           // relative voltage value
     Double currentInitialPU;    // the relative value of the current for the null iteration
-    Double currentPU;           // relative value of the current
+    Double currentPU = 0.0;           // relative value of the current
     Double selfConductancePU;   // self conductance of the node
 
     // backward computed values from relative values

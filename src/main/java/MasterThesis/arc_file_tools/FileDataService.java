@@ -20,7 +20,6 @@ public class FileDataService {
     static FileDataService instance;
     AppParameters params = AppParameters.getInstance();
     ElectricalNetwork elNet = ElectricalNetwork.getInstance();
-
     static DecimalFormat df = new DecimalFormat("00.000000");
 
     //region getInstance
@@ -61,6 +60,7 @@ public class FileDataService {
             elNet.nodeMap.forEach((ID, nodeEntity) -> {
                 printWriter.printf("%3d%s", ID, delim);
                 printWriter.printf("%-9.4f", nodeEntity.getVoltageReal());
+//                printWriter.printf("%-9.4f", nodeEntity.getVoltagePU());
                 printWriter.print("\n");
             });
         });

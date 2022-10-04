@@ -1,4 +1,4 @@
-package MasterThesis.el_net.directMethod;
+package MasterThesis.el_net.InsideCalcContener;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import java.util.Map;
 @Getter
 @Setter
 
-public class InsideLoopEveryNodeCalcEntity {
+public class DirectMethodInsideCalcEntity {
 
     long iterateMaxNumber;                     // emergency "valve"
     int a;                                     // error indicator
@@ -27,7 +27,7 @@ public class InsideLoopEveryNodeCalcEntity {
     double deltaVoltageThisIterPresentNode;    // zmiana napięcia w obl. węźle [PU]
     double voltageThisIterPresentNode;         // obl. nowe napięcie w węźle [PU]
 
-    public InsideLoopEveryNodeCalcEntity(InsideLoopEveryNodeCalcEntityBuilder builder) {
+    public DirectMethodInsideCalcEntity(DirectMethodInsideCalcEntityBuilder builder) {
         iterateMaxNumber = builder.iterateMaxNumber;
         a = builder.a;
         deltaCurrentThisIterPresentNode = builder.deltaCurrentThisIterPresentNode;

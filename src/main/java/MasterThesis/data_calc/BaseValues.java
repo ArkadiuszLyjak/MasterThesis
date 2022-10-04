@@ -3,6 +3,7 @@ package MasterThesis.data_calc;
 // Change calculated data to per unit / jednostki wzgledne
 public class BaseValues {
 
+    // Obliczanie rozpływów mocy w dużych systemach elektroenergetycznych PDF
     //    public static Double power_base = 100_000_000.0; // 100 MVA
     public static Double powerBase = 1_000_000.0;       // 1 MVA
     public static Double voltageBase = 420.0;           // V
