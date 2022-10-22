@@ -1,0 +1,5 @@
+ID|TYPE|TRANSMIT POWER
+1|LINE|null|
+2|LINE|null|
+11|LINE|null|
+12|LINE|null|

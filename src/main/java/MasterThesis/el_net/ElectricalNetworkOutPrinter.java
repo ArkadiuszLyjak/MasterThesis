@@ -264,7 +264,7 @@ public class ElectricalNetworkOutPrinter {
      * <a href="http://www.supermanisthegreatest.com">Superman!</a> </p>
      *
      * @see ElectricalNetwork#arcMap
-     * @see ElectricalNetworkService#nodeNeighborsForwardListBuild()
+     * @see ElectricalNetworkService#nodeNeighborsForwardMapBuild()
      */
 
     //region print Node Neighbors With Direction
@@ -295,13 +295,14 @@ public class ElectricalNetworkOutPrinter {
         switch (direction) {
             //region FORWARD
             case FWD:
+                System.out.println("start node number - Start, end node number - End");
                 elNet.neighborsForwardMap.forEach((node, neighborsIdList) -> {
-                            System.out.printf("node:[%3d] --> ", node);
-                            System.out.print("neighbors: [");
+                            System.out.printf("Start: %d --> ", node);
                             neighborsIdList.forEach(neighborId -> {
-                                System.out.printf("%d ", elNet.arcMap.get(neighborId).getEndNode());
+                                System.out.printf("End: %d (ID:%d), ",
+                                        elNet.arcMap.get(neighborId).getEndNode(), neighborId);
                             });
-                            System.out.println("]");
+                            System.out.println();
                         }
                 );
 
@@ -312,7 +313,6 @@ public class ElectricalNetworkOutPrinter {
             case REV:
                 elNet.neighborsReverseMap.forEach((nodeEnd, neighborsStartIdList) -> {
                     LongFunction<Long> IDtoNodeStartLongFunction = ID -> elNet.arcMap.get(ID).getStartNode();
-
 
                     System.out.print("reverse neighbors: ");
                     for (Long startNodeID : neighborsStartIdList) {
@@ -343,10 +343,9 @@ public class ElectricalNetworkOutPrinter {
         System.out.println("----------------------------------------\n");
 
         elNet.nodeList.forEach(nodeEntity -> {
-            System.out.printf("%3d: %s [PU]%n",
-                    nodeEntity.getId(),
-//                    DECIMAL_FORMAT_EXP.format(nodeEntity.getCurrentInitialPU()));
-                    DECIMAL_FORMAT_IMMITANCE.format(nodeEntity.getCurrentInitialPU()));
+            System.out.printf("%3d: %.4f [PU]%n", nodeEntity.getId(), nodeEntity.getCurrentInitialPU());
+//            DECIMAL_FORMAT_EXP.format(nodeEntity.getCurrentInitialPU()));
+//            DECIMAL_FORMAT_IMMITANCE.format(nodeEntity.getCurrentInitialPU()));
         });
 
     }
@@ -456,14 +455,14 @@ public class ElectricalNetworkOutPrinter {
                 System.out.println();
                 elNet.nodeMap.forEach((aLong, nodeEntity) -> {
                     formatter.format("%-23s %d%n", "id:", nodeEntity.getId());
-//                    formatter.format("%-23s %.2f [kW]%n", "active power:", nodeEntity.getActivePower());
-//                    formatter.format("%-23s %.2f [kVar]%n", "reactive power:", nodeEntity.getReactivePower());
+                    formatter.format("%-23s %.2f [kW]%n", "active power:", nodeEntity.getActivePower());
+                    formatter.format("%-23s %.2f [kVar]%n", "reactive power:", nodeEntity.getReactivePower());
                     formatter.format("  %-23s %(.2f [kV]%n", "voltage nominal:", nodeEntity.getNominalVoltage());
-                    formatter.format("  %-23s %(.1e%n", "voltage [PU]:", nodeEntity.getVoltagePU());
-//                    formatter.format("  %-23s %(.4f%n", "voltage real:", nodeEntity.getVoltageReal());
+                    formatter.format("  %-23s %(.4f%n", "voltage [PU]:", nodeEntity.getVoltagePU());
+                    formatter.format("  %-23s %(.4f%n", "voltage real:", nodeEntity.getVoltageReal());
                     formatter.format("%-23s %(.4f%n", "current iter '0' [PU]:", nodeEntity.getCurrentInitialPU());
-//                    formatter.format("%-23s %(.4f%n", "current [PU]:", nodeEntity.getCurrentPU());
-//                    formatter.format("%-23s %(.4f%n", "current real:", nodeEntity.getCurrentReal());
+                    formatter.format("%-23s %(.4f%n", "current [PU]:", nodeEntity.getCurrentPU());
+                    formatter.format("%-23s %(.4f%n", "current real:", nodeEntity.getCurrentReal());
 
                     System.out.println(formatter);
                     sb.setLength(0);
@@ -521,14 +520,14 @@ public class ElectricalNetworkOutPrinter {
 
     //region print nodes with no neighbors at back
     public void printNodesWithNoNeighborsAtBack() {
-        System.out.println("Power nodes: ");
+        System.out.println("\nPower nodes: ");
         elNet.nodesWithNoNeighborsBackList.forEach(System.out::println);
     }
     //endregion
 
     //region print nodes neighbors forward and reverse map
     public void printNodesNeighborsForwardReverseMap() {
-        System.out.println("map of the neighbors of the nodes in front and behind:");
+        System.out.println("\nmap of the neighbors of the nodes in front and behind:\n");
         if (!elNet.nodesNeighborsForwardReverseMap.isEmpty()) {
             elNet.nodesNeighborsForwardReverseMap.forEach((uniqueNodeNumber, neighborsIDsList) -> {
                 System.out.printf("%3d ", uniqueNodeNumber);
@@ -537,6 +536,7 @@ public class ElectricalNetworkOutPrinter {
         } else {
             System.out.println("Mapa: nodesNeighborsForwardReverseMap jest pusta");
         }
+        System.out.println();
     }
     //endregion
 

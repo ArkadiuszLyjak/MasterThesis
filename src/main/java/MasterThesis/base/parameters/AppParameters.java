@@ -23,7 +23,7 @@ public class AppParameters {
     String dataNodeResultsFileName = "NODE_RESULTS.txt";
     //    String dataNodeResultsFileName = "MO_DATA_NODE_RESULTS.txt";
     String delimiter = "|";
-    String sourceDataFilesPath = "C:\\repo\\MasterThesis\\dataFiles\\";
+    String sourceDataFilesPath = "C:\\repo\\MasterThesis\\src\\dataFiles\\";
     String arcResultsOutputFile = sourceDataFilesPath + "ARC_RESULTS.txt";
     String nodeResultsOutputFile = sourceDataFilesPath + "NODE_RESULTS.txt";
     //endregion

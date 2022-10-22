@@ -35,7 +35,7 @@ public class ElectricalNetworkService {
      */
 
     //region Generate forward neighbors map
-    public void nodeNeighborsForwardListBuild() {
+    public void nodeNeighborsForwardMapBuild() {
 
         elNet.arcMap.forEach((arcID, arcEntity) -> {
             long startNode = arcEntity.getStartNode();
@@ -53,7 +53,7 @@ public class ElectricalNetworkService {
     //endregion
 
     //region Generate reverse neighbors map
-    public void nodeNeighborsReverseListBuild() {
+    public void nodeNeighborsReverseMapBuild() {
         elNet.arcMap.forEach((arcID, arcEntity) -> {
 
             //region Description 2
@@ -169,6 +169,7 @@ public class ElectricalNetworkService {
 
         // set only keys
         Set<Long> ids = elNet.neighborsForwardMap.keySet();
+//        Set<Long> ids = elNet.nodesNeighborsForwardReverseMap.keySet();
 
         // build list of nodes with no neighbors in front
         listOfAllNodesAvailable.forEach(aLong -> {
@@ -182,20 +183,13 @@ public class ElectricalNetworkService {
     //region create no back neighbors nodes list
     public void createNoBackNeighborsNodesList() {
 
-        // list of all available nodes
-        Set<Map.Entry<Long, List<Long>>> entrySet = elNet.neighborsReverseMap.entrySet();
+        Set<Long> skd = elNet.nodeList.stream()
+                .mapToLong(NodeEntity::getId)
+                .boxed()
+                .collect(Collectors.toSet());
 
-        entrySet.forEach(longListEntry -> {
-            List<Long> value = longListEntry.getValue();
-            for (Long nodeID : value) {
-                ArcEntity arcEntity = elNet.arcMap.get(nodeID);
-                long startNode = arcEntity.getStartNode();
-                if (startNode == 0) {
-                    elNet.nodesWithNoNeighborsBackList.add(arcEntity.getEndNode());
-                }
-            }
-        });
-
+        skd.removeAll(elNet.neighborsReverseMap.keySet());
+        elNet.nodesWithNoNeighborsBackList.addAll(skd);
     }
     //endregion
 

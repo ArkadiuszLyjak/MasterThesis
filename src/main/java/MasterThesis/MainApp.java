@@ -20,6 +20,7 @@ package MasterThesis;
 * */
 
 import MasterThesis.arc_file_tools.FileDataService;
+import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
 //import MasterThesis.bfs.BfsAlgorithm;
 //import MasterThesis.bfs.BfsAlgorithmOutPrinter;
@@ -27,7 +28,6 @@ import MasterThesis.bfs.BfsAlgorithm;
 import MasterThesis.bfs.BfsAlgorithmOutPrinter;
 import MasterThesis.el_net.*;
 import MasterThesis.el_net.DirectMethodAlgorithm;
-import MasterThesis.tools.NetStatistics;
 
 import java.nio.charset.Charset;
 
@@ -65,7 +65,6 @@ public class MainApp {
             fileDataService.readLineTypeFile();
             fileDataService.readNodeFile();
             fileDataService.readTransformerTypeFile();
-
 //            elNetOutPrinter.printLineType(); // print line type
             //endregion
 
@@ -75,10 +74,10 @@ public class MainApp {
             //endregion
 
             //region generate front and back neighbors maps
-            elNetService.nodeNeighborsForwardListBuild();   // następnik
+            elNetService.nodeNeighborsForwardMapBuild();   // następnik
 //            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.FWD);
 
-            elNetService.nodeNeighborsReverseListBuild();     // poprzednik
+            elNetService.nodeNeighborsReverseMapBuild();     // poprzednik
 //            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.REV);
 
             elNetService.nodeNeighborsForwardReverseListBuild();
@@ -86,7 +85,7 @@ public class MainApp {
             //endregion
 
             //region Generate visit order
-            bfsAlgo.generateLevelsOrder();
+//            bfsAlgo.generateLevelsOrder();
 //            bfsAlgOutPrinter.printNodeVisitedOrder(); // print node visited order
             //endregion
 
@@ -119,7 +118,7 @@ public class MainApp {
 
             //region create nodes with no neighbors in front
             elNetService.createNoFrontNeighborsNodesList();
-//            elNetOutPrinter.printNodesWithNoNeighborsInFront(); // print nodes with no frontneighbors
+//            elNetOutPrinter.printNodesWithNoNeighborsInFront(); // print nodes with no front neighbors
             //endregion
 
             //region create and print power nodes list
@@ -140,7 +139,7 @@ public class MainApp {
             fileDataService.writeArcResultsToFile();
             //endregion
 
-//            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.HORIZONTAL);
+            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.HORIZONTAL);
 //            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.VERTICAL);
 //            elNetOutPrinter.printDistributedNodes(NodeType.OTHER_NODE); // print distributed nodes
             //endregion

@@ -5,16 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87091b50-afb2-4a5a-9117-312c1c37d355" name="Default Changelist" comment="back to not underscore">
+      <change afterPath="$PROJECT_DIR$/MasterThesis.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/MasterThesis/node/NodeFactoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataFiles/ARC_RESULTS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dataFiles/ARC_RESULTS.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataFiles/Arc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dataFiles/Arc.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataFiles/NODE_RESULTS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dataFiles/NODE_RESULTS.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataFiles/Node.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dataFiles/Node.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/arc_file_tools/FileDataService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/data_calc/BaseValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/data_calc/BaseValues.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/DirectMethodAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/DirectMethodAlgorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkOutPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkOutPrinter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/directMethod/DirectMethodAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/el_net/directMethod/DirectMethodAlgorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/MasterThesis/AppTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/MasterThesis/FactoryFromStrTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/MasterThesis/MainFactoryFromStrTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +56,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -100,7 +107,12 @@
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;LombokPluginIS_LOMBOK_JPS_FIX_ENABLED&quot;: &quot;true&quot;,
     &quot;LombokPluginIS_LOMBOK_VERSION_CHECK_Enabled&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/repo/MasterThesis&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -109,7 +121,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;profiler.jvm&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
@@ -122,6 +134,15 @@
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="MasterThesis.el_net.ElectricalNetworkService" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\repo\MasterThesis\src" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="MasterThesis.node" />
     </key>
   </component>
   <component name="RunManager" selected="Application.MainApp">
@@ -138,12 +159,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RozneTakie" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="testJava.RozneTakie" />
-      <module name="MasterThesis.main" />
+    <configuration name="MainFactoryFromStrTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MasterThesis.MainFactoryFromStrTest" />
+      <module name="MasterThesis.test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="testJava.*" />
+          <option name="PATTERN" value="MasterThesis.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -164,12 +185,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestStreams" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="testJava.TestStreams" />
+    <configuration name="TestingJava" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="testNewFunc.TestingJava" />
       <module name="MasterThesis.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="testJava.*" />
+          <option name="PATTERN" value="testNewFunc.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -177,33 +198,42 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestingJava" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MasterThesis.testJava.TestingJava" />
-      <module name="MasterThesis.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="MasterThesis.testJava.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="AppTest.testAppHasAGreeting" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;MasterThesis.AppTest.testAppHasAGreeting&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Application.TestingJava" />
-      <item itemvalue="Application.RozneTakie" />
+      <item itemvalue="Application.MainFactoryFromStrTest" />
       <item itemvalue="Application.Test" />
-      <item itemvalue="Application.TestStreams" />
       <item itemvalue="Application.MainApp" />
+      <item itemvalue="Gradle.AppTest.testAppHasAGreeting" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainApp" />
-        <item itemvalue="Application.TestingJava" />
+        <item itemvalue="Application.MainFactoryFromStrTest" />
+        <item itemvalue="Gradle.AppTest.testAppHasAGreeting" />
         <item itemvalue="Application.Test" />
-        <item itemvalue="Application.TestStreams" />
-        <item itemvalue="Application.RozneTakie" />
       </list>
     </recent_temporary>
   </component>
@@ -254,7 +284,12 @@
       <workItem from="1663490220005" duration="129053000" />
       <workItem from="1664179471168" duration="48490000" />
       <workItem from="1664357071038" duration="74983000" />
-      <workItem from="1664805137209" duration="36590000" />
+      <workItem from="1664805137209" duration="124896000" />
+      <workItem from="1665223489662" duration="47746000" />
+      <workItem from="1665493072515" duration="17956000" />
+      <workItem from="1665561001166" duration="33937000" />
+      <workItem from="1666426546689" duration="2676000" />
+      <workItem from="1666447776558" duration="1549000" />
     </task>
     <task id="LOCAL-00001" summary="__">
       <created>1657106998806</created>
@@ -370,28 +405,14 @@
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/MasterThesis/el_net/DirectMethodAlgorithm.java</url>
-          <line>129</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/MasterThesis/el_net/DirectMethodAlgorithm.java</url>
-          <line>131</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/MasterThesis/el_net/DirectMethodAlgorithm.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="GradleRunConfiguration">
+        <watch expression="neighborID" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MasterThesis$MainApp.ic" NAME="MainApp Coverage Results" MODIFIED="1584984382418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/MasterThesis$MainApp.ic" NAME="MainApp Coverage Results" MODIFIED="1665494381273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>MasterThesis.*</FILTER>
     </SUITE>
   </component>
