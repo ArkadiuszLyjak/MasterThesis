@@ -72,7 +72,7 @@ public class MainApp {
 //            System.out.println(AppParameters.getInstance().toString());
 //            elNetOutPrinter.printNetQuantity(); // print net quantity
             //endregion
-
+//
             //region generate front and back neighbors maps
             elNetService.nodeNeighborsForwardMapBuild();   // następnik
 //            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.FWD);
