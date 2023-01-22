@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="87091b50-afb2-4a5a-9117-312c1c37d355" name="Default Changelist" comment="back to not underscore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +228,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="91172426-8a7d-482b-957e-66da98945dfa" name="Changes" comment="" />
+      <changelist id="a433425c-90c3-4bb6-b15e-48b75d1d532d" name="Changes" comment="" />
       <created>1602790449081</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -284,7 +283,13 @@
       <workItem from="1667158699648" duration="1449000" />
       <workItem from="1667492230635" duration="337000" />
       <workItem from="1667492995730" duration="824000" />
-      <workItem from="1668790515352" duration="1121000" />
+      <workItem from="1668790515352" duration="8652000" />
+      <workItem from="1668849510505" duration="2420000" />
+      <workItem from="1671364463322" duration="2819000" />
+      <workItem from="1672137236681" duration="2100000" />
+      <workItem from="1672423940260" duration="5894000" />
+      <workItem from="1673283730054" duration="112000" />
+      <workItem from="1673903478660" duration="8983000" />
     </task>
     <task id="LOCAL-00001" summary="__">
       <created>1657106998806</created>
