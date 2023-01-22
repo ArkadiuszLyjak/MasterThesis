@@ -4,7 +4,7 @@
 //TYPE – nazwa typu
 //VOLTAGE – napięcie znamionowe
 //MAIN_STRAND_INTERSECTION – przekrój roboczy
-//COHESIVE_UNIT_RESISTANCE – rezystancja jednostkowa---
+//COHESIVE_UNIT_RESISTANCE – rezystancja jednostkowa
 //ZERO_UNIT_RESISTANCE – nieistotne, wpisujemy 0
 //COHESIVE_UNIT_REACTANCE – reaktancja jednostkowa
 //ZERO_UNIT_REACTANCE – nieistotne, wpisujemy 0
