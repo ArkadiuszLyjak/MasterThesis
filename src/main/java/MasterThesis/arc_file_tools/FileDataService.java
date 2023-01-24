@@ -73,7 +73,7 @@ public class FileDataService {
             FileDataReader.netFileRead(params.getNodeFileFullPath(), fileLine -> {
                 NodeEntity node = NodeFactory.prepareFromString(fileLine);
                 elNet.nodeMap.put(node.getId(), node);
-                elNet.nodeList.add(node);
+                elNet.nodeEntityList.add(node);
             });
         } catch (FileNotFoundException e) {
             e.printStackTrace();

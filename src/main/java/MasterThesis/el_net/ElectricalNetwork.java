@@ -17,7 +17,7 @@ public class ElectricalNetwork {
     public Map<Long, NodeEntity> nodeMap;                       // maps from files
     public Map<Long, TransformerTypeEntity> transformerTypeMap; // maps from files
 
-    public List<NodeEntity> nodeList;
+    public List<NodeEntity> nodeEntityList;
     public List<ArcEntity> arcList;
 
     public Map<Long, List<Long>> neighborsForwardMap = new LinkedHashMap<>();
@@ -57,7 +57,7 @@ public class ElectricalNetwork {
         nodeMap = new LinkedHashMap<>();
         arcMap = new LinkedHashMap<>();
         arcList = new LinkedList<>();
-        nodeList = new LinkedList<>();
+        nodeEntityList = new LinkedList<>();
     } //
     //endregion
 
@@ -68,7 +68,7 @@ public class ElectricalNetwork {
         transformerTypeMap.clear(); //
         arcMap.clear(); //
         arcList.clear(); //
-        nodeList.clear(); //
+        nodeEntityList.clear(); //
     }
     //endregion
 

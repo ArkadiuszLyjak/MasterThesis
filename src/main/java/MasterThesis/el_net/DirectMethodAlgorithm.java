@@ -1,12 +1,8 @@
 package MasterThesis.el_net;
 
 import MasterThesis.data_calc.BaseValues;
-import MasterThesis.el_net.InsideCalcContener.DirectMethodInsideCalcEntityBuilder;
-import MasterThesis.el_net.InsideCalcContener.NeighborEntityBuilder;
 import MasterThesis.node.NodeEntity;
-import MasterThesis.node.NodeType;
 
-import java.text.DecimalFormat;
 import java.util.*;
 
 import static MasterThesis.data_calc.BaseValues.voltageBase;
@@ -47,16 +43,14 @@ public class DirectMethodAlgorithm {
             a = 0;
 
 //            if (iterateMax == 1) break; // safety "valve"
-            if (iterateMax == 2) break; // safety "valve"
+//            if (iterateMax == 2) break; // safety "valve"
 //            if (iterateMax == 100) break; // safety "valve"
-//            if (iterateMax == 1000) break; // safety "valve"
+            if (iterateMax == 1000) break; // safety "valve"
             iterateMax++;
-
 
             System.out.println("\n-------------------------------------------------------");
             System.out.printf("---------------------- iterate: %d ---------------------\n", iterateMax);
             System.out.println("-------------------------------------------------------");
-
 
             //region Description
             double deltaCurrentThisIterPresentNode = 0;     // bieżąca wart. poprawki prądu
@@ -79,17 +73,14 @@ public class DirectMethodAlgorithm {
 //            System.out.printf("%s%(-6.4f\n\n", "√3_init = ", item_sqrt);
             //endregion
 
-
             //region iteracje dla każdego węzła
-            for (NodeEntity node : elNet.nodeList) {
-
+            for (NodeEntity node : elNet.nodeEntityList) {
 
                 //region data for every node
                 //region zmienne wewnętrzne używane w obl. iteracyjnych
                 long computedNodeNumber = node.getId();
                 System.out.printf("\n\t\t\t\t----- node = %d (k=%d) -----\n", node.getId(), iterateMax);
                 //endregion
-
 
                 //region pobranie prądu początkowego
                 if (iterateMax == 1) {
@@ -102,7 +93,6 @@ public class DirectMethodAlgorithm {
                     System.out.printf("I.%d(k=%d) = %(.4f\n", computedNodeNumber, iterateMax - 1, currentThisIterPresentNode);
                 }
                 //endregion
-
 
                 //region dane znamionowe / wejściowe
                 double u_i = node.getVoltagePU();               // napięcie w wężle liczonym
@@ -117,7 +107,6 @@ public class DirectMethodAlgorithm {
                 double sum_Uj_Gij = 0.0;
                 //endregion
 
-
                 //region obliczenie sumy "Uj * Gij" po sąsiadach
                 //region wybór mapy: forward lub reverse
                 Map<Long, List<Long>> map = new LinkedHashMap<>();
@@ -130,7 +119,6 @@ public class DirectMethodAlgorithm {
                     throw new Error("Mapa jest pusta!");
                 }
                 //endregion
-
 
                 for (Long neighborID : map.get(computedNodeNumber)) {
 //                for (Long neighborID : elNet.nodesNeighborsForwardReverseMap.get(node.getId())) {
@@ -177,12 +165,11 @@ public class DirectMethodAlgorithm {
                 //endregion
                 //endregion
 
-
                 //region for NodeType.OTHER_NODE
 //                if (node.getNodeType() == NodeType.OTHER_NODE) {
 
                 //region powerNodes
-                if (!(elNet.nodeList.size() <= elNet.nodesWithNoNeighborsBackList.size())) {
+                if (!(elNet.nodeEntityList.size() <= elNet.nodesWithNoNeighborsBackList.size())) {
 
                     System.out.println("\n\nalgorytm PRAWY - 5B");
 
@@ -217,7 +204,6 @@ public class DirectMethodAlgorithm {
 
                     System.out.printf("\tV.%d(k=%d) = %(.4f\n",
                             computedNodeNumber, iterateMax, voltageTempThisIterPresentNode);
-
 
                     //region setters
                     nodeVoltageCalculatedMap.put(computedNodeNumber, voltageTempThisIterPresentNode);
@@ -275,7 +261,6 @@ public class DirectMethodAlgorithm {
             }
             //endregion*/
 
-
             //region setting voltage PU / voltage real calculated in previous iteration
             Set<Long> nodes = nodeVoltageCalculatedMap.keySet();
             for (Long node : nodes) {
@@ -284,7 +269,6 @@ public class DirectMethodAlgorithm {
             }
             //endregion
             //endregion
-
 
             //region Current
             /*//region print current PU calculated in previous iteration
@@ -297,7 +281,6 @@ public class DirectMethodAlgorithm {
                 System.out.println("\nnodeCurrentCalculatedMap is empty");
             }
             //endregion*/
-
 
             //region setting current PU / current real calculated in previous iteration
             Collection<Double> currentValues = nodeCurrentCalculatedMap.values();
@@ -382,5 +365,5 @@ public class DirectMethodAlgorithm {
             }
         });
     }
-//endregion
+    //endregion
 }

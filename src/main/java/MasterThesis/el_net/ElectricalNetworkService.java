@@ -1,6 +1,5 @@
 package MasterThesis.el_net;
 
-import MasterThesis.arc.ArcEntity;
 import MasterThesis.base.entity.BaseEntity;
 import MasterThesis.base.parameters.AppParametersService;
 import MasterThesis.node.NodeEntity;
@@ -23,6 +22,12 @@ public class ElectricalNetworkService {
             instance = new ElectricalNetworkService();
         }
         return instance;
+    }
+    //endregion
+
+    //region isEmpty
+    public static boolean isEmpty(Collection coll) {
+        return (coll == null || coll.isEmpty());
     }
     //endregion
 
@@ -69,12 +74,13 @@ public class ElectricalNetworkService {
             //endregion
         });
     }
+
     //endregion
 
     //region Generate forward reverse neighbors map
     public void nodeNeighborsForwardReverseListBuild() {
 
-        elNet.nodeList.forEach(nodeEntity -> {
+        elNet.nodeEntityList.forEach(nodeEntity -> {
 
             Long node = nodeEntity.getId();
 
@@ -99,7 +105,6 @@ public class ElectricalNetworkService {
 //        }
 
     }
-
     //endregion
 
     //region isDistributeNode
@@ -162,7 +167,7 @@ public class ElectricalNetworkService {
     //region generate list of nodes with no neighbors in front of them
     public void createNoFrontNeighborsNodesList() {
         // list of all available nodes
-        List<Long> listOfAllNodesAvailable = elNet.nodeList
+        List<Long> listOfAllNodesAvailable = elNet.nodeEntityList
                 .stream()
                 .map(BaseEntity::getId)
                 .collect(Collectors.toList());
@@ -183,14 +188,27 @@ public class ElectricalNetworkService {
     //region create no back neighbors nodes list
     public void createNoBackNeighborsNodesList() {
 
-        Set<Long> skd = elNet.nodeList.stream()
+        /*Lista węzłów*/
+        List<Long> nodeList = elNet.nodeEntityList.stream()
                 .mapToLong(NodeEntity::getId)
                 .boxed()
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
 
-        skd.removeAll(elNet.neighborsReverseMap.keySet());
-        elNet.nodesWithNoNeighborsBackList.addAll(skd);
+//        for (Long aLong : nodeList) System.out.println(aLong);
+//        for (Map.Entry<Long, List<Long>> entry : elNet.neighborsReverseMap.entrySet()) {
+//            System.out.println(entry.getKey() + ":" + entry.getValue().toString());
+//        }
+
+        nodeList.removeAll(elNet.neighborsReverseMap.keySet());
+        elNet.nodesWithNoNeighborsBackList.addAll(nodeList);
+
+//        if (!isEmpty(elNet.nodesWithNoNeighborsBackList)) {
+//            for (Long aLong : elNet.nodesWithNoNeighborsBackList) {
+//                System.out.println("> " + aLong);
+//            }
+//        }
+
     }
-    //endregion
 
+//endregion
 }

@@ -296,7 +296,7 @@ public class ElectricalNetworkOutPrinter {
             //region FORWARD
             case FWD:
                 System.out.println("start node number - Start, end node number - End");
-                elNet.neighborsForwardMap.forEach((node, neighborsIdList) -> {
+                /*elNet.neighborsForwardMap.forEach((node, neighborsIdList) -> {
                             System.out.printf("Start: %d --> ", node);
                             neighborsIdList.forEach(neighborId -> {
                                 System.out.printf("End: %d (ID:%d), ",
@@ -304,7 +304,17 @@ public class ElectricalNetworkOutPrinter {
                             });
                             System.out.println();
                         }
+                );*/
+
+                elNet.neighborsForwardMap.forEach((node, neighborsIdList) -> {
+                            System.out.printf("Start: %d --> ", node);
+                            neighborsIdList.forEach(neighborId -> {
+                                System.out.printf("%d, ", elNet.arcMap.get(neighborId).getEndNode());
+                            });
+                            System.out.println();
+                        }
                 );
+
 
                 break;
             //endregion
@@ -342,7 +352,7 @@ public class ElectricalNetworkOutPrinter {
         System.out.println("------- NODE CurrentPU Io --------------");
         System.out.println("----------------------------------------\n");
 
-        elNet.nodeList.forEach(nodeEntity -> {
+        elNet.nodeEntityList.forEach(nodeEntity -> {
             System.out.printf("%3d: %.4f [PU]%n", nodeEntity.getId(), nodeEntity.getCurrentInitialPU());
 //            DECIMAL_FORMAT_EXP.format(nodeEntity.getCurrentInitialPU()));
 //            DECIMAL_FORMAT_IMMITANCE.format(nodeEntity.getCurrentInitialPU()));
