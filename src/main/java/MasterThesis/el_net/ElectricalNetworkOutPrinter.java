@@ -629,7 +629,7 @@ public class ElectricalNetworkOutPrinter {
                                 "Gij", df.format(neighborCalcEntity.getG_ij()));
 
                         System.out.printf("\t%-14s %s\n",
-                                "∑", df.format(neighborCalcEntity.getItem_sum()));
+                                "Suma: ", df.format(neighborCalcEntity.getItem_sum()));
 
                         System.out.println();
                     });

@@ -17,7 +17,7 @@ public class FileDataReader {
             String fileLine;
             while ((fileLine = br.readLine()) != null) {
                 if (fileLine.substring(0, 2).compareTo("//") != 0) {
-                    if (lines == 0) {
+                    if (lines == 0) { // pominięcie nagłówka
                     } else {
                         consumer.accept(fileLine);
                     }

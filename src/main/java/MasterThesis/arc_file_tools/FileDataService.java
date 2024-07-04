@@ -17,7 +17,7 @@ import java.text.DecimalFormat;
 
 public class FileDataService {
 
-    static FileDataService instance;
+    private static FileDataService instance;
     AppParameters params = AppParameters.getInstance();
     ElectricalNetwork elNet = ElectricalNetwork.getInstance();
     static DecimalFormat df = new DecimalFormat("00.000000");
@@ -121,20 +121,6 @@ public class FileDataService {
                 elNet.arcMap.put(arc.getId(), arc);
                 elNet.arcList.add(arc);
                 //endregion
-
-                /*//region Adds only the records that are turned on and prints to the screen
-                if (arc.getCondition() == 1) {
-                    elNet.arcMap.put(arc.getId(), arc);
-                    elNet.arcList.add(arc);
-                    System.out.println(arc);
-                } else {
-                    System.out.printf("[%3d] %3d > %3d %s%n",
-                            arc.getId(),
-                            arc.getStartNode(),
-                            arc.getEndNode(),
-                            "-------- not connected --------");
-                }
-                //endregion*/
             });
 
         } catch (FileNotFoundException e) {

@@ -31,7 +31,6 @@ public class BfsAlgorithmOutPrinter {
 
                             System.out.println("LEVEL " + nodeArcVO.netLevel + " > "
                                     + nodeArcVO.nodeId + "->" + nodeArcVO.neighborNodeId)
-//                    elNet.arcMap.get(nodeArcVO.arcId).getEndNodeId())
             );
         }
 

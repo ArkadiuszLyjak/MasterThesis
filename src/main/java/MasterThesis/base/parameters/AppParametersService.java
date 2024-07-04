@@ -27,7 +27,6 @@ public class AppParametersService {
     //region setParametersFromArgs
     public void setParametersFromArgs(String[] args) {
         if (args.length > 0) {
-//            for (int i = 0; ) System.out.println(args[0]);
             params.setSourceDataFilesPath(args[1]);
         }
     }

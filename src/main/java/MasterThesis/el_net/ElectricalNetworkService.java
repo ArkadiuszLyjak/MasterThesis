@@ -124,7 +124,7 @@ public class ElectricalNetworkService {
         }
         return false;
     }
-    //endregion
+    //endregion2
 
     //region self conductance of the node
     // quantities necessary for the main algorithm

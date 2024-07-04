@@ -2,15 +2,9 @@ package MasterThesis.el_net;
 
 import MasterThesis.arc.ArcEntity;
 import MasterThesis.arc.ArcType;
-import MasterThesis.base.entity.BaseEntity;
 import MasterThesis.data_calc.BaseValues;
 import MasterThesis.lineType.LineTypeEntity;
-import MasterThesis.node.NodeEntity;
 import MasterThesis.transformer_type.TransformerTypeEntity;
-
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ElectricalNetworkCalcService {
 
@@ -59,13 +53,14 @@ public class ElectricalNetworkCalcService {
 
                 //region [pu]
                 Double resistancePU = resistance / BaseValues.impedanceBase;
-//                System.out.printf("R:%.4f[pu] ", resistancePU);
+//                System.out.printf("\n\t  R:%.4f[pu] ", resistancePU);
 
                 Double reactancePU = reactance / BaseValues.impedanceBase;
 //                System.out.printf("X:%.4f[pu] ", reactancePU);
 
                 Double impedancePU = impedance / BaseValues.impedanceBase;
 //                System.out.printf("Z:%.4f[pu] ", impedancePU);
+//                System.out.println();
                 //endregion
 
 //                System.out.println();
@@ -78,6 +73,7 @@ public class ElectricalNetworkCalcService {
                 arc.setResistancePU(resistancePU);
                 arc.setReactancePU(reactancePU);
                 arc.setImpedancePU(impedancePU);
+
                 //endregion
 
             }
@@ -93,7 +89,8 @@ public class ElectricalNetworkCalcService {
 
                 TransformerTypeEntity transformerType = elNet.transformerTypeMap.get(arc.getPosition());
 
-                /*//region power losses in the transformer winding
+/*
+                //region power losses in the transformer winding
                 Double resistance = ((transformerType.getActiveIdleLoss() / 1000)       // [MW]
                         * Math.pow(transformerType.getNominalUpperVoltage(), 2.0))      // [kV]
                         / Math.pow((transformerType.getNominalPower() / 1000), 2.0);    // [MVA]
@@ -106,7 +103,8 @@ public class ElectricalNetworkCalcService {
                         * (Math.pow(transformerType.getNominalUpperVoltage(), 2.0)
                         / transformerType.getNominalPower());
 
-                //endregion*/
+                //endregion
+*/
 
                 double resistance = 0;
                 double reactance = 0;
@@ -297,7 +295,7 @@ public class ElectricalNetworkCalcService {
 
             try {
 
-//                /*System.out.println("NODE >" + node + "<");*/
+//                System.out.println("NODE >" + node + "<");
 
                 double currentPUSum = 0.0;
                 double currentPUforArc = 0.0;
