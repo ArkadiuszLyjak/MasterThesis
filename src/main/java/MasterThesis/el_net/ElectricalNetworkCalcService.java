@@ -31,8 +31,8 @@ public class ElectricalNetworkCalcService {
         for (ArcEntity arc : elNet.arcList) {
             if (arc.getType() == ArcType.LINE) {
 
-//                System.out.printf("%3d->%3d ", arc.getStartNode(), arc.getEndNode());
-//                System.out.printf("%s ", arc.getType());
+//                System.out.printf("%3d->%3d ", arc.getStartNode(), arc.getEndNode());11/*/**/*/
+//                System.out.printf("%s ", arc.getType());1
 
                 LineTypeEntity lineType = elNet.lineTypeMap.get(arc.getPosition());
 //                System.out.printf("%s ", lineType.getKind().toString());

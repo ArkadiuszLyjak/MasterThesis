@@ -240,6 +240,7 @@ public class ElectricalNetworkOutPrinter {
 
         for (ArcEntity arc : elNet.arcList) {
             if (arc.getType() == ArcType.TRANSFORMER) {
+                System.out.println("pułapka");
                 System.out.printf("%s %d %s", "--------- Trafo ID: (", arc.getId(), ") ---------\n");
                 System.out.printf("%-25s %4.2e %s%n", "(R) Resistance:", arc.getResistancePU(), " [pu]");
                 System.out.printf("%-25s %4.2e %s%n", "(X) Reactance:", arc.getReactancePU(), " [pu]");
