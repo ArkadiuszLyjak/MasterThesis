@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MasterThesis.FactoryFromStrTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-07-27T10:54:14" hostname="DELL5300" time="0.011">
+  <properties/>
+  <testcase name="printNode" classname="MasterThesis.FactoryFromStrTest" time="0.011"/>
+  <system-out><![CDATA[NUMBER:105
+TYPE:OTHER_NODE
+ACTIVE POWER:40.0
+REACTIVE POWER:47.058
+ACTIVE POWER DEV:0
+REACTIVE POWER DEV:0
+VOLTAGE:0.4
+
+NUMBER:106
+TYPE:COMPENSATORY_NODE
+ACTIVE POWER:40.0
+REACTIVE POWER:47.058
+ACTIVE POWER DEV:0
+REACTIVE POWER DEV:0
+VOLTAGE:0.4
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

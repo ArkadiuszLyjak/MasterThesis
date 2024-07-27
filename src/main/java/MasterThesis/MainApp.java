@@ -36,29 +36,14 @@ public class MainApp {
         try {
 
             //region Instances
-            AppParametersService paramsService =
-                    AppParametersService.getInstance();
-
-            ElectricalNetwork elNet =
-                    ElectricalNetwork.getInstance();
-
-            ElectricalNetworkService el_Net_Service =
-                    ElectricalNetworkService.getInstance();
-
-            BfsAlgorithm bfsAlgorithm =
-                    BfsAlgorithm.getInstance();
-
-            FileDataService file_Data_Service =
-                    FileDataService.getInstance();
-
-            ElectricalNetworkCalcService elNetCalcService =
-                    ElectricalNetworkCalcService.getInstance();
-
-            ElectricalNetworkOutPrinter elNetPrinter =
-                    ElectricalNetworkOutPrinter.getInstance();
-
-            BfsAlgorithmOutPrinter bfsAlgPrinter =
-                    BfsAlgorithmOutPrinter.getInstance();
+            AppParametersService paramsService = AppParametersService.getInstance();
+            ElectricalNetwork elNet = ElectricalNetwork.getInstance();
+            ElectricalNetworkService el_Net_Service = ElectricalNetworkService.getInstance();
+            BfsAlgorithm bfsAlgorithm = BfsAlgorithm.getInstance();
+            FileDataService file_Data_Service = FileDataService.getInstance();
+            ElectricalNetworkCalcService elNetCalcService = ElectricalNetworkCalcService.getInstance();
+            ElectricalNetworkOutPrinter elNetPrinter = ElectricalNetworkOutPrinter.getInstance();
+            BfsAlgorithmOutPrinter bfsAlgPrinter = BfsAlgorithmOutPrinter.getInstance();
             //endregion
 
             /*//region NetStatistics
@@ -117,10 +102,10 @@ public class MainApp {
             elNetPrinter.printNodeVoltagePu();
 
             // Calculation initial current iteration zero
-            elNetCalcService.calcNodeCurrentPUwithConsequenNodesForZEROiteration();
-            elNetCalcService.calcNodeCurrentPUwithPredecessorsNodesForZEROiteration();
-            elNetPrinter.printNodeCurrentPUIter0();
-            bfsAlgPrinter.printNodeVisitedOrder();
+//            elNetCalcService.calcNodeCurrentPUwithConsequenNodesForZEROiteration();
+//            elNetCalcService.calcNodeCurrentPUwithPredecessorsNodesForZEROiteration();
+//            elNetPrinter.printNodeCurrentPUIter0();
+//            bfsAlgPrinter.printNodeVisitedOrder();
             //endregion
 
             /*//region NODE POWER TRANSMIT

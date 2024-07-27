@@ -17,23 +17,23 @@ plugins {
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
     // This dependency is used by the application.
-    implementation 'com.google.guava:guava:27.1-jre'
-    compile "org.projectlombok:lombok:1.18.8"
-    annotationProcessor 'org.projectlombok:lombok:1.18.8'
-
-
+//    implementation 'com.google.guava:guava:27.1-jre'
+    implementation 'org.codehaus.groovy:groovy-all:3.0.9'
+    implementation "org.projectlombok:lombok:1.18.34"
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
 
 application {
     // Define the main class for the application
-    mainClassName = 'MasterThesis.MainApp'
+//    mainClassName = 'MasterThesis.MainApp'
+    mainClass.set('MasterThesis.MainApp')
 }
 
 jar {
