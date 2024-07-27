@@ -19,16 +19,6 @@ package MasterThesis;
 
 * */
 
-import MasterThesis.arc_file_tools.FileDataService;
-import MasterThesis.base.parameters.AppParameters;
-import MasterThesis.base.parameters.AppParametersService;
-import MasterThesis.bfs.BfsAlgorithm;
-import MasterThesis.bfs.BfsAlgorithmOutPrinter;
-import MasterThesis.el_net.ElectricalNetwork;
-import MasterThesis.el_net.ElectricalNetworkCalcService;
-import MasterThesis.el_net.ElectricalNetworkOutPrinter;
-import MasterThesis.el_net.ElectricalNetworkService;
-
 public class MainApp {
 
     public static void main(String[] args) {
@@ -36,14 +26,14 @@ public class MainApp {
         try {
 
             //region Instances
-            AppParametersService paramsService = AppParametersService.getInstance();
-            ElectricalNetwork elNet = ElectricalNetwork.getInstance();
-            ElectricalNetworkService el_Net_Service = ElectricalNetworkService.getInstance();
-            BfsAlgorithm bfsAlgorithm = BfsAlgorithm.getInstance();
-            FileDataService file_Data_Service = FileDataService.getInstance();
-            ElectricalNetworkCalcService elNetCalcService = ElectricalNetworkCalcService.getInstance();
-            ElectricalNetworkOutPrinter elNetPrinter = ElectricalNetworkOutPrinter.getInstance();
-            BfsAlgorithmOutPrinter bfsAlgPrinter = BfsAlgorithmOutPrinter.getInstance();
+//            AppParametersService paramsService = AppParametersService.getInstance();
+//            ElectricalNetwork elNet = ElectricalNetwork.getInstance();
+//            ElectricalNetworkService el_Net_Service = ElectricalNetworkService.getInstance();
+//            BfsAlgorithm bfsAlgorithm = BfsAlgorithm.getInstance();
+//            FileDataService file_Data_Service = FileDataService.getInstance();
+//            ElectricalNetworkCalcService elNetCalcService = ElectricalNetworkCalcService.getInstance();
+//            ElectricalNetworkOutPrinter elNetPrinter = ElectricalNetworkOutPrinter.getInstance();
+//            BfsAlgorithmOutPrinter bfsAlgPrinter = BfsAlgorithmOutPrinter.getInstance();
             //endregion
 
             /*//region NetStatistics
@@ -51,55 +41,53 @@ public class MainApp {
             //endregion*/
 
             //region Print aplication parameters
-            System.out.println(AppParameters.getInstance().toString());
+//            System.out.println(AppParameters.getInstance().toString());
             //endregion
 
             //region setParametersFromArgs
-            paramsService.setParametersFromArgs(args);
+//            paramsService.setParametersFromArgs(args);
             //endregion
 
             //region Read data files
-            file_Data_Service.readLineTypeFile();
-            file_Data_Service.readTransformerTypeFile();
-            file_Data_Service.readNodeFile();
-            file_Data_Service.readArcFile();
+//            file_Data_Service.readLineTypeFile();
+//            file_Data_Service.readTransformerTypeFile();
+//            file_Data_Service.readNodeFile();
+//            file_Data_Service.readArcFile();
             //endregion
 
             //region Generate neighbors map
-            el_Net_Service.nodeNeighborsFollowingListBuild(); // następnik
-            el_Net_Service.nodeNeighborsPredecessorListBuild(); // poprzednik
+//            el_Net_Service.nodeNeighborsFollowingListBuild(); // następnik
+//            el_Net_Service.nodeNeighborsPredecessorListBuild(); // poprzednik
             //endregion
 
             //region print neighbors map - Consequent
-            elNetPrinter.printNodeNeighborsWithDirection(
-                    ElectricalNetworkOutPrinter.DIRECTION.FOLLOWING);
+//            elNetPrinter.printNodeNeighborsWithDirection(ElectricalNetworkOutPrinter.DIRECTION.FOLLOWING);
             //endregion
 
             //region print neighbors map - Predecessor
-            elNetPrinter.printNodeNeighborsWithDirection(
-                    ElectricalNetworkOutPrinter.DIRECTION.PREDECESSOR);
+//            elNetPrinter.printNodeNeighborsWithDirection(ElectricalNetworkOutPrinter.DIRECTION.PREDECESSOR);
             //endregion
 
             //region Generate visit order
-            bfsAlgorithm.generateLevelsOrder();
+//            bfsAlgorithm.generateLevelsOrder();
             //endregion
 
             //region Print NetQuantity
-            elNetPrinter.printNetQuantity();
+//            elNetPrinter.printNetQuantity();
             //endregion
 
             //region Calculation Immitance
             // Calculation Immitance for Line
-            elNetCalcService.calcLineImmitance();
-            elNetPrinter.printLineImmitance();
+//            elNetCalcService.calcLineImmitance();
+//            elNetPrinter.printLineImmitance();
 
             // Calculation Immitance for Trafo
-            elNetCalcService.calcTrafoImmitance();
-            elNetPrinter.printTrafoImmitance();
+//            elNetCalcService.calcTrafoImmitance();
+//            elNetPrinter.printTrafoImmitance();
 
             // Calculation Per Unit for Nodes
-            elNetCalcService.calcNodeVoltagePu();
-            elNetPrinter.printNodeVoltagePu();
+//            elNetCalcService.calcNodeVoltagePu();
+//            elNetPrinter.printNodeVoltagePu();
 
             // Calculation initial current iteration zero
 //            elNetCalcService.calcNodeCurrentPUwithConsequenNodesForZEROiteration();
