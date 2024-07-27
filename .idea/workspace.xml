@@ -10,6 +10,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -78,20 +81,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;,
-      &quot;repository&quot;
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.MainApp">
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MasterThesis.MainApp" />
@@ -243,7 +246,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722078495770</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary=" modified:   .gitignore&#10;        modified:   .gradle/7.6/executionHistory/executionHistory.bin&#10;        modified:   .gradle/7.6/executionHistory/executionHistory.lock&#10;        modified:   .gradle/7.6/fileHashes/fileHashes.bin&#10;        modified:   .gradle/7.6/fileHashes/fileHashes.lock&#10;        modified:   .gradle/7.6/fileHashes/resourceHashesCache.bin&#10;        modified:   .gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;        modified:   .idea/workspace.xml&#10;        modified:   build/classes/java/main/MasterThesis/MainApp.class&#10;        modified:   build/tmp/compileJava/compileTransaction/stash-dir/MainApp.class.uniqueId0&#10;        modified:   build/tmp/compileJava/previous-compilation-data.bin">
+      <created>1722079160832</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1722079160832</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -277,7 +287,8 @@
     <MESSAGE value="back to not underscore" />
     <MESSAGE value="Upgraded Gradle, configured workspace, added new path to data files." />
     <MESSAGE value=" modified:   .idea/workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value=" modified:   .idea/workspace.xml" />
+    <MESSAGE value=" modified:   .gitignore&#10;        modified:   .gradle/7.6/executionHistory/executionHistory.bin&#10;        modified:   .gradle/7.6/executionHistory/executionHistory.lock&#10;        modified:   .gradle/7.6/fileHashes/fileHashes.bin&#10;        modified:   .gradle/7.6/fileHashes/fileHashes.lock&#10;        modified:   .gradle/7.6/fileHashes/resourceHashesCache.bin&#10;        modified:   .gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;        modified:   .idea/workspace.xml&#10;        modified:   build/classes/java/main/MasterThesis/MainApp.class&#10;        modified:   build/tmp/compileJava/compileTransaction/stash-dir/MainApp.class.uniqueId0&#10;        modified:   build/tmp/compileJava/previous-compilation-data.bin" />
+    <option name="LAST_COMMIT_MESSAGE" value=" modified:   .gitignore&#10;        modified:   .gradle/7.6/executionHistory/executionHistory.bin&#10;        modified:   .gradle/7.6/executionHistory/executionHistory.lock&#10;        modified:   .gradle/7.6/fileHashes/fileHashes.bin&#10;        modified:   .gradle/7.6/fileHashes/fileHashes.lock&#10;        modified:   .gradle/7.6/fileHashes/resourceHashesCache.bin&#10;        modified:   .gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;        modified:   .idea/workspace.xml&#10;        modified:   build/classes/java/main/MasterThesis/MainApp.class&#10;        modified:   build/tmp/compileJava/compileTransaction/stash-dir/MainApp.class.uniqueId0&#10;        modified:   build/tmp/compileJava/previous-compilation-data.bin" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
