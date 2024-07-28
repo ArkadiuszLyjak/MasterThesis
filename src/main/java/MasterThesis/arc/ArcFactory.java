@@ -27,7 +27,8 @@ public class ArcFactory {
         entity.setArcLength(Double.valueOf(entityArray[5]));        //Dlugosc
         entity.setTracks(Integer.valueOf(entityArray[6]));          //Tory
         entity.setCondition(Integer.valueOf(entityArray[7]));       //Stan
-        entity.setChange(Integer.valueOf(entityArray[8]));           //Zmiana
+        entity.setChange(Integer.valueOf(entityArray[8]));          //Zmiana
+
         return entity;
     }
     //endregion

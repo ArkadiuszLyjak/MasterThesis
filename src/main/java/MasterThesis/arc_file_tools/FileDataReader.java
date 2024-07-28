@@ -15,10 +15,9 @@ public class FileDataReader {
         try (BufferedReader br = new BufferedReader(new FileReader(sFileName))) {
             int lines = 0;
             String fileLine;
-
             while ((fileLine = br.readLine()) != null) {
                 if (fileLine.substring(0, 2).compareTo("//") != 0) {
-                    if (lines == 0) {
+                    if (lines == 0) { // pominięcie nagłówka
                     } else {
                         consumer.accept(fileLine);
                     }

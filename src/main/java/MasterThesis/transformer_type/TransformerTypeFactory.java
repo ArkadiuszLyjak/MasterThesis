@@ -39,6 +39,7 @@ public class TransformerTypeFactory {
         entity.setShortingVoltage(Double.valueOf(entityArray[12]));
         entity.setZeroResistance(Double.valueOf(entityArray[13]));
         entity.setZeroReactance(Double.valueOf(entityArray[14]));
+
         return entity;
     }
 }

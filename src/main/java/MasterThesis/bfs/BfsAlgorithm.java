@@ -36,6 +36,7 @@ public class BfsAlgorithm {
     public Long getNetLevel() {
         return maxNetLevel;
     }
+
     //endregion
 
     //region isNodeLevelExist
@@ -78,27 +79,25 @@ public class BfsAlgorithm {
 
             for (NodeArcVO nodeArcVO : nodeArcVOList) {
                 if (!isNodeLevelExist(nodeArcVO.netLevel + 1, nodeArcVO.neighborNodeId)) {
-                    generateLevelsOrder(nodeArcVO.neighborNodeId,
-                            nodeArcVO.netLevel + 1
-                    );
+                    generateLevelsOrder(nodeArcVO.neighborNodeId, nodeArcVO.netLevel + 1);
                 }
             }
 
         }
     }
-    //endregion*/
+//endregion*/
 
-    //region generateLevelsOrder
+    //region generate Levels Order
     private void generateLevelsOrder(Long beginNode, Long netLevel) {
         List<NodeArcVO> nodeArcVOList = new ArrayList<>();
 
-        if (elNet.neighborsConsequentMap.containsKey(beginNode)) {
+        if (elNet.neighborsForwardMap.containsKey(beginNode)) {
 
             if (maxNetLevel < netLevel) {
                 maxNetLevel = netLevel;
             }
 
-            for (Long arcId : elNet.neighborsConsequentMap.get(beginNode)) {
+            for (Long arcId : elNet.neighborsForwardMap.get(beginNode)) {
                 NodeArcVO nodeArcVO = new NodeArcVO();
                 nodeArcVO.netLevel = netLevel;
                 nodeArcVO.nodeId = beginNode;
@@ -115,8 +114,7 @@ public class BfsAlgorithm {
 
             for (NodeArcVO nodeArcVO : nodeArcVOList) {
                 if (!isNodeLevelExist(nodeArcVO.netLevel + 1, nodeArcVO.neighborNodeId)) {
-                    generateLevelsOrder(nodeArcVO.neighborNodeId,
-                            nodeArcVO.netLevel + 1
+                    generateLevelsOrder(nodeArcVO.neighborNodeId, nodeArcVO.netLevel + 1
                     );
                 }
             }
@@ -124,9 +122,9 @@ public class BfsAlgorithm {
         }
     }
 
-    //endregion
+//endregion
 
-    //region generateLevelsOrder
+    //region generate Levels Order
     public void generateLevelsOrder() {
         maxNetLevel = 0L;
         arcLevelsMap.clear();

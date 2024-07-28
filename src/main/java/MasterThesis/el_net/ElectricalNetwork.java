@@ -1,29 +1,34 @@
 package MasterThesis.el_net;
 
 import MasterThesis.arc.ArcEntity;
+import MasterThesis.el_net.InsideCalcContener.DirectMethodInsideCalcEntity;
 import MasterThesis.lineType.LineTypeEntity;
 import MasterThesis.node.NodeEntity;
 import MasterThesis.transformer_type.TransformerTypeEntity;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ElectricalNetwork {
 
     //region Properties
     private static ElectricalNetwork electricalNetwork;
-
-    public Map<Long, LineTypeEntity> lineTypeMap;                     // maps from files
-    public Map<Long, TransformerTypeEntity> transformerTypeMap; // maps from files
-    public Map<Long, NodeEntity> nodeMap;                       // maps from files
     public Map<Long, ArcEntity> arcMap;                         // maps from files
-    public List<NodeEntity> nodeList;                           //
-    public List<ArcEntity> arcList;                             //
+    public Map<Long, LineTypeEntity> lineTypeMap;               // maps from files
+    public Map<Long, NodeEntity> nodeMap;                       // maps from files
+    public Map<Long, TransformerTypeEntity> transformerTypeMap; // maps from files
 
-    public Map<Long, List<Long>> neighborsConsequentMap = new LinkedHashMap<>();
-    public Map<Long, List<Long>> neighborsPredecessorMap = new LinkedHashMap<>();
+    public List<NodeEntity> nodeEntityList;
+    public List<ArcEntity> arcList;
+
+    public Map<Long, List<Long>> neighborsForwardMap = new LinkedHashMap<>();
+    public Map<Long, List<Long>> neighborsReverseMap = new LinkedHashMap<>();
+    public Map<Long, ArrayList<Long>> nodesNeighborsForwardReverseMap = new LinkedHashMap<>();
+
+    public List<Long> nodesWithNoNeighborsBackList = new LinkedList<>();
+    public List<Long> nodesWithNoNeighborsInFrontList = new LinkedList<>();
+
+    // Mapa<nr_iteracji, Mapa<nr_węzła, obl_węzłowe>>
+    public Map<Long, Map<Long, DirectMethodInsideCalcEntity>> everyIterateCalcMap = new LinkedHashMap<>();
     //endregion
 
     /**
@@ -52,18 +57,18 @@ public class ElectricalNetwork {
         nodeMap = new LinkedHashMap<>();
         arcMap = new LinkedHashMap<>();
         arcList = new LinkedList<>();
-        nodeList = new LinkedList<>();
+        nodeEntityList = new LinkedList<>();
     } //
     //endregion
 
     //region clean
     public void clean() {
-        nodeMap.clear(); //
+        nodeMap.clear();
         lineTypeMap.clear(); //
         transformerTypeMap.clear(); //
         arcMap.clear(); //
         arcList.clear(); //
-        nodeList.clear(); //
+        nodeEntityList.clear(); //
     }
     //endregion
 

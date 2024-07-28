@@ -53,7 +53,7 @@ public class NodeDecorator implements EntityDecorator<NodeEntity> {
         // Napiecie
         labelBuilder
                 .append("VOLTAGE").append(":")
-                .append(node.getVoltage())
+                .append(node.getNominalVoltage())
                 .append("\n");
 
         return labelBuilder.toString();

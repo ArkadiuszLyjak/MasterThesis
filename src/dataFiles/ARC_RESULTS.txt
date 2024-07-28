@@ -1,0 +1,11 @@
+ID|TYPE|TRANSMIT POWER
+501|LINE|null|
+502|LINE|null|
+1|LINE|null|
+2|LINE|null|
+11|LINE|null|
+12|LINE|null|
+13|LINE|null|
+14|LINE|null|
+21|LINE|null|
+23|LINE|null|

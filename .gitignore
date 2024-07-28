@@ -19,7 +19,7 @@ Thumbs.db
 *.project
 *.classpath
 
-# Ignorowanie plików związanych z Gradle
+# Ignorowanie plików związanych z Gradle (jeśli są już dodane usunąć)
 .gradle/
 build.gradle
 gradle/

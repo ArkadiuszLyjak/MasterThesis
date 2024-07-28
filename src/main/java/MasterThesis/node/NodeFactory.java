@@ -35,7 +35,7 @@ public class NodeFactory {
         entity.setReactivePower(Double.valueOf(nodeArray[3]));
         entity.setActivePowerDeviation(Integer.valueOf(nodeArray[4]));
         entity.setReactivePowerDeviation(Integer.valueOf(nodeArray[5]));
-        entity.setVoltage(Double.valueOf(nodeArray[6]));
+        entity.setNominalVoltage(Double.valueOf(nodeArray[6]));
         return entity;
     }
     //endregion
