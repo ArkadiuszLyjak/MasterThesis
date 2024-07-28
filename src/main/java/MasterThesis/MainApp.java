@@ -101,7 +101,7 @@ public class MainApp {
 
             // Calculation initial current iteration zero
             elNetCalcService.calcNodeCurrentPUwithConsequenNodesForZEROiteration();
-            elNetCalcService.calcNodeCurrentPUwithPredecessorsNodesForZEROiteration();
+//            elNetCalcService.calcNodeCurrentPUwithPredecessorsNodesForZEROiteration();
 //            elNetPrinter.printNodeCurrentPUIter0();
 //            bfsAlgPrinter.printNodeVisitedOrder();
             //endregion

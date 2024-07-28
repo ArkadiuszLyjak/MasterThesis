@@ -253,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722079160832</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Error - &quot;Cannot invoke &quot;java.util.List.iterator()&quot; because &quot;neighborsIDlist&quot; is null&quot;">
+      <created>1722081124453</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1722081124453</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -288,9 +295,30 @@
     <MESSAGE value="Upgraded Gradle, configured workspace, added new path to data files." />
     <MESSAGE value=" modified:   .idea/workspace.xml" />
     <MESSAGE value=" modified:   .gitignore&#10;        modified:   .gradle/7.6/executionHistory/executionHistory.bin&#10;        modified:   .gradle/7.6/executionHistory/executionHistory.lock&#10;        modified:   .gradle/7.6/fileHashes/fileHashes.bin&#10;        modified:   .gradle/7.6/fileHashes/fileHashes.lock&#10;        modified:   .gradle/7.6/fileHashes/resourceHashesCache.bin&#10;        modified:   .gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;        modified:   .idea/workspace.xml&#10;        modified:   build/classes/java/main/MasterThesis/MainApp.class&#10;        modified:   build/tmp/compileJava/compileTransaction/stash-dir/MainApp.class.uniqueId0&#10;        modified:   build/tmp/compileJava/previous-compilation-data.bin" />
-    <option name="LAST_COMMIT_MESSAGE" value=" modified:   .gitignore&#10;        modified:   .gradle/7.6/executionHistory/executionHistory.bin&#10;        modified:   .gradle/7.6/executionHistory/executionHistory.lock&#10;        modified:   .gradle/7.6/fileHashes/fileHashes.bin&#10;        modified:   .gradle/7.6/fileHashes/fileHashes.lock&#10;        modified:   .gradle/7.6/fileHashes/resourceHashesCache.bin&#10;        modified:   .gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;        modified:   .idea/workspace.xml&#10;        modified:   build/classes/java/main/MasterThesis/MainApp.class&#10;        modified:   build/tmp/compileJava/compileTransaction/stash-dir/MainApp.class.uniqueId0&#10;        modified:   build/tmp/compileJava/previous-compilation-data.bin" />
+    <MESSAGE value="Error - &quot;Cannot invoke &quot;java.util.List.iterator()&quot; because &quot;neighborsIDlist&quot; is null&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Error - &quot;Cannot invoke &quot;java.util.List.iterator()&quot; because &quot;neighborsIDlist&quot; is null&quot;" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java</url>
+          <line>196</line>
+          <properties class="MasterThesis.el_net.ElectricalNetworkCalcService" method="calcNodeCurrentPUwithPredecessorsNodesForZEROiteration">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java</url>
+          <line>103</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
