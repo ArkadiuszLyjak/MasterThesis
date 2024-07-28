@@ -36,10 +36,8 @@ public class ElectricalNetwork {
      */
 
     //region getInstance - Singleton
-    //region Constructor
     private ElectricalNetwork() {
     }
-    //endregion
 
     public static ElectricalNetwork getInstance() {
         if (electricalNetwork == null) {

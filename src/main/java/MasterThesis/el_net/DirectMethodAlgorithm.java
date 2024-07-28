@@ -44,8 +44,8 @@ public class DirectMethodAlgorithm {
 
 //            if (iterateMax == 1) break; // safety "valve"
 //            if (iterateMax == 2) break; // safety "valve"
-            if (iterateMax == 100) break; // safety "valve"
-//            if (iterateMax == 1000) break; // safety "valve"
+//            if (iterateMax == 100) break; // safety "valve"
+            if (iterateMax == 1000) break; // safety "valve"
             iterateMax++;
 
 //            System.out.println("\n-------------------------------------------------------");
@@ -247,19 +247,6 @@ public class DirectMethodAlgorithm {
 
             //region setting and printings after each loop
             //region Voltage
-            /*//region print voltage PU calculated in previous iteration
-            Set<Map.Entry<Long, Double>> entriesVoltage = nodeVoltageCalculatedMap.entrySet();
-            if (!nodeVoltageCalculatedMap.isEmpty()) {
-                System.out.println();
-                for (Map.Entry<Long, Double> entry : entriesVoltage) {
-                    System.out.printf("node: %3d = voltage: %s\n",
-                            entry.getKey(),
-                            new DecimalFormat("0.000000").format(entry.getValue()));
-                }
-            } else {
-                System.out.println("\nnodeVoltageCalculatedMap is empty");
-            }
-            //endregion*/
 
             //region setting voltage PU / voltage real calculated in previous iteration
             Set<Long> nodes = nodeVoltageCalculatedMap.keySet();

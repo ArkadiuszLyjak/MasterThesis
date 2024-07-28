@@ -117,10 +117,8 @@ public class FileDataService {
             FileDataReader.netFileRead(params.getArcFullFileName(), fileLine -> {
                 ArcEntity arc = ArcFactory.prepareFromString(fileLine);
 
-                //region adds all records regardless of state
                 elNet.arcMap.put(arc.getId(), arc);
                 elNet.arcList.add(arc);
-                //endregion
             });
 
         } catch (FileNotFoundException e) {

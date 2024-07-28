@@ -31,8 +31,8 @@ public class ElectricalNetworkCalcService {
         for (ArcEntity arc : elNet.arcList) {
             if (arc.getType() == ArcType.LINE) {
 
-//                System.out.printf("%3d->%3d ", arc.getStartNode(), arc.getEndNode());11/*/**/*/
-//                System.out.printf("%s ", arc.getType());1
+//                System.out.printf("%3d->%3d ", arc.getStartNode(), arc.getEndNode());
+//                System.out.printf("%s ", arc.getType());
 
                 LineTypeEntity lineType = elNet.lineTypeMap.get(arc.getPosition());
 //                System.out.printf("%s ", lineType.getKind().toString());
@@ -85,6 +85,7 @@ public class ElectricalNetworkCalcService {
     public void calcTrafoImmitance() {
 
         for (ArcEntity arc : elNet.arcList) {
+
             if (arc.getType() == ArcType.TRANSFORMER) {
 
                 TransformerTypeEntity transformerType = elNet.transformerTypeMap.get(arc.getPosition());
