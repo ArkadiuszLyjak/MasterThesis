@@ -18,6 +18,7 @@ Thumbs.db
 *.launch
 *.project
 *.classpath
+*.idea
 
 # Ignorowanie plików związanych z Gradle (jeśli są już dodane usunąć)
 .gradle/
