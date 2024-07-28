@@ -10,6 +10,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -45,6 +48,11 @@
         <option value="Arek Lyjak &lt;alyjak@gmail.com&gt;" />
       </list>
     </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -77,7 +85,7 @@
   "keyToString": {
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   },
   "keyToStringList": {
     "GitStage.ChangesTree.GroupingKeys": [
@@ -155,10 +163,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Test" />
-        <item itemvalue="Application.RozneTakie" />
         <item itemvalue="Application.TestStreams" />
         <item itemvalue="Application.TestJavaEntity" />
+        <item itemvalue="Application.Test" />
+        <item itemvalue="Application.RozneTakie" />
         <item itemvalue="Application.MainApp" />
       </list>
     </recent_temporary>
@@ -231,7 +239,28 @@
       <option name="project" value="LOCAL" />
       <updated>1722078104837</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary=" modified:   .idea/workspace.xml">
+      <created>1722078495770</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1722078495770</updated>
+    </task>
+    <task id="LOCAL-00010" summary=" modified:   .gitignore&#10;        modified:   .gradle/7.6/executionHistory/executionHistory.bin&#10;        modified:   .gradle/7.6/executionHistory/executionHistory.lock&#10;        modified:   .gradle/7.6/fileHashes/fileHashes.bin&#10;        modified:   .gradle/7.6/fileHashes/fileHashes.lock&#10;        modified:   .gradle/7.6/fileHashes/resourceHashesCache.bin&#10;        modified:   .gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;        modified:   .idea/workspace.xml&#10;        modified:   build/classes/java/main/MasterThesis/MainApp.class&#10;        modified:   build/tmp/compileJava/compileTransaction/stash-dir/MainApp.class.uniqueId0&#10;        modified:   build/tmp/compileJava/previous-compilation-data.bin">
+      <created>1722079160832</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1722079160832</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Error - &quot;Cannot invoke &quot;java.util.List.iterator()&quot; because &quot;neighborsIDlist&quot; is null&quot;">
+      <created>1722081124453</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1722081124453</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -264,9 +293,32 @@
     <MESSAGE value="a" />
     <MESSAGE value="back to not underscore" />
     <MESSAGE value="Upgraded Gradle, configured workspace, added new path to data files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Upgraded Gradle, configured workspace, added new path to data files." />
+    <MESSAGE value=" modified:   .idea/workspace.xml" />
+    <MESSAGE value=" modified:   .gitignore&#10;        modified:   .gradle/7.6/executionHistory/executionHistory.bin&#10;        modified:   .gradle/7.6/executionHistory/executionHistory.lock&#10;        modified:   .gradle/7.6/fileHashes/fileHashes.bin&#10;        modified:   .gradle/7.6/fileHashes/fileHashes.lock&#10;        modified:   .gradle/7.6/fileHashes/resourceHashesCache.bin&#10;        modified:   .gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;        modified:   .idea/workspace.xml&#10;        modified:   build/classes/java/main/MasterThesis/MainApp.class&#10;        modified:   build/tmp/compileJava/compileTransaction/stash-dir/MainApp.class.uniqueId0&#10;        modified:   build/tmp/compileJava/previous-compilation-data.bin" />
+    <MESSAGE value="Error - &quot;Cannot invoke &quot;java.util.List.iterator()&quot; because &quot;neighborsIDlist&quot; is null&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Error - &quot;Cannot invoke &quot;java.util.List.iterator()&quot; because &quot;neighborsIDlist&quot; is null&quot;" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/MasterThesis/el_net/ElectricalNetworkCalcService.java</url>
+          <line>196</line>
+          <properties class="MasterThesis.el_net.ElectricalNetworkCalcService" method="calcNodeCurrentPUwithPredecessorsNodesForZEROiteration">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/MasterThesis/MainApp.java</url>
+          <line>103</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

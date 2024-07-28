@@ -1,7 +1,35 @@
-# Ignore Gradle project-specific cache directory
-#.gradle
+# Ignorowanie plików kompilacji Java
+target/
+build/
 
-# Ignore Gradle build output directory
-#build
-#.idea
-#misc.xml
+# Ignorowanie plików tymczasowych
+*.swp
+*.swo
+*.tmp
+*.bak
+*.log
+
+# Ignorowanie plików systemowych
+.DS_Store
+Thumbs.db
+
+# Ignorowanie plików konfiguracyjnych specyficznych dla IDE
+.vscode/
+*.launch
+*.project
+*.classpath
+
+# Ignorowanie plików związanych z Gradle
+.gradle/
+build.gradle
+gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Ignorowanie plików związanych z Maven
+.mvn/
+pom.xml
+target/
+
+# Ignorowanie plików związanych z Dockerem
+Dockerfile
+docker-compose.yml

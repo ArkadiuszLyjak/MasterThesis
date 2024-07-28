@@ -71,13 +71,11 @@ public class MainApp {
             //endregion
 
             //region print neighbors map - Consequent
-            elNetPrinter.printNodeNeighborsWithDirection(
-                    ElectricalNetworkOutPrinter.DIRECTION.FOLLOWING);
+            elNetPrinter.printNodeNeighborsWithDirection(ElectricalNetworkOutPrinter.DIRECTION.FOLLOWING);
             //endregion
 
             //region print neighbors map - Predecessor
-            elNetPrinter.printNodeNeighborsWithDirection(
-                    ElectricalNetworkOutPrinter.DIRECTION.PREDECESSOR);
+            elNetPrinter.printNodeNeighborsWithDirection(ElectricalNetworkOutPrinter.DIRECTION.PREDECESSOR);
             //endregion
 
             //region Generate visit order
@@ -102,7 +100,7 @@ public class MainApp {
             elNetPrinter.printNodeVoltagePu();
 
             // Calculation initial current iteration zero
-//            elNetCalcService.calcNodeCurrentPUwithConsequenNodesForZEROiteration();
+            elNetCalcService.calcNodeCurrentPUwithConsequenNodesForZEROiteration();
 //            elNetCalcService.calcNodeCurrentPUwithPredecessorsNodesForZEROiteration();
 //            elNetPrinter.printNodeCurrentPUIter0();
 //            bfsAlgPrinter.printNodeVisitedOrder();
