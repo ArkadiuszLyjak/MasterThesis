@@ -19,13 +19,7 @@ package MasterThesis;
 
 * */
 
-import MasterThesis.arc_file_tools.FileDataService;
-import MasterThesis.base.parameters.AppParameters;
 import MasterThesis.base.parameters.AppParametersService;
-import MasterThesis.bfs.BfsAlgorithm;
-import MasterThesis.bfs.BfsAlgorithmOutPrinter;
-import MasterThesis.el_net.*;
-import MasterThesis.node.NodeType;
 
 import java.nio.charset.Charset;
 
@@ -40,14 +34,14 @@ public class MainApp {
 
             //region Instances
             AppParametersService appParametersService = AppParametersService.getInstance();
-            FileDataService fileDataService = FileDataService.getInstance();
-            ElectricalNetwork elNet = ElectricalNetwork.getInstance();
-            ElectricalNetworkService elNetService = ElectricalNetworkService.getInstance();
-            BfsAlgorithm bfsAlgo = BfsAlgorithm.getInstance();
-            ElectricalNetworkCalcService elNetCalcService = ElectricalNetworkCalcService.getInstance();
-            ElectricalNetworkOutPrinter elNetOutPrinter = ElectricalNetworkOutPrinter.getInstance();
-            BfsAlgorithmOutPrinter bfsAlgOutPrinter = BfsAlgorithmOutPrinter.getInstance();
-            DirectMethodAlgorithm directMethodAlgorithm = DirectMethodAlgorithm.getInstance();
+//            FileDataService fileDataService = FileDataService.getInstance();
+//            ElectricalNetwork elNet = ElectricalNetwork.getInstance();
+//            ElectricalNetworkService elNetService = ElectricalNetworkService.getInstance();
+//            BfsAlgorithm bfsAlgo = BfsAlgorithm.getInstance();
+//            ElectricalNetworkCalcService elNetCalcService = ElectricalNetworkCalcService.getInstance();
+//            ElectricalNetworkOutPrinter elNetOutPrinter = ElectricalNetworkOutPrinter.getInstance();
+//            BfsAlgorithmOutPrinter bfsAlgOutPrinter = BfsAlgorithmOutPrinter.getInstance();
+//            DirectMethodAlgorithm directMethodAlgorithm = DirectMethodAlgorithm.getInstance();
             // endregion
 
             //region NetStatistics
@@ -55,48 +49,48 @@ public class MainApp {
             //endregion
 
             //region set parameters from args
-            appParametersService.setParametersFromArgs(args);
+//            appParametersService.setParametersFromArgs(args);
             //endregion
 
             //region Read data files
-            fileDataService.readArcFile();
-            fileDataService.readLineTypeFile();
-            fileDataService.readNodeFile();
-            fileDataService.readTransformerTypeFile();
+//            fileDataService.readArcFile();
+//            fileDataService.readLineTypeFile();
+//            fileDataService.readNodeFile();
+//            fileDataService.readTransformerTypeFile();
 
-            elNetOutPrinter.printLineType(); // print line type
+//            elNetOutPrinter.printLineType(); // print line type
             //endregion
 
             //region print app parameters and net quantity
-            System.out.println(AppParameters.getInstance().toString());
-            elNetOutPrinter.printNetQuantity(); // print net quantity
+//            System.out.println(AppParameters.getInstance().toString());
+//            elNetOutPrinter.printNetQuantity(); // print net quantity
             //endregion
 
             //region generate front and back neighbors maps
-            elNetService.nodeNeighborsForwardMapBuild();   // następnik
-            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.FWD);
+//            elNetService.nodeNeighborsForwardMapBuild();   // następnik
+//            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.FWD);
 
-            elNetService.nodeNeighborsReverseMapBuild();     // poprzednik
-            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.REV);
+//            elNetService.nodeNeighborsReverseMapBuild();     // poprzednik
+//            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.REV);
 
-            elNetService.nodeNeighborsForwardReverseListBuild();
-            elNetOutPrinter.printNodesNeighborsForwardReverseMap(); // print nodes neighbors [id] forward reverse map
+//            elNetService.nodeNeighborsForwardReverseListBuild();
+//            elNetOutPrinter.printNodesNeighborsForwardReverseMap(); // print nodes neighbors [id] forward reverse map
             //endregion
 
             //region Generate visit order
-            bfsAlgo.generateLevelsOrder();
-            bfsAlgOutPrinter.printNodeVisitedOrder(); // print node visited order
+//            bfsAlgo.generateLevelsOrder();
+//            bfsAlgOutPrinter.printNodeVisitedOrder(); // print node visited order
             //endregion
 
             //region calculations for power grid elements
             //region Calculation Immitance for Line
-            elNetCalcService.calcLineImmitance();
-            elNetOutPrinter.printLineImmitance();
+//            elNetCalcService.calcLineImmitance();
+//            elNetOutPrinter.printLineImmitance();
             //endregion
 
             //region Calculation Immitance for Trafo
-            elNetCalcService.calcTrafoImmitance();
-            elNetOutPrinter.printTrafoImmitance();          // print trafo immitance [PU]
+//            elNetCalcService.calcTrafoImmitance();
+//            elNetOutPrinter.printTrafoImmitance();          // print trafo immitance [PU]
 //            elNetOutPrinter.printTrafoImmitance(true); // print trafo immitance [Ω]
             //endregion
 
@@ -138,9 +132,9 @@ public class MainApp {
 //            fileDataService.writeArcResultsToFile();
             //endregion
 
-            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.VERTICAL);
-            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.HORIZONTAL);
-            elNetOutPrinter.printDistributedNodes(NodeType.OTHER_NODE); // print distributed nodes
+//            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.VERTICAL);
+//            elNetOutPrinter.printNodeValues(ElectricalNetworkOutPrinter.LEVELPRINT.HORIZONTAL);
+//            elNetOutPrinter.printDistributedNodes(NodeType.OTHER_NODE); // print distributed nodes
             //endregion
 
         } catch (Exception e) {

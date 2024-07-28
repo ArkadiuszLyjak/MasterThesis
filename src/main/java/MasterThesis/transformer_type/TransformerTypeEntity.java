@@ -48,10 +48,13 @@ public class TransformerTypeEntity extends BaseEntity {
     Double zeroReactance;
     //endregion
 
+    //region TransformerTypeEntity
     public TransformerTypeEntity(Long id) {
         super(id);
     }
+    //endregion
 
+    //region toString
     @Override
     public String toString() {
 
@@ -77,5 +80,6 @@ public class TransformerTypeEntity extends BaseEntity {
 
         return fmt.toString();
     }
+    //endregion
 
 }

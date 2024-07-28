@@ -27,6 +27,7 @@ public class DirectMethodInsideCalcEntity {
     double deltaVoltageThisIterPresentNode;    // zmiana napięcia w obl. węźle [PU]
     double voltageThisIterPresentNode;         // obl. nowe napięcie w węźle [PU]
 
+    //region DirectMethodInsideCalcEntity
     public DirectMethodInsideCalcEntity(DirectMethodInsideCalcEntityBuilder builder) {
         iterateMaxNumber = builder.iterateMaxNumber;
         a = builder.a;
@@ -41,4 +42,5 @@ public class DirectMethodInsideCalcEntity {
         deltaVoltageThisIterPresentNode = builder.deltaVoltageThisIterPresentNode;
         voltageThisIterPresentNode = builder.voltageThisIterPresentNode;
     }
+    //endregion
 }

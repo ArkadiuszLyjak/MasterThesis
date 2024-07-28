@@ -12,11 +12,13 @@ public class NeighborEntity {
     double g_ij;                                // konduktancja między węzłami [PU]
     double item_sum;                            // drugi człon licznika w obl. poprawki prądu
 
+    //region NeighborEntity
     public NeighborEntity(NeighborEntityBuilder builder) {
         this.nodeUniqueNeighbor = builder.nodeUniqueNeighbor;
         this.u_j = builder.u_j;
         this.g_ij = builder.g_ij;
         this.item_sum = builder.item_sum;
     }
+    //endregion
 
 }

@@ -11,22 +11,30 @@ public class NeighborEntityBuilder {
         this.nodeUniqueNeighbor = nodeUniqueNeighbor;
     }
 
+    //region NeighborEntityBuilder
     public NeighborEntityBuilder u_j(double u_j) {
         this.u_j = u_j;
         return this;
     }
+    //endregion
 
+    //region NeighborEntityBuilder
     public NeighborEntityBuilder g_ij(double g_ij) {
         this.g_ij = g_ij;
         return this;
     }
+    //endregion
 
+    //region NeighborEntityBuilder
     public NeighborEntityBuilder item_sum(double item_sum) {
         this.item_sum = item_sum;
         return this;
     }
+    //endregion
 
+    //region NeighborEntity
     public NeighborEntity build() {
         return new NeighborEntity(this);
     }
+    //endregion
 }

@@ -8,6 +8,7 @@ import java.util.Set;
 
 public class MapSearch {
 
+    //region getKeyByValueFromArcMap
     public static Long getKeyByValueFromArcMap(Map<Long, ArcEntity> map, Long value) {
 
         Set<Map.Entry<Long, ArcEntity>> entrySet = map.entrySet();
@@ -19,6 +20,7 @@ public class MapSearch {
         }
         return null;
     }
+    //endregion
 
     //region getKeyByValue
     public static <K, V> K getKeyByValue(Map<K, V> map, V value) {
