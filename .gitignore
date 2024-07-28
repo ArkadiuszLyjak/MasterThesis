@@ -1,6 +1,9 @@
 # Ignorowanie plików kompilacji Java
 target/
+
+# Ignorowanie katalogów build i .idea
 build/
+.idea/
 
 # Ignorowanie plików tymczasowych
 *.swp

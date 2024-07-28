@@ -19,7 +19,11 @@ package MasterThesis;
 
 * */
 
+import MasterThesis.arc_file_tools.FileDataService;
 import MasterThesis.base.parameters.AppParametersService;
+import MasterThesis.bfs.BfsAlgorithm;
+import MasterThesis.bfs.BfsAlgorithmOutPrinter;
+import MasterThesis.el_net.*;
 
 import java.nio.charset.Charset;
 
@@ -34,14 +38,14 @@ public class MainApp {
 
             //region Instances
             AppParametersService appParametersService = AppParametersService.getInstance();
-//            FileDataService fileDataService = FileDataService.getInstance();
-//            ElectricalNetwork elNet = ElectricalNetwork.getInstance();
-//            ElectricalNetworkService elNetService = ElectricalNetworkService.getInstance();
-//            BfsAlgorithm bfsAlgo = BfsAlgorithm.getInstance();
-//            ElectricalNetworkCalcService elNetCalcService = ElectricalNetworkCalcService.getInstance();
-//            ElectricalNetworkOutPrinter elNetOutPrinter = ElectricalNetworkOutPrinter.getInstance();
-//            BfsAlgorithmOutPrinter bfsAlgOutPrinter = BfsAlgorithmOutPrinter.getInstance();
-//            DirectMethodAlgorithm directMethodAlgorithm = DirectMethodAlgorithm.getInstance();
+            FileDataService fileDataService = FileDataService.getInstance();
+            ElectricalNetwork elNet = ElectricalNetwork.getInstance();
+            ElectricalNetworkService elNetService = ElectricalNetworkService.getInstance();
+            BfsAlgorithm bfsAlgo = BfsAlgorithm.getInstance();
+            ElectricalNetworkCalcService elNetCalcService = ElectricalNetworkCalcService.getInstance();
+            ElectricalNetworkOutPrinter elNetOutPrinter = ElectricalNetworkOutPrinter.getInstance();
+            BfsAlgorithmOutPrinter bfsAlgOutPrinter = BfsAlgorithmOutPrinter.getInstance();
+            DirectMethodAlgorithm directMethodAlgorithm = DirectMethodAlgorithm.getInstance();
             // endregion
 
             //region NetStatistics
@@ -49,14 +53,14 @@ public class MainApp {
             //endregion
 
             //region set parameters from args
-//            appParametersService.setParametersFromArgs(args);
+            appParametersService.setParametersFromArgs(args);
             //endregion
 
             //region Read data files
-//            fileDataService.readArcFile();
-//            fileDataService.readLineTypeFile();
-//            fileDataService.readNodeFile();
-//            fileDataService.readTransformerTypeFile();
+            fileDataService.readArcFile();
+            fileDataService.readLineTypeFile();
+            fileDataService.readNodeFile();
+            fileDataService.readTransformerTypeFile();
 
 //            elNetOutPrinter.printLineType(); // print line type
             //endregion

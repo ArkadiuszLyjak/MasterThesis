@@ -6,8 +6,8 @@ import lombok.Data;
 public abstract class BaseEntity {
     protected Long id;
 
-    //region setId
-    public void setId(Long id) {
+    //region BaseEntity
+    public BaseEntity(Long id) {
         this.id = id;
     }
     //endregion
@@ -18,8 +18,8 @@ public abstract class BaseEntity {
     }
     //endregion
 
-    //region BaseEntity
-    public BaseEntity(Long id) {
+    //region setId
+    public void setId(Long id) {
         this.id = id;
     }
     //endregion
