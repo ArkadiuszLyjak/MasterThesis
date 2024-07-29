@@ -59,44 +59,44 @@ public class MainApp {
             //endregion
 
             //region Read data files
-            fileDataService.readArcFile();
-            fileDataService.readLineTypeFile();
-            fileDataService.readNodeFile();
-            fileDataService.readTransformerTypeFile();
+//            fileDataService.readArcFile();
+//            fileDataService.readLineTypeFile();
+//            fileDataService.readNodeFile();
+//            fileDataService.readTransformerTypeFile();
 
-            elNetOutPrinter.printLineType(); // print line type
+//            elNetOutPrinter.printLineType(); // print line type
             //endregion
 
             //region print app parameters and net quantity
-            System.out.println(AppParameters.getInstance().toString());
-            elNetOutPrinter.printNetQuantity(); // print net quantity
+//            System.out.println(AppParameters.getInstance().toString());
+//            elNetOutPrinter.printNetQuantity(); // print net quantity
             //endregion
 
             //region generate front and back neighbors maps
-            elNetService.nodeNeighborsForwardMapBuild();   // następnik
-            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.FWD);
+//            elNetService.nodeNeighborsForwardMapBuild();   // następnik
+//            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.FWD);
 
-            elNetService.nodeNeighborsReverseMapBuild();     // poprzednik
-            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.REV);
+//            elNetService.nodeNeighborsReverseMapBuild();     // poprzednik
+//            elNetOutPrinter.printNodeNeighborsDirection(ElectricalNetworkOutPrinter.DIRECTION.REV);
 
-            elNetService.nodeNeighborsForwardReverseListBuild();
-            elNetOutPrinter.printNodesNeighborsForwardReverseMap(); // print nodes neighbors [id] forward reverse map
+//            elNetService.nodeNeighborsForwardReverseListBuild();
+//            elNetOutPrinter.printNodesNeighborsForwardReverseMap(); // print nodes neighbors [id] forward reverse map
             //endregion
 
             //region Generate visit order
-            bfsAlgo.generateLevelsOrder();
-            bfsAlgOutPrinter.printNodeVisitedOrder(); // print node visited order
+//            bfsAlgo.generateLevelsOrder();
+//            bfsAlgOutPrinter.printNodeVisitedOrder(); // print node visited order
             //endregion
 
             //region calculations for power grid elements
             //region Calculation Immitance for Line
-            elNetCalcService.calcLineImmitance();
-            elNetOutPrinter.printLineImmitance();
+//            elNetCalcService.calcLineImmitance();
+//            elNetOutPrinter.printLineImmitance();
             //endregion
 
             //region Calculation Immitance for Trafo
-            elNetCalcService.calcTrafoImmitance();
-            elNetOutPrinter.printTrafoImmitance();          // print trafo immitance [PU]
+//            elNetCalcService.calcTrafoImmitance();
+//            elNetOutPrinter.printTrafoImmitance();          // print trafo immitance [PU]
 //            elNetOutPrinter.printTrafoImmitance(true); // print trafo immitance [Ω]
             //endregion
 
