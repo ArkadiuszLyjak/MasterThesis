@@ -62,7 +62,7 @@ public class MainApp {
             fileDataService.readNodeFile();
             fileDataService.readTransformerTypeFile();
 
-//            elNetOutPrinter.printLineType(); // print line type
+            elNetOutPrinter.printLineType(); // print line type
             //endregion
 
             //region print app parameters and net quantity
