@@ -1,0 +1,13 @@
+//PlikTRANSFORMER_TYPE–katalogtransformatorów
+//ID– numer pozycji katalogowej
+//TYPE – nazwa typu
+//NOMINAL_POWER – moc znamionowa [kVA]
+//NOMINAL_UPPER_VOLTAGE – napięcie znamionowe górne [kV]
+//NOMINAL_LOWER_VOLTAGE – napięcie znamionowe dolne kV]
+//LOAD_POWER_LOSS – straty obciążeniowe czynne [kW]
+//ACTIVE_IDLE_LOSS – straty jałowe czynne [kW]
+//SHORTING_VOLTAGE – napięcie zwarcia [%]
+//Pozostałe dane nie są potrzebne, wystarczy wpisać 0.
+ID|TYPE|NOMINAL_POWER|NOMINAL_UPPER_VOLTAGE|NOMINAL_LOWER_VOLTAGE|VOLTAGE_INCREASE_RANGE|VOLTAGE_DECREASE_RANGE|NO_OF_ADJUSTMENT_RANGE|CONNECTION_GROUP|LOAD_POWER_LOSS|ACTIVE_IDLE_LOSS|IDLE_CURRENT|SHORTING_VOLTAGE|ZERO_RESISTANCE|ZERO_REAKTANCE
+10|TOd|630.00|15.75|0.42|0|0|0|0|6.5|0.6|0|6|0|0
+20|TOd|800.00|15.75|0.42|0|0|0|0|6.5|0.6|0|6|0|0

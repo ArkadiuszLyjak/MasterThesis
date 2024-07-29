@@ -1,9 +1,34 @@
-# Ignore Gradle project-specific cache directory
-.gradle
+# Przykładowy .gitignore dla projektów Java z użyciem IntelliJ IDEA
 
-# Ignore Gradle build output directory
-build
-.idea
+# Binaries
+*.class
+*.jar
+*.war
+*.ear
 
-# Ignore testing dirctory
-testJava
+# Działania w katalogu build (Gradle, Maven)
+build/
+target/
+
+# Gradle
+.gradle/
+build/
+
+# Pliki konfiguracyjne specyficzne dla IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Konfiguracja ustawień IDE
+.vscode/
+
+# Dane lokalne systemu operacyjnego
+.DS_Store
+Thumbs.db
+
+# Logi, dzienniki i raporty
+*.log
+
+# Katalogi z zewnętrznymi bibliotekami
+lib/
