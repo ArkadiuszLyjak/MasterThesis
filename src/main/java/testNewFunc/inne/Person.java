@@ -1,4 +1,4 @@
-package testNewFunc;
+package testNewFunc.inne;
 
 public class Person {
     private int id;

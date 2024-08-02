@@ -1,4 +1,4 @@
-package testNewFunc;
+package testNewFunc.inne;
 
 import java.util.Arrays;
 import java.util.List;

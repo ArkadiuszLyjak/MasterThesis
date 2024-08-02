@@ -1,4 +1,4 @@
-package testNewFunc;
+package testNewFunc.inne;
 
 import java.time.LocalDate;
 import java.time.Month;
