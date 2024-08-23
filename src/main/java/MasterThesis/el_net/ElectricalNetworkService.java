@@ -139,8 +139,8 @@ public class ElectricalNetworkService {
                     for (Long IDnbr : elNet.nodesNeighborsForwardReverseMap.get(uniqueNodeNum)) {
                         double calcSelfConductance = 1 / elNet.arcMap.get(IDnbr).getResistancePU();
 
-//                        System.out.printf("%d %3d G:%f R:%(.6f\n",
-//                        uniqueNodeNum, IDnbr, calcSelfConductance, elNet.arcMap.get(IDnbr).getResistancePU());
+                        System.out.printf("%d %3d G:%f R:%(.6f\n",
+                        uniqueNodeNum, IDnbr, calcSelfConductance, elNet.arcMap.get(IDnbr).getResistancePU());
 
                         if (!(calcSelfConductance == Double.POSITIVE_INFINITY)) {
                             selfConductance = selfConductance + calcSelfConductance;
@@ -155,8 +155,8 @@ public class ElectricalNetworkService {
 
                 nodeEntity.setSelfConductancePU(selfConductance);
 
-//                System.out.printf("%3d Gii:%(.6f\n", uniqueNodeNum, selfConductance);
-//                System.out.println();
+                System.out.printf("%3d Gii:%(.6f\n", uniqueNodeNum, selfConductance);
+                System.out.println();
             }
 
         });

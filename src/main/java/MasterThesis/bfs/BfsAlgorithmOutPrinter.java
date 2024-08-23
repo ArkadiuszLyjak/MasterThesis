@@ -2,8 +2,10 @@ package MasterThesis.bfs;
 
 public class BfsAlgorithmOutPrinter {
 
+    //region Description
     private static BfsAlgorithmOutPrinter instance;
     BfsAlgorithm bfsAlgorithm = BfsAlgorithm.getInstance();
+    //endregion
 
     //region getInstance - Singleton
     private BfsAlgorithmOutPrinter() {

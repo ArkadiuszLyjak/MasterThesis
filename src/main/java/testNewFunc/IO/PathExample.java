@@ -3,7 +3,19 @@ package testNewFunc.IO;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * <p>Klasa PathExample demonstruje różne operacje na ścieżkach plików w języku Java.</p>
+ * <p>Operacje obejmują uzyskiwanie ścieżki absolutnej, względnej, nazwy pliku, ścieżki do katalogu rodzica oraz tworzenie ścieżek względnych.</p>
+ */
 public class PathExample {
+    
+    /**
+     * <p>Metoda main jest punktem wejścia programu.</p>
+     * <p>Wykonuje różne operacje na ścieżkach plików i wyświetla wyniki na konsoli.</p>
+     *
+     * @param args Argumenty wiersza poleceń (niewykorzystywane)
+     */
+
     public static void main(String[] args) {
         // Ścieżka do pliku
         String filePathWrite = "C:\\repo\\MasterThesis\\src\\main\\java\\testNewFunc\\dataFiles\\Arc2.txt";

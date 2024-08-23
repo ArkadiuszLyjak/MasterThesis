@@ -538,6 +538,7 @@ public class ElectricalNetworkOutPrinter {
     //region print nodes neighbors forward and reverse map
     public void printNodesNeighborsForwardReverseMap() {
         System.out.println("\nmap of the neighbors of the nodes in front and behind:\n");
+
         if (!elNet.nodesNeighborsForwardReverseMap.isEmpty()) {
             elNet.nodesNeighborsForwardReverseMap.forEach((uniqueNodeNumber, neighborsIDsList) -> {
                 System.out.printf("%3d ", uniqueNodeNumber);

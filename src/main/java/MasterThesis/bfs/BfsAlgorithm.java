@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class BfsAlgorithm {
 
+    //region params
     private static BfsAlgorithm instance;
     private static ElectricalNetwork elNet;
 
@@ -18,6 +19,7 @@ public class BfsAlgorithm {
 
     //Maksymalny poziom odwiedzin
     Long maxNetLevel;
+    //endregion
 
     //region getInstance BfsAlgorithm - Singleton
     private BfsAlgorithm() {

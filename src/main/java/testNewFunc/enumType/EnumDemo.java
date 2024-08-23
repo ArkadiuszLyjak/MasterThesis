@@ -2,7 +2,7 @@ package testNewFunc.enumType;
 
 // Proste wyliczenie dla różnych środków transportu
 enum Transport {
-    AUTO, AUTOBUS, TIR, SAMOLOT, POCIAG
+    AUTO, AUTOBUS, TIR, SAMOLOT, POCIAG;
 }
 
 // Wyliczenie dla samochodów z dodatkową właściwością maksymalnej prędkości
@@ -48,6 +48,10 @@ public class EnumDemo {
         // Przykład użycia wyliczenia Cars i wyświetlenia maksymalnej prędkości
         for (Cars car : Cars.values()) {
             System.out.println(car + " ma maksymalną prędkość " + car.getMax_speed() + " km/h");
+        }
+
+        for(Transport tt: Transport.values()) {
+            System.out.println(tt.ordinal());
         }
     }
 }

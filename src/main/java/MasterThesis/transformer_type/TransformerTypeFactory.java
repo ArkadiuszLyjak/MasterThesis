@@ -22,6 +22,7 @@ public class TransformerTypeFactory {
 14 ZERO_REAKTANCE
 */
 
+    //region prepareFromString
     public static TransformerTypeEntity prepareFromString(String transformerTypeStr) {
         String[] entityArray = transformerTypeStr.split(AppParametersService.getInstance().getRegex());
         TransformerTypeEntity entity = new TransformerTypeEntity(Long.decode(entityArray[0]));
@@ -42,4 +43,5 @@ public class TransformerTypeFactory {
 
         return entity;
     }
+    //endregion
 }

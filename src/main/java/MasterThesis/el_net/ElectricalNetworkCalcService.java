@@ -164,9 +164,9 @@ public class ElectricalNetworkCalcService {
         elNet.nodeMap.forEach((node, nodeEntity) -> {
                     nodeEntity.setVoltagePU(nodeEntity.getNominalVoltage() / BaseValues.voltageBase);
 
-//                    System.out.printf("%3d %(.4f\n",
-//                            node,
-//                            nodeEntity.getNominalVoltage() / BaseValues.voltageBase);
+                    System.out.printf("%3d %(.4f\n",
+                            node,
+                            nodeEntity.getNominalVoltage() / BaseValues.voltageBase);
                 }
         );
     }
@@ -327,7 +327,7 @@ public class ElectricalNetworkCalcService {
                         currentPUforArc = 0.0; // ??
                     }
 
-                    /*//region wyśw. unikalne nr węzłów (nie ID!)
+                    //region wyśw. unikalne nr węzłów (nie ID!)
                     System.out.printf("%s->", "-");
 
                     System.out.printf(" %d ",
@@ -348,19 +348,19 @@ public class ElectricalNetworkCalcService {
                             currentPUforArc);
 
                     System.out.println();
-                    //endregion*/
+                    //endregion
                 }
 
                 currentPUSum = currentPUSum / Math.sqrt(3);
 
-                /*//region wyśw. prąd dla iter. zerowej dla kolejnych węzłów
+                //region wyśw. prąd dla iter. zerowej dla kolejnych węzłów
                 System.out.printf("Prad dla iter. zerowej dla wezla %d -> I0 = %s %(.4f\n",
                         node,
                         "Σ",
                         currentPUSum);
 
                 System.out.println("\n");
-                //endregion*/
+                //endregion
 
                 elNet.nodeMap.get(node).setCurrentInitialPU(currentPUSum);
 

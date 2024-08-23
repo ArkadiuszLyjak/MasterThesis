@@ -52,6 +52,7 @@ public class TransformerTypeEntity extends BaseEntity {
         super(id);
     }
 
+    //region toString
     @Override
     public String toString() {
 
@@ -77,5 +78,6 @@ public class TransformerTypeEntity extends BaseEntity {
 
         return fmt.toString();
     }
+    //endregion
 
 }

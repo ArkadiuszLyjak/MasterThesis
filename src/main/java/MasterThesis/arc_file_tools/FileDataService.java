@@ -17,10 +17,12 @@ import java.text.DecimalFormat;
 
 public class FileDataService {
 
+    //region params
     private static FileDataService instance;
     AppParameters params = AppParameters.getInstance();
     ElectricalNetwork elNet = ElectricalNetwork.getInstance();
     static DecimalFormat df = new DecimalFormat("00.000000");
+    //endregion
 
     //region getInstance
     private FileDataService() {
